@@ -3,35 +3,47 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Free Photocard & Polaroid Print Grid Maker | Instant A4, US Letter, 4x6 Printable PDF</title>
-  <meta name="description" content="Free online tool to auto-crop and arrange K-pop photocards, anime cards, and mini polaroids onto standard A4, US Letter, 4x6, and 5x7 print sheets with dashed cut lines. Download instant 300 DPI print-ready PDF.">
+  <title>K-Pop Photocard Print Grid Generator (300 DPI PDF) | StanKit Studio</title>
+  <meta name="description" content="Free online tool to arrange and print K-Pop photocards (55x85mm), Polaroids, and mini photos on A4, US Letter, or 4x6 paper with precise 300 DPI high-resolution PDF output and cut lines.">
   <meta name="keywords" content="stankit, stankit studio, kpop fandom tools, photocard print maker, kpop photocard template a4, us letter photocard grid, polaroid grid maker, diy photocard print sheet, 55x85mm card printer online">
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- jsPDF for PDF Generation -->
+
+  <!-- jsPDF for High-Res 300 DPI PDF Export -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
-  <!-- Global Google Fonts for English, Chinese, Thai, Arabic, Korean, Japanese -->
+  <!-- Google Analytics GA4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-MEASUREMENT_ID"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-MEASUREMENT_ID');
+
+    function trackGA4Event(eventName, eventParams = {}) {
+      if (typeof gtag === 'function') {
+        gtag('event', eventName, eventParams);
+      }
+      console.log('[GA4 Event]', eventName, eventParams);
+    }
+  </script>
+
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Sans+Thai:wght@400;500;700&family=Noto+Sans+Arabic:wght@400;500;700&family=Noto+Sans+KR:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&display=swap');
-    body { font-family: 'Plus Jakarta Sans', 'Noto Sans Thai', 'Noto Sans Arabic', 'Noto Sans SC', 'Noto Sans KR', 'Noto Sans JP', sans-serif; }
-    .card-slot {
-      aspect-ratio: 55 / 85;
-      background-size: cover;
-      background-position: center;
-      user-select: none;
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Sans+KR:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Sans+Thai:wght@400;500;700&family=Noto+Sans+Arabic:wght@400;500;700&display=swap');
+    body {
+      font-family: 'Plus Jakarta Sans', 'Noto Sans Thai', 'Noto Sans Arabic', 'Noto Sans SC', 'Noto Sans KR', 'Noto Sans JP', sans-serif;
     }
-    .card-slot.dragging {
-      opacity: 0.35;
-      transform: scale(0.95);
+    .checkerboard-bg {
+      background-color: #f8fafc;
+      background-image: 
+        linear-gradient(45deg, #f1f5f9 25%, transparent 25%), 
+        linear-gradient(-45deg, #f1f5f9 25%, transparent 25%), 
+        linear-gradient(45deg, transparent 75%, #f1f5f9 75%), 
+        linear-gradient(-45deg, transparent 75%, #f1f5f9 75%);
+      background-size: 16px 16px;
+      background-position: 0 0, 0 8px, 8px -8px, -8px 0px;
     }
-    .card-slot.drag-over {
-      ring: 3px solid #6366f1;
-      border-color: #6366f1;
-      transform: scale(1.03);
-    }
-  
     /* Position Ko-fi Floating Widget to Bottom-Right */
     .floatingchat-container-wrap,
     .floatingchat-container-wrap-mobi,
@@ -48,7 +60,7 @@
     }
   </style>
 </head>
-<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col justify-between transition-all">
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col justify-between">
 
   <!-- Navigation Header with Multi-Tool Menu -->
   <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
@@ -74,34 +86,33 @@
           </a>
           <a href="fan-letter.html" class="px-3 py-1.5 rounded-lg hover:text-indigo-600 hover:bg-slate-100 transition flex items-center space-x-1">
             <span>💌</span>
-            <span data-i18n="nav_tool_letter">Fan Letter Pro (Weverse/Bubble)</span>
+            <span data-i18n="nav_tool_letter">Fan Letter Pro</span>
           </a>
-          <span class="px-2.5 py-1 text-slate-400 font-medium flex items-center space-x-1 cursor-not-allowed" title="Coming Soon">
-            <span>⏰</span>
-            <span>KST Clock</span>
-            <span class="text-[9px] bg-slate-100 text-slate-500 px-1 py-0.2 rounded">SOON</span>
-          </span>
-          <span class="px-2.5 py-1 text-slate-400 font-medium flex items-center space-x-1 cursor-not-allowed" title="Coming Soon">
-            <span>⏳</span>
-            <span>D-Day</span>
-            <span class="text-[9px] bg-slate-100 text-slate-500 px-1 py-0.2 rounded">SOON</span>
-          </span>
+          <a href="about.html" class="px-3 py-1.5 rounded-lg hover:text-indigo-600 hover:bg-slate-100 transition flex items-center space-x-1">
+            <span>💡</span>
+            <span data-i18n="nav_about">About</span>
+          </a>
+          <a href="contact.html" class="px-3 py-1.5 rounded-lg hover:text-indigo-600 hover:bg-slate-100 transition flex items-center space-x-1">
+            <span>📬</span>
+            <span data-i18n="nav_contact">Contact</span>
+          </a>
         </nav>
       </div>
-      
-      <div class="flex items-center space-x-3 sm:space-x-4">
-        <!-- Multi-language Selector (7 Languages with English Default) -->
+
+      <!-- Right Action: Language Switcher & Coffee -->
+      <div class="flex items-center space-x-2 sm:space-x-3">
+        <!-- 7-Language Global Switcher -->
         <div class="relative">
-          <select id="lang-select" onchange="changeLanguage(this.value)" class="appearance-none bg-slate-100 border border-slate-200 text-slate-700 text-xs font-bold rounded-lg pl-7 pr-6 py-1.5 focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer hover:bg-slate-200 transition">
-            <option value="en">🇺🇸 English</option>
-            <option value="zh">🇨🇳 简体中文</option>
-            <option value="th">🇹🇭 ภาษาไทย</option>
-            <option value="ar">🇸🇦 العربية</option>
+          <select id="lang-select" onchange="changeLanguage(this.value)" class="bg-slate-100 border border-slate-200 text-slate-700 text-xs font-bold rounded-lg px-2.5 py-1.5 focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer appearance-none pr-7">
+            <option value="en">🇺🇸 EN</option>
+            <option value="zh">🇨🇳 中文</option>
             <option value="ko">🇰🇷 한국어</option>
             <option value="ja">🇯🇵 日本語</option>
-            <option value="es">🇪🇸 Español</option>
+            <option value="th">🇹🇭 ไทย</option>
+            <option value="ar">🇸🇦 العربية</option>
+            <option value="es">🇪🇸 ES</option>
           </select>
-          <div class="pointer-events-none absolute inset-y-0 left-2 flex items-center text-xs">🌐</div>
+          <span class="absolute right-2 top-2 pointer-events-none text-slate-400 text-[10px]">▼</span>
         </div>
 
         <a href="https://ko-fi.com/stankitstudio" target="_blank" class="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-amber-50 border border-amber-200 text-amber-800 text-xs font-bold hover:bg-amber-100 transition shadow-sm">
@@ -115,208 +126,154 @@
   <!-- Mobile Sub-Navigation Bar -->
   <div class="md:hidden bg-white border-b border-slate-200 px-4 py-2 flex items-center space-x-2 overflow-x-auto text-xs font-bold">
     <a href="index.html" class="whitespace-nowrap px-2.5 py-1 rounded-md bg-indigo-50 text-indigo-700">🖨️ Photocard Grid</a>
-    <a href="fan-letter.html" class="whitespace-nowrap px-2.5 py-1 rounded-md text-slate-600 hover:bg-slate-100">💌 Fan Letter Pro (Weverse/Bubble)</a>
+    <a href="fan-letter.html" class="whitespace-nowrap px-2.5 py-1 rounded-md text-slate-600 hover:bg-slate-100">💌 Fan Letter Pro</a>
+    <a href="about.html" class="whitespace-nowrap px-2.5 py-1 rounded-md text-slate-600 hover:bg-slate-100">💡 About</a>
+    <a href="contact.html" class="whitespace-nowrap px-2.5 py-1 rounded-md text-slate-600 hover:bg-slate-100">📬 Contact</a>
   </div>
 
   <!-- Main Workspace -->
   <main class="max-w-6xl mx-auto px-4 py-8 flex-grow">
     
-    <!-- Hero / Headline -->
+    <!-- Hero / Headline Area -->
     <div class="text-center max-w-2xl mx-auto mb-8">
-      <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-3">
-        <span data-i18n="hero_title_1">DIY Photocard & Polaroid</span> <br class="hidden sm:block">
-        <span class="bg-gradient-to-r from-indigo-600 to-rose-500 bg-clip-text text-transparent" data-i18n="hero_title_2">Print Sheet Generator</span>
+      <h1 class="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-2">
+        <span data-i18n="hero_title_1">K-Pop Photocard Print Grid Generator</span>
+        <br>
+        <span class="bg-gradient-to-r from-indigo-600 to-rose-500 bg-clip-text text-transparent" data-i18n="hero_title_2">300 DPI High-Res Printable PDF</span>
       </h1>
-      <p class="text-slate-600 text-sm sm:text-base leading-relaxed" data-i18n="hero_desc">
-        Upload your photos, drag to rearrange positions, and instantly download a high-resolution 300 DPI printable PDF with precision dashed cutting lines.
+      <p class="text-slate-500 text-xs sm:text-sm" data-i18n="hero_desc">
+        Effortlessly arrange 55×85mm standard photocards or Polaroids onto A4 / US Letter sheets. Instant 100% client-side privacy-first PDF export with bleed cut-lines.
       </p>
     </div>
 
-    <!-- AdSense Top Placeholder Banner -->
-    <div class="max-w-4xl mx-auto mb-8 p-3 rounded-xl border border-dashed border-slate-300 bg-slate-100 text-center text-xs text-slate-400" data-i18n="ad_placeholder">
+    <!-- AdSense Top Banner Placeholder -->
+    <div class="mb-8 p-3 rounded-xl border border-dashed border-slate-300 bg-slate-100 text-center text-xs text-slate-400">
       📢 Advertisement Placement (Google AdSense Responsive Banner Area)
     </div>
 
-    <!-- Two-Column Interactive Tool -->
+    <!-- Grid Two-Column Controls + Live Canvas Sheet -->
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
       
-      <!-- Left Controls (5 Cols) -->
-      <div class="lg:col-span-5 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-6">
-        <h2 class="text-lg font-bold text-slate-900 flex items-center space-x-2">
-          <span class="w-6 h-6 rounded-md bg-indigo-100 text-indigo-600 flex items-center justify-center text-xs">1</span>
-          <span data-i18n="sec_config">Configuration</span>
-        </h2>
-
-        <!-- Paper Size Matrix (Expanded with Badges) -->
-        <div>
-          <div class="flex items-center justify-between mb-2">
-            <label class="block text-xs font-bold uppercase tracking-wider text-slate-500" data-i18n="label_paper">Paper Format</label>
-            <span class="text-[11px] text-indigo-600 font-semibold" id=\"paper-info-badge\">A4 (9 Photocards)</span>
-          </div>
-
-          <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
-            
-            <!-- A4 (Popular) -->
-            <button id="btn-a4" onclick="setPaper('a4')" class="relative p-2.5 rounded-xl border-2 text-left transition border-indigo-600 bg-indigo-50/70 text-indigo-900">
-              <span class="absolute -top-2 -right-1 bg-gradient-to-r from-amber-500 to-rose-500 text-white text-[9px] font-extrabold px-1.5 py-0.2 rounded-full shadow-sm flex items-center space-x-0.5">
-                <span>🔥</span><span data-i18n="badge_hot">HOT</span>
-              </span>
-              <div class="font-extrabold text-xs flex items-center space-x-1">
-                <span>📄 A4</span>
+      <!-- Left Controls Panel (5 Cols) -->
+      <div class="lg:col-span-5 space-y-6">
+        
+        <!-- Upload & Settings Box -->
+        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-6">
+          
+          <!-- Step 1: Upload Images -->
+          <div>
+            <label class="block text-xs font-extrabold text-slate-900 uppercase tracking-wider mb-2">
+              <span data-i18n="label_step1">1. Upload Images</span> (<span id="upload-counter">0/9 cards</span>)
+            </label>
+            <div id="drop-zone" onclick="document.getElementById('file-input').click()" class="border-2 border-dashed border-indigo-200 hover:border-indigo-500 bg-indigo-50/50 hover:bg-indigo-50/80 transition rounded-2xl p-6 text-center cursor-pointer space-y-2">
+              <input type="file" id="file-input" multiple accept="image/*" class="hidden" onchange="handleFileSelect(this.files)">
+              <div class="w-12 h-12 rounded-2xl bg-white shadow-sm border border-indigo-100 flex items-center justify-center mx-auto text-2xl">
+                📷
               </div>
-              <div class="text-[10px] text-slate-500 mt-0.5" data-i18n="grid_9_cards">9 Cards (3×3)</div>
-            </button>
-
-            <!-- 4x6" Photo Paper (Popular) -->
-            <button id="btn-4x6" onclick="setPaper('4x6')" class="relative p-2.5 rounded-xl border-2 text-left transition border-slate-200 text-slate-700 hover:border-slate-300">
-              <span class="absolute -top-2 -right-1 bg-gradient-to-r from-amber-500 to-rose-500 text-white text-[9px] font-extrabold px-1.5 py-0.2 rounded-full shadow-sm flex items-center space-x-0.5">
-                <span>🔥</span><span data-i18n="badge_hot">HOT</span>
-              </span>
-              <div class="font-extrabold text-xs flex items-center space-x-1">
-                <span>🖼️ 4×6"</span>
-              </div>
-              <div class="text-[10px] text-slate-500 mt-0.5" data-i18n="grid_2_cards">2 Cards (Side)</div>
-            </button>
-
-            <!-- US Letter (North America) -->
-            <button id="btn-letter" onclick="setPaper('letter')" class="relative p-2.5 rounded-xl border-2 text-left transition border-slate-200 text-slate-700 hover:border-slate-300">
-              <span class="absolute -top-2 -right-1 bg-blue-600 text-white text-[9px] font-extrabold px-1.5 py-0.2 rounded-full shadow-sm">
-                US/CA
-              </span>
-              <div class="font-extrabold text-xs flex items-center space-x-1">
-                <span>🇺🇸 Letter</span>
-              </div>
-              <div class="text-[10px] text-slate-500 mt-0.5" data-i18n="grid_9_cards">9 Cards (3×3)</div>
-            </button>
-
-            <!-- 5x7" Photo Paper -->
-            <button id="btn-5x7" onclick="setPaper('5x7')" class="p-2.5 rounded-xl border-2 text-left transition border-slate-200 text-slate-700 hover:border-slate-300">
-              <div class="font-extrabold text-xs flex items-center space-x-1">
-                <span>📸 5×7"</span>
-              </div>
-              <div class="text-[10px] text-slate-500 mt-0.5" data-i18n="grid_4_cards">4 Cards (2×2)</div>
-            </button>
-
-            <!-- A5 Sheet -->
-            <button id="btn-a5" onclick="setPaper('a5')" class="p-2.5 rounded-xl border-2 text-left transition border-slate-200 text-slate-700 hover:border-slate-300">
-              <div class="font-extrabold text-xs flex items-center space-x-1">
-                <span>📖 A5</span>
-              </div>
-              <div class="text-[10px] text-slate-500 mt-0.5" data-i18n="grid_4_cards">4 Cards (2×2)</div>
-            </button>
-
-            <!-- 4-Cut Photobooth Strip (New Trending) -->
-            <button id="btn-strip" onclick="setPaper('strip')" class="relative p-2.5 rounded-xl border-2 text-left transition border-slate-200 text-slate-700 hover:border-slate-300">
-              <span class="absolute -top-2 -right-1 bg-purple-600 text-white text-[9px] font-extrabold px-1.5 py-0.2 rounded-full shadow-sm">
-                NEW
-              </span>
-              <div class="font-extrabold text-xs flex items-center space-x-1">
-                <span>🎞️ 4-Cut</span>
-              </div>
-              <div class="text-[10px] text-slate-500 mt-0.5" data-i18n="grid_strip_desc">2 Strips (8 Pcs)</div>
-            </button>
-
-          </div>
-        </div>
-
-        <!-- Card Type / Dimensions Dropdown -->
-        <div>
-          <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2" data-i18n="label_card_dim">Card Dimensions</label>
-          <select id="card-type-select" onchange="renderSlots()" class="w-full bg-slate-50 border border-slate-200 text-slate-700 text-sm rounded-xl px-3.5 py-2.5 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white font-medium">
-            <option value="standard" data-i18n="opt_standard">🔥 Standard Official K-Pop / Idol Card (55 × 85 mm)</option>
-            <option value="japanese" data-i18n="opt_japanese">🎴 Anime / TCG Trading Card Size (63 × 88 mm)</option>
-            <option value="mini-polaroid" data-i18n="opt_polaroid">📷 Mini Polaroid Style with Frame (54 × 86 mm)</option>
-            <option value="square" data-i18n="opt_square">⬛ Square Mini Print / Sticker (55 × 55 mm)</option>
-          </select>
-        </div>
-
-        <!-- Upload Area -->
-        <div>
-          <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2" data-i18n="label_upload">Upload Images</label>
-          <div id="drop-zone" onclick="document.getElementById('file-input').click()" class="border-2 border-dashed border-indigo-300 hover:border-indigo-500 bg-indigo-50/50 hover:bg-indigo-50/80 rounded-2xl p-6 text-center cursor-pointer transition">
-            <input type="file" id="file-input" multiple accept="image/*" class="hidden" onchange="handleFiles(this.files)">
-            <div class="text-3xl mb-2">📸</div>
-            <p class="text-xs font-bold text-indigo-900 mb-1" data-i18n="upload_prompt">Click to upload or drag & drop</p>
-            <p class="text-[11px] text-slate-500" data-i18n="upload_sub">Supports JPG, PNG, WEBP (Auto-cropped to 55x85)</p>
-          </div>
-        </div>
-
-        <!-- Uploaded Counter & Clear -->
-        <div class="flex items-center justify-between text-xs pt-2 border-t border-slate-100">
-          <span class="text-slate-500 font-medium"><span data-i18n="loaded_label">Images loaded:</span> <strong id="img-counter" class="text-indigo-600 font-bold">0 / 9</strong></span>
-          <button onclick="clearImages()" class="text-rose-600 hover:text-rose-700 font-semibold underline" data-i18n="btn_clear">Clear All</button>
-        </div>
-
-        <!-- Export Action Button -->
-        <button id="download-btn" onclick="generatePDF()" class="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-indigo-600 to-rose-500 hover:from-indigo-700 hover:to-rose-600 text-white font-extrabold text-sm shadow-lg shadow-indigo-200 transition transform active:scale-98 flex items-center justify-center space-x-2">
-          <span data-i18n="btn_download">📥 Download Print-Ready PDF</span>
-        </button>
-
-        <p class="text-[11px] text-center text-slate-400" data-i18n="pdf_subtext">Rendered at 300 DPI with cut lines for home printers or photo centers.</p>
-      </div>
-
-      <!-- Right Sheet Live Preview (7 Cols) -->
-      <div class="lg:col-span-7 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-        <div class="flex items-center justify-between mb-4">
-          <h2 class="text-base font-bold text-slate-900 flex items-center space-x-2">
-            <span class="w-6 h-6 rounded-md bg-emerald-100 text-emerald-600 flex items-center justify-center text-xs">2</span>
-            <span data-i18n="sec_preview">Live Sheet Preview</span>
-          </h2>
-          <span class="text-xs text-indigo-600 font-medium bg-indigo-50 px-2 py-0.5 rounded-md border border-indigo-100" data-i18n="preview_tip">
-            ✨ Drag to reorder or use buttons to move
-          </span>
-        </div>
-
-        <!-- Print Canvas Preview Frame -->
-        <div class="bg-slate-100 p-4 sm:p-6 rounded-xl flex items-center justify-center border border-slate-200 overflow-hidden min-h-[460px]">
-          <div id="print-sheet" class="bg-white shadow-xl rounded-sm p-4 sm:p-6 w-full max-w-[460px] border border-slate-300 transition-all">
-            <!-- Grid generated dynamically -->
-            <div id="grid-container" class="grid grid-cols-3 gap-3">
-              <!-- default placeholder slots -->
+              <div class="text-xs font-bold text-indigo-900" data-i18n="dropzone_title">Click to upload or drag & drop</div>
+              <p class="text-[11px] text-slate-500" data-i18n="dropzone_desc">PNG, JPG, WEBP (Supports batch selection)</p>
             </div>
           </div>
+
+          <!-- Step 2: Paper Size & Layout -->
+          <div>
+            <label class="block text-xs font-extrabold text-slate-900 uppercase tracking-wider mb-2" data-i18n="label_step2">
+              2. Paper Size & Card Format
+            </label>
+            <div class="grid grid-cols-3 gap-2">
+              <button type="button" onclick="setPaper('a4')" id="btn-paper-a4" class="p-3 rounded-xl border border-indigo-600 bg-indigo-50 text-indigo-700 text-xs font-extrabold flex flex-col items-center space-y-1 transition">
+                <span>📄 A4</span>
+                <span class="text-[10px] font-normal text-slate-500">3×3 Grid (9 cards)</span>
+              </button>
+              <button type="button" onclick="setPaper('letter')" id="btn-paper-letter" class="p-3 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-extrabold flex flex-col items-center space-y-1 transition">
+                <span>📑 Letter</span>
+                <span class="text-[10px] font-normal text-slate-500">3×3 Grid (9 cards)</span>
+              </button>
+              <button type="button" onclick="setPaper('4x6')" id="btn-paper-4x6" class="p-3 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-extrabold flex flex-col items-center space-y-1 transition">
+                <span>🖼️ 4×6"</span>
+                <span class="text-[10px] font-normal text-slate-500">2×2 Grid (4 cards)</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Step 3: Options (Cut Lines & Fill Mode) -->
+          <div class="space-y-3 pt-2 border-t border-slate-100">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-slate-700" data-i18n="opt_cutlines">Show Scissor Cut Lines</span>
+              <label class="relative inline-flex items-center cursor-pointer">
+                <input type="checkbox" id="check-cutlines" checked onchange="toggleCutLines(this.checked)" class="sr-only peer">
+                <div class="w-9 h-5 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-indigo-600"></div>
+              </label>
+            </div>
+
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-slate-700" data-i18n="opt_fit">Image Fit Mode</span>
+              <select id="select-fit" onchange="setFitMode(this.value)" class="bg-slate-100 border border-slate-200 text-slate-700 text-xs font-bold rounded-lg px-2.5 py-1.5 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                <option value="cover">Crop to Fill (No border)</option>
+                <option value="contain">Fit Entire Image</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Action Button: Download 300 DPI PDF -->
+          <div class="pt-2">
+            <button type="button" onclick="exportPDF()" class="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-indigo-600 to-rose-500 hover:from-indigo-700 hover:to-rose-600 text-white font-extrabold text-sm shadow-md shadow-indigo-100 transition transform active:scale-98 flex items-center justify-center space-x-2">
+              <span>🖨️</span>
+              <span data-i18n="btn_download_pdf">Download 300 DPI PDF (Print Ready)</span>
+            </button>
+            <p class="text-[10px] text-slate-400 text-center mt-2" data-i18n="pdf_note">
+              🔒 100% Client-Side Privacy: Images never leave your device.
+            </p>
+          </div>
+
+        </div>
+
+        <!-- NEW: LocalStorage Photocard Project History Card -->
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-3">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+              <span class="text-base">🕒</span>
+              <h3 class="text-xs font-extrabold text-slate-800 uppercase tracking-wide" data-i18n="sec_photocard_history">最近排版历史 (Recent Layouts)</h3>
+              <span id="photocard-history-badge" class="text-[10px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded-full font-bold">0</span>
+            </div>
+            <button type="button" onclick="clearPhotocardHistory()" class="text-[11px] text-slate-400 hover:text-rose-600 font-bold transition flex items-center space-x-1">
+              <span>🗑️</span><span>清空</span>
+            </button>
+          </div>
+
+          <!-- History List Container -->
+          <div id="photocard-history-list" class="space-y-2 max-h-56 overflow-y-auto pr-1">
+            <!-- Dynamic items -->
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right Area: Live Printable Grid Canvas Sheet (7 Cols) -->
+      <div class="lg:col-span-7 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+          <div class="flex items-center space-x-2">
+            <span class="text-xs font-extrabold text-slate-900 uppercase tracking-wide" data-i18n="preview_sheet_title">Printable Sheet Preview</span>
+            <span id="sheet-dim-label" class="text-[11px] text-slate-400">A4 (210×297mm) • 300 DPI</span>
+          </div>
+          <button type="button" onclick="clearAllImages()" class="text-xs font-bold text-slate-400 hover:text-rose-600 transition" data-i18n="btn_clear_all">
+            Clear Sheet
+          </button>
+        </div>
+
+        <!-- Canvas Container with Checkerboard Background -->
+        <div class="w-full overflow-x-auto p-4 checkerboard-bg rounded-xl flex items-center justify-center border border-slate-200/80">
+          <canvas id="print-canvas" class="bg-white shadow-lg rounded-sm max-w-full h-auto border border-slate-300"></canvas>
+        </div>
+
+        <div class="text-[11px] text-slate-500 text-center flex items-center justify-center space-x-4">
+          <span>📐 Standard 55×85mm Sizing</span>
+          <span>✂️ 1mm Safe Margins</span>
+          <span>🎯 Real-Time Rendering</span>
         </div>
       </div>
 
     </div>
-
-    <!-- SEO Content Section (Step by Step Guide) -->
-    <section id="how-to-use" class="mt-16 bg-white p-8 rounded-2xl border border-slate-200">
-      <h2 class="text-2xl font-bold text-slate-900 mb-6" data-i18n="guide_title">How to Print Photocards at Home (Step-by-Step Guide)</h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm text-slate-600">
-        <div class="p-4 rounded-xl bg-slate-50 border border-slate-100">
-          <div class="text-indigo-600 font-bold text-lg mb-2" data-i18n="step1_title">1. Upload & Format</div>
-          <p data-i18n="step1_desc">Choose your desired paper format (A4, Letter, 4x6, 5x7). Upload high-resolution images of your favorite idols, anime characters, or memories.</p>
-        </div>
-        <div class="p-4 rounded-xl bg-slate-50 border border-slate-100">
-          <div class="text-indigo-600 font-bold text-lg mb-2" data-i18n="step2_title">2. Export 300 DPI PDF</div>
-          <p data-i18n="step2_desc">Click the download button to generate a high-definition PDF file. The tool automatically embeds dashed cut lines and aligns margins to prevent clipping.</p>
-        </div>
-        <div class="p-4 rounded-xl bg-slate-50 border border-slate-100">
-          <div class="text-indigo-600 font-bold text-lg mb-2" data-i18n="step3_title">3. Print & Trim</div>
-          <p data-i18n="step3_desc">Print on 250gsm–300gsm glossy or matte photo paper at 100% scale (no fit-to-page). Use a paper cutter or scissors along the dotted guidelines.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- FAQ Section -->
-    <section id="faq" class="mt-12 bg-white p-8 rounded-2xl border border-slate-200">
-      <h2 class="text-2xl font-bold text-slate-900 mb-6" data-i18n="faq_title">Frequently Asked Questions</h2>
-      <div class="space-y-4 text-sm text-slate-600">
-        <div>
-          <h3 class="font-bold text-slate-800 text-base mb-1" data-i18n="faq_q1">What is the standard official K-Pop photocard size?</h3>
-          <p data-i18n="faq_a1">Official album photocards (BTS, Stray Kids, Seventeen, TWICE, NewJeans, Xiao Zhan) are standardly <strong>55 mm × 85 mm (2.16 × 3.34 inches)</strong> with rounded corners. This tool formats your prints precisely to 55×85mm.</p>
-        </div>
-        <div>
-          <h3 class="font-bold text-slate-800 text-base mb-1" data-i18n="faq_q2">Are my uploaded images saved on your servers?</h3>
-          <p data-i18n="faq_a2">No. All cropping, rendering, and PDF generation happen directly inside your web browser using HTML5 Canvas. Your photos never leave your device.</p>
-        </div>
-        <div>
-          <h3 class="font-bold text-slate-800 text-base mb-1" data-i18n="faq_q3">What paper should I use for printing?</h3>
-          <p data-i18n="faq_a3">We recommend using 230gsm to 300gsm heavy glossy inkjet photo paper or double-sided photo paper for the most authentic album photocard feel.</p>
-        </div>
-      </div>
-    </section>
 
   </main>
 
@@ -328,708 +285,14 @@
       </div>
       <div class="flex items-center space-x-6">
         <a href="index.html" class="hover:text-indigo-600">Photocard Print Maker</a>
-        <a href="fan-letter.html" class="hover:text-indigo-600">Fan Letter Pro (Weverse/Bubble)</a>
-        <a href="#about" onclick="alert('StanKit Studio is a free open-source utility designed for collectors and creators worldwide.')" class="hover:text-indigo-600" data-i18n="footer_about">About Us</a>
-        <a href="#privacy" onclick="alert('Privacy Policy: We do not store or collect user images. All operations run locally in your browser. We use cookies and third-party advertising partners like Google AdSense to serve ads.')" class="hover:text-indigo-600" data-i18n="footer_privacy">Privacy Policy</a>
-        <a href="#terms" onclick="alert('Terms of Service: This utility is for personal, non-commercial use. Users are responsible for printing content compliant with applicable laws.')" class="hover:text-indigo-600" data-i18n="footer_terms">Terms of Service</a>
-        <a href="mailto:support@stankit.studio" class="hover:text-indigo-600" data-i18n="footer_contact">Contact Us</a>
+        <a href="fan-letter.html" class="hover:text-indigo-600">Fan Letter Pro</a>
+        <a href="about.html" class="hover:text-indigo-600 font-semibold" data-i18n="footer_about">About Us</a>
+        <a href="privacy.html" class="hover:text-indigo-600 font-semibold" data-i18n="footer_privacy">Privacy Policy</a>
+        <a href="terms.html" class="hover:text-indigo-600 font-semibold" data-i18n="footer_terms">Terms of Service</a>
+        <a href="contact.html" class="hover:text-indigo-600 font-semibold" data-i18n="footer_contact">Contact Us</a>
       </div>
     </div>
   </footer>
-
-  <!-- Interactive JavaScript Engine & Multi-language i18n System -->
-  <script>
-    // 7 Languages Dictionary
-    const i18nData = {
-      en: {
-        badge_hub: "Fandom Micro-Tools",
-        nav_tool_print: "Photocard Print Maker",
-        nav_tool_letter: "Fan Letter Pro (Weverse/Bubble)",
-        badge_free: "100% Free & Fast",
-        nav_coffee: "Buy me a coffee",
-        badge_hot: "HOT",
-        hero_title_1: "DIY Photocard & Polaroid",
-        hero_title_2: "Print Sheet Generator",
-        hero_desc: "Upload your photos, drag to rearrange positions, and instantly download a high-resolution 300 DPI printable PDF with precision dashed cutting lines.",
-        ad_placeholder: "📢 Advertisement Placement (Google AdSense Responsive Banner Area)",
-        sec_config: "Configuration",
-        label_paper: "Paper Format",
-        grid_9_cards: "9 Cards (3×3)",
-        grid_2_cards: "2 Cards (Side)",
-        grid_4_cards: "4 Cards (2×2)",
-        grid_strip_desc: "2 Strips (8 Pcs)",
-        label_card_dim: "Card Dimensions",
-        opt_standard: "🔥 Standard Official K-Pop / Idol Card (55 × 85 mm)",
-        opt_japanese: "🎴 Anime / TCG Trading Card Size (63 × 88 mm)",
-        opt_polaroid: "📷 Mini Polaroid Style with Frame (54 × 86 mm)",
-        opt_square: "⬛ Square Mini Print / Sticker (55 × 55 mm)",
-        label_upload: "Upload Images",
-        upload_prompt: "Click to upload or drag & drop",
-        upload_sub: "Supports JPG, PNG, WEBP (Auto-cropped to 55x85)",
-        loaded_label: "Images loaded:",
-        btn_clear: "Clear All",
-        btn_download: "📥 Download Print-Ready PDF",
-        pdf_subtext: "Rendered at 300 DPI with cut lines for home printers or photo centers.",
-        sec_preview: "Live Sheet Preview",
-        preview_tip: "✨ Drag cards to reorder or use buttons to move",
-        guide_title: "How to Print Photocards at Home (Step-by-Step Guide)",
-        step1_title: "1. Upload & Format",
-        step1_desc: "Choose your desired paper format (A4, Letter, 4x6, 5x7). Upload high-resolution images of your favorite idols, anime characters, or memories.",
-        step2_title: "2. Export 300 DPI PDF",
-        step2_desc: "Click the download button to generate a high-definition PDF file. The tool automatically embeds dashed cut lines and aligns margins to prevent clipping.",
-        step3_title: "3. Print & Trim",
-        step3_desc: "Print on 250gsm–300gsm glossy or matte photo paper at 100% scale (no fit-to-page). Use a paper cutter or scissors along the dotted guidelines.",
-        faq_title: "Frequently Asked Questions",
-        faq_q1: "What is the standard official K-Pop photocard size?",
-        faq_a1: "Official album photocards (BTS, Stray Kids, Seventeen, TWICE, NewJeans, Xiao Zhan) are standardly 55 mm × 85 mm (2.16 × 3.34 inches) with rounded corners. This tool formats your prints precisely to 55×85mm.",
-        faq_q2: "Are my uploaded images saved on your servers?",
-        faq_a2: "No. All cropping, rendering, and PDF generation happen directly inside your web browser using HTML5 Canvas. Your photos never leave your device.",
-        faq_q3: "What paper should I use for printing?",
-        faq_a3: "We recommend using 230gsm to 300gsm heavy glossy inkjet photo paper or double-sided photo paper for the most authentic album photocard feel.",
-        footer_about: "About Us",
-        footer_privacy: "Privacy Policy",
-        footer_terms: "Terms of Service",
-        footer_contact: "Contact Us",
-        remove_btn: "✕",
-        move_left: "◀",
-        move_right: "▶",
-        alert_no_img: "Please upload at least 1 image before generating your PDF!"
-      },
-      zh: {
-        badge_hub: "追星微工具箱",
-        nav_tool_print: "小卡排版打印生成器",
-        nav_tool_letter: "多语种粉丝信生成器",
-        badge_free: "100% 免费快速",
-        nav_coffee: "请作者喝杯咖啡",
-        badge_hot: "热门",
-        hero_title_1: "小卡与拍立得",
-        hero_title_2: "一键排版打印生成器",
-        hero_desc: "上传你的照片，支持直接拖拽调整排列位置，一键生成并下载带剪裁虚线的高清 300 DPI 打印版 PDF 文件。",
-        ad_placeholder: "📢 广告展示位 (Google AdSense 响应式广告区)",
-        sec_config: "排版配置",
-        label_paper: "纸张规格",
-        grid_9_cards: "9 张 (3×3 满排)",
-        grid_2_cards: "2 张 (并排)",
-        grid_4_cards: "4 张 (2×2 经典)",
-        grid_strip_desc: "2 条人生四格 (共8张)",
-        label_card_dim: "卡片尺寸规格",
-        opt_standard: "🔥 官方标准专辑小卡 (55 × 85 mm)",
-        opt_japanese: "🎴 动漫/TCG 盲盒卡牌 (63 × 88 mm)",
-        opt_polaroid: "📷 复古拍立得风格 (54 × 86 mm)",
-        opt_square: "⬛ 正方形迷你卡/贴纸 (55 × 55 mm)",
-        label_upload: "上传卡片照片",
-        upload_prompt: "点击上传或将图片拖拽至此处",
-        upload_sub: "支持 JPG, PNG, WEBP (自动居中裁切至 55x85mm)",
-        loaded_label: "已加载图片:",
-        btn_clear: "全部清空",
-        btn_download: "📥 一键下载 300 DPI 打印级 PDF",
-        pdf_subtext: "内嵌精准裁剪虚线，支持家用打印机或照相馆 1:1 打印。",
-        sec_preview: "实时排版预览",
-        preview_tip: "✨ 可直接鼠标拖拽卡片换位，或悬停点击箭头移动/移除",
-        guide_title: "如何在家里自己打印高清小卡？（步骤指南）",
-        step1_title: "1. 上传与排版",
-        step1_desc: "选择需要的纸张规格（A4、Letter、4x6 或 5x7寸）。上传图片并任意拖拽调整心仪的展示顺序。",
-        step2_title: "2. 导出 300 DPI 高清 PDF",
-        step2_desc: "点击下载按钮，系统会在本地生成高清 PDF 文件，自动居中并加上防裁切虚线边缘。",
-        step3_title: "3. 打印与剪裁",
-        step3_desc: "使用 250g–300g 重磅高光相纸，按 100% 原始比例（不要缩放/适应页面）打印，沿虚线裁切即可。",
-        faq_title: "常见问题解答 (FAQ)",
-        faq_q1: "官方小卡的标准尺寸是多少？",
-        faq_a1: "目前市面上主流官方专辑小卡（如 BTS, Stray Kids, Seventeen, 肖战等）均为标准的 55mm × 85mm 圆角小卡。本工具严格按照此尺寸精准排版。",
-        faq_q2: "我上传的照片会被保存在服务器上吗？",
-        faq_a2: "完全不会。所有图片裁切和 PDF 生成均在你的浏览器本地进行，图片绝不上传任何服务器，保护个人隐私。",
-        faq_q3: "建议使用什么相纸打印？",
-        faq_a3: "推荐使用 230g–300g 的高光喷墨相纸或双面铜版纸，打印出来的厚度和质感最接近官方小卡。",
-        footer_about: "关于本站",
-        footer_privacy: "隐私政策",
-        footer_terms: "服务条款",
-        footer_contact: "联系我们",
-        remove_btn: "✕",
-        move_left: "◀",
-        move_right: "▶",
-        alert_no_img: "请至少上传 1 张图片后再生成 PDF！"
-      },
-      th: {
-        badge_hub: "เครื่องมือสำหรับแฟนคลับ",
-        nav_tool_print: "พิมพ์โฟโต้การ์ด",
-        nav_tool_letter: "สร้างจดหมายแฟนคลับ",
-        badge_free: "ฟรี 100% & รวดเร็ว",
-        nav_coffee: "เลี้ยงกาแฟผู้พัฒนา",
-        badge_hot: "ฮิต",
-        hero_title_1: "โปรแกรมจัดหน้าพิมพ์",
-        hero_title_2: "โฟโต้การ์ดและโพลารอยด์ DIY",
-        hero_desc: "อัปโหลดรูปภาพของคุณ ลากเพื่อจัดเรียงตำแหน่ง และดาวน์โหลดไฟล์ PDF คุณภาพสูง 300 DPI พร้อมเส้นประตัดได้ทันที",
-        ad_placeholder: "📢 พื้นที่โฆษณา (Google AdSense)",
-        sec_config: "การตั้งค่าการพิมพ์",
-        label_paper: "ขนาดกระดาษ",
-        grid_9_cards: "9 ใบ (3×3)",
-        grid_2_cards: "2 ใบ (คู่)",
-        grid_4_cards: "4 ใบ (2×2)",
-        grid_strip_desc: "2 แถบ 4-Cut (8 รูป)",
-        label_card_dim: "ขนาดการ์ด",
-        opt_standard: "🔥 ขนาดโฟโต้การ์ดมาตรฐาน (55 × 85 มม.)",
-        opt_japanese: "🎴 การ์ดอนิเมะ / TCG (63 × 88 มม.)",
-        opt_polaroid: "📷 สไตล์มินิโพลารอยด์ (54 × 86 มม.)",
-        opt_square: "⬛ มินิสี่เหลี่ยมจัตุรัส (55 × 55 มม.)",
-        label_upload: "อัปโหลดรูปภาพ",
-        upload_prompt: "คลิกเพื่ออัปโหลดหรือลากไฟล์มาวาง",
-        upload_sub: "รองรับ JPG, PNG, WEBP (ครอบตัด 55x85 มม. อัตโนมัติ)",
-        loaded_label: "รูปภาพที่โหลดแล้ว:",
-        btn_clear: "ล้างทั้งหมด",
-        btn_download: "📥 ดาวน์โหลด PDF คุณภาพสูง 300 DPI",
-        pdf_subtext: "ความละเอียด 300 DPI พร้อมเส้นประตัด เหมาะสำหรับเครื่องพิมพ์ที่บ้านหรือร้านอัดรูป",
-        sec_preview: "ตัวอย่างหน้าพิมพ์สด",
-        preview_tip: "✨ ลากการ์ดเพื่อสลับตำแหน่ง หรือใช้ปุ่มลูกศรเพื่อเลื่อน/ลบ",
-        guide_title: "วิธีพิมพ์โฟโต้การ์ดด้วยตนเองที่บ้าน (คู่มือ)",
-        step1_title: "1. อัปโหลดรูปภาพ",
-        step1_desc: "เลือกขนาดกระดาษ A4, Letter, 4x6 หรือ 5x7 นิ้ว แล้วอัปโหลดรูปไอดอลหรือตัวละครที่คุณชื่นชอบ",
-        step2_title: "2. ส่งออกไฟล์ PDF 300 DPI",
-        step2_desc: "คลิกดาวน์โหลดเพื่อสร้างไฟล์ PDF ความละเอียดสูง พร้อมเส้นประนำสายตาสำหรับตัด",
-        step3_title: "3. พิมพ์และตัด",
-        step3_desc: "พิมพ์ลงบนกระดาษโฟโต้ผิวมัน 250–300 แกรม ที่อัตราส่วน 100% แล้วตัดตามเส้นประ",
-        faq_title: "คำถามที่พบบ่อย (FAQ)",
-        faq_q1: "ขนาดมาตรฐานของโฟโต้การ์ด K-Pop คือเท่าใด?",
-        faq_a1: "โฟโต้การ์ดทางการส่วนใหญ่มีขนาดมาตรฐาน 55 มม. × 85 มม. เครื่องมือนี้จัดรูปแบบตามขนาดนี้อย่างแม่นยำ",
-        faq_q2: "รูปภาพของฉันถูกบันทึกบนเซิร์ฟเวอร์หรือไม่?",
-        faq_a2: "ไม่ รูปภาพทั้งหมดจะถูกประมวลผลภายในเบราว์เซอร์ของคุณโดยตรง",
-        faq_q3: "ควรใช้กระดาษแบบไหนในการพิมพ์?",
-        faq_a3: "แนะนำให้ใช้กระดาษโฟโต้ผิวมันความหนา 230–300 แกรม",
-        footer_about: "เกี่ยวกับเรา",
-        footer_privacy: "นโยบายความเป็นส่วนตัว",
-        footer_terms: "ข้อกำหนดการใช้งาน",
-        footer_contact: "ติดต่อเรา",
-        remove_btn: "✕",
-        move_left: "◀",
-        move_right: "▶",
-        alert_no_img: "โปรดอัปโหลดรูปภาพอย่างน้อย 1 รูปก่อนสร้าง PDF!"
-      },
-      ar: {
-        badge_hub: "أدوات الفاندوم",
-        nav_tool_print: "طباعة البطاقات",
-        nav_tool_letter: "مساعد رسائل المعجبين",
-        badge_free: "مجاني وسريع 100%",
-        nav_coffee: "ادعمني بقهوة",
-        badge_hot: "شائع",
-        hero_title_1: "أداة تنسيق وطباعة",
-        hero_title_2: "بطاقات وبولارويد DIY",
-        hero_desc: "قم برفع صورك، واسحب لتغيير ترتيب البطاقات، ثم حمّل فوراً ملف PDF عالي الدقة 300 DPI جاهز للطباعة.",
-        ad_placeholder: "📢 مساحة إعلانية (Google AdSense)",
-        sec_config: "إعدادات الطباعة",
-        label_paper: "حجم الورق",
-        grid_9_cards: "9 بطاقات (3×3)",
-        grid_2_cards: "بطاقتان (جنباً لجنب)",
-        grid_4_cards: "4 بطاقات (2×2)",
-        grid_strip_desc: "شريطان 4-Cut (8 صور)",
-        label_card_dim: "أبعاد البطاقة",
-        opt_standard: "🔥 بطاقة فوتوكارد رسمية قياسية (55 × 85 مم)",
-        opt_japanese: "🎴 بطاقات أنمي / TCG (63 × 88 مم)",
-        opt_polaroid: "📷 نمط بولارويد ميني (54 × 86 مم)",
-        opt_square: "⬛ طباعة مربعة صغيرة (55 × 55 مم)",
-        label_upload: "رفع الصور",
-        upload_prompt: "انقر للرفع أو اسحب الصور إلى هنا",
-        upload_sub: "يدعم JPG, PNG, WEBP (اقتصاص تلقائي إلى 55x85 مم)",
-        loaded_label: "الصور المحملة:",
-        btn_clear: "مسح الكل",
-        btn_download: "📥 تحميل ملف PDF بدقة 300 DPI للطباعة",
-        pdf_subtext: "بدقة 300 DPI مع خطوط قص متقطعة للطباعة المنزلية أو في مراكز التصوير.",
-        sec_preview: "معاينة الصفحة المباشرة",
-        preview_tip: "✨ اسحب البطاقات لإعادة ترتيبها أو استخدم الأسهم للتحريك/الحذف",
-        guide_title: "كيف تطبع بطاقات الفوتوكارد في المنزل؟ (دليل خطوة بخطوة)",
-        step1_title: "1. الرفع والتنسيق",
-        step1_desc: "اختر مقاس الورق (A4، Letter، 4x6 أو 5x7 بوصة). ارفع صورك المفضلة.",
-        step2_title: "2. تصدير PDF بدقة 300 DPI",
-        step2_desc: "انقر فوق زر التحميل لإنشاء ملف PDF بدقة فائقة مع خطوط قص متقطعة.",
-        step3_title: "3. الطباعة والقص",
-        step3_desc: "اطبع على ورق صور لامع بوزن 250-300 غرام بمقياس 100% ثم قص على طول الخطوط المتقطعة.",
-        faq_title: "الأسئلة الشائعة (FAQ)",
-        faq_q1: "ما هو الحجم الرسمي القياسي لبطاقات الكيبوب؟",
-        faq_a1: "الحجم القياسي لبطاقات الألبومات الرسمية هو 55 مم × 85 مم.",
-        faq_q2: "هل يتم حفظ صوري المرفوعة على خوادمكم؟",
-        faq_a2: "كلا، تتم جميع معالجات الصور وتوليد الـ PDF محلياً داخل متصفحك.",
-        faq_q3: "ما هو نوع الورق الموصى به للطباعة؟",
-        faq_a3: "نوصي باستخدام ورق صور لامع عالي الجودة بوزن 230 إلى 300 غرام.",
-        footer_about: "من نحن",
-        footer_privacy: "سياسة الخصوصية",
-        footer_terms: "شروط الخدمة",
-        footer_contact: "اتصل بنا",
-        remove_btn: "✕",
-        move_left: "◀",
-        move_right: "▶",
-        alert_no_img: "يرجى رفع صورة واحدة على الأقل قبل إنشاء ملف الـ PDF!"
-      },
-      ko: {
-        badge_hub: "팬덤 전용 마이크로 툴",
-        nav_tool_print: "포토카드 인쇄기",
-        nav_tool_letter: "팬레터 생성기",
-        badge_free: "100% 무료 & 초고속",
-        nav_coffee: "커피 한 잔 후원하기",
-        badge_hot: "인기",
-        hero_title_1: "DIY 포토카드 & 폴라로이드",
-        hero_title_2: "인쇄 그리드 생성기",
-        hero_desc: "사진을 업로드하고 드래그하여 순서를 변경한 후 고해상도 300 DPI 인쇄용 PDF를 즉시 다운로드하세요.",
-        ad_placeholder: "📢 광고 게재 영역 (Google AdSense)",
-        sec_config: "인쇄 설정",
-        label_paper: "용지 규격",
-        grid_9_cards: "9장 배치 (3×3)",
-        grid_2_cards: "2장 배치",
-        grid_4_cards: "4장 배치 (2×2)",
-        grid_strip_desc: "인생네컷 2줄 (8장)",
-        label_card_dim: "포토카드 크기",
-        opt_standard: "🔥 공식 앨범 포토카드 규격 (55 × 85 mm)",
-        opt_japanese: "🎴 애니메이션 / TCG 카드 (63 × 88 mm)",
-        opt_polaroid: "📷 미니 폴라로이드 스타일 (54 × 86 mm)",
-        opt_square: "⬛ 정사각형 미니 프린트 (55 × 55 mm)",
-        label_upload: "사진 업로드",
-        upload_prompt: "클릭하여 업로드하거나 드래그 앤 드롭",
-        upload_sub: "JPG, PNG, WEBP 지원 (55x85 자동 크롭)",
-        loaded_label: "로드된 사진:",
-        btn_clear: "전체 삭제",
-        btn_download: "📥 인쇄용 300 DPI PDF 다운로드",
-        pdf_subtext: "가정용 프린터 및 인화소에서 완벽하게 출력 가능한 300 DPI 지원.",
-        sec_preview: "실시간 시트 미리보기",
-        preview_tip: "✨ 드래그하여 위치를 바꾸거나 화살표 버튼으로 순서 이동/삭제",
-        guide_title: "집에서 포토카드 출력하는 방법 (가이드)",
-        step1_title: "1. 사진 업로드",
-        step1_desc: "A4, Letter, 4x6, 5x7 등 용지 크기를 선택하고 최애 아이돌 사진을 업로드하세요.",
-        step2_title: "2. 고해상도 PDF 내보내기",
-        step2_desc: "다운로드 버튼을 누르면 점선 가이드라인이 포함된 300 DPI 고화질 PDF가 즉시 생성됩니다.",
-        step3_title: "3. 인쇄 및 자르기",
-        step3_desc: "250g~300g 인화지에 100% 원본 비율로 출력한 후 가이드라인을 따라 잘라내세요.",
-        faq_title: "자주 묻는 질문 (FAQ)",
-        faq_q1: "공식 K-Pop 포토카드 표준 규격은 얼마인가요?",
-        faq_a1: "공식 앨범 포토카드는 표준 55mm × 85mm 규격입니다.",
-        faq_q2: "업로드한 이미지가 서버에 저장되나요?",
-        faq_a2: "아닙니다. 모든 렌더링 및 PDF 생성은 브라우저 내부에서만 처리됩니다.",
-        faq_q3: "어떤 용지를 사용하는 것이 좋은가요?",
-        faq_a3: "250gsm 이상의 고광택 인화지를 추천합니다.",
-        footer_about: "소개",
-        footer_privacy: "개인정보처리방침",
-        footer_terms: "이용약관",
-        footer_contact: "문의하기",
-        remove_btn: "✕",
-        move_left: "◀",
-        move_right: "▶",
-        alert_no_img: "PDF를 생성하려면 사진을 1장 이상 업로드해 주세요!"
-      },
-      ja: {
-        badge_hub: "推し活マイクロツール",
-        nav_tool_print: "トレカ印刷ツール",
-        nav_tool_letter: "ファンレター文面生成",
-        badge_free: "100% 無料・高速",
-        nav_coffee: "開発者にコーヒーをごちそう",
-        badge_hot: "人気",
-        hero_title_1: "自作トレカ & ポラロイド",
-        hero_title_2: "印刷シート自動生成ツール",
-        hero_desc: "写真をアップロードし、ドラッグで並び替え。切り取り点線付きの300 DPI印刷用PDFを瞬時に作成・ダウンロードできます。",
-        ad_placeholder: "📢 広告スペース (Google AdSense)",
-        sec_config: "印刷設定",
-        label_paper: "用紙サイズ",
-        grid_9_cards: "9枚配置 (3×3)",
-        grid_2_cards: "2枚配置",
-        grid_4_cards: "4枚配置 (2×2)",
-        grid_strip_desc: "韓国プリ風 2本 (8枚)",
-        label_card_dim: "カードサイズ",
-        opt_standard: "🔥 公式トレカ標準サイズ (55 × 85 mm)",
-        opt_japanese: "🎴 アニメ / TCGカードサイズ (63 × 88 mm)",
-        opt_polaroid: "📷 ポラロイド風 (54 × 86 mm)",
-        opt_square: "⬛ 正方形ミニ (55 × 55 mm)",
-        label_upload: "画像をアップロード",
-        upload_prompt: "クリックして画像を選択、またはドラッグ＆ドロップ",
-        upload_sub: "JPG, PNG, WEBP対応 (自動で55x85mmにトリミング)",
-        loaded_label: "読み込み済み:",
-        btn_clear: "すべてクリア",
-        btn_download: "📥 印刷用 300 DPI PDF をダウンロード",
-        pdf_subtext: "自宅のプリンターやコンビニ印刷で綺麗にカットできる点線ガイド付き。",
-        sec_preview: "プレビュー",
-        preview_tip: "✨ ドラッグして位置を入れ替え、または矢印ボタンで移動・削除",
-        guide_title: "お家でトレカを印刷する方法（ステップガイド）",
-        step1_title: "1. 画像を選択",
-        step1_desc: "A4、Letter、4x6、5x7用紙を選択し、お好みの推し画像をアップロードします。",
-        step2_title: "2. PDF出力",
-        step2_desc: "ダウンロードボタンを押すと、切り取り線付きのPDFが自動生成されます。",
-        step3_title: "3. 印刷・カット",
-        step3_desc: "厚手の光沢写真用紙（250g以上）に「等倍（100%）」で印刷し、点線に沿ってカットします。",
-        faq_title: "よくある質問",
-        faq_q1: "公式トレカの標準サイズは何ミリですか？",
-        faq_a1: "公式トレカは一般的に 55mm × 85mm です。本ツールはこの規格に完全対応しています。",
-        faq_q2: "アップロードした画像はサーバーに保存されますか？",
-        faq_a2: "いいえ、画像処理はすべてお使いのブラウザ内で行われます。",
-        faq_q3: "おすすめの用紙は？",
-        faq_a3: "230g〜300gの厚手光沢紙がおすすめです。",
-        footer_about: "概要",
-        footer_privacy: "プライバシーポリシー",
-        footer_terms: "利用規約",
-        footer_contact: "お問い合わせ",
-        remove_btn: "✕",
-        move_left: "◀",
-        move_right: "▶",
-        alert_no_img: "画像を1枚以上アップロードしてください！"
-      },
-      es: {
-        badge_hub: "Microherramientas K-Pop",
-        nav_tool_print: "Imprimir Photocards",
-        nav_tool_letter: "Generador de Cartas",
-        badge_free: "100% Gratis y Rápido",
-        nav_coffee: "Cómprame un café",
-        badge_hot: "POPULAR",
-        hero_title_1: "Generador de Photocards y",
-        hero_title_2: "Polaroids para Imprimir",
-        hero_desc: "Sube tus fotos, arrastra para reorganizar el orden y descarga al instante un PDF en alta resolución 300 DPI con líneas de corte punteadas.",
-        ad_placeholder: "📢 Espacio publicitario (Google AdSense)",
-        sec_config: "Configuración",
-        label_paper: "Tamaño de Papel",
-        grid_9_cards: "9 Cartas (3×3)",
-        grid_2_cards: "2 Cartas",
-        grid_4_cards: "4 Cartas (2×2)",
-        grid_strip_desc: "2 Tiras 4-Cut (8 Fotos)",
-        label_card_dim: "Dimensiones de la Carta",
-        opt_standard: "🔥 Photocard Oficial Estándar (55 × 85 mm)",
-        opt_japanese: "🎴 Tamaño Anime / TCG (63 × 88 mm)",
-        opt_polaroid: "📷 Estilo Mini Polaroid (54 × 86 mm)",
-        opt_square: "⬛ Impresión Cuadrada (55 × 55 mm)",
-        label_upload: "Subir Fotos",
-        upload_prompt: "Haz clic para subir o arrastra tus fotos",
-        upload_sub: "Soporta JPG, PNG, WEBP (Recorte automático a 55x85)",
-        loaded_label: "Imágenes cargadas:",
-        btn_clear: "Limpiar todo",
-        btn_download: "📥 Descargar PDF listo para imprimir",
-        pdf_subtext: "Generado a 300 DPI con guías de corte precisas.",
-        sec_preview: "Vista Previa de la Hoja",
-        preview_tip: "✨ Arrastra cartas para reorganizar o usa las flechas para mover",
-        guide_title: "¿Cómo imprimir Photocards en casa? (Guía paso a paso)",
-        step1_title: "1. Sube tus fotos",
-        step1_desc: "Elige A4, Carta, 4x6 o 5x7. Sube imágenes y arrástralas al orden deseado.",
-        step2_title: "2. Exporta el PDF a 300 DPI",
-        step2_desc: "Haz clic en descargar para generar el archivo con líneas de corte para tijeras o guillotina.",
-        step3_title: "3. Imprime y corta",
-        step3_desc: "Imprime en papel fotográfico brillante de 250gsm a 300gsm a escala 100% y corta por las líneas.",
-        faq_title: "Preguntas Frecuentes",
-        faq_q1: "¿Cuál es el tamaño oficial estándar de una photocard K-Pop?",
-        faq_a1: "El tamaño estándar oficial es de 55 mm × 85 mm (2.16 × 3.34 pulgadas).",
-        faq_q2: "¿Se guardan mis fotos en sus servidores?",
-        faq_a2: "No. Todo el proceso ocurre en tu navegador localmente por seguridad y privacidad.",
-        faq_q3: "¿Qué papel recomiendan?",
-        faq_a3: "Papel fotográfico brillante de 230gsm a 300gsm.",
-        footer_about: "Acerca de",
-        footer_privacy: "Política de Privacidad",
-        footer_terms: "Términos de Servicio",
-        footer_contact: "Contacto",
-        remove_btn: "✕",
-        move_left: "◀",
-        move_right: "▶",
-        alert_no_img: "¡Por favor sube al menos 1 imagen antes de generar el PDF!"
-      }
-    };
-
-    let currentLang = 'en';
-    let uploadedImages = [];
-    let currentPaper = 'a4';
-    let maxSlots = 9;
-    let dragSrcIndex = null;
-
-    const paperFormats = {
-      a4: { name: 'A4 (210×297mm)', max: 9, cols: 3, rows: 3, w: 210, h: 297 },
-      '4x6': { name: '4×6" (102×152mm)', max: 2, cols: 2, rows: 1, w: 152.4, h: 101.6 },
-      letter: { name: 'US Letter (8.5×11")', max: 9, cols: 3, rows: 3, w: 215.9, h: 279.4 },
-      '5x7': { name: '5×7" (127×178mm)', max: 4, cols: 2, rows: 2, w: 127, h: 177.8 },
-      a5: { name: 'A5 (148×210mm)', max: 4, cols: 2, rows: 2, w: 148, h: 210 },
-      strip: { name: '4-Cut Strips (4×6")', max: 8, cols: 2, rows: 4, w: 101.6, h: 152.4 }
-    };
-
-    function changeLanguage(lang) {
-      if (!i18nData[lang]) lang = 'en';
-      currentLang = lang;
-      localStorage.setItem('stankit_lang', lang);
-      document.getElementById('lang-select').value = lang;
-
-      // Handle RTL for Arabic layout automatically
-      if (lang === 'ar') {
-        document.documentElement.setAttribute('dir', 'rtl');
-      } else {
-        document.documentElement.setAttribute('dir', 'ltr');
-      }
-
-      const elements = document.querySelectorAll('[data-i18n]');
-      elements.forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        if (i18nData[lang][key]) {
-          el.innerText = i18nData[lang][key];
-        }
-      });
-      renderSlots();
-    }
-
-    function setPaper(type) {
-      currentPaper = type;
-      const allButtons = ['a4', '4x6', 'letter', '5x7', 'a5', 'strip'];
-      
-      allButtons.forEach(btnId => {
-        const btn = document.getElementById(`btn-${btnId}`);
-        if (btnId === type) {
-          btn.className = 'relative p-2.5 rounded-xl border-2 text-left transition border-indigo-600 bg-indigo-50/70 text-indigo-900 shadow-sm';
-        } else {
-          btn.className = 'relative p-2.5 rounded-xl border-2 text-left transition border-slate-200 text-slate-700 hover:border-slate-300';
-        }
-      });
-
-      const config = paperFormats[type] || paperFormats.a4;
-      document.getElementById('paper-info-badge').innerText = `${config.name}`;
-
-      if (uploadedImages.length > config.max) {
-        uploadedImages = uploadedImages.slice(0, config.max);
-      }
-      renderSlots();
-    }
-
-    function renderSlots() {
-      const container = document.getElementById('grid-container');
-      container.innerHTML = '';
-      
-      const config = paperFormats[currentPaper] || paperFormats.a4;
-      maxSlots = config.max;
-      
-      // Dynamic columns based on layout
-      if (config.cols === 3) container.className = 'grid grid-cols-3 gap-2.5';
-      else if (config.cols === 2) container.className = 'grid grid-cols-2 gap-3';
-      else container.className = 'grid grid-cols-1 gap-2';
-
-      document.getElementById('img-counter').innerText = `${uploadedImages.length} / ${maxSlots}`;
-
-      const cardType = document.getElementById('card-type-select').value;
-
-      for (let i = 0; i < maxSlots; i++) {
-        const slot = document.createElement('div');
-        
-        let ratioStyle = 'aspect-ratio: 55 / 85;';
-        if (cardType === 'japanese') ratioStyle = 'aspect-ratio: 63 / 88;';
-        else if (cardType === 'square') ratioStyle = 'aspect-ratio: 1 / 1;';
-        else if (currentPaper === 'strip') ratioStyle = 'aspect-ratio: 4 / 3;';
-
-        slot.setAttribute('style', ratioStyle);
-        slot.className = 'card-slot border-2 border-dashed border-slate-300 rounded-xl flex flex-col items-center justify-center text-slate-300 relative overflow-hidden bg-slate-50 group transition duration-150';
-
-        if (uploadedImages[i]) {
-          slot.style.backgroundImage = `url(${uploadedImages[i]})`;
-          slot.style.borderStyle = 'solid';
-          slot.style.borderColor = '#6366f1';
-          slot.setAttribute('draggable', 'true');
-          slot.classList.add('cursor-grab', 'active:cursor-grabbing');
-
-          // Drag and Drop Event Listeners
-          slot.addEventListener('dragstart', (e) => handleDragStart(e, i, slot));
-          slot.addEventListener('dragover', (e) => handleDragOver(e));
-          slot.addEventListener('dragenter', (e) => handleDragEnter(e, slot));
-          slot.addEventListener('dragleave', (e) => handleDragLeave(e, slot));
-          slot.addEventListener('drop', (e) => handleDrop(e, i, slot));
-          slot.addEventListener('dragend', (e) => handleDragEnd(e, slot));
-
-          // Interactive Hover Action Overlay (Move Left / Remove / Move Right)
-          const overlay = document.createElement('div');
-          overlay.className = 'absolute inset-0 bg-slate-950/60 backdrop-blur-[2px] text-white flex flex-col justify-between p-2 opacity-0 group-hover:opacity-100 transition duration-150 pointer-events-auto';
-
-          // Top Header: Drag Handle & Remove Button
-          const topBar = document.createElement('div');
-          topBar.className = 'flex items-center justify-between w-full';
-          topBar.innerHTML = `
-            <span class="text-[10px] font-extrabold bg-indigo-600/90 px-1.5 py-0.5 rounded text-white flex items-center space-x-1">
-              <span>⠿</span><span>#${i+1}</span>
-            </span>
-            <button onclick="removeImage(${i})" title="Remove" class="w-6 h-6 rounded-full bg-rose-600 hover:bg-rose-700 text-white flex items-center justify-center text-xs font-bold shadow transition">
-              ✕
-            </button>
-          `;
-
-          // Bottom Bar: Reordering Arrows (Left / Right Swap)
-          const bottomBar = document.createElement('div');
-          bottomBar.className = 'flex items-center justify-between w-full pt-1';
-
-          const prevBtn = document.createElement('button');
-          prevBtn.className = `px-2 py-1 rounded bg-white/20 hover:bg-white/40 text-white text-xs font-bold transition flex items-center space-x-0.5 ${i === 0 ? 'opacity-30 cursor-not-allowed' : ''}`;
-          prevBtn.innerHTML = `<span>◀</span>`;
-          prevBtn.title = "Move Left / Up";
-          if (i > 0) prevBtn.onclick = (e) => { e.stopPropagation(); moveImage(i, -1); };
-
-          const nextBtn = document.createElement('button');
-          nextBtn.className = `px-2 py-1 rounded bg-white/20 hover:bg-white/40 text-white text-xs font-bold transition flex items-center space-x-0.5 ${i === uploadedImages.length - 1 ? 'opacity-30 cursor-not-allowed' : ''}`;
-          nextBtn.innerHTML = `<span>▶</span>`;
-          nextBtn.title = "Move Right / Down";
-          if (i < uploadedImages.length - 1) nextBtn.onclick = (e) => { e.stopPropagation(); moveImage(i, 1); };
-
-          bottomBar.appendChild(prevBtn);
-          bottomBar.appendChild(nextBtn);
-
-          overlay.appendChild(topBar);
-          overlay.appendChild(bottomBar);
-          slot.appendChild(overlay);
-
-        } else {
-          slot.innerHTML = `<span class="text-xs font-semibold text-slate-400">#${i+1}</span>`;
-          slot.classList.add('cursor-pointer');
-          slot.onclick = () => document.getElementById('file-input').click();
-
-          // Allow dropping onto an empty slot
-          slot.addEventListener('dragover', (e) => handleDragOver(e));
-          slot.addEventListener('dragenter', (e) => handleDragEnter(e, slot));
-          slot.addEventListener('dragleave', (e) => handleDragLeave(e, slot));
-          slot.addEventListener('drop', (e) => handleDrop(e, i, slot));
-        }
-        container.appendChild(slot);
-      }
-    }
-
-    // HTML5 Drag & Drop Logic
-    function handleDragStart(e, index, slot) {
-      dragSrcIndex = index;
-      e.dataTransfer.effectAllowed = 'move';
-      e.dataTransfer.setData('text/plain', index);
-      setTimeout(() => slot.classList.add('dragging'), 0);
-    }
-
-    function handleDragOver(e) {
-      if (e.preventDefault) e.preventDefault();
-      e.dataTransfer.dropEffect = 'move';
-      return false;
-    }
-
-    function handleDragEnter(e, slot) {
-      slot.classList.add('drag-over');
-    }
-
-    function handleDragLeave(e, slot) {
-      slot.classList.remove('drag-over');
-    }
-
-    function handleDrop(e, targetIndex, slot) {
-      e.stopPropagation();
-      e.preventDefault();
-      slot.classList.remove('drag-over');
-
-      if (dragSrcIndex !== null && dragSrcIndex !== targetIndex) {
-        if (targetIndex < uploadedImages.length) {
-          // Swap positions
-          const temp = uploadedImages[dragSrcIndex];
-          uploadedImages.splice(dragSrcIndex, 1);
-          uploadedImages.splice(targetIndex, 0, temp);
-        } else {
-          // Move to end/empty slot
-          const temp = uploadedImages[dragSrcIndex];
-          uploadedImages.splice(dragSrcIndex, 1);
-          uploadedImages.push(temp);
-        }
-        renderSlots();
-      }
-      return false;
-    }
-
-    function handleDragEnd(e, slot) {
-      slot.classList.remove('dragging');
-      document.querySelectorAll('.card-slot').forEach(s => s.classList.remove('drag-over'));
-      dragSrcIndex = null;
-    }
-
-    // Step-by-Step Move Left / Right Buttons
-    function moveImage(index, direction) {
-      const targetIndex = index + direction;
-      if (targetIndex >= 0 && targetIndex < uploadedImages.length) {
-        const temp = uploadedImages[index];
-        uploadedImages[index] = uploadedImages[targetIndex];
-        uploadedImages[targetIndex] = temp;
-        renderSlots();
-      }
-    }
-
-    function handleFiles(files) {
-      if (!files || !files.length) return;
-      const remaining = maxSlots - uploadedImages.length;
-      const countToAdd = Math.min(files.length, remaining);
-
-      for (let i = 0; i < countToAdd; i++) {
-        const file = files[i];
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          if (uploadedImages.length < maxSlots) {
-            uploadedImages.push(e.target.result);
-            renderSlots();
-          }
-        };
-        reader.readAsDataURL(file);
-      }
-    }
-
-    function removeImage(index) {
-      uploadedImages.splice(index, 1);
-      renderSlots();
-    }
-
-    function clearImages() {
-      uploadedImages = [];
-      renderSlots();
-    }
-
-    // High-Resolution 300 DPI PDF Generator
-    async function generatePDF() {
-      if (uploadedImages.length === 0) {
-        alert(i18nData[currentLang].alert_no_img || 'Please upload at least 1 image before generating your PDF!');
-        return;
-      }
-
-      const { jsPDF } = window.jspdf;
-      const config = paperFormats[currentPaper] || paperFormats.a4;
-      
-      let orientation = 'portrait';
-      if (currentPaper === '4x6') orientation = 'landscape';
-
-      const doc = new jsPDF({
-        orientation: orientation,
-        unit: 'mm',
-        format: (currentPaper === 'a4' || currentPaper === 'a5') ? currentPaper : [config.w, config.h]
-      });
-
-      // Card Dimensions in mm
-      const cardType = document.getElementById('card-type-select').value;
-      let cardW = 55;
-      let cardH = 85;
-      if (cardType === 'japanese') { cardW = 63; cardH = 88; }
-      else if (cardType === 'square') { cardW = 55; cardH = 55; }
-
-      const gap = 4;
-      const totalGridW = config.cols * cardW + (config.cols - 1) * gap;
-      const totalGridH = config.rows * cardH + (config.rows - 1) * gap;
-
-      const pageW = (orientation === 'landscape') ? Math.max(config.w, config.h) : Math.min(config.w, config.h);
-      const pageH = (orientation === 'landscape') ? Math.min(config.w, config.h) : Math.max(config.w, config.h);
-
-      const marginX = Math.max(5, (pageW - totalGridW) / 2);
-      const marginY = Math.max(5, (pageH - totalGridH) / 2);
-
-      for (let i = 0; i < uploadedImages.length; i++) {
-        const col = i % config.cols;
-        const row = Math.floor(i / config.cols);
-        const x = marginX + col * (cardW + gap);
-        const y = marginY + row * (cardH + gap);
-
-        doc.addImage(uploadedImages[i], 'JPEG', x, y, cardW, cardH);
-        
-        // Dashed cutting lines
-        doc.setLineDashPattern([1.5, 1.5], 0);
-        doc.setDrawColor(180, 180, 180);
-        doc.rect(x, y, cardW, cardH);
-      }
-
-      doc.save(`StanKit_${currentPaper.toUpperCase()}_300DPI.pdf`);
-    }
-
-    // Default to English on First Load
-    window.addEventListener('DOMContentLoaded', () => {
-      const savedLang = (localStorage.getItem('stankit_lang') || localStorage.getItem('cardgrid_lang'));
-      if (savedLang && i18nData[savedLang]) {
-        changeLanguage(savedLang);
-      } else {
-        changeLanguage('en');
-      }
-      setPaper('a4');
-    });
-  </script>
 
   <!-- Ko-fi Floating Widget Overlay -->
   <script src="https://storage.ko-fi.com/cdn/scripts/overlay-widget.js"></script>
@@ -1041,6 +304,348 @@
       'floating-chat.donatebutton.text-color': '#ffffff'
     });
   </script>
-</body>
 
+  <!-- Application Logic -->
+  <script>
+    // State
+    let currentPaper = 'a4'; // 'a4', 'letter', '4x6'
+    let currentCutLine = true;
+    let currentFitMode = 'cover';
+    let uploadedImages = []; // Array of Image objects
+    let currentLang = 'en';
+
+    const i18nData = {
+      'en': {
+        'badge_hub': "Fandom Micro-Tools",
+        'nav_tool_print': "Photocard Print Maker",
+        'nav_tool_letter': "Fan Letter Pro",
+        'nav_about': "About",
+        'nav_contact': "Contact",
+        'nav_coffee': "Buy me a coffee",
+        'hero_title_1': "K-Pop Photocard Print Grid Generator",
+        'hero_title_2': "300 DPI High-Res Printable PDF",
+        'hero_desc': "Effortlessly arrange 55×85mm standard photocards or Polaroids onto A4 / US Letter sheets. Instant 100% client-side privacy-first PDF export with bleed cut-lines.",
+        'label_step1': "1. Upload Images",
+        'dropzone_title': "Click to upload or drag & drop",
+        'dropzone_desc': "PNG, JPG, WEBP (Supports batch selection)",
+        'label_step2': "2. Paper Size & Card Format",
+        'opt_cutlines': "Show Scissor Cut Lines",
+        'opt_fit': "Image Fit Mode",
+        'btn_download_pdf': "Download 300 DPI PDF (Print Ready)",
+        'pdf_note': "🔒 100% Client-Side Privacy: Images never leave your device.",
+        'preview_sheet_title': "Printable Sheet Preview",
+        'btn_clear_all': "Clear Sheet",
+        'sec_photocard_history': "Recent Print Layouts",
+        'footer_about': "About Us",
+        'footer_privacy': "Privacy Policy",
+        'footer_terms': "Terms of Service",
+        'footer_contact': "Contact Us"
+      },
+      'zh': {
+        'badge_hub': "追星微工具箱",
+        'nav_tool_print': "小卡排版打印生成器",
+        'nav_tool_letter': "多语种粉丝信专业版",
+        'nav_about': "关于本站",
+        'nav_contact': "联系我们",
+        'nav_coffee': "请作者喝杯咖啡",
+        'hero_title_1': "K-Pop 偶像小卡排版打印生成器",
+        'hero_title_2': "300 DPI 高清可打印 PDF",
+        'hero_desc': "一键将 55×85mm 标准小卡或拍立得照片自动排列到 A4 / US Letter 纸张上。纯浏览器本地处理，支持裁切辅助线与即时导出。",
+        'label_step1': "1. 上传小卡照片",
+        'dropzone_title': "点击上传或直接拖拽图片到此处",
+        'dropzone_desc': "支持 PNG、JPG、WEBP 批量选择",
+        'label_step2': "2. 纸张尺寸与规格",
+        'opt_cutlines': "显示剪刀裁切辅助虚线",
+        'opt_fit': "图片填充模式",
+        'btn_download_pdf': "导出 300 DPI 高清 PDF (可直接打印)",
+        'pdf_note': "🔒 100% 浏览器本地处理，照片零上传风险",
+        'preview_sheet_title': "打印排版实时预览",
+        'btn_clear_all': "清空当前纸张",
+        'sec_photocard_history': "最近排版记录",
+        'footer_about': "关于本站",
+        'footer_privacy': "隐私政策",
+        'footer_terms': "服务条款",
+        'footer_contact': "联系我们"
+      }
+    };
+
+    function changeLanguage(lang) {
+      if (!i18nData[lang]) lang = 'en';
+      currentLang = lang;
+      localStorage.setItem('stankit_lang', lang);
+      
+      const sel = document.getElementById('lang-select');
+      if (sel) sel.value = lang;
+
+      const elements = document.querySelectorAll('[data-i18n]');
+      elements.forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (i18nData[lang] && i18nData[lang][key]) {
+          el.innerText = i18nData[lang][key];
+        }
+      });
+
+      trackGA4Event('change_language', { selected_language: lang });
+    }
+
+    function setPaper(paper) {
+      currentPaper = paper;
+      document.getElementById('btn-paper-a4').className = paper === 'a4' ? 'p-3 rounded-xl border border-indigo-600 bg-indigo-50 text-indigo-700 text-xs font-extrabold flex flex-col items-center space-y-1 transition' : 'p-3 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-extrabold flex flex-col items-center space-y-1 transition';
+      document.getElementById('btn-paper-letter').className = paper === 'letter' ? 'p-3 rounded-xl border border-indigo-600 bg-indigo-50 text-indigo-700 text-xs font-extrabold flex flex-col items-center space-y-1 transition' : 'p-3 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-extrabold flex flex-col items-center space-y-1 transition';
+      document.getElementById('btn-paper-4x6').className = paper === '4x6' ? 'p-3 rounded-xl border border-indigo-600 bg-indigo-50 text-indigo-700 text-xs font-extrabold flex flex-col items-center space-y-1 transition' : 'p-3 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-extrabold flex flex-col items-center space-y-1 transition';
+
+      const dimLabels = {
+        'a4': 'A4 (210×297mm) • 300 DPI',
+        'letter': 'US Letter (8.5×11") • 300 DPI',
+        '4x6': '4×6" Photo Paper • 300 DPI'
+      };
+      document.getElementById('sheet-dim-label').innerText = dimLabels[paper];
+      renderCanvasGrid();
+    }
+
+    function toggleCutLines(checked) {
+      currentCutLine = checked;
+      renderCanvasGrid();
+    }
+
+    function setFitMode(mode) {
+      currentFitMode = mode;
+      renderCanvasGrid();
+    }
+
+    function handleFileSelect(files) {
+      if (!files || files.length === 0) return;
+      const maxSlots = currentPaper === '4x6' ? 4 : 9;
+
+      trackGA4Event('upload_photocards', { count: files.length });
+
+      Array.from(files).forEach(file => {
+        if (uploadedImages.length >= maxSlots) return;
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const img = new Image();
+          img.onload = () => {
+            uploadedImages.push(img);
+            document.getElementById('upload-counter').innerText = `${uploadedImages.length}/${maxSlots} cards`;
+            renderCanvasGrid();
+          };
+          img.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    function clearAllImages() {
+      uploadedImages = [];
+      const maxSlots = currentPaper === '4x6' ? 4 : 9;
+      document.getElementById('upload-counter').innerText = `0/${maxSlots} cards`;
+      renderCanvasGrid();
+    }
+
+    function renderCanvasGrid() {
+      const canvas = document.getElementById('print-canvas');
+      const ctx = canvas.getContext('2d');
+
+      // Base Canvas resolution for display preview
+      let sheetW = 210 * 3.7795; // mm to px approx (A4)
+      let sheetH = 297 * 3.7795;
+      let cols = 3, rows = 3;
+
+      if (currentPaper === 'letter') {
+        sheetW = 215.9 * 3.7795;
+        sheetH = 279.4 * 3.7795;
+      } else if (currentPaper === '4x6') {
+        sheetW = 101.6 * 3.7795;
+        sheetH = 152.4 * 3.7795;
+        cols = 2; rows = 2;
+      }
+
+      canvas.width = sheetW;
+      canvas.height = sheetH;
+
+      // Draw background
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, sheetW, sheetH);
+
+      // Card Dimensions in mm: 55 x 85 mm
+      const cardW = 55 * 3.7795;
+      const cardH = 85 * 3.7795;
+
+      const totalGridW = cols * cardW;
+      const totalGridH = rows * cardH;
+      const startX = (sheetW - totalGridW) / 2;
+      const startY = (sheetH - totalGridH) / 2;
+
+      let imgIdx = 0;
+      for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < cols; c++) {
+          const x = startX + c * cardW;
+          const y = startY + r * cardH;
+
+          // Draw card placeholder slot
+          ctx.strokeStyle = '#e2e8f0';
+          ctx.lineWidth = 1;
+          ctx.strokeRect(x, y, cardW, cardH);
+
+          if (imgIdx < uploadedImages.length) {
+            const img = uploadedImages[imgIdx];
+            ctx.save();
+            ctx.beginPath();
+            ctx.rect(x, y, cardW, cardH);
+            ctx.clip();
+
+            if (currentFitMode === 'cover') {
+              const hRatio = cardW / img.width;
+              const vRatio = cardH / img.height;
+              const ratio = Math.max(hRatio, vRatio);
+              const centerShiftX = (cardW - img.width * ratio) / 2;
+              const centerShiftY = (cardH - img.height * ratio) / 2;
+              ctx.drawImage(img, 0, 0, img.width, img.height, x + centerShiftX, y + centerShiftY, img.width * ratio, img.height * ratio);
+            } else {
+              const hRatio = cardW / img.width;
+              const vRatio = cardH / img.height;
+              const ratio = Math.min(hRatio, vRatio);
+              const centerShiftX = (cardW - img.width * ratio) / 2;
+              const centerShiftY = (cardH - img.height * ratio) / 2;
+              ctx.drawImage(img, 0, 0, img.width, img.height, x + centerShiftX, y + centerShiftY, img.width * ratio, img.height * ratio);
+            }
+            ctx.restore();
+          } else {
+            // Empty placeholder text
+            ctx.fillStyle = '#94a3b8';
+            ctx.font = '11px sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText(`Card ${imgIdx + 1} (55×85mm)`, x + cardW / 2, y + cardH / 2);
+          }
+
+          // Draw Cut Lines if active
+          if (currentCutLine) {
+            ctx.setLineDash([4, 4]);
+            ctx.strokeStyle = '#cbd5e1';
+            ctx.lineWidth = 1;
+            ctx.strokeRect(x, y, cardW, cardH);
+            ctx.setLineDash([]);
+          }
+
+          imgIdx++;
+        }
+      }
+    }
+
+    // ==========================================
+    // GA4 & LocalStorage Photocard History
+    // ==========================================
+
+    function savePhotocardProjectToHistory() {
+      try {
+        if (uploadedImages.length === 0) return;
+        const history = JSON.parse(localStorage.getItem('stankit_photocard_history') || '[]');
+
+        const entry = {
+          id: 'proj_' + Date.now(),
+          paperType: currentPaper.toUpperCase(),
+          cardCount: uploadedImages.length,
+          cutLine: currentCutLine,
+          timeStr: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+          dateStr: new Date().toLocaleDateString([], { month: 'short', day: 'numeric' })
+        };
+
+        history.unshift(entry);
+        if (history.length > 10) history.pop(); // Keep top 10
+        localStorage.setItem('stankit_photocard_history', JSON.stringify(history));
+        renderPhotocardHistoryUI();
+      } catch (err) {
+        console.warn('History save error:', err);
+      }
+    }
+
+    function renderPhotocardHistoryUI() {
+      const container = document.getElementById('photocard-history-list');
+      const badge = document.getElementById('photocard-history-badge');
+      if (!container) return;
+
+      const history = JSON.parse(localStorage.getItem('stankit_photocard_history') || '[]');
+      if (badge) badge.innerText = history.length;
+
+      if (history.length === 0) {
+        container.innerHTML = `<div class="p-3 rounded-xl bg-slate-50 border border-slate-100 text-center text-[11px] text-slate-400">暂无排版记录，导出 PDF 后将自动保存在本地。</div>`;
+        return;
+      }
+
+      container.innerHTML = '';
+      history.forEach((item, idx) => {
+        const itemEl = document.createElement('div');
+        itemEl.className = 'p-2.5 rounded-xl border border-slate-200 bg-slate-50/70 flex items-center justify-between text-xs hover:border-indigo-300 transition';
+        itemEl.innerHTML = `
+          <div class="space-y-0.5">
+            <div class="flex items-center space-x-1.5">
+              <span class="font-extrabold text-slate-800">${item.paperType}</span>
+              <span class="text-[10px] px-1.5 py-0.2 rounded bg-indigo-50 text-indigo-700 font-bold">${item.cardCount} 张小卡</span>
+              <span class="text-[10px] text-slate-400">${item.cutLine ? '✂️裁切线' : ''}</span>
+            </div>
+            <div class="text-[10px] text-slate-400">${item.dateStr} ${item.timeStr}</div>
+          </div>
+          <button type="button" onclick="deletePhotocardHistoryItem(${idx})" class="text-[11px] text-slate-400 hover:text-rose-600 p-1">
+            ✕
+          </button>
+        `;
+        container.appendChild(itemEl);
+      });
+    }
+
+    function deletePhotocardHistoryItem(index) {
+      const history = JSON.parse(localStorage.getItem('stankit_photocard_history') || '[]');
+      history.splice(index, 1);
+      localStorage.setItem('stankit_photocard_history', JSON.stringify(history));
+      renderPhotocardHistoryUI();
+    }
+
+    function clearPhotocardHistory() {
+      if (confirm('确定要清空全部排版记录吗？')) {
+        localStorage.removeItem('stankit_photocard_history');
+        renderPhotocardHistoryUI();
+      }
+    }
+
+    function exportPDF() {
+      const { jsPDF } = window.jspdf;
+      let format = 'a4';
+      if (currentPaper === 'letter') format = 'letter';
+      else if (currentPaper === '4x6') format = [101.6, 152.4];
+
+      const doc = new jsPDF({
+        orientation: 'portrait',
+        unit: 'mm',
+        format: format
+      });
+
+      const canvas = document.getElementById('print-canvas');
+      const imgData = canvas.toDataURL('image/jpeg', 1.0);
+
+      const pdfW = doc.internal.pageSize.getWidth();
+      const pdfH = doc.internal.pageSize.getHeight();
+
+      doc.addImage(imgData, 'JPEG', 0, 0, pdfW, pdfH, undefined, 'FAST');
+      doc.save(`StanKit_${currentPaper.toUpperCase()}_300DPI.pdf`);
+
+      savePhotocardProjectToHistory();
+      trackGA4Event('download_pdf', {
+        paper_type: currentPaper,
+        card_count: uploadedImages.length,
+        cut_line: currentCutLine
+      });
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedLang = localStorage.getItem('stankit_lang') || localStorage.getItem('cardgrid_lang');
+      if (savedLang && i18nData[savedLang]) {
+        changeLanguage(savedLang);
+      } else {
+        changeLanguage('en');
+      }
+      renderCanvasGrid();
+      renderPhotocardHistoryUI();
+    });
+  </script>
+</body>
 </html>

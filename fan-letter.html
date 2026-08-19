@@ -32,6 +32,23 @@
       right: 20px !important;
     }
   </style>
+
+  <!-- Google Analytics GA4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-MEASUREMENT_ID"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-MEASUREMENT_ID');
+
+    function trackGA4Event(eventName, eventParams = {}) {
+      if (typeof gtag === 'function') {
+        gtag('event', eventName, eventParams);
+      }
+      console.log('[GA4 Event]', eventName, eventParams);
+    }
+  </script>
+
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col justify-between transition-all">
 
@@ -61,16 +78,14 @@
             <span>💌</span>
             <span data-i18n="nav_tool_letter">Fan Letter Pro</span>
           </a>
-          <span class="px-2.5 py-1 text-slate-400 font-medium flex items-center space-x-1 cursor-not-allowed" title="Coming Soon">
-            <span>⏰</span>
-            <span>KST Clock</span>
-            <span class="text-[9px] bg-slate-100 text-slate-500 px-1 py-0.2 rounded">SOON</span>
-          </span>
-          <span class="px-2.5 py-1 text-slate-400 font-medium flex items-center space-x-1 cursor-not-allowed" title="Coming Soon">
-            <span>⏳</span>
-            <span>D-Day</span>
-            <span class="text-[9px] bg-slate-100 text-slate-500 px-1 py-0.2 rounded">SOON</span>
-          </span>
+          <a href="about.html" class="px-3 py-1.5 rounded-lg hover:text-indigo-600 hover:bg-slate-100 transition flex items-center space-x-1">
+            <span>💡</span>
+            <span data-i18n="nav_about">About</span>
+          </a>
+          <a href="contact.html" class="px-3 py-1.5 rounded-lg hover:text-indigo-600 hover:bg-slate-100 transition flex items-center space-x-1">
+            <span>📬</span>
+            <span data-i18n="nav_contact">Contact</span>
+          </a>
         </nav>
       </div>
       
@@ -102,6 +117,8 @@
   <div class="md:hidden bg-white border-b border-slate-200 px-4 py-2 flex items-center space-x-2 overflow-x-auto text-xs font-bold">
     <a href="index.html" class="whitespace-nowrap px-2.5 py-1 rounded-md text-slate-600 hover:bg-slate-100" data-i18n="nav_tool_print">🖨️ Photocard Grid</a>
     <a href="fan-letter.html" class="whitespace-nowrap px-2.5 py-1 rounded-md bg-indigo-50 text-indigo-700" data-i18n="nav_tool_letter">💌 Fan Letter Pro</a>
+    <a href="about.html" class="whitespace-nowrap px-2.5 py-1 rounded-md text-slate-600 hover:bg-slate-100" data-i18n="nav_about">💡 About</a>
+    <a href="contact.html" class="whitespace-nowrap px-2.5 py-1 rounded-md text-slate-600 hover:bg-slate-100" data-i18n="nav_contact">📬 Contact</a>
   </div>
 
   <!-- Main Workspace -->
@@ -462,6 +479,27 @@
 
         </div>
 
+
+        <!-- NEW: LocalStorage Fan Letter History Card -->
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-3.5">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+              <span class="text-base">🕒</span>
+              <h3 class="text-sm font-bold text-slate-800" data-i18n="sec_letter_history">最近生成与发送历史 (Recent History)</h3>
+              <span id="history-count-badge" class="text-[10px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded-full font-bold">0</span>
+            </div>
+            <button type="button" onclick="clearLetterHistory()" class="text-[11px] text-slate-400 hover:text-rose-600 font-bold transition flex items-center space-x-1" data-i18n="btn_clear_history">
+              <span>🗑️</span><span>清空历史</span>
+            </button>
+          </div>
+
+          <!-- History List Container -->
+          <div id="letter-history-list" class="space-y-2 max-h-72 overflow-y-auto pr-1">
+            <!-- Dynamic History Items rendered via JS -->
+          </div>
+        </div>
+
+
       </div>
 
     </div>
@@ -515,9 +553,10 @@
       <div class="flex items-center space-x-6">
         <a href="index.html" class="hover:text-indigo-600" data-i18n="nav_tool_print">Photocard Print Maker</a>
         <a href="fan-letter.html" class="hover:text-indigo-600" data-i18n="nav_tool_letter">Fan Letter Pro</a>
-        <a href="#about" onclick="alert('StanKit Studio is a free open-source fandom utility suite.')" class="hover:text-indigo-600" data-i18n="footer_about">About Us</a>
-        <a href="#privacy" onclick="alert('Privacy Policy: We do not store or collect user data. All operations run locally in your browser.')" class="hover:text-indigo-600" data-i18n="footer_privacy">Privacy Policy</a>
-        <a href="mailto:support@stankit.studio" class="hover:text-indigo-600" data-i18n="footer_contact">Contact Us</a>
+        <a href="about.html" class="hover:text-indigo-600 font-semibold" data-i18n="footer_about">About Us</a>
+        <a href="privacy.html" class="hover:text-indigo-600 font-semibold" data-i18n="footer_privacy">Privacy Policy</a>
+        <a href="terms.html" class="hover:text-indigo-600 font-semibold" data-i18n="footer_terms">Terms of Service</a>
+        <a href="contact.html" class="hover:text-indigo-600 font-semibold" data-i18n="footer_contact">Contact Us</a>
       </div>
     </div>
   </footer>
@@ -652,7 +691,14 @@
             "lbl_len_2": "Concise (Weverse)",
             "lbl_len_3": "Standard Letter",
             "lbl_len_4": "Milestone Essay",
-            "no_idol_match": "Custom idol name. Tap outside to continue."
+            "no_idol_match": "Custom idol name. Tap outside to continue.",
+            "nav_about": "About",
+            "nav_contact": "Contact",
+            "footer_terms": "Terms of Service",
+            "sec_letter_history": "Recent Generation & Sent History",
+            "btn_clear_history": "Clear History",
+            "history_empty": "No history yet. Your copied or exported letters will be automatically saved locally.",
+            "toast_restored": "🔄 Restored letter from history into the editor!"
       },
       "zh": {
             "badge_hub": "追星微工具箱",
@@ -777,7 +823,14 @@
             "lbl_len_2": "段落精悍 (Weverse)",
             "lbl_len_3": "标准书信",
             "lbl_len_4": "长文小作文",
-            "no_idol_match": "自定义爱豆名称，点击空白处即可直接使用。"
+            "no_idol_match": "自定义爱豆名称，点击空白处即可直接使用。",
+            "nav_about": "关于本站",
+            "nav_contact": "联系我们",
+            "footer_terms": "服务条款",
+            "sec_letter_history": "最近生成与发送历史 (Recent History)",
+            "btn_clear_history": "清空历史",
+            "history_empty": "暂无历史记录，点击复制或保存后将自动记录到本地。",
+            "toast_restored": "🔄 已将历史记录恢复到编辑框！"
       },
       "ko": {
             "badge_hub": "팬덤 전용 마이크로 툴",
@@ -902,7 +955,14 @@
             "lbl_len_2": "위버스 단락",
             "lbl_len_3": "표준 편지",
             "lbl_len_4": "장문 편지",
-            "no_idol_match": "직접 입력한 아이돌 이름입니다."
+            "no_idol_match": "직접 입력한 아이돌 이름입니다.",
+            "nav_about": "소개",
+            "nav_contact": "문의",
+            "footer_terms": "이용약관",
+            "sec_letter_history": "최근 생성 및 복사 기록",
+            "btn_clear_history": "기록 삭제",
+            "history_empty": "기록이 없습니다. 복사하거나 이미지로 저장한 편지가 자동 저장됩니다.",
+            "toast_restored": "🔄 선택한 기록을 텍스트 상자로 복원했습니다!"
       },
       "ja": {
             "badge_hub": "推し活マイクロツール",
@@ -1027,7 +1087,14 @@
             "lbl_len_2": "Weverse標準",
             "lbl_len_3": "標準手紙",
             "lbl_len_4": "長文レター",
-            "no_idol_match": "カスタム入力された推しの名前です。"
+            "no_idol_match": "カスタム入力された推しの名前です。",
+            "nav_about": "概要",
+            "nav_contact": "お問い合わせ",
+            "footer_terms": "利用規約",
+            "sec_letter_history": "最近の作成・送信履歴",
+            "btn_clear_history": "履歴を削除",
+            "history_empty": "履歴はありません。コピーや保存した文面が自動で記録されます。",
+            "toast_restored": "🔄 履歴からメッセージを復元しました！"
       },
       "th": {
             "badge_hub": "เครื่องมือแฟนคลับ",
@@ -1152,7 +1219,14 @@
             "lbl_len_2": "Weverse ย่อหน้า",
             "lbl_len_3": "จดหมายมาตรฐาน",
             "lbl_len_4": "เรียงความยาว",
-            "no_idol_match": "ชื่อไอดอลที่กำหนดเอง"
+            "no_idol_match": "ชื่อไอดอลที่กำหนดเอง",
+            "nav_about": "เกี่ยวกับเรา",
+            "nav_contact": "ติดต่อเรา",
+            "footer_terms": "ข้อกำหนดการใช้งาน",
+            "sec_letter_history": "ประวัติการสร้างและคัดลอกล่าสุด",
+            "btn_clear_history": "ล้างประวัติ",
+            "history_empty": "ยังไม่มีประวัติ ข้อความที่คัดลอกหรือบันทึกจะถูกเก็บไว้ในเครื่องอัตโนมัติ",
+            "toast_restored": "🔄 กู้คืนข้อความจากประวัติเรียบร้อยแล้ว!"
       },
       "ar": {
             "badge_hub": "أدوات الفاندوم",
@@ -1277,7 +1351,14 @@
             "lbl_len_2": "Weverse فقرة",
             "lbl_len_3": "رسالة قياسية",
             "lbl_len_4": "مقال مطول",
-            "no_idol_match": "اسم آيدول مخصص."
+            "no_idol_match": "اسم آيدول مخصص.",
+            "nav_about": "من نحن",
+            "nav_contact": "اتصل بنا",
+            "footer_terms": "شروط الخدمة",
+            "sec_letter_history": "سجل الرسائل الأخيرة",
+            "btn_clear_history": "مسح السجل",
+            "history_empty": "لا يوجد سجل حتى الآن. سيتم حفظ الرسائل المنسوخة تلقائياً.",
+            "toast_restored": "🔄 تم استعادة الرسالة من السجل بنجاح!"
       },
       "es": {
             "badge_hub": "Microherramientas K-Pop",
@@ -1402,7 +1483,14 @@
             "lbl_len_2": "Conciso (Weverse)",
             "lbl_len_3": "Carta estándar",
             "lbl_len_4": "Carta larga",
-            "no_idol_match": "Nombre de Idol personalizado."
+            "no_idol_match": "Nombre de Idol personalizado.",
+            "nav_about": "Acerca de",
+            "nav_contact": "Contacto",
+            "footer_terms": "Términos de Servicio",
+            "sec_letter_history": "Historial Reciente de Cartas",
+            "btn_clear_history": "Borrar Historial",
+            "history_empty": "Sin historial aún. Las cartas copiadas o guardadas se almacenarán localmente.",
+            "toast_restored": "🔄 ¡Carta restaurada en el editor!"
       }
 };
 
@@ -6413,6 +6501,7 @@
       });
 
       updateLetter();
+      trackGA4Event('search_idol', { idol_id: idol.id, idol_name: idol.name_en, group: idol.group, lang: idol.lang });
     }
 
     // Render Idol Profile Visual Card (Feature 3)
@@ -6443,6 +6532,7 @@
       if (elMem) elMem.value = '';
       if (elSlogan) elSlogan.value = '';
       updateLetter();
+      trackGA4Event('search_idol', { idol_id: idol.id, idol_name: idol.name_en, group: idol.group, lang: idol.lang });
     }
 
     function renderActiveIdolCard() {
@@ -6496,6 +6586,7 @@
         applyIdol(exact, true);
       } else {
         updateLetter();
+        trackGA4Event('select_scenario', { scenario_id: scId, category: sc.cat });
       }
     }
 
@@ -6581,6 +6672,7 @@
     function shuffleLetterCopy() {
       copyVariationIndex = (copyVariationIndex + 1) % 3;
       updateLetter();
+      trackGA4Event('generate_letter', { idol_name: document.getElementById('idol-input').value, scenario_id: currentScenarioId, target_lang: targetLang, is_shuffle: true });
       const tDict = i18nData[currentLang] || i18nData.en;
       showToast(tDict.toast_shuffled || "🎲 Generated fresh copy with new kaomoji!");
     }
@@ -6663,6 +6755,7 @@
         if (elTip) elTip.innerText = tip;
 
         updateLetter();
+        trackGA4Event('select_scenario', { scenario_id: scId, category: sc.cat });
       }
     }
 
@@ -6687,6 +6780,7 @@
       });
       updateTargetBoxTitle();
       if (shouldUpdateLetter) updateLetter();
+      trackGA4Event('search_idol', { idol_id: idol.id, idol_name: idol.name_en, group: idol.group, lang: idol.lang });
     }
 
     function updateTargetBoxTitle() {
@@ -6732,6 +6826,7 @@
         showToast(tDict.toast_mode_stream || "🎧 Switched to Streaming & Chart Sprint Mode!");
       }
       updateLetter();
+      trackGA4Event('search_idol', { idol_id: idol.id, idol_name: idol.name_en, group: idol.group, lang: idol.lang });
     }
 
     function applyStylePreset(type) {
@@ -6762,6 +6857,7 @@
         document.getElementById('slider-length').value = 50;
       }
       updateLetter();
+      trackGA4Event('search_idol', { idol_id: idol.id, idol_name: idol.name_en, group: idol.group, lang: idol.lang });
     }
 
     // Attach proper Korean particles
@@ -7016,6 +7112,148 @@
       }
     }
 
+    
+    // ==========================================
+    // GA4 & LocalStorage User History Management
+    // ==========================================
+
+    function saveLetterToHistory(actionType = 'generate') {
+      try {
+        const idolInput = document.getElementById('idol-input');
+        const senderInput = document.getElementById('sender-input');
+        const targetText = document.getElementById('target-textarea').value.trim();
+        if (!targetText) return;
+
+        const history = JSON.parse(localStorage.getItem('stankit_letter_history') || '[]');
+        
+        // Skip duplicate identical top entry
+        if (history.length > 0 && history[0].text === targetText) return;
+
+        const sc = scenariosData[currentScenarioId] || scenariosData['cb-sprint'];
+        const scTitle = (sc.title && sc.title[currentLang]) ? sc.title[currentLang] : (sc.title.en || Object.values(sc.title)[0]);
+
+        const entry = {
+          id: 'hist_' + Date.now(),
+          idolName: idolInput.value.trim() || (currentIdol ? currentIdol.name_en : 'Jungkook'),
+          idolGroup: currentIdol ? currentIdol.group : '',
+          idolPhoto: currentIdol ? currentIdol.photo : '',
+          scenarioId: currentScenarioId,
+          scenarioTitle: scTitle,
+          scenarioIcon: sc.icon || '💌',
+          targetLang: targetLang,
+          text: targetText,
+          timeStr: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+          dateStr: new Date().toLocaleDateString([], { month: 'short', day: 'numeric' }),
+          action: actionType
+        };
+
+        history.unshift(entry);
+        if (history.length > 15) history.pop(); // Keep recent 15
+        localStorage.setItem('stankit_letter_history', JSON.stringify(history));
+        renderLetterHistoryUI();
+      } catch (err) {
+        console.warn('LocalStorage error:', err);
+      }
+    }
+
+    function renderLetterHistoryUI() {
+      const container = document.getElementById('letter-history-list');
+      const badge = document.getElementById('history-count-badge');
+      if (!container) return;
+
+      const history = JSON.parse(localStorage.getItem('stankit_letter_history') || '[]');
+      if (badge) badge.innerText = history.length;
+
+      if (history.length === 0) {
+        const tDict = i18nData[currentLang] || i18nData.en;
+        container.innerHTML = `<div class="p-4 rounded-xl bg-slate-50 border border-slate-100 text-center text-xs text-slate-400">${tDict.history_empty || '暂无历史记录，点击复制或保存后将自动记录到本地。'}</div>`;
+        return;
+      }
+
+      container.innerHTML = '';
+      const flagMap = { 'ko': '🇰🇷', 'zh': '🇨🇳', 'ja': '🇯🇵', 'en': '🇺🇸' };
+
+      history.forEach((item, idx) => {
+        const itemEl = document.createElement('div');
+        itemEl.className = 'p-3 rounded-xl border border-slate-200 hover:border-indigo-300 bg-slate-50/70 transition space-y-2 text-xs';
+        
+        const previewText = item.text.replace(/\n/g, ' ').substring(0, 90) + (item.text.length > 90 ? '...' : '');
+
+        itemEl.innerHTML = `
+          <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+              <span class="text-sm">${item.scenarioIcon || '💌'}</span>
+              <span class="font-extrabold text-slate-800">${item.idolName}</span>
+              <span class="text-[10px] px-1.5 py-0.2 rounded bg-indigo-50 text-indigo-700 font-bold">${item.scenarioTitle}</span>
+              <span class="text-[10px] text-slate-400">${flagMap[item.targetLang] || ''}</span>
+            </div>
+            <span class="text-[10px] text-slate-400">${item.dateStr} ${item.timeStr}</span>
+          </div>
+
+          <p class="text-slate-600 font-medium text-[11px] leading-relaxed bg-white p-2 rounded-lg border border-slate-100 select-all cursor-pointer" onclick="loadHistoryItem(${idx})">
+            ${previewText}
+          </p>
+
+          <div class="flex items-center justify-between pt-1">
+            <button type="button" onclick="loadHistoryItem(${idx})" class="text-[10px] text-indigo-600 hover:text-indigo-800 font-bold flex items-center space-x-1">
+              <span>🔄</span><span>载入编辑器 (Restore)</span>
+            </button>
+            <div class="flex items-center space-x-2">
+              <button type="button" onclick="copyHistoryText(${idx})" class="text-[10px] text-slate-600 hover:text-slate-900 font-semibold underline">
+                复制正文
+              </button>
+              <button type="button" onclick="deleteHistoryItem(${idx})" class="text-[10px] text-slate-400 hover:text-rose-600 font-semibold">
+                删除
+              </button>
+            </div>
+          </div>
+        `;
+        container.appendChild(itemEl);
+      });
+    }
+
+    function loadHistoryItem(index) {
+      const history = JSON.parse(localStorage.getItem('stankit_letter_history') || '[]');
+      if (history[index]) {
+        const item = history[index];
+        document.getElementById('target-textarea').value = item.text;
+        updateCharCount();
+        if (item.scenarioId) selectScenario(item.scenarioId);
+        if (item.targetLang) setTargetLang(item.targetLang, false);
+        const tDict = i18nData[currentLang] || i18nData.en;
+        showToast(tDict.toast_restored || "🔄 已将历史记录恢复到编辑框！");
+
+        trackGA4Event('restore_history_letter', {
+          idol_name: item.idolName,
+          scenario_id: item.scenarioId
+        });
+      }
+    }
+
+    function copyHistoryText(index) {
+      const history = JSON.parse(localStorage.getItem('stankit_letter_history') || '[]');
+      if (history[index]) {
+        navigator.clipboard.writeText(history[index].text).then(() => {
+          const tDict = i18nData[currentLang] || i18nData.en;
+          showToast(tDict.toast_copied || "✨ Copied to clipboard!");
+        });
+      }
+    }
+
+    function deleteHistoryItem(index) {
+      const history = JSON.parse(localStorage.getItem('stankit_letter_history') || '[]');
+      history.splice(index, 1);
+      localStorage.setItem('stankit_letter_history', JSON.stringify(history));
+      renderLetterHistoryUI();
+    }
+
+    function clearLetterHistory() {
+      if (confirm(currentLang === 'zh' ? '确定要清空全部历史生成记录吗？' : 'Clear all letter history?')) {
+        localStorage.removeItem('stankit_letter_history');
+        renderLetterHistoryUI();
+      }
+    }
+
     function showToast(msg) {
       const toast = document.getElementById('copy-toast');
       toast.innerText = msg;
@@ -7026,6 +7264,8 @@
     function copyTargetOnly() {
       const tDict = i18nData[currentLang] || i18nData.en;
       const text = document.getElementById('target-textarea').value;
+      saveLetterToHistory('copy');
+      trackGA4Event('copy_letter', { idol_name: document.getElementById('idol-input').value, scenario_id: currentScenarioId, target_lang: targetLang });
       navigator.clipboard.writeText(text).then(() => {
         showToast(tDict.toast_copied || "✨ Copied to clipboard!");
       });
@@ -7037,6 +7277,10 @@
       const ref = document.getElementById('ref-translation').innerText;
       const transLabel = currentLang === 'zh' ? '中文对照释义' : (currentLang === 'ja' ? '日本語訳' : 'Reference Translation');
       const text = `${target}\n\n[${transLabel}]\n${ref}`;
+      saveLetterToHistory('copy');
+      trackGA4Event('copy_letter', { idol_name: document.getElementById('idol-input').value, scenario_id: currentScenarioId, target_lang: targetLang });
+      saveLetterToHistory('copy_bilingual');
+      trackGA4Event('copy_bilingual', { idol_name: document.getElementById('idol-input').value, scenario_id: currentScenarioId });
       navigator.clipboard.writeText(text).then(() => {
         showToast(tDict.toast_bilingual || "✨ Bilingual fan message copied to clipboard!");
       });
@@ -7148,6 +7392,8 @@
       link.download = `FanLetter_${idolName}_${currentScenarioId}.png`;
       link.href = canvas.toDataURL('image/png');
       link.click();
+      saveLetterToHistory('export_image');
+      trackGA4Event('export_image_card', { idol_name: idolName, scenario_id: currentScenarioId });
     }
 
     function changeLanguage(lang) {
@@ -7187,6 +7433,8 @@
 
       // Re-render dynamic scenarios, meta box and letter
       selectScenario(currentScenarioId);
+      renderLetterHistoryUI();
+      trackGA4Event('change_language', { selected_language: lang });
     }
 
     window.addEventListener('DOMContentLoaded', () => {
@@ -7199,6 +7447,7 @@
       } else {
         changeLanguage('en');
       }
+      renderLetterHistoryUI();
     });
   </script>
 
