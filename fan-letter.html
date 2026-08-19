@@ -197,13 +197,21 @@
           <!-- Inputs Grid -->
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 relative">
             <div class="relative">
-              <label class="block text-[11px] font-bold text-slate-600 mb-1" data-i18n="field_idol">Idol or Group Name (Fuzzy Multi-language Match)</label>
-              <div class="relative">
-                <input type="text" id="idol-input" value="Jungkook" placeholder="Search Idol or Group (e.g. Jungkook, BTS, Xiao Zhan, Felix, aespa)" data-i18n-placeholder="placeholder_idol" oninput="handleIdolInput(this.value)" autocomplete="off" class="w-full bg-slate-50 border border-slate-200 text-slate-800 text-xs rounded-xl px-3.5 py-2.5 pr-8 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white font-extrabold transition">
-                <span class="absolute right-3 top-2.5 text-slate-400 pointer-events-none text-xs">🔍</span>
+              <div class="flex items-center justify-between mb-1.5">
+                <label class="block text-[11px] font-extrabold text-slate-700 flex items-center space-x-1" data-i18n="field_idol">
+                  <span>💎</span><span data-i18n="field_idol">Idol or Group Name</span>
+                </label>
+                <span class="inline-flex items-center space-x-1 px-2 py-0.5 rounded-full bg-gradient-to-r from-indigo-50 to-purple-50 border border-indigo-200 text-indigo-700 text-[10px] font-extrabold shadow-2xs">
+                  <span>✨</span><span data-i18n="tag_custom_idol">Type or Search Any Idol</span>
+                </span>
+              </div>
+              <!-- Glowing highlighted input border -->
+              <div class="relative p-[1.5px] rounded-xl bg-gradient-to-r from-indigo-500 via-purple-500 to-rose-400 shadow-xs focus-within:shadow-md transition">
+                <input type="text" id="idol-input" value="Jungkook" placeholder="Search Idol or Group (e.g. Jungkook, BTS, Xiao Zhan, Felix, aespa)" data-i18n-placeholder="placeholder_idol" oninput="handleIdolInput(this.value)" autocomplete="off" class="w-full bg-white text-slate-900 text-xs rounded-[10px] px-3.5 py-2.5 pr-8 focus:outline-none font-extrabold transition">
+                <span class="absolute right-3 top-2.5 text-indigo-500 pointer-events-none text-xs font-bold">🔍</span>
               </div>
               <!-- Autocomplete Dropdown List -->
-              <div id="idol-autocomplete-list" class="hidden absolute left-0 right-0 top-full mt-1 bg-white border border-slate-200 rounded-xl shadow-xl z-50 max-h-64 overflow-y-auto divide-y divide-slate-100 text-xs">
+              <div id="idol-autocomplete-list" class="hidden absolute left-0 right-0 top-full mt-1.5 bg-white border border-slate-200 rounded-xl shadow-xl z-50 max-h-64 overflow-y-auto divide-y divide-slate-100 text-xs">
                 <!-- Dropdown items rendered via JS -->
               </div>
             </div>
@@ -437,12 +445,14 @@
 
           <!-- Editable Target Message Box -->
           <div class="space-y-2">
-            <div class="flex items-center justify-between">
+            <div class="flex items-center justify-between gap-2 flex-wrap">
               <label id="target-box-title" class="text-xs font-bold text-indigo-700 flex items-center space-x-1">
                 <span>🇰🇷</span><span>Target Message (Korean / Ready to Send)</span>
               </label>
-              <button type="button" onclick="shuffleLetterCopy()" class="text-[11px] font-bold text-indigo-600 hover:text-indigo-800 transition flex items-center space-x-1 cursor-pointer">
-                <span>🎲</span><span data-i18n="btn_shuffle_copy">Shuffle Copy & Kaomoji</span>
+              <button type="button" onclick="shuffleLetterCopy()" class="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-gradient-to-r from-indigo-600 via-purple-600 to-rose-500 hover:from-indigo-700 hover:to-rose-600 text-white font-extrabold text-[11px] shadow-sm hover:shadow-md transition transform active:scale-95 cursor-pointer">
+                <span class="text-xs">🎲</span>
+                <span data-i18n="btn_shuffle_copy">Shuffle Copy & Kaomoji</span>
+                <span class="text-[9px] bg-white/20 px-1.5 py-0.2 rounded-full uppercase tracking-wider font-extrabold ml-0.5">✦ Random</span>
               </button>
             </div>
             <textarea id="target-textarea" rows="7" class="w-full bg-slate-50/80 border border-slate-200 rounded-xl p-3.5 text-xs text-slate-800 font-medium focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white transition leading-relaxed resize-none" oninput="updateCharCount()"></textarea>
@@ -548,6 +558,8 @@
     // 7-Language Global Dictionary
     const i18nData = {
     "en": {
+        "btn_shuffle_copy": "Shuffle Copy & Kaomojis",
+        "tag_custom_idol": "Type or Search Any Idol",
         "badge_hub": "Fandom Micro-Tools",
         "nav_tool_print": "Photocard Print Maker",
         "nav_tool_letter": "Fan Letter Pro",
@@ -626,6 +638,8 @@
         "footer_contact": "Contact Us"
     },
     "zh": {
+        "btn_shuffle_copy": "换一批文案与颜文字",
+        "tag_custom_idol": "可直接输入/搜索任意爱豆",
         "badge_hub": "追星微工具箱",
         "nav_tool_print": "小卡排版打印生成器",
         "nav_tool_letter": "多语种粉丝信专业版",
@@ -704,6 +718,8 @@
         "footer_contact": "联系我们"
     },
     "ko": {
+        "btn_shuffle_copy": "문구 & 이모티콘 셔플",
+        "tag_custom_idol": "모든 아이돌 직접 검색 가능",
         "badge_hub": "팬덤 마이크로 툴",
         "nav_tool_print": "포토카드 인쇄기",
         "nav_tool_letter": "팬레터 프로",
@@ -782,6 +798,8 @@
         "footer_contact": "문의하기"
     },
     "ja": {
+        "btn_shuffle_copy": "文面・顔文字をシャッフル",
+        "tag_custom_idol": "推し名を自由に入力・検索",
         "badge_hub": "推し活ツール",
         "nav_tool_print": "トレカ印刷ツール",
         "nav_tool_letter": "ファンレター Pro",
@@ -860,6 +878,8 @@
         "footer_contact": "お問い合わせ"
     },
     "th": {
+        "btn_shuffle_copy": "สุ่มข้อความและอิโมจิใหม่",
+        "tag_custom_idol": "ค้นหาไอดอลได้ทุกคน",
         "badge_hub": "เครื่องมือแฟนคลับ",
         "nav_tool_print": "พิมพ์โฟโต้การ์ด",
         "nav_tool_letter": "เขียนจดหมายแฟนคลับ Pro",
@@ -938,6 +958,8 @@
         "footer_contact": "ติดต่อเรา"
     },
     "ar": {
+        "btn_shuffle_copy": "تغيير النص والإيموجي",
+        "tag_custom_idol": "ابحث عن أي آيدول بحرية",
         "badge_hub": "أدوات الفاندوم",
         "nav_tool_print": "طباعة البطاقات",
         "nav_tool_letter": "رسائل المعجبين Pro",
@@ -1016,6 +1038,8 @@
         "footer_contact": "اتصل بنا"
     },
     "es": {
+        "btn_shuffle_copy": "Mezclar Texto y Kaomojis",
+        "tag_custom_idol": "Escribe o busca cualquier idol",
         "badge_hub": "Microherramientas K-Pop",
         "nav_tool_print": "Imprimir Photocards",
         "nav_tool_letter": "Generador de Cartas Pro",
@@ -35218,13 +35242,22 @@
       const sc = scenariosData[currentScenarioId] || scenariosData['cb-sprint'];
       const tier = emotionVal > 70 ? 'passionate' : (emotionVal > 35 ? 'warm' : 'light');
       
-      let baseTarget = (sc.sentences[tier] && sc.sentences[tier][currentTargetLang]) 
-        ? sc.sentences[tier][currentTargetLang]
-        : (sc.sentences[tier]['ko'] || '');
-
-      let baseRef = (sc.sentences[tier] && sc.sentences[tier][currentLang]) 
-        ? sc.sentences[tier][currentLang] 
-        : (sc.sentences[tier]['en'] || '');
+      let variantList = (sc.variants && sc.variants[tier]) || [];
+      if (variantList.length === 0 && sc.sentences && sc.sentences[tier]) {
+        variantList = [sc.sentences[tier]];
+      }
+      const defaultVariant = variantList[0] || {
+        'ko': '이번 컴백 축하해요! 신곡 너무 좋아서 매일 듣고 있어요 ( ˶ˆ꒳ˆ˵ ) 🎶✨',
+        'zh': '恭喜这次华丽回归！新歌实在太好听了，每天都在单曲循环 ( ˶ˆ꒳ˆ˵ ) 🎶✨',
+        'en': 'Congrats on the new comeback! The title track is absolute magic ( ˶ˆ꒳ˆ˵ ) 🎶✨',
+        'ja': 'カムバックおめでとう！新曲が最高すぎて毎日聴いてるよ ( ˶ˆ꒳ˆ˵ ) 🎶✨',
+        'th': 'ยินดีด้วยกับการคัมแบ็ค! เพลงใหม่เพราะมาก จะคอยสตรีมให้นะ ( ˶ˆ꒳ˆ˵ ) 🎶✨',
+        'ar': 'تهانينا الحارة بالعودة! الأغنية الجديدة رائعة جداً ( ˶ˆ꒳ˆ˵ ) 🎶✨',
+        'es': '¡Felicidades por el comeback! La nueva canción es pura magia ( ˶ˆ꒳ˆ˵ ) 🎶✨'
+      };
+      
+      let baseTarget = (defaultVariant[currentTargetLang] || defaultVariant['ko'] || defaultVariant['en'] || '');
+      let baseRef = (defaultVariant[currentLang] || defaultVariant['en'] || defaultVariant['zh'] || '');
 
       // Replace {NAME} with target idol name
       let nativeIdolName = idolName;
