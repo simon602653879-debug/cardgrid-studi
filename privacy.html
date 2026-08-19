@@ -2,8 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+    <!-- High-Res Aesthetic Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>">
+  <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Privacy Policy | StanKit Studio</title>
+  <title>StanKit Studio | Privacy Policy</title>
   <meta name="description" content="Privacy Policy for StanKit Studio. Learn how we protect your privacy with 100% local client-side processing, zero server photo storage, and transparent cookie policies.">
   <meta name="keywords" content="stankit privacy policy, gdpr privacy, cookie policy, google adsense disclosure">
   <script src="https://cdn.tailwindcss.com"></script>
@@ -44,6 +47,7 @@
     }
   </script>
 
+  <link rel="canonical" href="https://stankit.vercel.app/privacy.html">
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col justify-between">
   
@@ -59,7 +63,7 @@
           </div>
           <div>
             <span class="text-lg font-extrabold tracking-tight bg-gradient-to-r from-indigo-600 to-rose-500 bg-clip-text text-transparent">StanKit Studio</span>
-            <span class="hidden sm:inline-block text-[11px] font-semibold px-2 py-0.5 ml-2 bg-indigo-50 text-indigo-700 rounded-full border border-indigo-100">Fandom Micro-Tools</span>
+            <span class="hidden sm:inline-block text-[11px] font-semibold px-2 py-0.5 ml-2 bg-indigo-50 text-indigo-700 rounded-full border border-indigo-100" data-i18n="badge_hub">Fandom Micro-Tools</span>
           </div>
         </a>
 
@@ -67,28 +71,31 @@
         <nav class="hidden md:flex items-center space-x-1 text-xs font-bold text-slate-600">
           <a href="index.html" class="px-3 py-1.5 rounded-lg hover:text-indigo-600 hover:bg-slate-100 transition flex items-center space-x-1">
             <span>🖨️</span>
-            <span>Photocard Print Maker</span>
+            <span data-i18n="nav_tool_print">Photocard Print Maker</span>
           </a>
           <a href="fan-letter.html" class="px-3 py-1.5 rounded-lg hover:text-indigo-600 hover:bg-slate-100 transition flex items-center space-x-1">
             <span>💌</span>
-            <span>Fan Letter Pro</span>
+            <span data-i18n="nav_tool_letter">Fan Letter Pro</span>
           </a>
-          <a href="about.html" class="px-3 py-1.5 rounded-lg hover:text-indigo-600 hover:bg-slate-100 transition flex items-center space-x-1 ">
-            <span>💡</span>
-            <span>About</span>
-          </a>
-          <a href="contact.html" class="px-3 py-1.5 rounded-lg hover:text-indigo-600 hover:bg-slate-100 transition flex items-center space-x-1 ">
-            <span>📬</span>
-            <span>Contact</span>
-          </a>
+          <span class="px-2.5 py-1 text-slate-400 font-medium flex items-center space-x-1 cursor-not-allowed" title="Coming Soon">
+            <span>⏰</span>
+            <span>KST Clock</span>
+            <span class="text-[9px] bg-slate-100 text-slate-500 px-1 py-0.2 rounded">SOON</span>
+          </span>
+          <span class="px-2.5 py-1 text-slate-400 font-medium flex items-center space-x-1 cursor-not-allowed" title="Coming Soon">
+            <span>⏳</span>
+            <span>D-Day</span>
+            <span class="text-[9px] bg-slate-100 text-slate-500 px-1 py-0.2 rounded">SOON</span>
+          </span>
         </nav>
       </div>
-      
-      <!-- Right Actions: Coffee -->
+
+      <!-- Right Actions: Language Switcher (if on tool pages) & Coffee -->
       <div class="flex items-center space-x-2 sm:space-x-3">
+        
         <a href="https://ko-fi.com/stankitstudio" target="_blank" class="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-amber-50 border border-amber-200 text-amber-800 text-xs font-bold hover:bg-amber-100 transition shadow-sm">
           <span>☕</span>
-          <span class="hidden sm:inline">Buy me a coffee</span>
+          <span class="hidden sm:inline" data-i18n="nav_coffee">Buy me a coffee</span>
         </a>
       </div>
     </div>
@@ -96,10 +103,8 @@
 
   <!-- Mobile Sub-Navigation Bar -->
   <div class="md:hidden bg-white border-b border-slate-200 px-4 py-2 flex items-center space-x-2 overflow-x-auto text-xs font-bold">
-    <a href="index.html" class="whitespace-nowrap px-2.5 py-1 rounded-md text-slate-600 hover:bg-slate-100">🖨️ Photocard Grid</a>
-    <a href="fan-letter.html" class="whitespace-nowrap px-2.5 py-1 rounded-md text-slate-600 hover:bg-slate-100">💌 Fan Letter Pro</a>
-    <a href="about.html" class="whitespace-nowrap px-2.5 py-1 rounded-md text-slate-600 hover:bg-slate-100 ">💡 About</a>
-    <a href="contact.html" class="whitespace-nowrap px-2.5 py-1 rounded-md text-slate-600 hover:bg-slate-100 ">📬 Contact</a>
+    <a href="index.html" class="whitespace-nowrap px-2.5 py-1 rounded-md text-slate-600 hover:bg-slate-100" data-i18n="nav_tool_print">🖨️ Photocard Grid</a>
+    <a href="fan-letter.html" class="whitespace-nowrap px-2.5 py-1 rounded-md text-slate-600 hover:bg-slate-100" data-i18n="nav_tool_letter">💌 Fan Letter Pro</a>
   </div>
 
 
@@ -118,7 +123,7 @@
         <section class="space-y-2">
           <h2 class="text-lg font-bold text-slate-900">1. Introduction</h2>
           <p>
-            Welcome to <strong>StanKit Studio</strong> ("we", "our", or "us"), accessible via <a href="https://cardgrid-studi.vercel.app" class="text-indigo-600 underline">https://cardgrid-studi.vercel.app</a>. We are committed to honoring and protecting your privacy. This Privacy Policy explains what information we process, why we process it, and how your privacy rights are safeguarded when using our free web utilities.
+            Welcome to <strong>StanKit Studio</strong> ("we", "our", or "us"), accessible via <a href="https://stankit.vercel.app" class="text-indigo-600 underline">https://stankit.vercel.app</a>. We are committed to honoring and protecting your privacy. This Privacy Policy explains what information we process, why we process it, and how your privacy rights are safeguarded when using our free web utilities.
           </p>
         </section>
 
@@ -186,9 +191,9 @@
           <p>
             If you have questions regarding this Privacy Policy, feel free to reach out to us at:
             <br>
-            <strong>Email:</strong> <a href="mailto:support@stankit.studio" class="text-indigo-600 underline">support@stankit.studio</a>
+            <strong>Email:</strong> <a href="mailto:stankit.studio@gmail.com" class="text-indigo-600 underline">stankit.studio@gmail.com</a>
             <br>
-            <strong>Contact Page:</strong> <a href="contact.html" class="text-indigo-600 underline">https://cardgrid-studi.vercel.app/contact.html</a>
+            <strong>Contact Page:</strong> <a href="contact.html" class="text-indigo-600 underline">https://stankit.vercel.app/contact.html</a>
           </p>
         </section>
 
@@ -199,19 +204,17 @@
   </main>
 
   
-  <!-- Legal & Compliance Footer -->
+  <!-- Legal & Compliance Footer (4 Major Compliance Links) -->
   <footer class="bg-white border-t border-slate-200 mt-16 py-8">
     <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 space-y-4 sm:space-y-0">
       <div class="flex items-center space-x-2">
         <span>© 2026 StanKit Studio. All rights reserved.</span>
       </div>
-      <div class="flex items-center space-x-6">
-        <a href="index.html" class="hover:text-indigo-600">Photocard Print Maker</a>
-        <a href="fan-letter.html" class="hover:text-indigo-600">Fan Letter Pro</a>
-        <a href="about.html" class="hover:text-indigo-600 font-semibold">About Us</a>
-        <a href="privacy.html" class="hover:text-indigo-600 font-semibold">Privacy Policy</a>
-        <a href="terms.html" class="hover:text-indigo-600 font-semibold">Terms of Service</a>
-        <a href="contact.html" class="hover:text-indigo-600 font-semibold">Contact Us</a>
+      <div class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 font-medium">
+        <a href="about.html" class="hover:text-indigo-600 transition" data-i18n="footer_about">About Us (关于本站)</a>
+        <a href="privacy.html" class="hover:text-indigo-600 transition" data-i18n="footer_privacy">Privacy Policy (隐私政策)</a>
+        <a href="terms.html" class="hover:text-indigo-600 transition" data-i18n="footer_terms">Terms of Service (服务条款)</a>
+        <a href="contact.html" class="hover:text-indigo-600 transition" data-i18n="footer_contact">Contact Us (联系我们)</a>
       </div>
     </div>
   </footer>
