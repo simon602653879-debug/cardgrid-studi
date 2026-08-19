@@ -998,19 +998,26 @@
             ctx.setLineDash([]);
           }
 
-          // Build HTML Interactive Overlay Element for this slot
+          // Build HTML Interactive Overlay Element with 100% Responsive Percentage Positioning
           if (overlay) {
             const slotEl = document.createElement('div');
             const thisIdx = imgIdx;
-            slotEl.className = 'absolute slot-interactive pointer-events-auto rounded-sm border border-transparent hover:border-indigo-500/50 hover:bg-indigo-500/5 transition cursor-pointer flex flex-col justify-between p-1.5';
-            slotEl.style.left = x + 'px';
-            slotEl.style.top = y + 'px';
-            slotEl.style.width = cardW + 'px';
-            slotEl.style.height = cardH + 'px';
+            
+            // Convert canvas coordinate bounds into responsive percentages
+            const leftPct = (x / sheetW) * 100;
+            const topPct = (y / sheetH) * 100;
+            const widthPct = (cardW / sheetW) * 100;
+            const heightPct = (cardH / sheetH) * 100;
+
+            slotEl.style.left = leftPct + '%';
+            slotEl.style.top = topPct + '%';
+            slotEl.style.width = widthPct + '%';
+            slotEl.style.height = heightPct + '%';
 
             if (hasImage) {
+              slotEl.className = 'absolute slot-interactive pointer-events-auto rounded-sm border border-transparent hover:border-indigo-400 hover:bg-slate-950/40 hover:backdrop-blur-[1px] transition-all duration-150 cursor-grab active:cursor-grabbing flex flex-col justify-between p-1.5 group select-none';
               slotEl.setAttribute('draggable', 'true');
-              slotEl.setAttribute('title', `Card ${thisIdx + 1} - 拖拽可调整位置，点击右上角 ✕ 删除`);
+              slotEl.setAttribute('title', `Card #${thisIdx + 1} • 按住拖拽可调位，点击 ✕ 快速删除`);
               slotEl.ondragstart = (e) => handleSlotDragStart(e, thisIdx);
               slotEl.ondragend = handleSlotDragEnd;
               slotEl.ondragover = handleSlotDragOver;
@@ -1018,28 +1025,33 @@
               slotEl.ondrop = (e) => handleSlotDrop(e, thisIdx);
 
               slotEl.innerHTML = `
-                <div class="slot-actions opacity-0 transition-opacity flex items-center justify-between w-full">
-                  <span class="bg-slate-900/80 text-white text-[10px] font-extrabold px-1.5 py-0.2 rounded shadow cursor-grab active:cursor-grabbing flex items-center space-x-0.5">
+                <div class="opacity-0 group-hover:opacity-100 transition-opacity duration-150 flex items-center justify-between w-full">
+                  <span class="bg-slate-900/90 text-white text-[9px] font-extrabold px-1.5 py-0.5 rounded shadow-xs flex items-center space-x-0.5">
                     <span>⋮⋮</span>
                     <span>#${thisIdx + 1}</span>
                   </span>
-                  <button type="button" onclick="deleteCard(${thisIdx}, event)" title="删除此小卡" class="w-6 h-6 rounded-full bg-rose-600 hover:bg-rose-700 text-white flex items-center justify-center text-xs font-extrabold shadow-md transition transform hover:scale-110 active:scale-95 cursor-pointer">
+                  <button type="button" onclick="deleteCard(${thisIdx}, event)" title="删除此小卡" class="w-5 h-5 rounded-full bg-rose-600/90 hover:bg-rose-600 text-white flex items-center justify-center text-[10px] font-bold shadow-md transition transform hover:scale-110 active:scale-90 cursor-pointer">
                     ✕
                   </button>
                 </div>
-                <div class="slot-actions opacity-0 transition-opacity text-center">
-                  <span class="bg-slate-900/70 text-white text-[9px] font-bold px-2 py-0.5 rounded-full backdrop-blur-xs">
-                    ↕️ 拖拽调位
+                <div class="opacity-0 group-hover:opacity-100 transition-opacity duration-150 my-auto text-center pointer-events-none">
+                  <span class="bg-slate-900/85 text-white text-[9px] font-extrabold px-2 py-0.5 rounded-full shadow-xs backdrop-blur-xs inline-flex items-center space-x-1">
+                    <span>↕️</span>
+                    <span>拖拽排序</span>
                   </span>
                 </div>
+                <div class="h-2"></div>
               `;
             } else {
+              slotEl.className = 'absolute slot-interactive pointer-events-auto rounded-sm border border-transparent hover:border-indigo-400/80 hover:bg-indigo-500/10 transition-all duration-150 cursor-pointer flex items-center justify-center p-1.5 group select-none';
               slotEl.onclick = () => document.getElementById('file-input').click();
-              slotEl.setAttribute('title', `点击上传照片到 Card ${thisIdx + 1}`);
+              slotEl.setAttribute('title', `点击上传照片到 Card #${thisIdx + 1}`);
               slotEl.innerHTML = `
-                <div class="w-full h-full flex flex-col items-center justify-center text-slate-400 hover:text-indigo-600 transition">
-                  <span class="text-base font-bold">+</span>
-                  <span class="text-[9px] font-bold">上传小卡</span>
+                <div class="opacity-0 group-hover:opacity-100 transition-opacity duration-150 flex flex-col items-center justify-center text-indigo-600">
+                  <div class="w-6 h-6 rounded-full bg-white shadow-xs border border-indigo-200 flex items-center justify-center text-xs font-bold text-indigo-600 mb-0.5">
+                    +
+                  </div>
+                  <span class="text-[9px] font-extrabold bg-white/90 px-1.5 py-0.2 rounded shadow-2xs">上传小卡</span>
                 </div>
               `;
             }
