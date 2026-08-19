@@ -4,11 +4,11 @@
   <meta charset="UTF-8">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>">
   <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>">
-  <link rel="canonical" href="https://stankit.vercel.app/fan-letter.html">
+  <link rel="canonical" href="https://stankit.vercel.app/newjeans-fan-letter.html">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>StanKit Studio | K-Pop Fan Letter & Weverse/Bubble Helper</title>
-  <meta name="description" content="Generate culturally accurate, emotionally rich K-Pop & idol fan letters, Bubble DMs, Weverse snipes, and comeback streaming slogans in Korean, Japanese, Chinese, and English.">
-  <meta name="keywords" content="stankit, stankit studio, kpop fandom tools, kpop fan letter generator, weverse comment translator, bubble message helper, korean honorifics fan letter, jujeop rainbow fart, 粉丝信生成器">
+  <title>StanKit Studio | NewJeans Fan Letter & Bunnies Chat Generator</title>
+  <meta name="description" content="Write aesthetic NewJeans fan letters, Phoning / Weverse messages, and Ditto slogans in Korean and English for Minji, Hanni, Danielle, Haerin, Hyein.">
+  <meta name="keywords" content="newjeans fan letter, bunnies message generator, ditto fan letter, hanni newjeans message">
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -128,9 +128,9 @@
         <span data-i18n="hero_pill">Professional Fandom Writer: 27+ Scenarios × 4D Tone Engine × Custom Memory Slots</span>
       </div>
       <h1 class="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-2">
-        <span data-i18n="hero_title_1">K-Pop & Idol Fan Letter</span>
+        <span >NewJeans Fan Letter & Bunnies Messages</span>
         <br>
-        <span class="bg-gradient-to-r from-indigo-600 via-purple-600 to-rose-500 bg-clip-text text-transparent" data-i18n="hero_title_2">Professional AI Writing Studio</span>
+        <span class="bg-gradient-to-r from-indigo-600 via-purple-600 to-rose-500 bg-clip-text text-transparent" >Aesthetic Fandom AI Studio</span>
       </h1>
       <p class="text-slate-500 text-xs sm:text-sm max-w-2xl mx-auto leading-relaxed" data-i18n="hero_desc">
         Craft culturally accurate, deeply touching fan letters and messages. Choose from 27+ curated fandom scenarios with precise 4-dimensional control over Emotion, Honorifics, Literary Style, and Length.
@@ -34982,8 +34982,9 @@
     window.addEventListener('DOMContentLoaded', () => {
       renderIdolChips();
       renderScenarioButtons();
+      const targetIdol = idolDatabase.find(i => i.id === 'newjeans-group') || idolDatabase[1];
       selectScenario('cb-sprint', false);
-      applyIdol(idolDatabase[1], true);
+      applyIdol(targetIdol, true);
 
       // Check URL parameters for direct platform mode deep-linking (?mode=weverse)
       const urlParams = new URLSearchParams(window.location.search);
