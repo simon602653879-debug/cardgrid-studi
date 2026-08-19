@@ -59,6 +59,7 @@
       right: 20px !important;
     }
   </style>
+  <link rel="canonical" href="https://stankit.vercel.app/">
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col justify-between">
 
@@ -149,6 +150,38 @@
     <!-- AdSense Top Banner Placeholder -->
     <div class="mb-8 p-3 rounded-xl border border-dashed border-slate-300 bg-slate-100 text-center text-xs text-slate-400">
       📢 Advertisement Placement (Google AdSense Responsive Banner Area)
+    </div>
+
+    
+    <!-- Top High-Frequency Fandom Platform Quick-Mode Banner (Linked to Fan Letter Pro) -->
+    <div class="max-w-6xl mx-auto mb-6 p-4 rounded-2xl bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white shadow-lg border border-indigo-900/50 flex flex-col md:flex-row md:items-center justify-between gap-3">
+      <div class="flex items-center space-x-3">
+        <div class="w-9 h-9 rounded-xl bg-indigo-600/40 border border-indigo-400/30 flex items-center justify-center text-lg shadow-inner">
+          🔥
+        </div>
+        <div>
+          <h2 class="text-sm font-extrabold text-white tracking-wide flex items-center space-x-1.5">
+            <span data-i18n="platform_bar_title">高频互动平台一键直达 (Platform Quick Modes)</span>
+            <span class="text-[9px] bg-rose-500 text-white font-bold px-1.5 py-0.2 rounded-full uppercase animate-pulse">Hot</span>
+          </h2>
+          <p class="text-[11px] text-slate-300 font-medium" data-i18n="platform_bar_desc">一键自动调校最适字数、语气敬语、专属句式与话题标签 (Hashtags)</p>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap gap-1.5">
+        <a href="fan-letter.html?mode=weverse" class="px-3 py-1.5 rounded-xl bg-white/10 hover:bg-indigo-600 text-white text-xs font-extrabold transition flex items-center space-x-1.5 border border-white/10 shadow-xs active:scale-95 cursor-pointer">
+          <span>⚡</span><span data-i18n="mode_weverse">Weverse 抢楼秒评</span>
+        </a>
+        <a href="fan-letter.html?mode=bubble" class="px-3 py-1.5 rounded-xl bg-white/10 hover:bg-indigo-600 text-white text-xs font-extrabold transition flex items-center space-x-1.5 border border-white/10 shadow-xs active:scale-95 cursor-pointer">
+          <span>💬</span><span data-i18n="mode_bubble">Bubble 私信秒回</span>
+        </a>
+        <a href="fan-letter.html?mode=sns" class="px-3 py-1.5 rounded-xl bg-white/10 hover:bg-indigo-600 text-white text-xs font-extrabold transition flex items-center space-x-1.5 border border-white/10 shadow-xs active:scale-95 cursor-pointer">
+          <span>📱</span><span data-i18n="mode_sns">X / 微博超话打卡</span>
+        </a>
+        <a href="fan-letter.html?mode=stream" class="px-3 py-1.5 rounded-xl bg-white/10 hover:bg-indigo-600 text-white text-xs font-extrabold transition flex items-center space-x-1.5 border border-white/10 shadow-xs active:scale-95 cursor-pointer">
+          <span>🎧</span><span data-i18n="mode_stream">回归刷音源打榜</span>
+        </a>
+      </div>
     </div>
 
     <!-- Grid Two-Column Controls + Live Canvas Sheet -->
@@ -315,59 +348,231 @@
     let currentLang = 'en';
 
     const i18nData = {
-      'en': {
-        'badge_hub': "Fandom Micro-Tools",
-        'nav_tool_print': "Photocard Print Maker",
-        'nav_tool_letter': "Fan Letter Pro",
-        'nav_about': "About",
-        'nav_contact': "Contact",
-        'nav_coffee': "Buy me a coffee",
-        'hero_title_1': "K-Pop Photocard Print Grid Generator",
-        'hero_title_2': "300 DPI High-Res Printable PDF",
-        'hero_desc': "Effortlessly arrange 55×85mm standard photocards or Polaroids onto A4 / US Letter sheets. Instant 100% client-side privacy-first PDF export with bleed cut-lines.",
-        'label_step1': "1. Upload Images",
-        'dropzone_title': "Click to upload or drag & drop",
-        'dropzone_desc': "PNG, JPG, WEBP (Supports batch selection)",
-        'label_step2': "2. Paper Size & Card Format",
-        'opt_cutlines': "Show Scissor Cut Lines",
-        'opt_fit': "Image Fit Mode",
-        'btn_download_pdf': "Download 300 DPI PDF (Print Ready)",
-        'pdf_note': "🔒 100% Client-Side Privacy: Images never leave your device.",
-        'preview_sheet_title': "Printable Sheet Preview",
-        'btn_clear_all': "Clear Sheet",
-        'sec_photocard_history': "Recent Print Layouts",
-        'footer_about': "About Us",
-        'footer_privacy': "Privacy Policy",
-        'footer_terms': "Terms of Service",
-        'footer_contact': "Contact Us"
+      "en": {
+            "badge_hub": "Fandom Micro-Tools",
+            "nav_tool_print": "Photocard Print Maker",
+            "nav_tool_letter": "Fan Letter Pro",
+            "nav_about": "About",
+            "nav_contact": "Contact",
+            "nav_coffee": "Buy me a coffee",
+            "hero_title_1": "K-Pop Photocard Print Grid Generator",
+            "hero_title_2": "300 DPI High-Res Printable PDF",
+            "hero_desc": "Effortlessly arrange 55×85mm standard photocards or Polaroids onto A4 / US Letter sheets. Instant 100% client-side privacy-first PDF export with bleed cut-lines.",
+            "label_step1": "1. Upload Images",
+            "dropzone_title": "Click to upload or drag & drop",
+            "dropzone_desc": "PNG, JPG, WEBP (Supports batch selection)",
+            "label_step2": "2. Paper Size & Card Format",
+            "opt_cutlines": "Show Scissor Cut Lines",
+            "opt_fit": "Image Fit Mode",
+            "btn_download_pdf": "Download 300 DPI PDF (Print Ready)",
+            "pdf_note": "🔒 100% Client-Side Privacy: Images never leave your device.",
+            "preview_sheet_title": "Printable Sheet Preview",
+            "btn_clear_all": "Clear Sheet",
+            "sec_photocard_history": "Recent Print Layouts",
+            "footer_about": "About Us",
+            "footer_privacy": "Privacy Policy",
+            "footer_terms": "Terms of Service",
+            "footer_contact": "Contact Us",
+            "platform_bar_title": "Daily Fandom Platform Quick Modes",
+            "platform_bar_desc": "1-Click tone, length & hashtag optimization for fandom platforms",
+            "mode_weverse": "Weverse First-Comment",
+            "mode_bubble": "Bubble Daily Chat",
+            "mode_sns": "X / Fandom Check-in",
+            "mode_stream": "Comeback Streaming Sprint"
       },
-      'zh': {
-        'badge_hub': "追星微工具箱",
-        'nav_tool_print': "小卡排版打印生成器",
-        'nav_tool_letter': "多语种粉丝信专业版",
-        'nav_about': "关于本站",
-        'nav_contact': "联系我们",
-        'nav_coffee': "请作者喝杯咖啡",
-        'hero_title_1': "K-Pop 偶像小卡排版打印生成器",
-        'hero_title_2': "300 DPI 高清可打印 PDF",
-        'hero_desc': "一键将 55×85mm 标准小卡或拍立得照片自动排列到 A4 / US Letter 纸张上。纯浏览器本地处理，支持裁切辅助线与即时导出。",
-        'label_step1': "1. 上传小卡照片",
-        'dropzone_title': "点击上传或直接拖拽图片到此处",
-        'dropzone_desc': "支持 PNG、JPG、WEBP 批量选择",
-        'label_step2': "2. 纸张尺寸与规格",
-        'opt_cutlines': "显示剪刀裁切辅助虚线",
-        'opt_fit': "图片填充模式",
-        'btn_download_pdf': "导出 300 DPI 高清 PDF (可直接打印)",
-        'pdf_note': "🔒 100% 浏览器本地处理，照片零上传风险",
-        'preview_sheet_title': "打印排版实时预览",
-        'btn_clear_all': "清空当前纸张",
-        'sec_photocard_history': "最近排版记录",
-        'footer_about': "关于本站",
-        'footer_privacy': "隐私政策",
-        'footer_terms': "服务条款",
-        'footer_contact': "联系我们"
+      "zh": {
+            "badge_hub": "追星微工具箱",
+            "nav_tool_print": "小卡排版打印生成器",
+            "nav_tool_letter": "多语种粉丝信专业版",
+            "nav_about": "关于本站",
+            "nav_contact": "联系我们",
+            "nav_coffee": "请作者喝杯咖啡",
+            "hero_title_1": "K-Pop 偶像小卡排版打印生成器",
+            "hero_title_2": "300 DPI 高清可打印 PDF",
+            "hero_desc": "一键将 55×85mm 标准小卡或拍立得照片自动排列到 A4 / US Letter 纸张上。纯浏览器本地处理，支持裁切辅助线与即时导出。",
+            "label_step1": "1. 上传小卡照片",
+            "dropzone_title": "点击上传或直接拖拽图片到此处",
+            "dropzone_desc": "支持 PNG、JPG、WEBP 批量选择",
+            "label_step2": "2. 纸张尺寸与规格",
+            "opt_cutlines": "显示剪刀裁切辅助虚线",
+            "opt_fit": "图片填充模式",
+            "btn_download_pdf": "导出 300 DPI 高清 PDF (可直接打印)",
+            "pdf_note": "🔒 100% 浏览器本地处理，照片零上传风险",
+            "preview_sheet_title": "打印排版实时预览",
+            "btn_clear_all": "清空当前纸张",
+            "sec_photocard_history": "最近排版记录",
+            "footer_about": "关于本站",
+            "footer_privacy": "隐私政策",
+            "footer_terms": "服务条款",
+            "footer_contact": "联系我们",
+            "platform_bar_title": "高频互动平台一键直达 (Platform Quick Modes)",
+            "platform_bar_desc": "一键自动调校最适字数、语气敬语、专属句式与话题标签 (Hashtags)",
+            "mode_weverse": "Weverse 抢楼秒评",
+            "mode_bubble": "Bubble 私信秒回",
+            "mode_sns": "X / 微博超话打卡",
+            "mode_stream": "回归刷音源打榜"
+      },
+      "ko": {
+            "badge_hub": "팬덤 마이크로 툴",
+            "nav_tool_print": "포토카드 인쇄기",
+            "nav_tool_letter": "팬레터 프로",
+            "nav_about": "소개",
+            "nav_contact": "문의",
+            "nav_coffee": "커피 후원",
+            "hero_title_1": "K-Pop 포토카드 인쇄 그리드 생성기",
+            "hero_title_2": "300 DPI 초고화질 출력 PDF",
+            "hero_desc": "55×85mm 표준 포토카드 또는 폴라로이드를 A4/US Letter 용지에 자동으로 배열하여 인쇄용 300 DPI PDF로 즉시 내보냅니다.",
+            "label_step1": "1. 이미지 업로드",
+            "dropzone_title": "클릭하여 업로드 또는 드래그 앤 드롭",
+            "dropzone_desc": "PNG, JPG, WEBP 일괄 지원",
+            "label_step2": "2. 용지 규격 및 카드 포맷",
+            "opt_cutlines": "가위 재단선 표시",
+            "opt_fit": "이미지 맞춤 방식",
+            "btn_download_pdf": "300 DPI PDF 다운로드 (인쇄용)",
+            "pdf_note": "🔒 100% 로컬 브라우저 처리: 이미지가 서버로 전송되지 않습니다.",
+            "preview_sheet_title": "인쇄 시트 실시간 미리보기",
+            "btn_clear_all": "시트 비우기",
+            "sec_photocard_history": "최근 인쇄 프로젝트",
+            "footer_about": "소개",
+            "footer_privacy": "개인정보처리방침",
+            "footer_terms": "이용약관",
+            "footer_contact": "문의하기",
+            "platform_bar_title": "팬덤 플랫폼별 1초 원클릭 모드 (Platform Quick Modes)",
+            "platform_bar_desc": "위버스, 버블, 트위터 출첵, 음원 스밍에 최적화된 글자수와 어조 자동 셋팅",
+            "mode_weverse": "위버스 선착순 첫댓글",
+            "mode_bubble": "버블 일상 칼답",
+            "mode_sns": "X / 트위터 출첵",
+            "mode_stream": "음원 스밍총공 인증"
+      },
+      "ja": {
+            "badge_hub": "推し活ツール",
+            "nav_tool_print": "トレカ印刷ツール",
+            "nav_tool_letter": "ファンレター Pro",
+            "nav_about": "概要",
+            "nav_contact": "お問い合わせ",
+            "nav_coffee": "コーヒーをごちそう",
+            "hero_title_1": "K-Pop トレカ印刷グリッド生成ツール",
+            "hero_title_2": "300 DPI 高解像度 印刷用 PDF",
+            "hero_desc": "55×85mmの標準トレカやチェキ写真をA4/US Letter用紙に自動整列し、裁断線付きの300 DPI高解像度PDFを即座に出力します。",
+            "label_step1": "1. 写真をアップロード",
+            "dropzone_title": "クリックまたはドラッグ＆ドロップ",
+            "dropzone_desc": "PNG, JPG, WEBP（一括選択可能）",
+            "label_step2": "2. 用紙サイズ＆カード規格",
+            "opt_cutlines": "裁断ガイド線を表示",
+            "opt_fit": "画像フィットモード",
+            "btn_download_pdf": "300 DPI PDFをダウンロード (印刷用)",
+            "pdf_note": "🔒 100% ローカル処理：写真が外部サーバーに送信されることはありません。",
+            "preview_sheet_title": "印刷シートプレビュー",
+            "btn_clear_all": "シートをクリア",
+            "sec_photocard_history": "最近の印刷履歴",
+            "footer_about": "概要",
+            "footer_privacy": "プライバシーポリシー",
+            "footer_terms": "利用規約",
+            "footer_contact": "お問い合わせ",
+            "platform_bar_title": "推し活プラットフォーム別 ワンクリックモード (Platform Quick Modes)",
+            "platform_bar_desc": "Weverse、Bubble、Xタグ投稿、音源スミンに最適な文面を1秒で最適化",
+            "mode_weverse": "Weverse 1コメ早押し",
+            "mode_bubble": "Bubble 日常返信",
+            "mode_sns": "X (Twitter) 毎日タグ投稿",
+            "mode_stream": "カムバ音源スミン応援"
+      },
+      "th": {
+            "badge_hub": "เครื่องมือแฟนคลับ",
+            "nav_tool_print": "พิมพ์โฟโต้การ์ด",
+            "nav_tool_letter": "เขียนจดหมายแฟนคลับ Pro",
+            "nav_about": "เกี่ยวกับเรา",
+            "nav_contact": "ติดต่อเรา",
+            "nav_coffee": "เลี้ยงกาแฟ",
+            "hero_title_1": "โปรแกรมจัดหน้าพิมพ์โฟโต้การ์ด K-Pop",
+            "hero_title_2": "PDF ความละเอียดสูง 300 DPI พร้อมพิมพ์",
+            "hero_desc": "จัดเรียงโฟโต้การ์ดมาตรฐาน 55×85 มม. ลงบนกระดาษ A4 หรือ US Letter อัตโนมัติ พร้อมเส้นไกด์ตัดและส่งออก PDF ความละเอียด 300 DPI ทันที",
+            "label_step1": "1. อัปโหลดรูปภาพ",
+            "dropzone_title": "คลิกเพื่ออัปโหลดหรือลากไฟล์มาวาง",
+            "dropzone_desc": "รองรับ PNG, JPG, WEBP หลายไฟล์พร้อมกัน",
+            "label_step2": "2. ขนาดกระดาษและรูปแบบการ์ด",
+            "opt_cutlines": "แสดงเส้นประสำหรับตัด",
+            "opt_fit": "โหมดจัดขนาดภาพ",
+            "btn_download_pdf": "ดาวน์โหลด PDF 300 DPI (พร้อมพิมพ์)",
+            "pdf_note": "🔒 ปลอดภัย 100%: ประมวลผลภายในเครื่องของคุณเท่านั้น",
+            "preview_sheet_title": "ตัวอย่างหน้าพิมพ์สด",
+            "btn_clear_all": "ล้างภาพทั้งหมด",
+            "sec_photocard_history": "ประวัติการจัดหน้าล่าสุด",
+            "footer_about": "เกี่ยวกับเรา",
+            "footer_privacy": "นโยบายความเป็นส่วนตัว",
+            "footer_terms": "ข้อกำหนดการใช้งาน",
+            "footer_contact": "ติดต่อเรา",
+            "platform_bar_title": "โหมดด่วนสำหรับแพลตฟอร์มแฟนคลับ (Platform Quick Modes)",
+            "platform_bar_desc": "ปรับแต่งคำพูด ความยาว และแฮชแท็กให้เหมาะกับ Weverse, Bubble, X และการสตรีมเพลงใน 1 วินาที",
+            "mode_weverse": "Weverse คอมเมนต์แรกสุดไว",
+            "mode_bubble": "Bubble ตอบแชทประจำวัน",
+            "mode_sns": "X เช็คอินประจำวัน",
+            "mode_stream": "สตรีมเพลงคัมแบ็ค"
+      },
+      "ar": {
+            "badge_hub": "أدوات الفاندوم",
+            "nav_tool_print": "طباعة البطاقات",
+            "nav_tool_letter": "رسائل المعجبين Pro",
+            "nav_about": "من نحن",
+            "nav_contact": "اتصل بنا",
+            "nav_coffee": "ادعمني بقهوة",
+            "hero_title_1": "أداة طباعة بطاقات فوتوكارد الكيبوب",
+            "hero_title_2": "ملف PDF عالي الدقة 300 DPI جاهز للطباعة",
+            "hero_desc": "قم بترتيب بطاقات 55×85 مم على ورق A4 أو Letter تلقائياً مع خطوط قص دقيقة وتصدير فوري لملفات PDF بدقة 300 DPI.",
+            "label_step1": "1. رفع الصور",
+            "dropzone_title": "انقر للرفع أو اسحب الصور هنا",
+            "dropzone_desc": "يدعم PNG, JPG, WEBP دفعة واحدة",
+            "label_step2": "2. حجم الورق والبطاقة",
+            "opt_cutlines": "إظهار خطوط القص",
+            "opt_fit": "نمط ملء الصورة",
+            "btn_download_pdf": "تحميل PDF بدقة 300 DPI (جاهز للطباعة)",
+            "pdf_note": "🔒 خصوصية 100%: تتم معالجة الصور داخل جهازك بالكامل.",
+            "preview_sheet_title": "معاينة ورقة الطباعة المباشرة",
+            "btn_clear_all": "مسح الورقة",
+            "sec_photocard_history": "المشاريع الأخيرة",
+            "footer_about": "من نحن",
+            "footer_privacy": "سياسة الخصوصية",
+            "footer_terms": "شروط الخدمة",
+            "footer_contact": "اتصل بنا",
+            "platform_bar_title": "الأوضاع السريعة لمنصات الفاندوم (Platform Quick Modes)",
+            "platform_bar_desc": "تعديل فوري للنبرة والطول والهاشتاغات لتناسب Weverse و Bubble و X وتطبيقات البث",
+            "mode_weverse": "الرد الأول في Weverse",
+            "mode_bubble": "محادثة Bubble اليومية",
+            "mode_sns": "منشورات الدعم في X",
+            "mode_stream": "دعم ستريم العودة"
+      },
+      "es": {
+            "badge_hub": "Microherramientas K-Pop",
+            "nav_tool_print": "Imprimir Photocards",
+            "nav_tool_letter": "Generador de Cartas Pro",
+            "nav_about": "Acerca de",
+            "nav_contact": "Contacto",
+            "nav_coffee": "Cómprame un café",
+            "hero_title_1": "Generador de Impresión de Photocards K-Pop",
+            "hero_title_2": "PDF de Alta Resolución 300 DPI Listo para Imprimir",
+            "hero_desc": "Organiza photocards estándar de 55×85mm en hojas A4 o US Letter con líneas de corte y exportación instantánea a PDF en 300 DPI.",
+            "label_step1": "1. Subir Imágenes",
+            "dropzone_title": "Haz clic para subir o arrastra imágenes aquí",
+            "dropzone_desc": "PNG, JPG, WEBP (Permite selección múltiple)",
+            "label_step2": "2. Tamaño de Papel y Formato",
+            "opt_cutlines": "Mostrar Líneas de Corte",
+            "opt_fit": "Modo de Ajuste",
+            "btn_download_pdf": "Descargar PDF 300 DPI (Listo para Imprimir)",
+            "pdf_note": "🔒 100% Privacidad Local: Tus fotos nunca salen de tu dispositivo.",
+            "preview_sheet_title": "Vista Previa de la Hoja",
+            "btn_clear_all": "Limpiar Hoja",
+            "sec_photocard_history": "Proyectos Recientes",
+            "footer_about": "Acerca de",
+            "footer_privacy": "Política de Privacidad",
+            "footer_terms": "Términos de Servicio",
+            "footer_contact": "Contacto",
+            "platform_bar_title": "Modos Rápidos por Plataforma de Fandom",
+            "platform_bar_desc": "Optimización en 1 clic para Weverse, Bubble, X y Streaming",
+            "mode_weverse": "Weverse Primer Comentario",
+            "mode_bubble": "Bubble Chat Diario",
+            "mode_sns": "Check-in Diario en X",
+            "mode_stream": "Streaming de Comeback"
       }
-    };
+};
 
     function changeLanguage(lang) {
       if (!i18nData[lang]) lang = 'en';
