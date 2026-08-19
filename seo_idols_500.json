@@ -1,0 +1,3002 @@
+[
+  {
+    "slug": "bts",
+    "name": "BTS",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "BTS Weverse letter template and streaming cheer"
+  },
+  {
+    "slug": "bts-jungkook",
+    "name": "Jungkook",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "Jungkook Golden Seven birthday fan letter"
+  },
+  {
+    "slug": "bts-v",
+    "name": "V (Kim Taehyung)",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "Kim Taehyung V Layover Weverse fan message"
+  },
+  {
+    "slug": "bts-jimin",
+    "name": "Jimin",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "Jimin Muse Face handwritten fan letter"
+  },
+  {
+    "slug": "bts-suga",
+    "name": "SUGA (Agust D)",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "SUGA D-DAY tour fan letter template"
+  },
+  {
+    "slug": "bts-jin",
+    "name": "Jin",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "Jin Astronaut military discharge welcome fan letter"
+  },
+  {
+    "slug": "bts-rm",
+    "name": "RM (Kim Namjoon)",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "RM Indigo RPWP sincere fan letter"
+  },
+  {
+    "slug": "bts-jhope",
+    "name": "J-Hope",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "J-Hope Jack In The Box HOPE ON THE STREET letter"
+  },
+  {
+    "slug": "blackpink",
+    "name": "BLACKPINK",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "BLACKPINK world tour Born Pink anniversary letter"
+  },
+  {
+    "slug": "jennie-blackpink",
+    "name": "Jennie",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "Jennie You & Me Ruby Weverse comment"
+  },
+  {
+    "slug": "jisoo-blackpink",
+    "name": "Jisoo",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "Jisoo ME Flower drama support fan letter"
+  },
+  {
+    "slug": "rose-blackpink",
+    "name": "Rosé",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "Rosé On The Ground APT fan letter template"
+  },
+  {
+    "slug": "lisa-blackpink",
+    "name": "Lisa",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "Lisa Lalisa Rockstar Coachella fan letter"
+  },
+  {
+    "slug": "newjeans",
+    "name": "NewJeans",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "NewJeans Bunnies Phoning Weverse comment"
+  },
+  {
+    "slug": "newjeans-hanni",
+    "name": "Hanni",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "NewJeans Hanni Tokyo Dome Blue Coral Reef letter"
+  },
+  {
+    "slug": "newjeans-haerin",
+    "name": "Haerin",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "NewJeans Haerin cat visual Phoning message"
+  },
+  {
+    "slug": "newjeans-minji",
+    "name": "Minji",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "NewJeans Minji MC debut appreciation letter"
+  },
+  {
+    "slug": "newjeans-danielle",
+    "name": "Danielle",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "NewJeans Danielle Disney Little Mermaid letter"
+  },
+  {
+    "slug": "newjeans-hyein",
+    "name": "Hyein",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "NewJeans Hyein maknae vocal praise letter"
+  },
+  {
+    "slug": "ive",
+    "name": "IVE",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "IVE DIVE comeback music show #1 cheer letter"
+  },
+  {
+    "slug": "ive-wonyoung",
+    "name": "Jang Wonyoung",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "Jang Wonyoung Lucky Vicky positive mindset letter"
+  },
+  {
+    "slug": "ive-yujin",
+    "name": "An Yujin",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "An Yujin Earth Arcade IVE leader support letter"
+  },
+  {
+    "slug": "ive-rei",
+    "name": "Rei",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "IVE Rei cute rap and healing bubble message"
+  },
+  {
+    "slug": "ive-gaeul",
+    "name": "Gaeul",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "IVE Gaeul sunbae killing part appreciation letter"
+  },
+  {
+    "slug": "ive-liz",
+    "name": "Liz",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "IVE Liz main vocal acoustic cover letter"
+  },
+  {
+    "slug": "ive-leeseo",
+    "name": "Leeseo",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "IVE Leeseo high school graduation cheer letter"
+  },
+  {
+    "slug": "stray-kids",
+    "name": "Stray Kids",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "Stray Kids STAY Billboard 200 #1 tribute letter"
+  },
+  {
+    "slug": "skz-felix",
+    "name": "Felix",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "Stray Kids Felix deep voice sunshine healing letter"
+  },
+  {
+    "slug": "skz-hyunjin",
+    "name": "Hyunjin",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "Stray Kids Hyunjin Versace art and dance letter"
+  },
+  {
+    "slug": "skz-bangchan",
+    "name": "Bang Chan",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "Stray Kids Bang Chan Chan's Room safe space letter"
+  },
+  {
+    "slug": "skz-leeknow",
+    "name": "Lee Know",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "Stray Kids Lee Know dance leader bubble message"
+  },
+  {
+    "slug": "skz-changbin",
+    "name": "Changbin",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "Stray Kids Changbin Dwaekki 3RACHA rap letter"
+  },
+  {
+    "slug": "skz-han",
+    "name": "Han",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "Stray Kids Han Jisung all-rounder vocal rap letter"
+  },
+  {
+    "slug": "skz-seungmin",
+    "name": "Seungmin",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "Stray Kids Seungmin OST main vocal letter"
+  },
+  {
+    "slug": "skz-in",
+    "name": "I.N",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "Stray Kids I.N trot maknae glowing vocal letter"
+  },
+  {
+    "slug": "seventeen",
+    "name": "SEVENTEEN",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "SEVENTEEN CARAT follow tour stadium letter"
+  },
+  {
+    "slug": "svt-mingyu",
+    "name": "Mingyu",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "SEVENTEEN Mingyu visual Weverse live comment"
+  },
+  {
+    "slug": "svt-jeonghan",
+    "name": "Jeonghan",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "SEVENTEEN Jeonghan enlistment health and waiting letter"
+  },
+  {
+    "slug": "svt-wonwoo",
+    "name": "Wonwoo",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "SEVENTEEN Wonwoo deep voice gamer comfort letter"
+  },
+  {
+    "slug": "svt-hoshi",
+    "name": "Hoshi",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "SEVENTEEN Hoshi tiger horanghae stage passion letter"
+  },
+  {
+    "slug": "svt-scoups",
+    "name": "S.Coups",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "SEVENTEEN S.Coups general leader recovery letter"
+  },
+  {
+    "slug": "svt-joshua",
+    "name": "Joshua",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "SEVENTEEN Joshua gentle vocal Sunday morning letter"
+  },
+  {
+    "slug": "svt-woozi",
+    "name": "Woozi",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "SEVENTEEN Woozi producer Daesang gratitude letter"
+  },
+  {
+    "slug": "svt-dk",
+    "name": "DK (Dokyeom)",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "SEVENTEEN DK musical vocal sunshine happy virus letter"
+  },
+  {
+    "slug": "svt-seungkwan",
+    "name": "Seungkwan",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "SEVENTEEN Seungkwan variety King vocal healing letter"
+  },
+  {
+    "slug": "svt-the8",
+    "name": "The8 (Xu Minghao)",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "SEVENTEEN The8 art tea fashion growth letter"
+  },
+  {
+    "slug": "svt-jun",
+    "name": "Jun (Wen Junhui)",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "SEVENTEEN Jun drama actor solo music letter"
+  },
+  {
+    "slug": "svt-vernon",
+    "name": "Vernon",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "SEVENTEEN Vernon hip-hop mixtape cinema letter"
+  },
+  {
+    "slug": "svt-dino",
+    "name": "Dino",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "SEVENTEEN Dino future of K-pop solo dance letter"
+  },
+  {
+    "slug": "aespa",
+    "name": "aespa",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "aespa MY Supernova Armageddon comeback cheer letter"
+  },
+  {
+    "slug": "aespa-karina",
+    "name": "Karina",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "aespa Karina AI visual leader Bubble reply letter"
+  },
+  {
+    "slug": "aespa-winter",
+    "name": "Winter",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "aespa Winter vocal high note guitar acoustic letter"
+  },
+  {
+    "slug": "aespa-ningning",
+    "name": "Ningning",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "aespa Ningning Versace golden vocal stage letter"
+  },
+  {
+    "slug": "aespa-giselle",
+    "name": "Giselle",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "aespa Giselle multilingual rap that's hot letter"
+  },
+  {
+    "slug": "le-sserafim",
+    "name": "LE SSERAFIM",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "LE SSERAFIM FEARNOT Coachella Crazy comeback letter"
+  },
+  {
+    "slug": "lsrfm-chaewon",
+    "name": "Kim Chaewon",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "Kim Chaewon bob hair leader Weverse letter"
+  },
+  {
+    "slug": "lsrfm-sakura",
+    "name": "Miyawaki Sakura",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "Sakura Miyawaki idol journey 12-year tribute letter"
+  },
+  {
+    "slug": "lsrfm-yunjin",
+    "name": "Huh Yunjin",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "Huh Yunjin self-produced solo opera vocal letter"
+  },
+  {
+    "slug": "lsrfm-kazuha",
+    "name": "Kazuha",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "Kazuha ballet graceful core strength letter"
+  },
+  {
+    "slug": "lsrfm-eunchae",
+    "name": "Hong Eunchae",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "Hong Eunchae Star Diary Music Bank MC letter"
+  },
+  {
+    "slug": "twice",
+    "name": "TWICE",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "TWICE ONCE stadium world tour With YOU-th letter"
+  },
+  {
+    "slug": "twice-nayeon",
+    "name": "Nayeon",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "TWICE Nayeon POP ABCD summer queen solo letter"
+  },
+  {
+    "slug": "twice-sana",
+    "name": "Sana",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "TWICE Sana MISAMO No Sana No Life cute letter"
+  },
+  {
+    "slug": "twice-momo",
+    "name": "Momo",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "TWICE Momo dance machine MISAMO stage letter"
+  },
+  {
+    "slug": "twice-tzuyu",
+    "name": "Tzuyu",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "TWICE Tzuyu abouTZU solo debut visual praise letter"
+  },
+  {
+    "slug": "twice-jihyo",
+    "name": "Jihyo",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "TWICE Jihyo ZONE Killin Me Good leader letter"
+  },
+  {
+    "slug": "twice-mina",
+    "name": "Mina",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "TWICE Mina Sharon black swan elegant vocal letter"
+  },
+  {
+    "slug": "twice-dahyun",
+    "name": "Dahyun",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "TWICE Dahyun tofu piano variety actress letter"
+  },
+  {
+    "slug": "twice-chaeyoung",
+    "name": "Chaeyoung",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "TWICE Chaeyoung artistic rap free spirit letter"
+  },
+  {
+    "slug": "twice-jeongyeon",
+    "name": "Jeongyeon",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "TWICE Jeongyeon inspiring resilience vocal letter"
+  },
+  {
+    "slug": "enhypen",
+    "name": "ENHYPEN",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "ENHYPEN ENGENE Romance Untold dark blood letter"
+  },
+  {
+    "slug": "enha-heeseung",
+    "name": "Heeseung",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "ENHYPEN Heeseung ace vocal center stage letter"
+  },
+  {
+    "slug": "enha-sunghoon",
+    "name": "Sunghoon",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "ENHYPEN Sunghoon ice prince visual MC letter"
+  },
+  {
+    "slug": "enha-jungwon",
+    "name": "Jungwon",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "ENHYPEN Jungwon leader cute dimple vocal letter"
+  },
+  {
+    "slug": "enha-sunoo",
+    "name": "Sunoo",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "ENHYPEN Sunoo bright sunshine vitamin Bubble letter"
+  },
+  {
+    "slug": "enha-niki",
+    "name": "Ni-ki",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "ENHYPEN Ni-ki prodigy dancer maknae stage letter"
+  },
+  {
+    "slug": "enha-jay",
+    "name": "Jay",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "ENHYPEN Jay rock guitar vocal charisma letter"
+  },
+  {
+    "slug": "enha-jake",
+    "name": "Jake",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "ENHYPEN Jake Layla golden retriever warmth letter"
+  },
+  {
+    "slug": "txt",
+    "name": "TOMORROW X TOGETHER",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "TXT MOA Deja Vu minisode 3 world tour letter"
+  },
+  {
+    "slug": "txt-yeonjun",
+    "name": "Yeonjun",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "TXT Yeonjun 4th gen IT boy GGUM solo dance letter"
+  },
+  {
+    "slug": "txt-soobin",
+    "name": "Soobin",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "TXT Soobin giant bunny leader gentle comfort letter"
+  },
+  {
+    "slug": "txt-beomgyu",
+    "name": "Beomgyu",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "TXT Beomgyu guitar center energetic moodmaker letter"
+  },
+  {
+    "slug": "txt-taehyun",
+    "name": "Taehyun",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "TXT Taehyun vocal powerhouse passionate mindset letter"
+  },
+  {
+    "slug": "txt-hueningkai",
+    "name": "HueningKai",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "TXT HueningKai multi-instrumentalist angel maknae letter"
+  },
+  {
+    "slug": "ateez",
+    "name": "ATEEZ",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "ATEEZ ATINY Coachella Golden Hour pirate king letter"
+  },
+  {
+    "slug": "ateez-hongjoong",
+    "name": "Hongjoong",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "ATEEZ Hongjoong captain producer fashion letter"
+  },
+  {
+    "slug": "ateez-seonghwa",
+    "name": "Seonghwa",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "ATEEZ Seonghwa mother visual stage demon letter"
+  },
+  {
+    "slug": "ateez-san",
+    "name": "San",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "ATEEZ San mountain demon stage presence letter"
+  },
+  {
+    "slug": "ateez-wooyoung",
+    "name": "Wooyoung",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "ATEEZ Wooyoung dance main killing part letter"
+  },
+  {
+    "slug": "ateez-mingi",
+    "name": "Mingi",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "ATEEZ Mingi deep rap Fix On swagger letter"
+  },
+  {
+    "slug": "ateez-yunho",
+    "name": "Yunho",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "ATEEZ Yunho main dancer golden retriever letter"
+  },
+  {
+    "slug": "ateez-yeosang",
+    "name": "Yeosang",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "ATEEZ Yeosang statue visual sweet vocal letter"
+  },
+  {
+    "slug": "ateez-jongho",
+    "name": "Jongho",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "ATEEZ Jongho 4-tier high note vocal god letter"
+  },
+  {
+    "slug": "nct-127",
+    "name": "NCT 127",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "NCT 127 NCTzen Fact Check Neo City tour letter"
+  },
+  {
+    "slug": "nct-dream",
+    "name": "NCT DREAM",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "NCT DREAM 7DREAM ISTJ Smoothie stadium letter"
+  },
+  {
+    "slug": "nct-mark",
+    "name": "Mark Lee",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "NCT Mark Lee Spider-man all-rounder solo letter"
+  },
+  {
+    "slug": "nct-taeyong",
+    "name": "Taeyong",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "NCT Taeyong TAP Shalala enlistment support letter"
+  },
+  {
+    "slug": "nct-jaehyun",
+    "name": "Jaehyun",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "NCT Jaehyun J solo R&B Valentine letter"
+  },
+  {
+    "slug": "nct-doyoung",
+    "name": "Doyoung",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "NCT Doyoung Youth solo vocal acoustic tour letter"
+  },
+  {
+    "slug": "nct-haechan",
+    "name": "Haechan",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "NCT Haechan honey vocal full sun energy letter"
+  },
+  {
+    "slug": "nct-jaemin",
+    "name": "Jaemin",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "NCT DREAM Jaemin Nana photography warm fan letter"
+  },
+  {
+    "slug": "nct-jeno",
+    "name": "Jeno",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "NCT DREAM Jeno captain dance rap eye smile letter"
+  },
+  {
+    "slug": "nct-renjun",
+    "name": "Renjun",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "NCT DREAM Renjun healing vocal artistic letter"
+  },
+  {
+    "slug": "nct-chenle",
+    "name": "Chenle",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "NCT DREAM Chenle main vocal piano king letter"
+  },
+  {
+    "slug": "nct-jisung",
+    "name": "Jisung",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "NCT DREAM Jisung dance prodigy deep voice letter"
+  },
+  {
+    "slug": "riize",
+    "name": "RIIZE",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "RIIZE BRIIZE Boom Boom Bass debut year letter"
+  },
+  {
+    "slug": "riize-wonbin",
+    "name": "Wonbin",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "RIIZE Wonbin center visual guitar genius letter"
+  },
+  {
+    "slug": "riize-shotaro",
+    "name": "Shotaro",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "RIIZE Shotaro main dancer TikTok dance groove letter"
+  },
+  {
+    "slug": "riize-sungchan",
+    "name": "Sungchan",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "RIIZE Sungchan physical rap visual energy letter"
+  },
+  {
+    "slug": "riize-sohee",
+    "name": "Sohee",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "RIIZE Sohee monster live vocal bridge high note letter"
+  },
+  {
+    "slug": "riize-anton",
+    "name": "Anton",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "RIIZE Anton cello producer maknae growth letter"
+  },
+  {
+    "slug": "riize-eunseok",
+    "name": "Eunseok",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "RIIZE Eunseok handsome humor stone charisma letter"
+  },
+  {
+    "slug": "zerobaseone",
+    "name": "ZEROBASEONE",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "ZEROBASEONE ZEROSE In Bloom Feel the POP letter"
+  },
+  {
+    "slug": "zb1-sung-hanbin",
+    "name": "Sung Hanbin",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "ZEROBASEONE Sung Hanbin all-rounder leader M Countdown letter"
+  },
+  {
+    "slug": "zb1-zhang-hao",
+    "name": "Zhang Hao",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "ZEROBASEONE Zhang Hao Boys Planet #1 center violin letter"
+  },
+  {
+    "slug": "zb1-ricky",
+    "name": "Ricky",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "ZEROBASEONE Ricky young and rich tall and handsome letter"
+  },
+  {
+    "slug": "zb1-yujin",
+    "name": "Han Yujin",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "ZEROBASEONE Han Yujin maknae dance prodigy letter"
+  },
+  {
+    "slug": "zb1-matthew",
+    "name": "Seok Matthew",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "ZEROBASEONE Seok Matthew Canada sunshine smile letter"
+  },
+  {
+    "slug": "boynextdoor",
+    "name": "BOYNEXTDOOR",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "BOYNEXTDOOR ONEDOOR Earth Wind & Fire letter"
+  },
+  {
+    "slug": "bnd-myung-jaehyun",
+    "name": "Myung Jaehyun",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "BOYNEXTDOOR Myung Jaehyun leader energetic rap letter"
+  },
+  {
+    "slug": "tws",
+    "name": "TWS",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "TWS 42 Plot Twist sparkling refreshing debut letter"
+  },
+  {
+    "slug": "tws-shinyu",
+    "name": "Shinyu",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "TWS Shinyu leader visual first meeting letter"
+  },
+  {
+    "slug": "babymonster",
+    "name": "BABYMONSTER",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "BABYMONSTER MONSTIEZ SHEESH live vocal letter"
+  },
+  {
+    "slug": "baemon-ahyeon",
+    "name": "Ahyeon",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "BABYMONSTER Ahyeon ace vocal rap center letter"
+  },
+  {
+    "slug": "baemon-chiquita",
+    "name": "Chiquita",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "BABYMONSTER Chiquita Thai maknae stage charisma letter"
+  },
+  {
+    "slug": "kiss-of-life",
+    "name": "KISS OF LIFE",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "KISS OF LIFE KISSY Sticky Midas Touch live letter"
+  },
+  {
+    "slug": "kiof-natty",
+    "name": "Natty",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "KISS OF LIFE Natty Sugarcoat solo dance groove letter"
+  },
+  {
+    "slug": "kiof-belle",
+    "name": "Belle",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "KISS OF LIFE Belle LE SSERAFIM songwriter vocal letter"
+  },
+  {
+    "slug": "illit",
+    "name": "ILLIT",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "ILLIT GLLIT Magnetic super real me TikTok viral letter"
+  },
+  {
+    "slug": "g-i-dle",
+    "name": "(G)I-DLE",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "G-I-DLE NEVERLAND Queencard Super Lady letter"
+  },
+  {
+    "slug": "gidle-soyeon",
+    "name": "Jeon Soyeon",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "Jeon Soyeon genius producer rap leadership letter"
+  },
+  {
+    "slug": "gidle-yuqi",
+    "name": "Yuqi",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "Yuqi YU1Q1 Freak deep voice solo cheer letter"
+  },
+  {
+    "slug": "gidle-miyeon",
+    "name": "Miyeon",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "Miyeon princess visual main vocal OST letter"
+  },
+  {
+    "slug": "red-velvet",
+    "name": "Red Velvet",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "Red Velvet ReVeluv Cosmic 10th anniversary letter"
+  },
+  {
+    "slug": "rv-irene",
+    "name": "Irene",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "Red Velvet Irene visual original visual queen letter"
+  },
+  {
+    "slug": "rv-seulgi",
+    "name": "Seulgi",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "Red Velvet Seulgi 28 Reasons all-rounder dance letter"
+  },
+  {
+    "slug": "rv-wendy",
+    "name": "Wendy",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "Red Velvet Wendy Wish You Hell vocal powerhouse letter"
+  },
+  {
+    "slug": "exo",
+    "name": "EXO",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "EXO EXO-L Cream Soda vocal harmony stadium letter"
+  },
+  {
+    "slug": "exo-baekhyun",
+    "name": "Baekhyun",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "Baekhyun Lonsdaleite solo tour genius idol letter"
+  },
+  {
+    "slug": "exo-kai",
+    "name": "Kai",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "Kai Rover Peaches dance king waiting letter"
+  },
+  {
+    "slug": "exo-do",
+    "name": "D.O. (Doh Kyungsoo)",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "Doh Kyungsoo Blossom acoustic vocal actor letter"
+  },
+  {
+    "slug": "exo-chanyeol",
+    "name": "Chanyeol",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "Chanyeol Black Out solo album guitar letter"
+  },
+  {
+    "slug": "shinee",
+    "name": "SHINee",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "SHINee SHINee WORLD Hard 15th anniversary letter"
+  },
+  {
+    "slug": "shinee-taemin",
+    "name": "Taemin",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "Taemin Guilty Move king of K-pop solo letter"
+  },
+  {
+    "slug": "shinee-key",
+    "name": "Key",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "Key Pleasure Shop retro futuristic variety king letter"
+  },
+  {
+    "slug": "shinee-minho",
+    "name": "Minho",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "Minho fiery charisma drama actor running letter"
+  },
+  {
+    "slug": "iu",
+    "name": "IU (Lee Jieun)",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "IU UAENA The Winning HEREH stadium tour letter"
+  },
+  {
+    "slug": "taeyeon",
+    "name": "Taeyeon",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "Taeyeon To. X INVU vocal queen OST legend letter"
+  },
+  {
+    "slug": "g-dragon",
+    "name": "G-Dragon",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "G-Dragon Power comeback fashion icon letter"
+  },
+  {
+    "slug": "taeyang",
+    "name": "Taeyang",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "Taeyang VIBE Down to Earth soulful R&B letter"
+  },
+  {
+    "slug": "sunmi",
+    "name": "Sunmi",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "Sunmi Gashina Heroine retro queen solo letter"
+  },
+  {
+    "slug": "chungha",
+    "name": "Chungha",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "Chungha EENIE MEENIE queen of solo dance letter"
+  },
+  {
+    "slug": "itzy",
+    "name": "ITZY",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "ITZY MIDZY Born to Be Untouchable stage dance letter"
+  },
+  {
+    "slug": "itzy-yeji",
+    "name": "Yeji",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "ITZY Yeji light fury cat leader solo dance letter"
+  },
+  {
+    "slug": "itzy-ryujin",
+    "name": "Ryujin",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "ITZY Ryujin shoulder dance girl crush letter"
+  },
+  {
+    "slug": "stayc",
+    "name": "STAYC",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "STAYC SWITH Cheeky Icy Thang ASAP live vocal letter"
+  },
+  {
+    "slug": "nmixx",
+    "name": "NMIXX",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "NMIXX NSWER Dash Fe3O4 mixx pop live stage letter"
+  },
+  {
+    "slug": "nmixx-haewon",
+    "name": "Haewon",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "NMIXX Haewon Workdol variety leader vocal letter"
+  },
+  {
+    "slug": "nmixx-sullyoon",
+    "name": "Sullyoon",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "NMIXX Sullyoon fairy visual live vocal letter"
+  },
+  {
+    "slug": "kep1er",
+    "name": "Kep1er",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "Kep1er Kep1ian Shooting Star WA DA DA letter"
+  },
+  {
+    "slug": "the-boyz",
+    "name": "THE BOYZ",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "THE BOYZ THE B Nectar world tour visual letter"
+  },
+  {
+    "slug": "the-boyz-juyeon",
+    "name": "Juyeon",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "THE BOYZ Juyeon main dancer fashion visual letter"
+  },
+  {
+    "slug": "treasure",
+    "name": "TREASURE",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "TREASURE TEUME King Kong Reboot tour letter"
+  },
+  {
+    "slug": "monsta-x",
+    "name": "MONSTA X",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "MONSTA X MONBEBE powerhouse beast idol letter"
+  },
+  {
+    "slug": "monsta-x-shownu",
+    "name": "Shownu",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "Shownu leader dance bear military return letter"
+  },
+  {
+    "slug": "monsta-x-changkyun",
+    "name": "I.M",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "I.M Off The Beat deep voice solo rap letter"
+  },
+  {
+    "slug": "p1harmony",
+    "name": "P1Harmony",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "P1Harmony P1ece Killin' It arena tour letter"
+  },
+  {
+    "slug": "p1h-keeho",
+    "name": "Keeho",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "P1Harmony Keeho hilarious live vocal leader letter"
+  },
+  {
+    "slug": "xikers",
+    "name": "xikers",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "xikers roady energetic performance rookie letter"
+  },
+  {
+    "slug": "cravity",
+    "name": "CRAVITY",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "CRAVITY LUVITY Road to Kingdom Love or Die letter"
+  },
+  {
+    "slug": "day6",
+    "name": "DAY6",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "DAY6 My Day Welcome to the Show chart reversal letter"
+  },
+  {
+    "slug": "day6-young-k",
+    "name": "Young K",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "Young K genius bassist lyricist Kiss the Radio letter"
+  },
+  {
+    "slug": "day6-wonpil",
+    "name": "Wonpil",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "Wonpil synthesizer smile healing melody letter"
+  },
+  {
+    "slug": "lucy",
+    "name": "LUCY",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "LUCY WalWal violin band refreshing summer letter"
+  },
+  {
+    "slug": "the-rose",
+    "name": "The Rose",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "The Rose Black Rose Dual world tour indie band letter"
+  },
+  {
+    "slug": "woosung",
+    "name": "Woosung (Sam Kim)",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "Woosung 4444 unique rasp vocal solo letter"
+  },
+  {
+    "slug": "wave-to-earth",
+    "name": "wave to earth",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "wave to earth seasons indie bedroom pop letter"
+  },
+  {
+    "slug": "xdinary-heroes",
+    "name": "Xdinary Heroes",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "Xdinary Heroes Villains rock band Overload letter"
+  },
+  {
+    "slug": "plave",
+    "name": "PLAVE",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "PLAVE PLLI Way 4 Luv virtual idol #1 letter"
+  },
+  {
+    "slug": "kang-daniel",
+    "name": "Kang Daniel",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "Kang Daniel FLOW national center solo letter"
+  },
+  {
+    "slug": "woodz",
+    "name": "WOODZ (Cho Seungyoun)",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "WOODZ Drowning rock vocal military waiting letter"
+  },
+  {
+    "slug": "bibi",
+    "name": "BIBI",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "BIBI Bam Yang Gang chart topper queen letter"
+  },
+  {
+    "slug": "super-junior",
+    "name": "Super Junior",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "Super Junior E.L.F. Super Show anniversary letter"
+  },
+  {
+    "slug": "suju-kyuhyun",
+    "name": "Kyuhyun",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "Kyuhyun Restart ballad vocal musical letter"
+  },
+  {
+    "slug": "suju-heechul",
+    "name": "Kim Heechul",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "Kim Heechul universe star variety healing letter"
+  },
+  {
+    "slug": "girls-generation",
+    "name": "Girls' Generation (SNSD)",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "Girls' Generation SONE Forever 1 legend letter"
+  },
+  {
+    "slug": "snsd-yoona",
+    "name": "Yoona (Lim Yoona)",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "Lim Yoona nation's center actress visual letter"
+  },
+  {
+    "slug": "snsd-seohyun",
+    "name": "Seohyun",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "Seohyun upright maknae musical actress letter"
+  },
+  {
+    "slug": "2ne1",
+    "name": "2NE1",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "2NE1 Blackjacks Welcome Back reunion tour letter"
+  },
+  {
+    "slug": "2ne1-cl",
+    "name": "CL (Lee Chaerin)",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "CL the baddest female GZBs leader letter"
+  },
+  {
+    "slug": "2ne1-dara",
+    "name": "Sandara Park",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "Sandara Park Dara Krung-Krung evergreen visual letter"
+  },
+  {
+    "slug": "mamamoo",
+    "name": "MAMAMOO",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "MAMAMOO MOOMOO vocal powerhouse concert letter"
+  },
+  {
+    "slug": "mamamoo-hwasa",
+    "name": "Hwasa",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "Hwasa NA Maria queen of confidence solo letter"
+  },
+  {
+    "slug": "mamamoo-solar",
+    "name": "Solar",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "Solar Colours high note belting musical letter"
+  },
+  {
+    "slug": "somi",
+    "name": "JEON SOMI",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "Jeon Somi Fast Forward Ice Cream dance queen letter"
+  },
+  {
+    "slug": "jessi",
+    "name": "Jessi",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "Jessi NUNU NANA Gum Jebbies confidence letter"
+  },
+  {
+    "slug": "hyuna",
+    "name": "HyunA",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "HyunA Attitude Bubble Pop queen of sexy letter"
+  },
+  {
+    "slug": "zico",
+    "name": "ZICO",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "ZICO SPOT Any Song KOZ producer rapper letter"
+  },
+  {
+    "slug": "jay-park",
+    "name": "Jay Park",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "Jay Park Jay Effect Ganadara MORE R&B king letter"
+  },
+  {
+    "slug": "epik-high",
+    "name": "Epik High",
+    "category": "K-Pop",
+    "defaultPromptKeyword": "Epik High Tablo Sleepless in High Skool poetic hip-hop letter"
+  },
+  {
+    "slug": "taylor-swift",
+    "name": "Taylor Swift",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Taylor Swift Eras Tour Cruel Summer Swifties letter"
+  },
+  {
+    "slug": "billie-eilish",
+    "name": "Billie Eilish",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Billie Eilish Hit Me Hard and Soft Birds of a Feather letter"
+  },
+  {
+    "slug": "ariana-grande",
+    "name": "Ariana Grande",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Ariana Grande Eternal Sunshine We Can't Be Friends letter"
+  },
+  {
+    "slug": "justin-bieber",
+    "name": "Justin Bieber",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Justin Bieber Beliebers Peaches Purpose healing letter"
+  },
+  {
+    "slug": "harry-styles",
+    "name": "Harry Styles",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Harry Styles Love on Tour As It Was Harries letter"
+  },
+  {
+    "slug": "olivia-rodrigo",
+    "name": "Olivia Rodrigo",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Olivia Rodrigo GUTS tour vampire Livies letter"
+  },
+  {
+    "slug": "sabrina-carpenter",
+    "name": "Sabrina Carpenter",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Sabrina Carpenter Short n' Sweet Espresso Please Please Please letter"
+  },
+  {
+    "slug": "chappell-roan",
+    "name": "Chappell Roan",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Chappell Roan Good Luck Babe Midwest Princess letter"
+  },
+  {
+    "slug": "charli-xcx",
+    "name": "Charli XCX",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Charli XCX Brat summer club classics 365 letter"
+  },
+  {
+    "slug": "dua-lipa",
+    "name": "Dua Lipa",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Dua Lipa Radical Optimism Houdini Dance the Night letter"
+  },
+  {
+    "slug": "beyonce",
+    "name": "Beyoncé",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Beyoncé Cowboy Carter Renaissance Beyhive tribute letter"
+  },
+  {
+    "slug": "rihanna",
+    "name": "Rihanna",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Rihanna Fenty Navy Diamonds Super Bowl tribute letter"
+  },
+  {
+    "slug": "lady-gaga",
+    "name": "Lady Gaga",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Lady Gaga Little Monsters Die With a Smile Joker letter"
+  },
+  {
+    "slug": "selena-gomez",
+    "name": "Selena Gomez",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Selena Gomez Rare Beauty Only Murders Selenators letter"
+  },
+  {
+    "slug": "bruno-mars",
+    "name": "Bruno Mars",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Bruno Mars Die With a Smile Silk Sonic 24K Magic letter"
+  },
+  {
+    "slug": "the-weeknd",
+    "name": "The Weeknd",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "The Weeknd After Hours Blinding Lights XO letter"
+  },
+  {
+    "slug": "drake",
+    "name": "Drake",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Drake OVO Sound Hotline Bling God's Plan letter"
+  },
+  {
+    "slug": "ed-sheeran",
+    "name": "Ed Sheeran",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Ed Sheeran Mathematics Tour Shape of You Sheerios letter"
+  },
+  {
+    "slug": "lana-del-rey",
+    "name": "Lana Del Rey",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Lana Del Rey Did you know that there's a tunnel Summertime Sadness letter"
+  },
+  {
+    "slug": "katy-perry",
+    "name": "Katy Perry",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Katy Perry 143 Lifetimes KatyCats pop queen letter"
+  },
+  {
+    "slug": "miley-cyrus",
+    "name": "Miley Cyrus",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Miley Cyrus Endless Summer Vacation Flowers Grammy letter"
+  },
+  {
+    "slug": "shawn-mendes",
+    "name": "Shawn Mendes",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Shawn Mendes Shawn self-titled acoustic comeback letter"
+  },
+  {
+    "slug": "camila-cabello",
+    "name": "Camila Cabello",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Camila Cabello C,XOXO I LUV IT Havana Camilizers letter"
+  },
+  {
+    "slug": "post-malone",
+    "name": "Post Malone",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Post Malone F-1 Trillion Sunflower rock country letter"
+  },
+  {
+    "slug": "sza",
+    "name": "SZA",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "SZA SOS Kill Bill Snooze R&B queen letter"
+  },
+  {
+    "slug": "doja-cat",
+    "name": "Doja Cat",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Doja Cat Scarlet Paint the Town Red Agora Hills letter"
+  },
+  {
+    "slug": "cardi-b",
+    "name": "Cardi B",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Cardi B Bardi Gang Bodak Yellow WAP rap letter"
+  },
+  {
+    "slug": "nicki-minaj",
+    "name": "Nicki Minaj",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Nicki Minaj Pink Friday 2 Barbz queen of rap letter"
+  },
+  {
+    "slug": "megan-thee-stallion",
+    "name": "Megan Thee Stallion",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Megan Thee Stallion MEGAN Hiss Hotties letter"
+  },
+  {
+    "slug": "travis-scott",
+    "name": "Travis Scott",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Travis Scott UTOPIA Circus Maximus ragers letter"
+  },
+  {
+    "slug": "kendrick-lamar",
+    "name": "Kendrick Lamar",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Kendrick Lamar Not Like Us Super Bowl LIX Pulitzer letter"
+  },
+  {
+    "slug": "eminem",
+    "name": "Eminem",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Eminem The Death of Slim Shady Houdini Stans letter"
+  },
+  {
+    "slug": "kanye-west",
+    "name": "Ye (Kanye West)",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Ye Vultures Carnival rap pioneer letter"
+  },
+  {
+    "slug": "frank-ocean",
+    "name": "Frank Ocean",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Frank Ocean Blonde Channel Orange poetic letter"
+  },
+  {
+    "slug": "tyler-the-creator",
+    "name": "Tyler, The Creator",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Tyler The Creator CHROMAKOPIA Igor Camp Flog Gnaw letter"
+  },
+  {
+    "slug": "j-cole",
+    "name": "J. Cole",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "J. Cole 2014 Forest Hills Drive Dreamville letter"
+  },
+  {
+    "slug": "asap-rocky",
+    "name": "A$AP Rocky",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "A$AP Rocky Don't Be Dumb fashion rap letter"
+  },
+  {
+    "slug": "lil-nas-x",
+    "name": "Lil Nas X",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Lil Nas X Montero Old Town Road visual king letter"
+  },
+  {
+    "slug": "jack-harlow",
+    "name": "Jack Harlow",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Jack Harlow Lovin On Me First Class Louisville letter"
+  },
+  {
+    "slug": "bad-bunny",
+    "name": "Bad Bunny",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Bad Bunny Un Verano Sin Ti Nadie Sabe Benito letter"
+  },
+  {
+    "slug": "rosalia",
+    "name": "Rosalía",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Rosalía MOTOMAMI Despechá flamenco avant-pop letter"
+  },
+  {
+    "slug": "shakira",
+    "name": "Shakira",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Shakira Las Mujeres Ya No Lloran Hips Don't Lie letter"
+  },
+  {
+    "slug": "j-balvin",
+    "name": "J Balvin",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "J Balvin Mi Gente Colores reggaeton prince letter"
+  },
+  {
+    "slug": "karol-g",
+    "name": "Karol G",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Karol G Mañana Será Bonito Bichota stadium letter"
+  },
+  {
+    "slug": "rauw-alejandro",
+    "name": "Rauw Alejandro",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Rauw Alejandro Saturno Cosa Nuestra dance letter"
+  },
+  {
+    "slug": "anitta",
+    "name": "Anitta",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Anitta Funk Generation Envolver Brazilian queen letter"
+  },
+  {
+    "slug": "sam-smith",
+    "name": "Sam Smith",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Sam Smith Gloria Unholy Stay With Me Sailors letter"
+  },
+  {
+    "slug": "adele",
+    "name": "Adele",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Adele Weekends with Adele 30 Rolling in the Deep letter"
+  },
+  {
+    "slug": "lorde",
+    "name": "Lorde",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Lorde Melodrama Solar Power Pure Heroine letter"
+  },
+  {
+    "slug": "troye-sivan",
+    "name": "Troye Sivan",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Troye Sivan Something to Give Each Other Rush letter"
+  },
+  {
+    "slug": "conan-gray",
+    "name": "Conan Gray",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Conan Gray Found Heaven Heather Memories letter"
+  },
+  {
+    "slug": "gracie-abrams",
+    "name": "Gracie Abrams",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Gracie Abrams The Secret of Us Close To You letter"
+  },
+  {
+    "slug": "madison-beer",
+    "name": "Madison Beer",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Madison Beer Silence Between Songs Spinnin letter"
+  },
+  {
+    "slug": "tate-mcrae",
+    "name": "Tate McRae",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Tate McRae Think Later greedy exes dance letter"
+  },
+  {
+    "slug": "bebe-rexha",
+    "name": "Bebe Rexha",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Bebe Rexha I'm Good Blue Rexhars powerhouse letter"
+  },
+  {
+    "slug": "rita-ora",
+    "name": "Rita Ora",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Rita Ora You & I Anywhere pop dance letter"
+  },
+  {
+    "slug": "ava-max",
+    "name": "Ava Max",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Ava Max Diamonds & Dancefloors Sweet but Psycho letter"
+  },
+  {
+    "slug": "zara-larsson",
+    "name": "Zara Larsson",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Zara Larsson Venus Symphony Lush Life letter"
+  },
+  {
+    "slug": "ellie-goulding",
+    "name": "Ellie Goulding",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Ellie Goulding Higher Than Heaven Lights letter"
+  },
+  {
+    "slug": "halsey",
+    "name": "Halsey",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Halsey The Great Impersonator Without Me letter"
+  },
+  {
+    "slug": "melanie-martinez",
+    "name": "Melanie Martinez",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Melanie Martinez Portals Cry Baby aesthetic letter"
+  },
+  {
+    "slug": "marina",
+    "name": "MARINA",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "MARINA Electra Heart Ancient Dreams in a Modern Land letter"
+  },
+  {
+    "slug": "carly-rae-jepsen",
+    "name": "Carly Rae Jepsen",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Carly Rae Jepsen The Loveliest Time Emotion letter"
+  },
+  {
+    "slug": "kesha",
+    "name": "Kesha",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Kesha Joyride Gag Order freedom pop letter"
+  },
+  {
+    "slug": "kelly-clarkson",
+    "name": "Kelly Clarkson",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Kelly Clarkson Chemistry Since U Been Gone letter"
+  },
+  {
+    "slug": "pink",
+    "name": "P!NK",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "P!NK Trustfall Summer Carnival aerial acrobatics letter"
+  },
+  {
+    "slug": "christina-aguilera",
+    "name": "Christina Aguilera",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Christina Aguilera Genie in a Bottle vocal powerhouse letter"
+  },
+  {
+    "slug": "britney-spears",
+    "name": "Britney Spears",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Britney Spears Princess of Pop Toxic Stronger letter"
+  },
+  {
+    "slug": "madonna",
+    "name": "Madonna",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Madonna Celebration Tour Queen of Pop Like a Prayer letter"
+  },
+  {
+    "slug": "mariah-carey",
+    "name": "Mariah Carey",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Mariah Carey Songbird Supreme Lambily All I Want for Christmas letter"
+  },
+  {
+    "slug": "celine-dion",
+    "name": "Celine Dion",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Celine Dion Paris Olympics My Heart Will Go On letter"
+  },
+  {
+    "slug": "elton-john",
+    "name": "Elton John",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Elton John Farewell Yellow Brick Road Rocket Man letter"
+  },
+  {
+    "slug": "coldplay",
+    "name": "Coldplay",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Coldplay Music of the Spheres Yellow Viva La Vida letter"
+  },
+  {
+    "slug": "maroon-5",
+    "name": "Maroon 5",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Maroon 5 Adam Levine Sugar Memories letter"
+  },
+  {
+    "slug": "imagine-dragons",
+    "name": "Imagine Dragons",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Imagine Dragons LOOM Radioactive Believer letter"
+  },
+  {
+    "slug": "onerepublic",
+    "name": "OneRepublic",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "OneRepublic Ryan Tedder Counting Stars Artificial Paradise letter"
+  },
+  {
+    "slug": "the-1975",
+    "name": "The 1975",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "The 1975 Matty Healy Still... At Their Very Best letter"
+  },
+  {
+    "slug": "arctic-monkeys",
+    "name": "Arctic Monkeys",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Arctic Monkeys Alex Turner Do I Wanna Know 505 letter"
+  },
+  {
+    "slug": "5-seconds-of-summer",
+    "name": "5 Seconds of Summer",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "5 Seconds of Summer 5SOS Youngblood 5SOSFam letter"
+  },
+  {
+    "slug": "one-direction",
+    "name": "One Direction",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "One Direction Directioners 10th anniversary What Makes You Beautiful letter"
+  },
+  {
+    "slug": "jonas-brothers",
+    "name": "Jonas Brothers",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Jonas Brothers The Album Sucker Jonatics letter"
+  },
+  {
+    "slug": "backstreet-boys",
+    "name": "Backstreet Boys",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Backstreet Boys DNA World Tour I Want It That Way letter"
+  },
+  {
+    "slug": "westlife",
+    "name": "Westlife",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Westlife The Wild Dreams Tour You Raise Me Up letter"
+  },
+  {
+    "slug": "little-mix",
+    "name": "Little Mix",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Little Mix Mixers Shout Out to My Ex Wings letter"
+  },
+  {
+    "slug": "fifth-harmony",
+    "name": "Fifth Harmony",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Fifth Harmony Harmonizers Work from Home letter"
+  },
+  {
+    "slug": "spice-girls",
+    "name": "Spice Girls",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Spice Girls Girl Power Wannabe Spice Up Your Life letter"
+  },
+  {
+    "slug": "linkin-park",
+    "name": "Linkin Park",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Linkin Park From Zero In the End Chester tribute letter"
+  },
+  {
+    "slug": "green-day",
+    "name": "Green Day",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Green Day Saviors American Idiot Boulevard of Broken Dreams letter"
+  },
+  {
+    "slug": "blink-182",
+    "name": "Blink-182",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Blink-182 One More Time All the Small Things letter"
+  },
+  {
+    "slug": "fall-out-boy",
+    "name": "Fall Out Boy",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Fall Out Boy So Much (for) Stardust Sugar We're Goin Down letter"
+  },
+  {
+    "slug": "panic-at-the-disco",
+    "name": "Panic! At The Disco",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Panic At The Disco Brendon Urie High Hopes letter"
+  },
+  {
+    "slug": "my-chemical-romance",
+    "name": "My Chemical Romance",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "My Chemical Romance Black Parade Welcome to the Black Parade letter"
+  },
+  {
+    "slug": "paramore",
+    "name": "Paramore",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Paramore Hayley Williams This Is Why Misery Business letter"
+  },
+  {
+    "slug": "twenty-one-pilots",
+    "name": "Twenty One Pilots",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Twenty One Pilots Clancy Stressed Out Skeleton Clique letter"
+  },
+  {
+    "slug": "gorillaz",
+    "name": "Gorillaz",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Gorillaz Damon Albarn Cracker Island Feel Good Inc letter"
+  },
+  {
+    "slug": "daft-punk",
+    "name": "Daft Punk",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Daft Punk Random Access Memories Get Lucky robot letter"
+  },
+  {
+    "slug": "calvin-harris",
+    "name": "Calvin Harris",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Calvin Harris 96 Months Summer Feel So Close letter"
+  },
+  {
+    "slug": "david-guetta",
+    "name": "David Guetta",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "David Guetta Titanium I'm Good DJ legend letter"
+  },
+  {
+    "slug": "avicii",
+    "name": "Avicii (Tim Bergling)",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Avicii Tim Wake Me Up Levels eternal tribute letter"
+  },
+  {
+    "slug": "marshmello",
+    "name": "Marshmello",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Marshmello Happier Alone mellogang EDM letter"
+  },
+  {
+    "slug": "the-chainsmokers",
+    "name": "The Chainsmokers",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "The Chainsmokers Closer Don't Let Me Down letter"
+  },
+  {
+    "slug": "kygo",
+    "name": "Kygo",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Kygo Tropical House It Ain't Me Stargazing letter"
+  },
+  {
+    "slug": "zedd",
+    "name": "Zedd",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Zedd Telos Clarity The Middle electro pop letter"
+  },
+  {
+    "slug": "martin-garrix",
+    "name": "Martin Garrix",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Martin Garrix Animals In the Name of Love letter"
+  },
+  {
+    "slug": "alan-walker",
+    "name": "Alan Walker",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Alan Walker Faded Walker #1814 EDM letter"
+  },
+  {
+    "slug": "dj-snake",
+    "name": "DJ Snake",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "DJ Snake Let Me Love You Turn Down for What letter"
+  },
+  {
+    "slug": "skrillex",
+    "name": "Skrillex",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Skrillex Quest for Fire Rumble dubstep pioneer letter"
+  },
+  {
+    "slug": "fred-again",
+    "name": "Fred again..",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Fred again Actual Life adore u electronic ambient letter"
+  },
+  {
+    "slug": "steve-aoki",
+    "name": "Steve Aoki",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Steve Aoki Cake Me BTS Waste It On Me letter"
+  },
+  {
+    "slug": "sia",
+    "name": "Sia",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Sia Reasonable Woman Chandelier Unstoppable letter"
+  },
+  {
+    "slug": "alicia-keys",
+    "name": "Alicia Keys",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Alicia Keys Hell's Kitchen Fallin' If I Ain't Got You letter"
+  },
+  {
+    "slug": "john-legend",
+    "name": "John Legend",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "John Legend All of Me Ordinary People soul letter"
+  },
+  {
+    "slug": "norah-jones",
+    "name": "Norah Jones",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Norah Jones Visions Don't Know Why jazz comfort letter"
+  },
+  {
+    "slug": "sam-fender",
+    "name": "Sam Fender",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Sam Fender Seventeen Going Under British indie rock letter"
+  },
+  {
+    "slug": "lewis-capaldi",
+    "name": "Lewis Capaldi",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Lewis Capaldi Someone You Loved Pointless humor letter"
+  },
+  {
+    "slug": "james-arthur",
+    "name": "James Arthur",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "James Arthur Say You Won't Let Go Bitter Sweet Love letter"
+  },
+  {
+    "slug": "calum-scott",
+    "name": "Calum Scott",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Calum Scott You Are The Reason Dancing On My Own letter"
+  },
+  {
+    "slug": "dean-lewis",
+    "name": "Dean Lewis",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Dean Lewis Be Alright How Do I Say Goodbye letter"
+  },
+  {
+    "slug": "vance-joy",
+    "name": "Vance Joy",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Vance Joy Riptide Clarity ukulele folk letter"
+  },
+  {
+    "slug": "hozier",
+    "name": "Hozier",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Hozier Too Sweet Take Me to Church Unreal Unearth letter"
+  },
+  {
+    "slug": "george-ezra",
+    "name": "George Ezra",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "George Ezra Shotgun Budapest warm baritone letter"
+  },
+  {
+    "slug": "benson-boone",
+    "name": "Benson Boone",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Benson Boone Beautiful Things Fireworks and Rollerblades letter"
+  },
+  {
+    "slug": "teddy-swims",
+    "name": "Teddy Swims",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Teddy Swims Lose Control I've Tried Everything But Therapy letter"
+  },
+  {
+    "slug": "stephen-sanchez",
+    "name": "Stephen Sanchez",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Stephen Sanchez Until I Found You retro 50s romance letter"
+  },
+  {
+    "slug": "noah-kahan",
+    "name": "Noah Kahan",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Noah Kahan Stick Season Dial Drunk folk pop letter"
+  },
+  {
+    "slug": "laufey",
+    "name": "Laufey",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Laufey Bewitched From The Start modern jazz cello letter"
+  },
+  {
+    "slug": "mitski",
+    "name": "Mitski",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Mitski My Love Mine All Mine indie poet letter"
+  },
+  {
+    "slug": "clairo",
+    "name": "Clairo",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Clairo Charm Sofia Bags bedroom pop letter"
+  },
+  {
+    "slug": "phoebe-bridgers",
+    "name": "Phoebe Bridgers",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Phoebe Bridgers Punisher Motion Sickness boygenius letter"
+  },
+  {
+    "slug": "faye-webster",
+    "name": "Faye Webster",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Faye Webster Underdressed at the Symphony pedal steel indie letter"
+  },
+  {
+    "slug": "beabadoobee",
+    "name": "beabadoobee",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "beabadoobee This Is How Tomorrow Moves indie rock letter"
+  },
+  {
+    "slug": "remi-wolf",
+    "name": "Remi Wolf",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Remi Wolf Big Ideas Disco Man funky pop letter"
+  },
+  {
+    "slug": "rene-rapp",
+    "name": "Reneé Rapp",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Reneé Rapp Snow Angel Mean Girls broadway vocal letter"
+  },
+  {
+    "slug": "katseye",
+    "name": "KATSEYE",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "KATSEYE Touch Debut global girl group EYEKONS letter"
+  },
+  {
+    "slug": "vcha",
+    "name": "VCHA",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "VCHA Only One Girls of the Year JYP Republic letter"
+  },
+  {
+    "slug": "lany",
+    "name": "LANY",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "LANY a beautiful blur ILYSB synth-pop letter"
+  },
+  {
+    "slug": "the-neighbourhood",
+    "name": "The Neighbourhood",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "The Neighbourhood Sweater Weather wiped out letter"
+  },
+  {
+    "slug": "chase-atlantic",
+    "name": "Chase Atlantic",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Chase Atlantic Swim Friends alternative R&B letter"
+  },
+  {
+    "slug": "cigarettes-after-sex",
+    "name": "Cigarettes After Sex",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Cigarettes After Sex Apocalypse X's dream pop letter"
+  },
+  {
+    "slug": "men-i-trust",
+    "name": "Men I Trust",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Men I Trust Show Me How indie dreampop chill letter"
+  },
+  {
+    "slug": "khruangbin",
+    "name": "Khruangbin",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Khruangbin A LA SALA Texas psychedelic soul letter"
+  },
+  {
+    "slug": "leon-bridges",
+    "name": "Leon Bridges",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Leon Bridges Texas Sun Coming Home soulful letter"
+  },
+  {
+    "slug": "major-lazer",
+    "name": "Major Lazer",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Major Lazer Lean On dancehall EDM letter"
+  },
+  {
+    "slug": "diplo",
+    "name": "Diplo",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Diplo Mad Decent country dance electronic letter"
+  },
+  {
+    "slug": "pitbull",
+    "name": "Pitbull (Mr. Worldwide)",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Pitbull Mr 305 Give Me Everything party anthem letter"
+  },
+  {
+    "slug": "daddy-yankee",
+    "name": "Daddy Yankee",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Daddy Yankee King of Reggaeton Gasolina legend letter"
+  },
+  {
+    "slug": "ricky-martin",
+    "name": "Ricky Martin",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Ricky Martin Livin' La Vida Loca Latin pop king letter"
+  },
+  {
+    "slug": "enrique-iglesias",
+    "name": "Enrique Iglesias",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Enrique Iglesias King of Latin Pop Hero Bailando letter"
+  },
+  {
+    "slug": "cher",
+    "name": "Cher",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Cher Goddess of Pop Believe Farewell Tour letter"
+  },
+  {
+    "slug": "janet-jackson",
+    "name": "Janet Jackson",
+    "category": "Pop Star",
+    "defaultPromptKeyword": "Janet Jackson Together Again Rhythm Nation icon letter"
+  },
+  {
+    "slug": "timothee-chalamet",
+    "name": "Timothée Chalamet",
+    "category": "Actor",
+    "defaultPromptKeyword": "Timothée Chalamet Dune Wonka fan letter and support"
+  },
+  {
+    "slug": "zendaya",
+    "name": "Zendaya",
+    "category": "Actor",
+    "defaultPromptKeyword": "Zendaya Euphoria Challengers Spider-Man fashion icon letter"
+  },
+  {
+    "slug": "tom-holland",
+    "name": "Tom Holland",
+    "category": "Actor",
+    "defaultPromptKeyword": "Tom Holland Spider-Man Romeo and Juliet West End letter"
+  },
+  {
+    "slug": "jenna-ortega",
+    "name": "Jenna Ortega",
+    "category": "Actor",
+    "defaultPromptKeyword": "Jenna Ortega Wednesday Beetlejuice gothic queen letter"
+  },
+  {
+    "slug": "pedro-pascal",
+    "name": "Pedro Pascal",
+    "category": "Actor",
+    "defaultPromptKeyword": "Pedro Pascal The Last of Us Mandalorian fan letter"
+  },
+  {
+    "slug": "florence-pugh",
+    "name": "Florence Pugh",
+    "category": "Actor",
+    "defaultPromptKeyword": "Florence Pugh Oppenheimer Midsommar Thunderbolts letter"
+  },
+  {
+    "slug": "austin-butler",
+    "name": "Austin Butler",
+    "category": "Actor",
+    "defaultPromptKeyword": "Austin Butler Dune 2 Elvis Bikeriders fan letter"
+  },
+  {
+    "slug": "sydney-sweeney",
+    "name": "Sydney Sweeney",
+    "category": "Actor",
+    "defaultPromptKeyword": "Sydney Sweeney Anyone But You Euphoria Immaculate letter"
+  },
+  {
+    "slug": "jacob-elordi",
+    "name": "Jacob Elordi",
+    "category": "Actor",
+    "defaultPromptKeyword": "Jacob Elordi Saltburn Euphoria Priscilla letter"
+  },
+  {
+    "slug": "anya-taylor-joy",
+    "name": "Anya Taylor-Joy",
+    "category": "Actor",
+    "defaultPromptKeyword": "Anya Taylor-Joy Furiosa Queen's Gambit Dune letter"
+  },
+  {
+    "slug": "margot-robbie",
+    "name": "Margot Robbie",
+    "category": "Actor",
+    "defaultPromptKeyword": "Margot Robbie Barbie Harley Quinn producer letter"
+  },
+  {
+    "slug": "ryan-gosling",
+    "name": "Ryan Gosling",
+    "category": "Actor",
+    "defaultPromptKeyword": "Ryan Gosling I'm Just Ken Barbie La La Land letter"
+  },
+  {
+    "slug": "cillian-murphy",
+    "name": "Cillian Murphy",
+    "category": "Actor",
+    "defaultPromptKeyword": "Cillian Murphy Oppenheimer Peaky Blinders Oscar winner letter"
+  },
+  {
+    "slug": "emma-stone",
+    "name": "Emma Stone",
+    "category": "Actor",
+    "defaultPromptKeyword": "Emma Stone Poor Things La La Land Oscar best actress letter"
+  },
+  {
+    "slug": "robert-pattinson",
+    "name": "Robert Pattinson",
+    "category": "Actor",
+    "defaultPromptKeyword": "Robert Pattinson The Batman Mickey 17 Twilight letter"
+  },
+  {
+    "slug": "kristen-stewart",
+    "name": "Kristen Stewart",
+    "category": "Actor",
+    "defaultPromptKeyword": "Kristen Stewart Spencer Twilight Love Lies Bleeding letter"
+  },
+  {
+    "slug": "henry-cavill",
+    "name": "Henry Cavill",
+    "category": "Actor",
+    "defaultPromptKeyword": "Henry Cavill Superman Witcher Warhammer 40k letter"
+  },
+  {
+    "slug": "chris-evans",
+    "name": "Chris Evans",
+    "category": "Actor",
+    "defaultPromptKeyword": "Chris Evans Captain America Avengers Knives Out letter"
+  },
+  {
+    "slug": "chris-hemsworth",
+    "name": "Chris Hemsworth",
+    "category": "Actor",
+    "defaultPromptKeyword": "Chris Hemsworth Thor Furiosa Extraction letter"
+  },
+  {
+    "slug": "scarlett-johansson",
+    "name": "Scarlett Johansson",
+    "category": "Actor",
+    "defaultPromptKeyword": "Scarlett Johansson Black Widow Lost in Translation letter"
+  },
+  {
+    "slug": "elizabeth-olsen",
+    "name": "Elizabeth Olsen",
+    "category": "Actor",
+    "defaultPromptKeyword": "Elizabeth Olsen Scarlet Witch WandaVision His Three Daughters letter"
+  },
+  {
+    "slug": "sebastian-stan",
+    "name": "Sebastian Stan",
+    "category": "Actor",
+    "defaultPromptKeyword": "Sebastian Stan Winter Soldier The Apprentice Bucky letter"
+  },
+  {
+    "slug": "tom-hiddleston",
+    "name": "Tom Hiddleston",
+    "category": "Actor",
+    "defaultPromptKeyword": "Tom Hiddleston Loki Thor glorious purpose letter"
+  },
+  {
+    "slug": "benedict-cumberbatch",
+    "name": "Benedict Cumberbatch",
+    "category": "Actor",
+    "defaultPromptKeyword": "Benedict Cumberbatch Doctor Strange Sherlock Eric letter"
+  },
+  {
+    "slug": "keanu-reeves",
+    "name": "Keanu Reeves",
+    "category": "Actor",
+    "defaultPromptKeyword": "Keanu Reeves John Wick Matrix wholesome legend letter"
+  },
+  {
+    "slug": "anne-hathaway",
+    "name": "Anne Hathaway",
+    "category": "Actor",
+    "defaultPromptKeyword": "Anne Hathaway The Idea of You Devil Wears Prada letter"
+  },
+  {
+    "slug": "andrew-garfield",
+    "name": "Andrew Garfield",
+    "category": "Actor",
+    "defaultPromptKeyword": "Andrew Garfield Spider-Man Tick Tick Boom We Live in Time letter"
+  },
+  {
+    "slug": "song-kang",
+    "name": "Song Kang",
+    "category": "Actor",
+    "defaultPromptKeyword": "Song Kang My Demon Sweet Home military service waiting letter"
+  },
+  {
+    "slug": "cha-eun-woo",
+    "name": "Cha Eun-woo",
+    "category": "Actor",
+    "defaultPromptKeyword": "Cha Eun-woo True Beauty Wonderful World ASTRO visual letter"
+  },
+  {
+    "slug": "park-seo-joon",
+    "name": "Park Seo-joon",
+    "category": "Actor",
+    "defaultPromptKeyword": "Park Seo-joon Itaewon Class Gyeongseong Creature Marvels letter"
+  },
+  {
+    "slug": "lee-min-ho",
+    "name": "Lee Min-ho",
+    "category": "Actor",
+    "defaultPromptKeyword": "Lee Min-ho Pachinko Boys Over Flowers Hallyu legend letter"
+  },
+  {
+    "slug": "hyun-bin",
+    "name": "Hyun Bin",
+    "category": "Actor",
+    "defaultPromptKeyword": "Hyun Bin Crash Landing on You Secret Garden Harbin letter"
+  },
+  {
+    "slug": "son-ye-jin",
+    "name": "Son Ye-jin",
+    "category": "Actor",
+    "defaultPromptKeyword": "Son Ye-jin Crash Landing on You Classic queen letter"
+  },
+  {
+    "slug": "song-hye-kyo",
+    "name": "Song Hye-kyo",
+    "category": "Actor",
+    "defaultPromptKeyword": "Song Hye-kyo The Glory Descendants of the Sun Baeksang letter"
+  },
+  {
+    "slug": "kim-soo-hyun",
+    "name": "Kim Soo-hyun",
+    "category": "Actor",
+    "defaultPromptKeyword": "Kim Soo-hyun Queen of Tears My Love from the Star letter"
+  },
+  {
+    "slug": "kim-ji-won",
+    "name": "Kim Ji-won",
+    "category": "Actor",
+    "defaultPromptKeyword": "Kim Ji-won Queen of Tears My Liberation Notes Hong Hae-in letter"
+  },
+  {
+    "slug": "park-bo-gum",
+    "name": "Park Bo-gum",
+    "category": "Actor",
+    "defaultPromptKeyword": "Park Bo-gum Reply 1988 Moonlight Good Boy letter"
+  },
+  {
+    "slug": "lee-jong-suk",
+    "name": "Lee Jong-suk",
+    "category": "Actor",
+    "defaultPromptKeyword": "Lee Jong-suk Big Mouth W Pinocchio fan meeting letter"
+  },
+  {
+    "slug": "gong-yoo",
+    "name": "Gong Yoo",
+    "category": "Actor",
+    "defaultPromptKeyword": "Gong Yoo Goblin Squid Game 2 Coffee Prince letter"
+  },
+  {
+    "slug": "lee-dong-wook",
+    "name": "Lee Dong-wook",
+    "category": "Actor",
+    "defaultPromptKeyword": "Lee Dong-wook Tale of the Nine Tailed A Shop for Killers letter"
+  },
+  {
+    "slug": "byeon-woo-seok",
+    "name": "Byeon Woo-seok",
+    "category": "Actor",
+    "defaultPromptKeyword": "Byeon Woo-seok Lovely Runner Ryu Sun-jae fan letter"
+  },
+  {
+    "slug": "kim-hye-yoon",
+    "name": "Kim Hye-yoon",
+    "category": "Actor",
+    "defaultPromptKeyword": "Kim Hye-yoon Lovely Runner Im Sol Sky Castle letter"
+  },
+  {
+    "slug": "hatsune-miku",
+    "name": "Hatsune Miku",
+    "category": "Virtual IP",
+    "defaultPromptKeyword": "Hatsune Miku Magical Mirai Vocaloid 39 fan letter"
+  },
+  {
+    "slug": "kda",
+    "name": "K/DA",
+    "category": "Virtual IP",
+    "defaultPromptKeyword": "K/DA League of Legends POP/STARS Akali Ahri Evelynn Kai'Sa letter"
+  },
+  {
+    "slug": "gawr-gura",
+    "name": "Gawr Gura",
+    "category": "Virtual IP",
+    "defaultPromptKeyword": "Gawr Gura Hololive EN chumbuds 'a' fan message"
+  },
+  {
+    "slug": "mori-calliope",
+    "name": "Mori Calliope",
+    "category": "Virtual IP",
+    "defaultPromptKeyword": "Mori Calliope Hololive deadbeats rap music letter"
+  },
+  {
+    "slug": "hoshimachi-suisei",
+    "name": "Hoshimachi Suisei",
+    "category": "Virtual IP",
+    "defaultPromptKeyword": "Hoshimachi Suisei Stellar Stellar First Take concert letter"
+  },
+  {
+    "slug": "usada-pekora",
+    "name": "Usada Pekora",
+    "category": "Virtual IP",
+    "defaultPromptKeyword": "Usada Pekora Hololive peko comedy idol letter"
+  },
+  {
+    "slug": "kizuna-ai",
+    "name": "Kizuna AI",
+    "category": "Virtual IP",
+    "defaultPromptKeyword": "Kizuna AI pioneer VTuber A.I.Channel letter"
+  },
+  {
+    "slug": "baek-hyun-plave",
+    "name": "PLAVE Noah",
+    "category": "Virtual IP",
+    "defaultPromptKeyword": "PLAVE Han Noah virtual idol vocal visual letter"
+  },
+  {
+    "slug": "xiao-zhan",
+    "name": "Xiao Zhan (Sean Xiao)",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Xiao Zhan Sean Xiao Peter Pan The Untamed fan letter"
+  },
+  {
+    "slug": "wang-yibo",
+    "name": "Wang Yibo",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Wang Yibo MTJJ motorcycle dancer actor Born to Fly letter"
+  },
+  {
+    "slug": "jackson-wang",
+    "name": "Jackson Wang",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Jackson Wang Magic Man Team Wang GOT7 world tour letter"
+  },
+  {
+    "slug": "lay-zhang",
+    "name": "Lay Zhang (Zhang Yixing)",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Lay Zhang Grandline M-POP producer EXO letter"
+  },
+  {
+    "slug": "luhan",
+    "name": "Lu Han",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Lu Han Reloaded solo concert singer letter"
+  },
+  {
+    "slug": "victoria-song",
+    "name": "Victoria Song (Song Qian)",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Victoria Song f(x) leader actress dancer letter"
+  },
+  {
+    "slug": "dylan-wang",
+    "name": "Dylan Wang (Wang Hedi)",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Dylan Wang Love Between Fairy and Devil Dongfang Qingcang letter"
+  },
+  {
+    "slug": "zhao-lusi",
+    "name": "Zhao Lusi (Rosy Zhao)",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Zhao Lusi Rosy Hidden Love Love Like the Galaxy letter"
+  },
+  {
+    "slug": "dilraba-dilmurat",
+    "name": "Dilraba Dilmurat",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Dilraba Dilmurat Alice You Are My Glory goddess letter"
+  },
+  {
+    "slug": "yang-mi",
+    "name": "Yang Mi",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Yang Mi Eternal Love Chinese Paladin 3 fashion icon letter"
+  },
+  {
+    "slug": "esther-yu",
+    "name": "Esther Yu (Yu Shuxin)",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Esther Yu Love Between Fairy and Devil Sweet Pomegranate letter"
+  },
+  {
+    "slug": "bai-lu",
+    "name": "Bai Lu",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Bai Lu Till the End of the Moon Story of Kunning Palace letter"
+  },
+  {
+    "slug": "leo-wu",
+    "name": "Leo Wu (Wu Lei)",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Wu Lei Love Like the Galaxy Amidst a Snowstorm of Love letter"
+  },
+  {
+    "slug": "yang-yang",
+    "name": "Yang Yang",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Yang Yang Love O2O You Are My Glory King's Avatar letter"
+  },
+  {
+    "slug": "cheng-yi",
+    "name": "Cheng Yi",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Cheng Yi Mysterious Lotus Casebook Love and Redemption letter"
+  },
+  {
+    "slug": "tan-jianci",
+    "name": "Tan Jianci (JC-T)",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Tan Jianci Lost You Forever Xiang Liu Latin dance vocal letter"
+  },
+  {
+    "slug": "luo-yunxi",
+    "name": "Luo Yunxi (Leo Luo)",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Luo Yunxi Till the End of the Moon Ashes of Love ballet actor letter"
+  },
+  {
+    "slug": "gong-jun",
+    "name": "Gong Jun (Simon Gong)",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Gong Jun Word of Honor Legend of Anle Junwei letter"
+  },
+  {
+    "slug": "zhou-shen",
+    "name": "Zhou Shen (Charlie Zhou)",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Zhou Shen Big Fish heavenly vocal OST master letter"
+  },
+  {
+    "slug": "joker-xue",
+    "name": "Joker Xue (Xue Zhiqian)",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Joker Xue Extraterrestrial world tour Actor serious music letter"
+  },
+  {
+    "slug": "hua-chenyu",
+    "name": "Hua Chenyu",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Hua Chenyu Mars Concert Bull fight alien vocal genius letter"
+  },
+  {
+    "slug": "gem-tang",
+    "name": "G.E.M. (Gloria Tang)",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "G.E.M. Tang Gloria I AM GLORIA stadium tour Light Years Away letter"
+  },
+  {
+    "slug": "jay-chou",
+    "name": "Jay Chou",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Jay Chou King of Mandopop Carnival world tour Chopin of the East letter"
+  },
+  {
+    "slug": "jj-lin",
+    "name": "JJ Lin",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "JJ Lin JJ20 world tour walking CD Twilight letter"
+  },
+  {
+    "slug": "jolin-tsai",
+    "name": "Jolin Tsai",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Jolin Tsai Ugly Beauty tour Queen of C-Pop Womxnly letter"
+  },
+  {
+    "slug": "eason-chan",
+    "name": "Eason Chan",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Eason Chan FEAR and DREAMS tour God of Cantopop letter"
+  },
+  {
+    "slug": "mayday",
+    "name": "Mayday",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Mayday 5525 live tour No.5525 King of Concerts Oasis letter"
+  },
+  {
+    "slug": "lexie-liu",
+    "name": "Lexie Liu",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Lexie Liu The Happy Star cyberpunk Mulan R&B electro letter"
+  },
+  {
+    "slug": "liu-yuxin",
+    "name": "Liu Yuxin (XIN Liu)",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Liu Yuxin THE9 poppin dance fashion all-rounder letter"
+  },
+  {
+    "slug": "curley-g",
+    "name": "Curley G (Xilinnayi Gao)",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Curley G BonBon Girls 303 powerhouse vocal rock letter"
+  },
+  {
+    "slug": "cai-xukun",
+    "name": "Cai Xukun (KUN)",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Cai Xukun Lover KUN world tour IKUN letter"
+  },
+  {
+    "slug": "chen-linong",
+    "name": "Chen Linong",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Chen Linong sweet smile vocal idol actor letter"
+  },
+  {
+    "slug": "fan-chengcheng",
+    "name": "Fan Chengcheng",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Fan Chengcheng Pegasus 2 variety king rapper actor letter"
+  },
+  {
+    "slug": "justin-huang",
+    "name": "Justin (Huang Minghao)",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Justin Huang rap variety energetic soloist letter"
+  },
+  {
+    "slug": "zhu-zhengting",
+    "name": "Zhu Zhengting",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Zhu Zhengting human guo-feng dance prince letter"
+  },
+  {
+    "slug": "wang-linkai",
+    "name": "Lil Ghost (Wang Linkai)",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Lil Ghost punk rock rap energetic concert letter"
+  },
+  {
+    "slug": "you-zhangjing",
+    "name": "You Zhangjing (AZORAchin)",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "You Zhangjing high note vocal OST soloist letter"
+  },
+  {
+    "slug": "karry-wang",
+    "name": "Karry Wang (Wang Junkai)",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Wang Junkai TFBOYS leader actor singer little crab letter"
+  },
+  {
+    "slug": "roy-wang",
+    "name": "Roy Wang (Wang Yuan)",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Wang Yuan Berklee singer-songwriter TFBOYS tangyuan letter"
+  },
+  {
+    "slug": "jackson-yee",
+    "name": "Jackson Yee (Yi Yangqianxi)",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Jackson Yee Better Days A Little Red Flower movie star letter"
+  },
+  {
+    "slug": "zhao-liying",
+    "name": "Zhao Liying",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Zhao Liying The Legend of ShenLi The Story of MingLan queen letter"
+  },
+  {
+    "slug": "yang-zi",
+    "name": "Yang Zi (Andy Yang)",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Yang Zi Lost You Forever Go Go Squid Ashes of Love letter"
+  },
+  {
+    "slug": "guan-xiaotong",
+    "name": "Guan Xiaotong",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Guan Xiaotong nation's daughter actress fashion letter"
+  },
+  {
+    "slug": "ju-jingyi",
+    "name": "Ju Jingyi",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Ju Jingyi 4000 year visual beauty aesthetic idol actress letter"
+  },
+  {
+    "slug": "meng-meiqi",
+    "name": "Meng Meiqi",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Meng Meiqi Rocket Girls 101 #1 stage center dance letter"
+  },
+  {
+    "slug": "wu-xuanyi",
+    "name": "Wu Xuanyi",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Wu Xuanyi sweet visual idol actress wink queen letter"
+  },
+  {
+    "slug": "sunnee-yang",
+    "name": "Sunnee (Yang Yunqing)",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Sunnee Thai Chinese soulful vocal R&B soloist letter"
+  },
+  {
+    "slug": "song-weilong",
+    "name": "Song Weilong",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Song Weilong Go Ahead Find Yourself romantic lead letter"
+  },
+  {
+    "slug": "xu-kai",
+    "name": "Xu Kai",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Xu Kai Story of Yanxi Palace Best Choice Ever actor letter"
+  },
+  {
+    "slug": "lin-yi",
+    "name": "Lin Yi",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Lin Yi Put Your Head on My Shoulder Everyone Loves Me letter"
+  },
+  {
+    "slug": "hu-yitian",
+    "name": "Hu Yitian",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Hu Yitian A Love So Beautiful Go Go Squid actor letter"
+  },
+  {
+    "slug": "arthur-chen",
+    "name": "Arthur Chen (Chen Feiyu)",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Arthur Chen Lighter and Princess Ever Night actor letter"
+  },
+  {
+    "slug": "ding-yuxi",
+    "name": "Ding Yuxi",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Ding Yuxi The Romance of Tiger and Rose Melody of Golden Age letter"
+  },
+  {
+    "slug": "zhang-linghe",
+    "name": "Zhang Linghe",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Zhang Linghe Story of Kunning Palace Love's Rebellion letter"
+  },
+  {
+    "slug": "deng-wei",
+    "name": "Deng Wei",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Deng Wei Lost You Forever Love of the Divine Tree letter"
+  },
+  {
+    "slug": "yu-shi",
+    "name": "Yu Shi (Yosh Yu)",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Yu Shi Creation of the Gods To the Wonder horse archery letter"
+  },
+  {
+    "slug": "chen-muchi",
+    "name": "Chen Muchi",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Chen Muchi Creation of the Gods warrior actor letter"
+  },
+  {
+    "slug": "neo-hou",
+    "name": "Neo Hou (Hou Minghao)",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Hou Minghao Back from the Brink Dashing Youth letter"
+  },
+  {
+    "slug": "joseph-zeng",
+    "name": "Joseph Zeng (Zeng Shunxi)",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Zeng Shunxi Mysterious Lotus Casebook Heavenly Sword letter"
+  },
+  {
+    "slug": "liu-haoran",
+    "name": "Liu Haoran (Turbo Liu)",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Liu Haoran Detective Chinatown youth actor letter"
+  },
+  {
+    "slug": "amber-liu",
+    "name": "Amber Liu",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Amber Liu f(x) Borders Sisters Who Make Waves letter"
+  },
+  {
+    "slug": "henry-lau",
+    "name": "Henry Lau",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Henry Lau violin multi-instrumentalist loop station letter"
+  },
+  {
+    "slug": "meng-jia",
+    "name": "Meng Jia (Jia)",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Meng Jia miss A dancer Sisters Who Make Waves letter"
+  },
+  {
+    "slug": "wang-feifei",
+    "name": "Fei (Wang Feifei)",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Wang Feifei miss A stage queen dance teacher letter"
+  },
+  {
+    "slug": "wayv-ten",
+    "name": "TEN (Chittaphon Leechaiyapornkul)",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "WayV TEN Nightwalker Birthday artistic dance god letter"
+  },
+  {
+    "slug": "wayv-kun",
+    "name": "KUN (Qian Kun)",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "WayV KUN pilot producer leader healing vocal letter"
+  },
+  {
+    "slug": "wayv-winwin",
+    "name": "Winwin (Dong Sicheng)",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "WayV Winwin Chinese traditional dance actor letter"
+  },
+  {
+    "slug": "wayv-xiaojun",
+    "name": "Xiaojun (Xiao Dejun)",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "WayV Xiaojun main vocal musical theater eyebrows letter"
+  },
+  {
+    "slug": "wayv-hendery",
+    "name": "Hendery (Huang Guanheng)",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "WayV Hendery comedic visual rapper Macau letter"
+  },
+  {
+    "slug": "wayv-yangyang",
+    "name": "YangYang (Liu Yangyang)",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "WayV YangYang German multilingual main rapper maknae letter"
+  },
+  {
+    "slug": "eric-chou",
+    "name": "Eric Chou",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Eric Chou King of Lovelorn Ballads How Have You Been letter"
+  },
+  {
+    "slug": "yoga-lin",
+    "name": "Yoga Lin",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Yoga Lin Idol tour Senses Around magic voice letter"
+  },
+  {
+    "slug": "jam-hsiao",
+    "name": "Jam Hsiao",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Jam Hsiao Rain God rock powerhouse Lion band letter"
+  },
+  {
+    "slug": "khalil-fong",
+    "name": "Khalil Fong (Fang Datong)",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Khalil Fong Soulboy Timeless R&B pioneer letter"
+  },
+  {
+    "slug": "alin",
+    "name": "A-Lin",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "A-Lin Golden Melody Best Female Singer A-LINK tour letter"
+  },
+  {
+    "slug": "hebe-tien",
+    "name": "Hebe Tien (Tien Fu-chen)",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Hebe Tien S.H.E A Little Happiness poetic soloist letter"
+  },
+  {
+    "slug": "stefanie-sun",
+    "name": "Stefanie Sun",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Stefanie Sun Encounter Cloudy Day Queen of Mandopop letter"
+  },
+  {
+    "slug": "fish-leong",
+    "name": "Fish Leong",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Fish Leong Queen of Love Songs Courage Warm letter"
+  },
+  {
+    "slug": "angela-zhang",
+    "name": "Angela Zhang",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Angela Zhang Invisible Wings Aurora iron lung vocal letter"
+  },
+  {
+    "slug": "cyndi-wang",
+    "name": "Cyndi Wang",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Cyndi Wang Sugar King Love You Cyndiloves2sing letter"
+  },
+  {
+    "slug": "rainie-yang",
+    "name": "Rainie Yang",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Rainie Yang LIKE A STAR tour Ambiguous youth memory letter"
+  },
+  {
+    "slug": "karen-mok",
+    "name": "Karen Mok",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Karen Mok The Way You Make Me Feel cello legs diva letter"
+  },
+  {
+    "slug": "faye-wong",
+    "name": "Faye Wong",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Faye Wong Heavenly Queen Red Bean Eyes On Me legend letter"
+  },
+  {
+    "slug": "teresa-teng",
+    "name": "Teresa Teng",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Teresa Teng The Moon Represents My Heart timeless legend letter"
+  },
+  {
+    "slug": "leslie-cheung",
+    "name": "Leslie Cheung",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Leslie Cheung Gor Gor Wind Blows On eternal legend letter"
+  },
+  {
+    "slug": "anita-mui",
+    "name": "Anita Mui",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Anita Mui Daughter of Hong Kong Sunset Song diva letter"
+  },
+  {
+    "slug": "beyond",
+    "name": "BEYOND (Wong Ka Kui)",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "BEYOND Wong Ka Kui Boundless Oceans Vast Skies rock legend letter"
+  },
+  {
+    "slug": "wu-bai",
+    "name": "Wu Bai & China Blue",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Wu Bai Last Dance King of Live Rock wave letter"
+  },
+  {
+    "slug": "wakin-chau",
+    "name": "Wakin Chau (Emil Chau)",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Wakin Chau Friends sunny brother classic letter"
+  },
+  {
+    "slug": "richie-jen",
+    "name": "Richie Jen",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Richie Jen Too Softhearted Heartache knight letter"
+  },
+  {
+    "slug": "charlie-young",
+    "name": "Charlie Young",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Charlie Young classic 90s aesthetic jade girl letter"
+  },
+  {
+    "slug": "takeshi-kaneshiro",
+    "name": "Takeshi Kaneshiro",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Takeshi Kaneshiro Chungking Express visual legend letter"
+  },
+  {
+    "slug": "tony-leung",
+    "name": "Tony Leung Chiu-wai",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Tony Leung In the Mood for Love Cannes best actor letter"
+  },
+  {
+    "slug": "maggie-cheung",
+    "name": "Maggie Cheung",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Maggie Cheung Clean In the Mood for Love Cannes queen letter"
+  },
+  {
+    "slug": "stephen-chow",
+    "name": "Stephen Chow",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Stephen Chow King of Comedy A Chinese Odyssey genius letter"
+  },
+  {
+    "slug": "andy-lau",
+    "name": "Andy Lau",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Andy Lau Four Heavenly Kings model worker icon letter"
+  },
+  {
+    "slug": "jacky-cheung",
+    "name": "Jacky Cheung",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Jacky Cheung God of Songs 60+ concert tour letter"
+  },
+  {
+    "slug": "aaron-kwok",
+    "name": "Aaron Kwok",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Aaron Kwok Stage King dancing legend letter"
+  },
+  {
+    "slug": "leon-lai",
+    "name": "Leon Lai",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Leon Lai Prince of Love Songs Four Heavenly Kings letter"
+  },
+  {
+    "slug": "feng-timo",
+    "name": "Feng Timo",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Feng Timo Buddha-like Girl sweet vocal live streaming letter"
+  }
+]
