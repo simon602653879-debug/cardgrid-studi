@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Free Photocard & Polaroid Print Grid Maker | Instant A4, US Letter, 4x6 Printable PDF</title>
   <meta name="description" content="Free online tool to auto-crop and arrange K-pop photocards, anime cards, and mini polaroids onto standard A4, US Letter, 4x6, and 5x7 print sheets with dashed cut lines. Download instant 300 DPI print-ready PDF.">
-  <meta name="keywords" content="photocard print maker, kpop photocard template a4, us letter photocard grid, polaroid grid maker, diy photocard print sheet, 55x85mm card printer online">
+  <meta name="keywords" content="stankit, stankit studio, kpop fandom tools, photocard print maker, kpop photocard template a4, us letter photocard grid, polaroid grid maker, diy photocard print sheet, 55x85mm card printer online">
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -31,21 +31,62 @@
       border-color: #6366f1;
       transform: scale(1.03);
     }
+  
+    /* Position Ko-fi Floating Widget to Bottom-Right */
+    .floatingchat-container-wrap,
+    .floatingchat-container-wrap-mobi,
+    .floatingchat-container,
+    div[class*="floatingchat-container"] {
+      left: auto !important;
+      right: 20px !important;
+    }
+    .floating-chat-kofi-popup-iframe,
+    .floating-chat-kofi-popup-iframe-mobi,
+    iframe[class*="floating-chat-kofi"] {
+      left: auto !important;
+      right: 20px !important;
+    }
   </style>
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col justify-between transition-all">
 
-  <!-- Navigation Header -->
-  <header class="bg-white border-b border-slate-200 sticky top-0 z-50">
+  <!-- Navigation Header with Multi-Tool Menu -->
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
     <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-      <div class="flex items-center space-x-3">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-rose-500 flex items-center justify-center text-white font-bold text-xl shadow-md shadow-indigo-100">
-          ✨
-        </div>
-        <div>
-          <span class="text-lg font-extrabold tracking-tight bg-gradient-to-r from-indigo-600 to-rose-500 bg-clip-text text-transparent">CardGrid Studio</span>
-          <span class="hidden sm:inline-block text-xs font-semibold px-2 py-0.5 ml-2 bg-indigo-50 text-indigo-700 rounded-full border border-indigo-100" data-i18n="badge_free">100% Free & Fast</span>
-        </div>
+      
+      <!-- Brand & Global Switcher -->
+      <div class="flex items-center space-x-6">
+        <a href="/" class="flex items-center space-x-2.5">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-rose-500 flex items-center justify-center text-white font-bold text-xl shadow-md shadow-indigo-100">
+            ✨
+          </div>
+          <div>
+            <span class="text-lg font-extrabold tracking-tight bg-gradient-to-r from-indigo-600 to-rose-500 bg-clip-text text-transparent">StanKit Studio</span>
+            <span class="hidden sm:inline-block text-[11px] font-semibold px-2 py-0.5 ml-2 bg-indigo-50 text-indigo-700 rounded-full border border-indigo-100" data-i18n="badge_hub">Fandom Micro-Tools</span>
+          </div>
+        </a>
+
+        <!-- Tools Nav -->
+        <nav class="hidden md:flex items-center space-x-1 text-xs font-bold text-slate-600">
+          <a href="/" class="px-3 py-1.5 rounded-lg bg-indigo-50 text-indigo-700 border border-indigo-100 transition flex items-center space-x-1">
+            <span>🖨️</span>
+            <span data-i18n="nav_tool_print">Photocard Print Maker</span>
+          </a>
+          <a href="/fan-letter" class="px-3 py-1.5 rounded-lg hover:text-indigo-600 hover:bg-slate-100 transition flex items-center space-x-1">
+            <span>💌</span>
+            <span data-i18n="nav_tool_letter">Fan Letter Pro (Weverse/Bubble)</span>
+          </a>
+          <span class="px-2.5 py-1 text-slate-400 font-medium flex items-center space-x-1 cursor-not-allowed" title="Coming Soon">
+            <span>⏰</span>
+            <span>KST Clock</span>
+            <span class="text-[9px] bg-slate-100 text-slate-500 px-1 py-0.2 rounded">SOON</span>
+          </span>
+          <span class="px-2.5 py-1 text-slate-400 font-medium flex items-center space-x-1 cursor-not-allowed" title="Coming Soon">
+            <span>⏳</span>
+            <span>D-Day</span>
+            <span class="text-[9px] bg-slate-100 text-slate-500 px-1 py-0.2 rounded">SOON</span>
+          </span>
+        </nav>
       </div>
       
       <div class="flex items-center space-x-3 sm:space-x-4">
@@ -63,13 +104,19 @@
           <div class="pointer-events-none absolute inset-y-0 left-2 flex items-center text-xs">🌐</div>
         </div>
 
-        <a href="https://ko-fi.com" target="_blank" class="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-amber-50 border border-amber-200 text-amber-800 text-xs font-bold hover:bg-amber-100 transition shadow-sm">
+        <a href="https://ko-fi.com/stankitstudio" target="_blank" class="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-amber-50 border border-amber-200 text-amber-800 text-xs font-bold hover:bg-amber-100 transition shadow-sm">
           <span>☕</span>
           <span class="hidden sm:inline" data-i18n="nav_coffee">Buy me a coffee</span>
         </a>
       </div>
     </div>
   </header>
+
+  <!-- Mobile Sub-Navigation Bar -->
+  <div class="md:hidden bg-white border-b border-slate-200 px-4 py-2 flex items-center space-x-2 overflow-x-auto text-xs font-bold">
+    <a href="/" class="whitespace-nowrap px-2.5 py-1 rounded-md bg-indigo-50 text-indigo-700">🖨️ Photocard Grid</a>
+    <a href="/fan-letter" class="whitespace-nowrap px-2.5 py-1 rounded-md text-slate-600 hover:bg-slate-100">💌 Fan Letter Pro (Weverse/Bubble)</a>
+  </div>
 
   <!-- Main Workspace -->
   <main class="max-w-6xl mx-auto px-4 py-8 flex-grow">
@@ -104,7 +151,7 @@
         <div>
           <div class="flex items-center justify-between mb-2">
             <label class="block text-xs font-bold uppercase tracking-wider text-slate-500" data-i18n="label_paper">Paper Format</label>
-            <span class="text-[11px] text-indigo-600 font-semibold" id="paper-info-badge">A4 (9 Photocards)</span>
+            <span class="text-[11px] text-indigo-600 font-semibold" id=\"paper-info-badge\">A4 (9 Photocards)</span>
           </div>
 
           <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
@@ -277,13 +324,15 @@
   <footer class="bg-white border-t border-slate-200 mt-16 py-8">
     <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 space-y-4 sm:space-y-0">
       <div class="flex items-center space-x-2">
-        <span>© 2026 CardGrid Studio. All rights reserved.</span>
+        <span>© 2026 StanKit Studio. All rights reserved.</span>
       </div>
       <div class="flex items-center space-x-6">
-        <a href="#about" onclick="alert('CardGrid Studio is a free open-source utility designed for collectors and creators worldwide.')" class="hover:text-indigo-600" data-i18n="footer_about">About Us</a>
+        <a href="/" class="hover:text-indigo-600">Photocard Print Maker</a>
+        <a href="/fan-letter" class="hover:text-indigo-600">Fan Letter Pro (Weverse/Bubble)</a>
+        <a href="#about" onclick="alert('StanKit Studio is a free open-source utility designed for collectors and creators worldwide.')" class="hover:text-indigo-600" data-i18n="footer_about">About Us</a>
         <a href="#privacy" onclick="alert('Privacy Policy: We do not store or collect user images. All operations run locally in your browser. We use cookies and third-party advertising partners like Google AdSense to serve ads.')" class="hover:text-indigo-600" data-i18n="footer_privacy">Privacy Policy</a>
         <a href="#terms" onclick="alert('Terms of Service: This utility is for personal, non-commercial use. Users are responsible for printing content compliant with applicable laws.')" class="hover:text-indigo-600" data-i18n="footer_terms">Terms of Service</a>
-        <a href="mailto:support@cardgrid.studio" class="hover:text-indigo-600" data-i18n="footer_contact">Contact Us</a>
+        <a href="mailto:support@stankit.studio" class="hover:text-indigo-600" data-i18n="footer_contact">Contact Us</a>
       </div>
     </div>
   </footer>
@@ -293,6 +342,9 @@
     // 7 Languages Dictionary
     const i18nData = {
       en: {
+        badge_hub: "Fandom Micro-Tools",
+        nav_tool_print: "Photocard Print Maker",
+        nav_tool_letter: "Fan Letter Pro (Weverse/Bubble)",
         badge_free: "100% Free & Fast",
         nav_coffee: "Buy me a coffee",
         badge_hot: "HOT",
@@ -344,6 +396,9 @@
         alert_no_img: "Please upload at least 1 image before generating your PDF!"
       },
       zh: {
+        badge_hub: "追星微工具箱",
+        nav_tool_print: "小卡排版打印生成器",
+        nav_tool_letter: "多语种粉丝信生成器",
         badge_free: "100% 免费快速",
         nav_coffee: "请作者喝杯咖啡",
         badge_hot: "热门",
@@ -395,6 +450,9 @@
         alert_no_img: "请至少上传 1 张图片后再生成 PDF！"
       },
       th: {
+        badge_hub: "เครื่องมือสำหรับแฟนคลับ",
+        nav_tool_print: "พิมพ์โฟโต้การ์ด",
+        nav_tool_letter: "สร้างจดหมายแฟนคลับ",
         badge_free: "ฟรี 100% & รวดเร็ว",
         nav_coffee: "เลี้ยงกาแฟผู้พัฒนา",
         badge_hot: "ฮิต",
@@ -446,6 +504,9 @@
         alert_no_img: "โปรดอัปโหลดรูปภาพอย่างน้อย 1 รูปก่อนสร้าง PDF!"
       },
       ar: {
+        badge_hub: "أدوات الفاندوم",
+        nav_tool_print: "طباعة البطاقات",
+        nav_tool_letter: "مساعد رسائل المعجبين",
         badge_free: "مجاني وسريع 100%",
         nav_coffee: "ادعمني بقهوة",
         badge_hot: "شائع",
@@ -497,6 +558,9 @@
         alert_no_img: "يرجى رفع صورة واحدة على الأقل قبل إنشاء ملف الـ PDF!"
       },
       ko: {
+        badge_hub: "팬덤 전용 마이크로 툴",
+        nav_tool_print: "포토카드 인쇄기",
+        nav_tool_letter: "팬레터 생성기",
         badge_free: "100% 무료 & 초고속",
         nav_coffee: "커피 한 잔 후원하기",
         badge_hot: "인기",
@@ -548,6 +612,9 @@
         alert_no_img: "PDF를 생성하려면 사진을 1장 이상 업로드해 주세요!"
       },
       ja: {
+        badge_hub: "推し活マイクロツール",
+        nav_tool_print: "トレカ印刷ツール",
+        nav_tool_letter: "ファンレター文面生成",
         badge_free: "100% 無料・高速",
         nav_coffee: "開発者にコーヒーをごちそう",
         badge_hot: "人気",
@@ -599,6 +666,9 @@
         alert_no_img: "画像を1枚以上アップロードしてください！"
       },
       es: {
+        badge_hub: "Microherramientas K-Pop",
+        nav_tool_print: "Imprimir Photocards",
+        nav_tool_letter: "Generador de Cartas",
         badge_free: "100% Gratis y Rápido",
         nav_coffee: "Cómprame un café",
         badge_hot: "POPULAR",
@@ -669,7 +739,7 @@
     function changeLanguage(lang) {
       if (!i18nData[lang]) lang = 'en';
       currentLang = lang;
-      localStorage.setItem('cardgrid_lang', lang);
+      localStorage.setItem('stankit_lang', lang);
       document.getElementById('lang-select').value = lang;
 
       // Handle RTL for Arabic layout automatically
@@ -946,12 +1016,12 @@
         doc.rect(x, y, cardW, cardH);
       }
 
-      doc.save(`CardGrid_${currentPaper.toUpperCase()}_300DPI.pdf`);
+      doc.save(`StanKit_${currentPaper.toUpperCase()}_300DPI.pdf`);
     }
 
     // Default to English on First Load
     window.addEventListener('DOMContentLoaded', () => {
-      const savedLang = localStorage.getItem('cardgrid_lang');
+      const savedLang = (localStorage.getItem('stankit_lang') || localStorage.getItem('cardgrid_lang'));
       if (savedLang && i18nData[savedLang]) {
         changeLanguage(savedLang);
       } else {
@@ -960,5 +1030,17 @@
       setPaper('a4');
     });
   </script>
+
+  <!-- Ko-fi Floating Widget Overlay -->
+  <script src="https://storage.ko-fi.com/cdn/scripts/overlay-widget.js"></script>
+  <script>
+    kofiWidgetOverlay.draw('stankitstudio', {
+      'type': 'floating-chat',
+      'floating-chat.donatebutton.text': 'Support',
+      'floating-chat.donatebutton.background-color': '#6366f1',
+      'floating-chat.donatebutton.text-color': '#ffffff'
+    });
+  </script>
 </body>
+
 </html>

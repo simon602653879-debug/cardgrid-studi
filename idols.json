@@ -1,0 +1,445 @@
+[
+  {
+    "id": "bts-jungkook",
+    "name_en": "Jungkook",
+    "name_kr": "정국",
+    "name_zh": "田柾国",
+    "name_ja": "ジョングク",
+    "aliases": [
+      "jungkook",
+      "jk",
+      "jeon",
+      "kook",
+      "정국",
+      "전정국",
+      "田柾国",
+      "柾国",
+      "果果",
+      "bts"
+    ],
+    "group": "BTS",
+    "lang": "ko",
+    "color": "#6366f1",
+    "fandom": "ARMY",
+    "birthday": "09-01",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Jung_Kook_of_BTS%2C_February_12%2C_2026_%281%29.png/360px-Jung_Kook_of_BTS%2C_February_12%2C_2026_%281%29.png",
+    "works": [
+      "Seven",
+      "Standing Next to You",
+      "Euphoria",
+      "Golden"
+    ]
+  },
+  {
+    "id": "bts-v",
+    "name_en": "V (Taehyung)",
+    "name_kr": "뷔 (태형)",
+    "name_zh": "金泰亨",
+    "name_ja": "テテ (V)",
+    "aliases": [
+      "v",
+      "taehyung",
+      "tae",
+      "thv",
+      "뷔",
+      "태형",
+      "김태형",
+      "金泰亨",
+      "泰泰",
+      "bts"
+    ],
+    "group": "BTS",
+    "lang": "ko",
+    "color": "#8b5cf6",
+    "fandom": "ARMY",
+    "birthday": "12-30",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/V_at_the_White_House%2C_31_May_2022.jpg/360px-V_at_the_White_House%2C_31_May_2022.jpg",
+    "works": [
+      "Love Me Again",
+      "Slow Dancing",
+      "Sweet Night",
+      "Layover"
+    ]
+  },
+  {
+    "id": "bts-jimin",
+    "name_en": "Jimin",
+    "name_kr": "지민",
+    "name_zh": "朴智旻",
+    "name_ja": "ジミン",
+    "aliases": [
+      "jimin",
+      "min",
+      "chimchim",
+      "지민",
+      "박지민",
+      "朴智旻",
+      "智旻",
+      "bts"
+    ],
+    "group": "BTS",
+    "lang": "ko",
+    "color": "#ec4899",
+    "fandom": "ARMY",
+    "birthday": "10-13",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Park_Ji-min_at_the_White_House%2C_31_May_2022.jpg/360px-Park_Ji-min_at_the_White_House%2C_31_May_2022.jpg",
+    "works": [
+      "Like Crazy",
+      "Who",
+      "Filter",
+      "MUSE"
+    ]
+  },
+  {
+    "id": "skz-felix",
+    "name_en": "Felix",
+    "name_kr": "필릭스",
+    "name_zh": "李龙馥",
+    "name_ja": "フィリックス",
+    "aliases": [
+      "felix",
+      "lix",
+      "yongbok",
+      "필릭스",
+      "용복",
+      "이용복",
+      "李龙馥",
+      "龙馥",
+      "skz",
+      "stray kids"
+    ],
+    "group": "Stray Kids",
+    "lang": "ko",
+    "color": "#3b82f6",
+    "fandom": "STAY",
+    "birthday": "09-15",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Felix_of_Stray_Kids_at_Incheon_Airport%2C_May_3%2C_2024.png/360px-Felix_of_Stray_Kids_at_Incheon_Airport%2C_May_3%2C_2024.png",
+    "works": [
+      "Chk Chk Boom",
+      "LALALALA",
+      "S-Class",
+      "God's Menu",
+      "Deep End"
+    ]
+  },
+  {
+    "id": "skz-hyunjin",
+    "name_en": "Hyunjin",
+    "name_kr": "현진",
+    "name_zh": "黄铉辰",
+    "name_ja": "ヒョンジン",
+    "aliases": [
+      "hyunjin",
+      "jinnie",
+      "현진",
+      "황현진",
+      "黄铉辰",
+      "铉辰",
+      "skz",
+      "stray kids"
+    ],
+    "group": "Stray Kids",
+    "lang": "ko",
+    "color": "#ef4444",
+    "fandom": "STAY",
+    "birthday": "03-20",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Hwang_Hyun-jin_in_February_2024.jpg/360px-Hwang_Hyun-jin_in_February_2024.jpg",
+    "works": [
+      "Chk Chk Boom",
+      "Maniac",
+      "Thunderous",
+      "Play With Fire"
+    ]
+  },
+  {
+    "id": "svt-mingyu",
+    "name_en": "Mingyu",
+    "name_kr": "민규",
+    "name_zh": "金珉奎",
+    "name_ja": "ミンギュ",
+    "aliases": [
+      "mingyu",
+      "gyu",
+      "민규",
+      "김민규",
+      "金珉奎",
+      "珉奎",
+      "svt",
+      "seventeen"
+    ],
+    "group": "SEVENTEEN",
+    "lang": "ko",
+    "color": "#0ea5e9",
+    "fandom": "CARAT",
+    "birthday": "04-06",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Kim_Min-gyu_in_May_2023.jpg/360px-Kim_Min-gyu_in_May_2023.jpg",
+    "works": [
+      "Super (손오공)",
+      "MAESTRO",
+      "HOT",
+      "Darl+ing"
+    ]
+  },
+  {
+    "id": "svt-jeonghan",
+    "name_en": "Jeonghan",
+    "name_kr": "정한",
+    "name_zh": "尹净汉",
+    "name_ja": "ジョンハン",
+    "aliases": [
+      "jeonghan",
+      "han",
+      "정한",
+      "윤정한",
+      "尹净汉",
+      "净汉",
+      "svt",
+      "seventeen"
+    ],
+    "group": "SEVENTEEN",
+    "lang": "ko",
+    "color": "#f43f5e",
+    "fandom": "CARAT",
+    "birthday": "10-04",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Yoon_Jeong-han_in_October_2023.jpg/360px-Yoon_Jeong-han_in_October_2023.jpg",
+    "works": [
+      "MAESTRO",
+      "Fallin' Flower",
+      "Circles",
+      "Last Night"
+    ]
+  },
+  {
+    "id": "aespa-karina",
+    "name_en": "Karina",
+    "name_kr": "카리나",
+    "name_zh": "柳智敏",
+    "name_ja": "カリナ",
+    "aliases": [
+      "karina",
+      "jimin",
+      "카리나",
+      "유지민",
+      "柳智敏",
+      "智敏",
+      "aespa"
+    ],
+    "group": "aespa",
+    "lang": "ko",
+    "color": "#a855f7",
+    "fandom": "MY",
+    "birthday": "04-11",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Aespa%27s_Karina_10.jpg/360px-Aespa%27s_Karina_10.jpg",
+    "works": [
+      "Supernova",
+      "Armageddon",
+      "Drama",
+      "Spicy",
+      "Next Level"
+    ]
+  },
+  {
+    "id": "aespa-winter",
+    "name_en": "Winter",
+    "name_kr": "윈터",
+    "name_zh": "金旼炡",
+    "name_ja": "ウィンター",
+    "aliases": [
+      "winter",
+      "minjeong",
+      "윈터",
+      "김민정",
+      "金旼炡",
+      "旼炡",
+      "aespa"
+    ],
+    "group": "aespa",
+    "lang": "ko",
+    "color": "#06b6d4",
+    "fandom": "MY",
+    "birthday": "01-01",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Winter_at_the_KAMP_LA_2022.jpg/360px-Winter_at_the_KAMP_LA_2022.jpg",
+    "works": [
+      "Supernova",
+      "Armageddon",
+      "Drama",
+      "Step Back"
+    ]
+  },
+  {
+    "id": "nj-haerin",
+    "name_en": "Haerin",
+    "name_kr": "해린",
+    "name_zh": "姜谐潾",
+    "name_ja": "ヘリン",
+    "aliases": [
+      "haerin",
+      "해린",
+      "강해린",
+      "姜谐潾",
+      "谐潾",
+      "猫猫",
+      "newjeans",
+      "nj"
+    ],
+    "group": "NewJeans",
+    "lang": "ko",
+    "color": "#10b981",
+    "fandom": "Bunnies",
+    "birthday": "05-15",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Kang_Hae-rin_at_the_2023_Melon_Music_Awards.jpg/360px-Kang_Hae-rin_at_the_2023_Melon_Music_Awards.jpg",
+    "works": [
+      "Supernatural",
+      "Ditto",
+      "OMG",
+      "Hype Boy",
+      "ETA"
+    ]
+  },
+  {
+    "id": "twice-sana",
+    "name_en": "Sana",
+    "name_kr": "사나",
+    "name_zh": "凑崎纱夏",
+    "name_ja": "サナ (湊崎紗夏)",
+    "aliases": [
+      "sana",
+      "사나",
+      "minatozaki sana",
+      "凑崎纱夏",
+      "サナ",
+      "紗夏",
+      "twice"
+    ],
+    "group": "TWICE",
+    "lang": "ja",
+    "color": "#f97316",
+    "fandom": "ONCE",
+    "birthday": "12-29",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Minatozaki_Sana_at_Incheon_Airport_in_June_2023.jpg/360px-Minatozaki_Sana_at_Incheon_Airport_in_June_2023.jpg",
+    "works": [
+      "Feel Special",
+      "Fancy",
+      "Talk that Talk",
+      "Cheer Up"
+    ]
+  },
+  {
+    "id": "cpop-xiaozhan",
+    "name_en": "Xiao Zhan",
+    "name_kr": "샤오잔",
+    "name_zh": "肖战",
+    "name_ja": "シャオ・ジャン",
+    "aliases": [
+      "xiao zhan",
+      "xiaozhan",
+      "sean xiao",
+      "sean",
+      "xz",
+      "肖战",
+      "战哥",
+      "샤오잔",
+      "cpop"
+    ],
+    "group": "Solo",
+    "lang": "zh",
+    "color": "#dc2626",
+    "fandom": "小飞侠 (Peter Pan)",
+    "birthday": "10-05",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Xiao_Zhan_at_the_Weibo_Night_Ceremony_January_11_2020.jpg/360px-Xiao_Zhan_at_the_Weibo_Night_Ceremony_January_11_2020.jpg",
+    "works": [
+      "光点 (Spotlight)",
+      "余年",
+      "射雕英雄传",
+      "玉骨遥",
+      "最幸运的幸运"
+    ]
+  },
+  {
+    "id": "cpop-jacksonwang",
+    "name_en": "Jackson Wang",
+    "name_kr": "잭슨",
+    "name_zh": "王嘉尔",
+    "name_ja": "ジャクソン",
+    "aliases": [
+      "jackson wang",
+      "jackson",
+      "wang jiaer",
+      "王嘉尔",
+      "嘉尔",
+      "嘎嘎",
+      "잭슨",
+      "got7",
+      "team wang"
+    ],
+    "group": "GOT7 / Team Wang",
+    "lang": "zh",
+    "color": "#eab308",
+    "fandom": "Jackys",
+    "birthday": "03-28",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Jackson_Wang_in_2023.jpg/360px-Jackson_Wang_in_2023.jpg",
+    "works": [
+      "Papillon",
+      "Blow",
+      "Cruel",
+      "Drive You Home",
+      "100 Ways"
+    ]
+  },
+  {
+    "id": "twice-momo",
+    "name_en": "Momo",
+    "name_kr": "모모",
+    "name_zh": "平井桃",
+    "name_ja": "モモ (平井もも)",
+    "aliases": [
+      "momo",
+      "hirai momo",
+      "모모",
+      "平井桃",
+      "モモ",
+      "twice"
+    ],
+    "group": "TWICE",
+    "lang": "ja",
+    "color": "#ec4899",
+    "fandom": "ONCE",
+    "birthday": "11-09",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Hirai_Momo_at_Incheon_Airport_in_June_2023.jpg/360px-Hirai_Momo_at_Incheon_Airport_in_June_2023.jpg",
+    "works": [
+      "Feel Special",
+      "Fancy",
+      "TT",
+      "Do not touch"
+    ]
+  },
+  {
+    "id": "pop-taylor",
+    "name_en": "Taylor Swift",
+    "name_kr": "테일러 스위프트",
+    "name_zh": "泰勒·斯威夫特",
+    "name_ja": "テイラー・スウィフト",
+    "aliases": [
+      "taylor swift",
+      "taylor",
+      "swift",
+      "ts",
+      "霉霉",
+      "泰勒",
+      "테일러"
+    ],
+    "group": "Solo",
+    "lang": "en",
+    "color": "#d97706",
+    "fandom": "Swifties",
+    "birthday": "12-13",
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Taylor_Swift_at_the_2023_MTV_Video_Music_Awards_4.jpg/360px-Taylor_Swift_at_the_2023_MTV_Video_Music_Awards_4.jpg",
+    "works": [
+      "Cruel Summer",
+      "Love Story",
+      "Fortnight",
+      "Anti-Hero",
+      "Blank Space"
+    ]
+  }
+]
