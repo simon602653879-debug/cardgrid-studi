@@ -14,13 +14,15 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
     body { font-family: 'Plus Jakarta Sans', sans-serif; }
-    /* Position Ko-fi Floating Widget to Bottom-Right */
+    
+      /* Position Ko-fi Floating Widget to Bottom-Right with Clean Safe Z-Index */
     .floatingchat-container-wrap,
     .floatingchat-container-wrap-mobi,
     .floatingchat-container,
     div[class*="floatingchat-container"] {
       left: auto !important;
       right: 20px !important;
+      bottom: 20px !important;
     }
     .floating-chat-kofi-popup-iframe,
     .floating-chat-kofi-popup-iframe-mobi,
@@ -95,7 +97,7 @@
         
         <a href="https://ko-fi.com/stankitstudio" target="_blank" class="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-amber-50 border border-amber-200 text-amber-800 text-xs font-bold hover:bg-amber-100 transition shadow-sm">
           <span>☕</span>
-          <span class="hidden sm:inline" data-i18n="nav_coffee">Buy me a coffee</span>
+          <span class="hidden sm:inline" data-i18n="nav_coffee">Support me</span>
         </a>
       </div>
     </div>
@@ -205,30 +207,32 @@
 
   
   <!-- Legal & Compliance Footer (4 Major Compliance Links) -->
-  <footer class="bg-white border-t border-slate-200 mt-16 py-8">
-    <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 space-y-4 sm:space-y-0">
-      <div class="flex items-center space-x-2">
-        <span>© 2026 StanKit Studio. All rights reserved.</span>
-      </div>
-      <div class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 font-medium">
+    <!-- Legal & Compliance Footer (Centered Layout - 100% Clear from Floating Widget) -->
+  <footer class="bg-white border-t border-slate-200 mt-16 py-10 pb-28 sm:pb-20">
+    <div class="max-w-4xl mx-auto px-4 text-center space-y-3 text-xs text-slate-500">
+      <div class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 font-semibold text-slate-600">
         <a href="about.html" class="hover:text-indigo-600 transition" data-i18n="footer_about">About Us (关于本站)</a>
         <a href="privacy.html" class="hover:text-indigo-600 transition" data-i18n="footer_privacy">Privacy Policy (隐私政策)</a>
         <a href="terms.html" class="hover:text-indigo-600 transition" data-i18n="footer_terms">Terms of Service (服务条款)</a>
         <a href="contact.html" class="hover:text-indigo-600 transition" data-i18n="footer_contact">Contact Us (联系我们)</a>
       </div>
+      <div class="text-[11px] text-slate-400">
+        <span>© 2026 StanKit Studio. All rights reserved. Built for global fandom communities.</span>
+      </div>
     </div>
   </footer>
 
-  <!-- Ko-fi Floating Widget Overlay -->
+  
+
+  <!-- Ko-fi Floating Widget Overlay (In-page Modal Support) -->
   <script src="https://storage.ko-fi.com/cdn/scripts/overlay-widget.js"></script>
   <script>
     kofiWidgetOverlay.draw('stankitstudio', {
       'type': 'floating-chat',
-      'floating-chat.donatebutton.text': 'Support',
+      'floating-chat.donatebutton.text': 'Support me',
       'floating-chat.donatebutton.background-color': '#6366f1',
       'floating-chat.donatebutton.text-color': '#ffffff'
     });
   </script>
-
 </body>
 </html>
