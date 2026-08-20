@@ -75,6 +75,16 @@
     "operatingSystem": "All"
   }
   </script>
+  <!-- OpenGraph & Twitter Meta Tags for Social Sharing & E-E-A-T -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="StanKit Studio | Fan Letter Pro & Bubble/DM Writing AI">
+  <meta property="og:description" content="Write culturally authentic, deeply moving fan letters and Bubble/DM replies for 1,000+ global idols.">
+  <meta property="og:url" content="https://stankit.vercel.app/fan-letter.html">
+  <meta property="og:site_name" content="StanKit Studio">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="StanKit Studio | Fan Letter Pro">
+  <meta name="twitter:description" content="Culturally authentic fan letter and Bubble AI writing studio for global fandoms.">
+
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col justify-between">
 
@@ -535,6 +545,52 @@
             </div>
           </div>
 
+          <!-- [Research Feature] Bubble / Weverse DM 30-Char Ultra-Short High-Density Presets -->
+          <div class="p-3.5 rounded-2xl bg-gradient-to-r from-pink-50 via-purple-50 to-indigo-50 border border-pink-200/80 space-y-2.5">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center space-x-1.5">
+                <span class="text-base">💬</span>
+                <span class="text-xs font-extrabold text-indigo-950">Bubble / Weverse DM 30-Char Limit Compressor</span>
+                <span class="text-[9px] bg-rose-500 text-white px-1.5 py-0.2 rounded font-extrabold">≤30 Chars</span>
+              </div>
+              <span class="text-[10px] text-slate-500 font-bold">1-Click High-Density Korean</span>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-1.5 text-xs">
+              <button type="button" onclick="insertBubblePhrase('오늘 하루도 밥 잘 챙겨먹고 파이팅해요! 힘내요❤️')" class="p-2 rounded-xl bg-white hover:bg-indigo-50 border border-slate-200 text-left transition flex items-center justify-between group cursor-pointer">
+                <div>
+                  <div class="font-bold text-slate-800 text-[11px] group-hover:text-indigo-600">오늘 하루도 밥 잘 챙겨먹고 파이팅해요! 힘내요❤️</div>
+                  <div class="text-[9px] text-slate-400">Eat well & stay strong today! (26 chars)</div>
+                </div>
+                <span class="text-[10px] text-indigo-600 font-extrabold ml-1">26자</span>
+              </button>
+
+              <button type="button" onclick="insertBubblePhrase('오늘 무대 진짜 최고였어요! 푹 쉬어요 사랑해요✨')" class="p-2 rounded-xl bg-white hover:bg-indigo-50 border border-slate-200 text-left transition flex items-center justify-between group cursor-pointer">
+                <div>
+                  <div class="font-bold text-slate-800 text-[11px] group-hover:text-indigo-600">오늘 무대 진짜 최고였어요! 푹 쉬어요 사랑해요✨</div>
+                  <div class="text-[9px] text-slate-400">Stage was amazing! Rest well (26 chars)</div>
+                </div>
+                <span class="text-[10px] text-indigo-600 font-extrabold ml-1">26자</span>
+              </button>
+
+              <button type="button" onclick="insertBubblePhrase('언제나 네 편이야. 아프지 말고 행복만 하자🍀')" class="p-2 rounded-xl bg-white hover:bg-indigo-50 border border-slate-200 text-left transition flex items-center justify-between group cursor-pointer">
+                <div>
+                  <div class="font-bold text-slate-800 text-[11px] group-hover:text-indigo-600">언제나 네 편이야. 아프지 말고 행복만 하자🍀</div>
+                  <div class="text-[9px] text-slate-400">Always on your side. Only happiness (25 chars)</div>
+                </div>
+                <span class="text-[10px] text-indigo-600 font-extrabold ml-1">25자</span>
+              </button>
+
+              <button type="button" onclick="insertBubblePhrase('너무 보고 싶어요! 항상 응원하고 있어요 고마워요🥰')" class="p-2 rounded-xl bg-white hover:bg-indigo-50 border border-slate-200 text-left transition flex items-center justify-between group cursor-pointer">
+                <div>
+                  <div class="font-bold text-slate-800 text-[11px] group-hover:text-indigo-600">너무 보고 싶어요! 항상 응원하고 있어요 고마워요🥰</div>
+                  <div class="text-[9px] text-slate-400">Miss you so much! Thank you always (27 chars)</div>
+                </div>
+                <span class="text-[10px] text-indigo-600 font-extrabold ml-1">27자</span>
+              </button>
+            </div>
+          </div>
+
           <!-- Editable Target Message Box -->
           <div class="space-y-2">
             <div class="flex items-center justify-between gap-2 flex-wrap">
@@ -630,8 +686,22 @@
     </div>
 
     <!-- Bottom AdSense Banner -->
-    <div class="max-w-6xl mx-auto mt-12 p-4 rounded-2xl border border-dashed border-slate-300 bg-slate-100 text-center text-xs text-slate-400">
-      📢 Advertisement Placement (Google AdSense High-Conversion Banner Area)
+    <!-- AdSense Compliant Banner Block -->
+    <div class="max-w-6xl mx-auto mt-12 overflow-hidden rounded-2xl bg-white border border-slate-200/80 shadow-2xs text-center">
+      <div class="p-4 sm:p-6 text-center space-y-2">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+             data-ad-slot="XXXXXXXXXX"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+          try { (adsbygoogle = window.adsbygoogle || []).push({}); } catch(e) {}
+        </script>
+        <div class="text-[10px] text-slate-400 font-bold tracking-wider uppercase">
+          StanKit Studio • Free Fandom Digital Tools
+        </div>
+      </div>
     </div>
 
     <!-- SEO FAQ Section -->
@@ -645,6 +715,16 @@
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs text-slate-700 leading-relaxed">
+        <!-- [Research E-E-A-T Guide 1: Korean Honorifics & Addressing Boundaries] -->
+        <div class="space-y-2 p-4 rounded-xl bg-indigo-50/60 border border-indigo-100 col-span-1 md:col-span-2">
+          <h3 class="font-extrabold text-indigo-950 text-sm flex items-center space-x-1.5">
+            <span>🛡️</span>
+            <span>韩语粉丝信与 Bubble 称呼避坑指南 (Honorifics & Safe Addressing Guide)</span>
+          </h3>
+          <p class="text-xs text-slate-700 leading-relaxed">
+            <strong>为什么不要随意叫“Oppa (오빠)”或使用平语 (반말)？</strong> 在韩国社会文化中，“Oppa”带有强烈的亲昵与年龄限定色彩（仅女性对年长男性）。对于比自己年龄小的新生代偶像，或刚出道的新人爱豆，使用带有敬语后缀的 <strong>“이름 + 님 (-nim)”</strong>（如 정국님, 제니님）或官方粉丝爱称是最得体、最尊重且绝不踩雷的做法。StanKit Studio 默认采用最高安全级别的 <em>해요体（亲切敬语）</em>，彻底消除国际粉丝的敬语焦虑。
+          </p>
+        </div>
         <div class="space-y-2 p-4 rounded-xl bg-slate-50 border border-slate-100">
           <h3 class="font-extrabold text-slate-900 text-sm flex items-center space-x-1.5">
             <span>❓</span>
@@ -714,6 +794,30 @@
     // State Variables
     let currentLang = 'en';
     let currentTargetLang = 'ko';
+    
+    // ==========================================
+    // Safe LocalStorage Wrapper (Safari Private Browsing Guard)
+    // ==========================================
+    function safeGetStorage(key, defaultVal) {
+      try {
+        const val = localStorage.getItem(key);
+        return val !== null ? JSON.parse(val) : defaultVal;
+      } catch (e) {
+        console.warn('[Storage Read Warning]', e);
+        return defaultVal;
+      }
+    }
+
+    function safeSetStorage(key, val) {
+      try {
+        localStorage.setItem(key, typeof val === 'string' ? val : JSON.stringify(val));
+        return true;
+      } catch (e) {
+        console.warn('[Storage Write Warning]', e);
+        return false;
+      }
+    }
+
     let currentIdol = null;
     let currentScenarioId = 'cb-sprint';
     let activeFilterCat = 'popular';
@@ -1321,6 +1425,20 @@
       renderLetterWithVariant(lastShuffleIndex);
     }
 
+    
+    function insertBubblePhrase(koreanText) {
+      const textarea = document.getElementById('target-textarea');
+      if (textarea) {
+        textarea.value = koreanText;
+        updateCharCount(koreanText.length);
+        const refEl = document.getElementById('ref-translation');
+        if (refEl) {
+          refEl.innerText = 'Bubble/DM 30字极限表达 (Ultra-Dense Phrase)';
+        }
+        showToast('💬 Bubble 30字短句已填入！', '✨');
+      }
+    }
+
     function renderLetterWithVariant(varIdx) {
       const idolName = document.getElementById('idol-input').value.trim() || (currentIdol ? currentIdol.name_en : 'My Idol');
       const senderName = document.getElementById('sender-input').value.trim() || ((currentIdol && (currentIdol.fandomName || currentIdol.fandom)) || 'Fans');
@@ -1412,7 +1530,18 @@
     function updateCharCount() {
       const txt = document.getElementById('target-textarea').value;
       const len = txt.length;
-      document.getElementById('char-count').innerText = `${len} chars`;
+      const charEl = document.getElementById('char-count');
+      if (charEl) {
+        if (currentStyles.length === 'flash' || len <= 35) {
+          if (len <= 30) {
+            charEl.innerHTML = `<span class="text-emerald-600 font-extrabold">${len}/30 chars (✅ Bubble OK)</span>`;
+          } else {
+            charEl.innerHTML = `<span class="text-rose-600 font-extrabold">${len}/30 chars (⚠️ Bubble Limit Exceeded)</span>`;
+          }
+        } else {
+          charEl.innerText = `${len} chars`;
+        }
+      }
     }
 
     function loadPopularPreset(type) {

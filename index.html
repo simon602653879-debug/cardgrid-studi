@@ -6,8 +6,46 @@
   <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title id="seo-title">StanKit Studio | Photocard Print Grid Maker (300 DPI)</title>
-  <meta name="description" id="seo-desc" content="Free online tool to arrange and print idol photocards (55x85mm), Polaroids, and mini photos on A4, US Letter, A5, 4x6 or 5x7 paper with precise 300 DPI high-resolution PDF output and cut lines.">
-  <meta name="keywords" content="stankit, stankit studio, photocard print maker, photocard template a4, us letter photocard grid, polaroid grid maker, diy photocard print sheet, 55x85mm card printer online, a5 photocard grid, 300 dpi print">
+  <meta name="description" id="seo-desc" content="Free online tool to arrange and print idol photocards (55x85mm), BTS tour mini cards (70x100mm), Japanese L-size bromides (89x127mm), and Polaroids on A4, US Letter, 4x6 photo paper with 300 DPI high-res PDF output and DPI quality check.">
+  <meta name="keywords" content="stankit, stankit studio, photocard print maker, photocard template a4, 4x6 walgreens photocard grid, bts mini photocard size, 70x100mm card, japanese bromide l size print, missing pc placeholder generator, diy photocard print sheet, 55x85mm card printer online, 300 dpi print">
+
+  <!-- OpenGraph & Twitter Meta Tags for Social Sharing & E-E-A-T -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="StanKit Studio | Photocard Print Grid Maker (300 DPI)">
+  <meta property="og:description" content="Free DIY tool to arrange 55x85mm photocards, Polaroids, and tour mini cards on A4, US Letter, or 4x6 photo paper with 300 DPI export.">
+  <meta property="og:url" content="https://stankit.vercel.app/">
+  <meta property="og:site_name" content="StanKit Studio">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="StanKit Studio | Photocard Print Grid Maker (300 DPI)">
+  <meta name="twitter:description" content="Free DIY tool to arrange 55x85mm photocards, Polaroids, and tour mini cards on A4, US Letter, or 4x6 photo paper with 300 DPI export.">
+
+  <!-- Schema.org JSON-LD Structured Data for Google AdSense & SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "StanKit Studio Photocard Print Grid Maker",
+    "url": "https://stankit.vercel.app/",
+    "applicationCategory": "DesignApplication",
+    "operatingSystem": "All",
+    "description": "Free online tool to arrange and print idol photocards (55x85mm), BTS tour mini cards (70x100mm), Japanese L-size bromides (89x127mm), and Polaroids on A4, US Letter, and 4x6 photo paper with 300 DPI high-res PDF output.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "featureList": [
+      "55x85mm Standard Photocard Grid",
+      "70x100mm Tour Mini Card Template",
+      "89x127mm Japanese L-Size Bromide Layout",
+      "Walgreens 4x6 Photo Paper Grid",
+      "300 DPI High-Resolution Printable PDF",
+      "Intelligent DPI Quality Check",
+      "Missing PC Wishlist Placeholder Generator",
+      "100% Client-Side Privacy Guarantee"
+    ]
+  }
+  </script>
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -160,7 +198,7 @@
         <span class="bg-gradient-to-r from-indigo-600 to-rose-500 bg-clip-text text-transparent" data-i18n="hero_title_2">300 DPI High-Res Printable PDF</span>
       </h1>
       <p class="text-slate-500 text-xs sm:text-sm leading-relaxed" data-i18n="hero_desc">
-        Effortlessly arrange standard 55×85mm photocards, Polaroids, or mini photos on various paper sheets. 100% client-side privacy-first PDF export with precision cut-lines.
+        Arrange standard 55×85mm photocards, BTS 70×100mm tour cards, Japanese L-size bromides, and Polaroids with intelligent DPI resolution check, 2mm cutting gaps, and 100% client-side privacy.
       </p>
     </div>
 
@@ -173,7 +211,7 @@
         <!-- Upload & Settings Box -->
         <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-6">
           
-          <!-- Step 1: Upload Images -->
+          <!-- Step 1: Upload Images & Missing Card Generator -->
           <div>
             <div class="flex items-center justify-between mb-2">
               <label class="block text-xs font-extrabold text-slate-900 uppercase tracking-wider flex items-center space-x-1.5">
@@ -182,99 +220,128 @@
               </label>
               <span class="text-xs font-bold text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-full border border-indigo-100" id="upload-counter">0/9 cards</span>
             </div>
-            <div id="drop-zone" onclick="triggerUploadForSlot(null)" class="border-2 border-dashed border-indigo-200 hover:border-indigo-500 bg-indigo-50/40 hover:bg-indigo-50/80 transition rounded-2xl p-6 text-center cursor-pointer space-y-2 group active:scale-98">
+
+            <!-- Upload Dropzone -->
+            <div id="drop-zone" onclick="triggerUploadForSlot(null)" class="border-2 border-dashed border-indigo-200 hover:border-indigo-500 bg-indigo-50/40 hover:bg-indigo-50/80 transition rounded-2xl p-5 text-center cursor-pointer space-y-2 group active:scale-98">
               <input type="file" id="file-input" multiple accept="image/*" class="hidden" onchange="handleFileSelect(this.files)">
-              <div class="w-12 h-12 rounded-2xl bg-white shadow-sm border border-indigo-100 flex items-center justify-center mx-auto text-2xl group-hover:scale-110 transition transform">
+              <div class="w-11 h-11 rounded-2xl bg-white shadow-sm border border-indigo-100 flex items-center justify-center mx-auto text-xl group-hover:scale-110 transition transform">
                 📷
               </div>
               <div class="text-xs font-bold text-indigo-900" data-i18n="dropzone_title">Click to upload or drag & drop</div>
               <p class="text-[11px] text-slate-500" data-i18n="dropzone_desc">PNG, JPG, WEBP (Supports batch selection)</p>
             </div>
+
+            <!-- Missing PC Placeholder Generator Trigger -->
+            <div class="mt-2.5 flex items-center justify-between gap-2">
+              <button type="button" onclick="openPlaceholderModal()" class="w-full py-2 px-3 rounded-xl bg-purple-50 hover:bg-purple-100 border border-purple-200 text-purple-700 font-bold text-xs flex items-center justify-center space-x-1.5 transition cursor-pointer">
+                <span>🎴</span>
+                <span data-i18n="btn_gen_placeholders">Generate Missing PC Placeholders</span>
+                <span class="text-[9px] bg-purple-200/70 text-purple-800 px-1 py-0.2 rounded font-extrabold">Etsy Pick</span>
+              </button>
+            </div>
           </div>
 
-          <!-- Step 2: Diverse Paper Sizes & Specifications -->
+          <!-- Step 2: Diverse Paper Sizes & Physical Formats (10 Sizing Presets) -->
           <div>
             <div class="flex items-center justify-between mb-2">
               <label class="block text-xs font-extrabold text-slate-900 uppercase tracking-wider flex items-center space-x-1.5">
                 <span class="w-5 h-5 rounded-md bg-indigo-600 text-white flex items-center justify-center text-[10px] font-extrabold">2</span>
                 <span data-i18n="label_step2">2. Paper Size & Card Format</span>
               </label>
-              <span class="text-[10px] text-slate-400 font-bold" data-i18n="label_multi_sizes">8 Formats Available</span>
+              <span class="text-[10px] text-slate-400 font-bold" data-i18n="label_multi_sizes">10 Formats Available</span>
             </div>
 
             <!-- Paper Grid Option Cards -->
             <div class="grid grid-cols-2 sm:grid-cols-2 gap-2 text-xs font-bold" id="paper-options-container">
               
               <!-- 1. A4 Standard (🔥 Popular) -->
-              <button type="button" onclick="setPaper('a4')" id="btn-paper-a4" class="p-3 rounded-xl border border-indigo-600 bg-indigo-50 text-indigo-700 text-left transition relative cursor-pointer active:scale-98 shadow-xs">
+              <button type="button" onclick="setPaper('a4')" id="btn-paper-a4" class="p-2.5 rounded-xl border border-indigo-600 bg-indigo-50 text-indigo-700 text-left transition relative cursor-pointer active:scale-98 shadow-xs">
                 <div class="flex items-center justify-between">
                   <span class="font-extrabold text-xs" data-i18n="paper_a4_title">📄 A4 Standard</span>
                   <span class="text-[9px] bg-rose-500 text-white px-1.5 py-0.2 rounded font-extrabold" data-i18n="badge_hot">🔥 HOT</span>
                 </div>
-                <div class="text-[11px] font-medium text-slate-500 mt-0.5" data-i18n="paper_a4_desc">55×85mm • 3×3 (9 cards)</div>
+                <div class="text-[10px] font-medium text-slate-500 mt-0.5" data-i18n="paper_a4_desc">55×85mm • 3×3 (9 cards)</div>
               </button>
 
               <!-- 2. US Letter (🔥 Popular) -->
-              <button type="button" onclick="setPaper('letter')" id="btn-paper-letter" class="p-3 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-left transition relative cursor-pointer active:scale-98">
+              <button type="button" onclick="setPaper('letter')" id="btn-paper-letter" class="p-2.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-left transition relative cursor-pointer active:scale-98">
                 <div class="flex items-center justify-between">
                   <span class="font-extrabold text-xs" data-i18n="paper_letter_title">📑 US Letter</span>
                   <span class="text-[9px] bg-amber-500 text-white px-1.5 py-0.2 rounded font-extrabold" data-i18n="badge_na">🔥 USA</span>
                 </div>
-                <div class="text-[11px] font-medium text-slate-500 mt-0.5" data-i18n="paper_letter_desc">8.5×11" • 3×3 (9 cards)</div>
+                <div class="text-[10px] font-medium text-slate-500 mt-0.5" data-i18n="paper_letter_desc">8.5×11" • 3×3 (9 cards)</div>
               </button>
 
-              <!-- 3. A4 Polaroid Mini -->
-              <button type="button" onclick="setPaper('a4-polaroid')" id="btn-paper-a4-polaroid" class="p-3 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-left transition relative cursor-pointer active:scale-98">
+              <!-- 3. 4x6" Walgreens / Walmart Photo Print (🔥 Research Painpoint) -->
+              <button type="button" onclick="setPaper('4x6')" id="btn-paper-4x6" class="p-2.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-left transition relative cursor-pointer active:scale-98">
+                <div class="flex items-center justify-between">
+                  <span class="font-extrabold text-xs" data-i18n="paper_4x6_title">🖼️ 4×6" Retail Photo</span>
+                  <span class="text-[9px] bg-emerald-500 text-white px-1.5 py-0.2 rounded font-extrabold" data-i18n="badge_retail">$0.15</span>
+                </div>
+                <div class="text-[10px] font-medium text-slate-500 mt-0.5" data-i18n="paper_4x6_desc">46×70mm • 2×2 (4 cards)</div>
+              </button>
+
+              <!-- 4. BTS / Tour Mini Photocard (70x100mm) (🔥 Research Painpoint) -->
+              <button type="button" onclick="setPaper('a4-bts-tour')" id="btn-paper-a4-bts-tour" class="p-2.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-left transition relative cursor-pointer active:scale-98">
+                <div class="flex items-center justify-between">
+                  <span class="font-extrabold text-xs" data-i18n="paper_tour_title">💜 Tour Mini PC</span>
+                  <span class="text-[9px] bg-purple-100 text-purple-700 px-1.5 py-0.2 rounded font-bold" data-i18n="badge_tour">70×100mm</span>
+                </div>
+                <div class="text-[10px] font-medium text-slate-500 mt-0.5" data-i18n="paper_tour_desc">A4 Sheet • 2×2 (4 cards)</div>
+              </button>
+
+              <!-- 5. Japan Lawson / 7-11 L-Size Bromide (89x127mm) (🔥 Research Painpoint) -->
+              <button type="button" onclick="setPaper('japan-l-size')" id="btn-paper-japan-l-size" class="p-2.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-left transition relative cursor-pointer active:scale-98">
+                <div class="flex items-center justify-between">
+                  <span class="font-extrabold text-xs" data-i18n="paper_bromide_title">🇯🇵 Japan L-Bromide</span>
+                  <span class="text-[9px] bg-rose-100 text-rose-700 px-1.5 py-0.2 rounded font-bold" data-i18n="badge_jp">L判 89×127</span>
+                </div>
+                <div class="text-[10px] font-medium text-slate-500 mt-0.5" data-i18n="paper_bromide_desc">A4 Sheet • 2×2 (4 photos)</div>
+              </button>
+
+              <!-- 6. A4 Polaroid Mini -->
+              <button type="button" onclick="setPaper('a4-polaroid')" id="btn-paper-a4-polaroid" class="p-2.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-left transition relative cursor-pointer active:scale-98">
                 <div class="flex items-center justify-between">
                   <span class="font-extrabold text-xs" data-i18n="paper_polaroid_title">🏷️ Polaroid Mini</span>
                   <span class="text-[9px] bg-indigo-100 text-indigo-700 px-1.5 py-0.2 rounded font-bold">54×86mm</span>
                 </div>
-                <div class="text-[11px] font-medium text-slate-500 mt-0.5" data-i18n="paper_polaroid_desc">A4 Sheet • 3×3 (9 cards)</div>
+                <div class="text-[10px] font-medium text-slate-500 mt-0.5" data-i18n="paper_polaroid_desc">A4 Sheet • 3×3 (9 cards)</div>
               </button>
 
-              <!-- 4. 4x6" Photo Paper (🔥 Popular) -->
-              <button type="button" onclick="setPaper('4x6')" id="btn-paper-4x6" class="p-3 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-left transition relative cursor-pointer active:scale-98">
-                <div class="flex items-center justify-between">
-                  <span class="font-extrabold text-xs" data-i18n="paper_4x6_title">🖼️ 4×6" Photo Paper</span>
-                  <span class="text-[9px] bg-rose-500 text-white px-1.5 py-0.2 rounded font-extrabold" data-i18n="badge_mini">🔥 Pocket</span>
-                </div>
-                <div class="text-[11px] font-medium text-slate-500 mt-0.5" data-i18n="paper_4x6_desc">46×70mm • 2×2 (4 cards)</div>
-              </button>
-
-              <!-- 5. 5x7" Photo Paper -->
-              <button type="button" onclick="setPaper('5x7')" id="btn-paper-5x7" class="p-3 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-left transition relative cursor-pointer active:scale-98">
+              <!-- 7. 5x7" Photo Paper -->
+              <button type="button" onclick="setPaper('5x7')" id="btn-paper-5x7" class="p-2.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-left transition relative cursor-pointer active:scale-98">
                 <div class="flex items-center justify-between">
                   <span class="font-extrabold text-xs" data-i18n="paper_5x7_title">📸 5×7" Photo Paper</span>
                   <span class="text-[9px] bg-slate-100 text-slate-600 px-1.5 py-0.2 rounded font-bold">55×85mm</span>
                 </div>
-                <div class="text-[11px] font-medium text-slate-500 mt-0.5" data-i18n="paper_5x7_desc">Photo Studio • 2×2 (4 cards)</div>
+                <div class="text-[10px] font-medium text-slate-500 mt-0.5" data-i18n="paper_5x7_desc">Photo Studio • 2×2 (4 cards)</div>
               </button>
 
-              <!-- 6. A5 Hand-diary -->
-              <button type="button" onclick="setPaper('a5')" id="btn-paper-a5" class="p-3 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-left transition relative cursor-pointer active:scale-98">
+              <!-- 8. A5 Hand-diary -->
+              <button type="button" onclick="setPaper('a5')" id="btn-paper-a5" class="p-2.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-left transition relative cursor-pointer active:scale-98">
                 <div class="flex items-center justify-between">
                   <span class="font-extrabold text-xs" data-i18n="paper_a5_title">📐 A5 Hand Diary</span>
                   <span class="text-[9px] bg-slate-100 text-slate-600 px-1.5 py-0.2 rounded font-bold">55×85mm</span>
                 </div>
-                <div class="text-[11px] font-medium text-slate-500 mt-0.5" data-i18n="paper_a5_desc">148×210mm • 2×2 (4 cards)</div>
+                <div class="text-[10px] font-medium text-slate-500 mt-0.5" data-i18n="paper_a5_desc">148×210mm • 2×2 (4 cards)</div>
               </button>
 
-              <!-- 7. A4 Dense 12-Cards -->
-              <button type="button" onclick="setPaper('a4-dense')" id="btn-paper-a4-dense" class="p-3 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-left transition relative cursor-pointer active:scale-98">
+              <!-- 9. A4 Dense 12-Cards -->
+              <button type="button" onclick="setPaper('a4-dense')" id="btn-paper-a4-dense" class="p-2.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-left transition relative cursor-pointer active:scale-98">
                 <div class="flex items-center justify-between">
                   <span class="font-extrabold text-xs" data-i18n="paper_dense_title">⚡ A4 Dense 12-Cards</span>
                   <span class="text-[9px] bg-emerald-100 text-emerald-700 px-1.5 py-0.2 rounded font-bold" data-i18n="badge_save">Eco</span>
                 </div>
-                <div class="text-[11px] font-medium text-slate-500 mt-0.5" data-i18n="paper_dense_desc">50×68mm • 3×4 (12 cards)</div>
+                <div class="text-[10px] font-medium text-slate-500 mt-0.5" data-i18n="paper_dense_desc">50×68mm • 3×4 (12 cards)</div>
               </button>
 
-              <!-- 8. A3 Commercial Batch (16-Cards) -->
-              <button type="button" onclick="setPaper('a3')" id="btn-paper-a3" class="p-3 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-left transition relative cursor-pointer active:scale-98">
+              <!-- 10. A3 Commercial Batch (16-Cards) -->
+              <button type="button" onclick="setPaper('a3')" id="btn-paper-a3" class="p-2.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-left transition relative cursor-pointer active:scale-98">
                 <div class="flex items-center justify-between">
                   <span class="font-extrabold text-xs" data-i18n="paper_a3_title">🏢 A3 Batch Commercial</span>
                   <span class="text-[9px] bg-purple-100 text-purple-700 px-1.5 py-0.2 rounded font-bold" data-i18n="badge_batch">Batch</span>
                 </div>
-                <div class="text-[11px] font-medium text-slate-500 mt-0.5" data-i18n="paper_a3_desc">55×85mm • 4×4 (16 cards)</div>
+                <div class="text-[10px] font-medium text-slate-500 mt-0.5" data-i18n="paper_a3_desc">55×85mm • 4×4 (16 cards)</div>
               </button>
 
             </div>
@@ -290,7 +357,7 @@
               </label>
             </div>
 
-            <!-- [P1.2] Safe Area Margin Overlay Toggle -->
+            <!-- Safe Area Margin Overlay Toggle -->
             <div class="flex items-center justify-between">
               <span class="font-bold text-slate-700" data-i18n="opt_safe_area">Show 2mm Safe Area Guides</span>
               <label class="relative inline-flex items-center cursor-pointer">
@@ -308,7 +375,7 @@
               </select>
             </div>
 
-            <!-- [P1.5] Backside Print Template Option Placeholder -->
+            <!-- Backside Print Template Option Placeholder -->
             <div class="flex items-center justify-between pt-1 border-t border-slate-100">
               <div class="flex items-center space-x-1.5">
                 <span class="font-bold text-slate-700" data-i18n="opt_back_template">Double-Sided Back Template</span>
@@ -323,9 +390,9 @@
 
           <!-- Action Button: Download 300 DPI PDF -->
           <div class="pt-2">
-            <button type="button" onclick="exportPDF()" class="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-indigo-600 to-rose-500 hover:from-indigo-700 hover:to-rose-600 text-white font-extrabold text-sm shadow-md shadow-indigo-100 transition transform active:scale-98 flex items-center justify-center space-x-2 cursor-pointer">
+            <button type="button" id="btn-export-pdf" onclick="exportPDF()" class="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-indigo-600 to-rose-500 hover:from-indigo-700 hover:to-rose-600 text-white font-extrabold text-sm shadow-md shadow-indigo-100 transition transform active:scale-98 flex items-center justify-center space-x-2 cursor-pointer">
               <span>🖨️</span>
-              <span data-i18n="btn_download_pdf">Download 300 DPI PDF (Print Ready)</span>
+              <span id="btn-pdf-text" data-i18n="btn_download_pdf">Download 300 DPI PDF (Print Ready)</span>
             </button>
             <p class="text-[10px] text-slate-400 text-center mt-2" data-i18n="pdf_note">
               🔒 100% Client-Side Privacy: Images never leave your device.
@@ -369,13 +436,13 @@
           </div>
         </div>
 
-        <!-- Interactive Tips Bar -->
-        <div class="p-2.5 rounded-xl bg-indigo-50/60 border border-indigo-100 text-indigo-900 text-xs flex items-center justify-between">
+        <!-- Interactive Tips & DPI Health Bar -->
+        <div class="p-2.5 rounded-xl bg-indigo-50/60 border border-indigo-100 text-indigo-900 text-xs flex items-center justify-between flex-wrap gap-2">
           <span class="flex items-center space-x-1.5 font-bold">
             <span>💡</span>
-            <span data-i18n="tip_interactive">Drag cards to swap positions. Hover to rotate ↻ or delete ✕.</span>
+            <span data-i18n="tip_interactive">Drag cards to swap. Hover to rotate ↻, delete ✕, or inspect 🟢 DPI resolution.</span>
           </span>
-          <span class="text-[10px] text-indigo-600 font-extrabold bg-white px-2 py-0.5 rounded shadow-2xs" data-i18n="tag_interactive">Drag to swap</span>
+          <span class="text-[10px] text-indigo-600 font-extrabold bg-white px-2 py-0.5 rounded shadow-2xs" data-i18n="tag_interactive">Auto DPI Health Check</span>
         </div>
 
         <!-- Paper Sheet Container with Checkerboard Background (P0: Padding Centered) -->
@@ -389,71 +456,177 @@
           </div>
         </div>
 
-        <div class="text-[11px] text-slate-500 text-center flex flex-wrap items-center justify-center gap-x-4 gap-y-1">
+        <div class="text-[11px] text-slate-500 text-center flex flex-wrap items-center justify-center gap-x-4 gap-y-1 font-medium">
           <span data-i18n="feature_1">📐 Millimeter-Precision Centering</span>
           <span data-i18n="feature_2">✂️ 2mm Physical Cutting Gaps</span>
-          <span data-i18n="feature_3">🖱️ Drag to Swap / Rotate / Delete</span>
+          <span data-i18n="feature_3">🔍 Intelligent DPI Resolution Check</span>
         </div>
       </div>
 
     </div>
 
-    <!-- AdSense Placement at Bottom -->
-    <div class="max-w-6xl mx-auto mt-12 p-4 rounded-2xl border border-dashed border-slate-300 bg-slate-100 text-center text-xs text-slate-400">
-      📢 Advertisement Placement (Google AdSense High-Conversion Banner Area)
+    <!-- Modal: Missing PC Placeholder Generator -->
+    <div id="placeholder-modal" class="fixed inset-0 bg-slate-950/60 backdrop-blur-xs flex items-center justify-center p-4 z-50 opacity-0 pointer-events-none transition-opacity duration-200">
+      <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl space-y-4 border border-slate-100 transform scale-95 transition-transform duration-200" id="placeholder-modal-content">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+          <div class="flex items-center space-x-2">
+            <span class="text-xl">🎴</span>
+            <h3 class="font-extrabold text-slate-900 text-sm" data-i18n="modal_placeholder_title">Missing PC Placeholder Generator</h3>
+          </div>
+          <button type="button" onclick="closePlaceholderModal()" class="text-slate-400 hover:text-slate-700 text-base font-bold cursor-pointer">✕</button>
+        </div>
+
+        <p class="text-xs text-slate-500" data-i18n="modal_placeholder_desc">
+          Generate aesthetic printable placeholder cards for your empty binder pockets (fill wishlist gaps).
+        </p>
+
+        <div class="space-y-3 text-xs">
+          <div>
+            <label class="font-bold text-slate-700 block mb-1" data-i18n="label_placeholder_text">Placeholder Watermark Text:</label>
+            <input type="text" id="ph-text" value="WISH LIST" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="e.g. WISH LIST, MISSING PC, JUNGKOOK - SEVEN">
+          </div>
+
+          <div>
+            <label class="font-bold text-slate-700 block mb-1" data-i18n="label_placeholder_theme">Aesthetic Color Theme:</label>
+            <div class="grid grid-cols-4 gap-2 text-[11px] font-bold text-center">
+              <button type="button" onclick="selectPlaceholderTheme('purple')" id="theme-purple" class="p-2 rounded-xl border-2 border-indigo-600 bg-indigo-50 text-indigo-700 cursor-pointer font-bold">💜 Lavender</button>
+              <button type="button" onclick="selectPlaceholderTheme('pink')" id="theme-pink" class="p-2 rounded-xl border border-slate-200 bg-slate-50 text-slate-700 cursor-pointer font-bold">💖 Rose</button>
+              <button type="button" onclick="selectPlaceholderTheme('mint')" id="theme-mint" class="p-2 rounded-xl border border-slate-200 bg-slate-50 text-slate-700 cursor-pointer font-bold">🍀 Mint</button>
+              <button type="button" onclick="selectPlaceholderTheme('slate')" id="theme-slate" class="p-2 rounded-xl border border-slate-200 bg-slate-50 text-slate-700 cursor-pointer font-bold">🖤 Slate</button>
+            </div>
+          </div>
+
+          <div>
+            <label class="font-bold text-slate-700 block mb-1" data-i18n="label_placeholder_count">Number of Placeholders:</label>
+            <select id="ph-count" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+              <option value="fill">Fill all remaining empty slots</option>
+              <option value="1">1 Card</option>
+              <option value="4">4 Cards</option>
+              <option value="9">9 Cards (Full Sheet)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="pt-2 flex items-center space-x-2">
+          <button type="button" onclick="generatePlaceholders()" class="w-full py-3 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-extrabold text-xs shadow-md shadow-indigo-100 cursor-pointer transition">
+            ✨ <span data-i18n="btn_apply_placeholders">Generate & Insert to Sheet</span>
+          </button>
+        </div>
+      </div>
     </div>
 
-    <!-- SEO FAQ Section -->
-    <div class="max-w-6xl mx-auto mt-8 bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm space-y-6">
-      <div class="border-b border-slate-100 pb-4">
-        <h2 class="text-lg sm:text-xl font-extrabold text-slate-900 tracking-tight flex items-center space-x-2">
-          <span>📚</span>
-          <span data-i18n="faq_title">Photocard Printing FAQ & DIY Guide</span>
-        </h2>
-        <p class="text-xs text-slate-500 font-medium mt-1" data-i18n="faq_desc">Learn paper selection, sizing standards, and home printing recommendations</p>
+    <!-- AdSense Compliant Banner Block -->
+    <div class="max-w-6xl mx-auto mt-12 overflow-hidden rounded-2xl bg-white border border-slate-200/80 shadow-2xs text-center">
+      <div class="p-4 sm:p-6 text-center space-y-2">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+             data-ad-slot="XXXXXXXXXX"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+          try { (adsbygoogle = window.adsbygoogle || []).push({}); } catch(e) {}
+        </script>
+        <div class="text-[10px] text-slate-400 font-bold tracking-wider uppercase">
+          StanKit Studio • Free Fandom Digital Tools
+        </div>
       </div>
+    </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs text-slate-700 leading-relaxed">
-        <div class="space-y-2 p-4 rounded-xl bg-slate-50 border border-slate-100">
-          <h3 class="font-extrabold text-slate-900 text-sm flex items-center space-x-1.5">
+    <!-- Deep SEO & E-E-A-T Knowledge Hub (Prevent Low-Value Content Penalty) -->
+    <div class="max-w-6xl mx-auto mt-8 space-y-8">
+      
+      <!-- Section 1: Comprehensive Photocard Size Chart & Card Sleeve Standards -->
+      <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm space-y-6">
+        <div class="border-b border-slate-100 pb-4">
+          <h2 class="text-lg sm:text-xl font-extrabold text-slate-900 tracking-tight flex items-center space-x-2">
             <span>📏</span>
-            <span data-i18n="faq_q1">What is the standard size for idol photocards?</span>
-          </h3>
-          <p data-i18n="faq_a1">
-            Standard idol photocards measure exactly 55×85mm (2.16×3.35 inches) with rounded corners (r=2.5mm~3mm). Instax Mini polaroids measure 54×86mm. StanKit Studio supports both dimensions with pixel-perfect millimeter precision.
+            <span data-i18n="guide_size_title">Comprehensive Idol Photocard Sizing & Sleeve Guide</span>
+          </h2>
+          <p class="text-xs text-slate-500 font-medium mt-1" data-i18n="guide_size_desc">
+            Universal standard dimensions across K-Pop, Japanese Bromides, Tour Mini PCs, and optimal card sleeve sizes.
           </p>
         </div>
 
-        <div class="space-y-2 p-4 rounded-xl bg-slate-50 border border-slate-100">
-          <h3 class="font-extrabold text-slate-900 text-sm flex items-center space-x-1.5">
-            <span>📄</span>
-            <span data-i18n="faq_q2">Which paper should I use for printing at home?</span>
-          </h3>
-          <p data-i18n="faq_a2">
-            We recommend 250gsm~300gsm double-sided glossy or matte photo paper. If your home inkjet printer supports it, 300gsm RC glossy paper provides the most authentic official merchandise feel and thickness.
-          </p>
-        </div>
-
-        <div class="space-y-2 p-4 rounded-xl bg-slate-50 border border-slate-100">
-          <h3 class="font-extrabold text-slate-900 text-sm flex items-center space-x-1.5">
-            <span>🔒</span>
-            <span data-i18n="faq_q3">Are my uploaded photos safe and private?</span>
-          </h3>
-          <p data-i18n="faq_a3">
-            100% yes. StanKit Studio processes and arranges all images purely inside your web browser using HTML5 Canvas & Web Workers. Zero images or user data are ever uploaded to external servers.
-          </p>
-        </div>
-
-        <div class="space-y-2 p-4 rounded-xl bg-slate-50 border border-slate-100">
-          <h3 class="font-extrabold text-slate-900 text-sm flex items-center space-x-1.5">
-            <span>🖱️</span>
-            <span data-i18n="faq_q4">How do I reorder or delete cards on the grid?</span>
-          </h3>
-          <p data-i18n="faq_a4">
-            Simply drag any card with your mouse and drop it onto another slot to swap positions. To remove a photo, hover over its card slot and click the red ✕ delete button.
-          </p>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs border-collapse">
+            <thead>
+              <tr class="bg-slate-50 border-b border-slate-200 text-slate-600 font-extrabold">
+                <th class="p-3">Category / Format</th>
+                <th class="p-3">Exact Physical Size</th>
+                <th class="p-3">Recommended Card Sleeve</th>
+                <th class="p-3">Common Examples & Agency Origin</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100 text-slate-700">
+              <tr class="hover:bg-slate-50/60 transition">
+                <td class="p-3 font-bold text-indigo-700">Standard Album PC (官方专辑标准小卡)</td>
+                <td class="p-3 font-mono font-bold">55 × 85 mm</td>
+                <td class="p-3"><span class="bg-indigo-50 text-indigo-700 px-2 py-0.5 rounded font-bold">56×87mm / 57.5×89mm</span></td>
+                <td class="p-3">SM, HYBE, JYP, YG, Starship album inclusions, Lucky Draws, POBs</td>
+              </tr>
+              <tr class="hover:bg-slate-50/60 transition">
+                <td class="p-3 font-bold text-purple-700">BTS / Tour Mini Photocard (巡演大卡/留言卡)</td>
+                <td class="p-3 font-mono font-bold">70 × 100 mm</td>
+                <td class="p-3"><span class="bg-purple-50 text-purple-700 px-2 py-0.5 rounded font-bold">72×102mm / 73×105mm</span></td>
+                <td class="p-3">BTS Muster & Tour packs, TXT, SEVENTEEN, ENHYPEN concert merchandise</td>
+              </tr>
+              <tr class="hover:bg-slate-50/60 transition">
+                <td class="p-3 font-bold text-rose-700">Japan Conbini Bromide (日版便利店 L判 生写真)</td>
+                <td class="p-3 font-mono font-bold">89 × 127 mm (L判)</td>
+                <td class="p-3"><span class="bg-rose-50 text-rose-700 px-2 py-0.5 rounded font-bold">91×130mm (L-Size Bag)</span></td>
+                <td class="p-3">Lawson / FamilyMart / 7-Eleven Japanese printed bromides, Idol magazine photos</td>
+              </tr>
+              <tr class="hover:bg-slate-50/60 transition">
+                <td class="p-3 font-bold text-amber-700">Instax Mini Polaroid (富士拍立得 Mini 相纸)</td>
+                <td class="p-3 font-mono font-bold">54 × 86 mm</td>
+                <td class="p-3"><span class="bg-amber-50 text-amber-700 px-2 py-0.5 rounded font-bold">56×87mm (Snug Fit)</span></td>
+                <td class="p-3">Fujifilm Instax Mini instant prints, Special event lucky draw polaroids</td>
+              </tr>
+              <tr class="hover:bg-slate-50/60 transition">
+                <td class="p-3 font-bold text-emerald-700">PVC / Special Transparent Cards (透明/厚PVC卡)</td>
+                <td class="p-3 font-mono font-bold">55 × 85 mm (0.76mm)</td>
+                <td class="p-3"><span class="bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded font-bold">58×89mm (Thick Sleeve)</span></td>
+                <td class="p-3">Pop-up store ID cards, Credit-card style PVC cards, lenticular 3D cards</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
+
+      <!-- Section 2: Retail Photo Kiosk ($0.15 Walgreens/Walmart) Print Guide -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs text-slate-700 leading-relaxed">
+        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-3">
+          <h3 class="font-extrabold text-slate-900 text-sm flex items-center space-x-1.5">
+            <span>🛒</span>
+            <span data-i18n="guide_retail_title">How to Print 4 Photocards for $0.15 at Walgreens/Walmart</span>
+          </h3>
+          <p class="text-slate-600" data-i18n="guide_retail_desc1">
+            Standard 4×6" photo prints cost only $0.15~$0.25 at Walgreens, Walmart, CVS, and local print shops. By selecting our <strong>4×6" (46×70mm 2×2)</strong> template, you can fit 4 photocards seamlessly onto a single photo sheet.
+          </p>
+          <ul class="list-disc list-inside space-y-1 text-slate-600 text-[11px]">
+            <li>Select <strong>4×6" Photo Paper</strong> format in StanKit Studio and export PDF/JPEG.</li>
+            <li>In the retail kiosk app, select <strong>"Fill / True-to-size"</strong> (disable auto-crop).</li>
+            <li>Use a craft paper cutter or scissors along our dashed scissor cut-lines.</li>
+          </ul>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-3">
+          <h3 class="font-extrabold text-slate-900 text-sm flex items-center space-x-1.5">
+            <span>🛡️</span>
+            <span data-i18n="guide_storage_title">Photocard Archival & Acid-Free Storage Rules</span>
+          </h3>
+          <p class="text-slate-600" data-i18n="guide_storage_desc1">
+            <strong>Never use cheap PVC binder pages!</strong> PVC contains chemical plasticizers that migrate into photocard ink over time, causing irreversible yellowing, sticking, and holographic foil peeling.
+          </p>
+          <ul class="list-disc list-inside space-y-1 text-slate-600 text-[11px]">
+            <li>Always choose <strong>Acid-Free & PVC-Free (PP or CPP)</strong> card sleeves.</li>
+            <li>Double-sleeve valuable photocards (56×87mm inner snug sleeve + 58×89mm outer hard sleeve).</li>
+            <li>Store binders vertically in a cool, dry place away from direct UV sunlight.</li>
+          </ul>
+        </div>
+      </div>
+
     </div>
 
   </main>
@@ -468,7 +641,7 @@
         <a href="contact.html" class="hover:text-indigo-600 transition" data-i18n="footer_contact">Contact Us (联系我们)</a>
       </div>
       <div class="text-[11px] text-slate-400">
-        <span>© 2026 StanKit Studio. All rights reserved. Built for global fandom communities.</span>
+        <span>© 2026 StanKit Studio. All rights reserved. 100% Client-Side Privacy Protection.</span>
       </div>
     </div>
   </footer>
@@ -482,20 +655,66 @@
   <!-- Application Logic -->
   <script>
     // ==========================================
-    // State Management
+    // Safe LocalStorage Wrapper (Safari Private Browsing Guard)
     // ==========================================
-    let currentPaper = 'a4'; // 'a4', 'letter', 'a4-polaroid', '4x6', '5x7', 'a5', 'a4-dense', 'a3'
-    let currentCutLine = true;
-    let currentSafeArea = true; // [P1.2] Safe Area Margins Guide
-    let currentBackside = false; // [P1.5] Backside template toggle
-    let currentFitMode = 'cover';
-    let uploadedImages = []; // Array of { src: string, img: Image, id: string, rotation: number }
-    let currentLang = 'en';
-    let draggedIndex = null;
-    let targetUploadSlot = null; // [P1.3] Precision slot index for upload
+    function safeGetStorage(key, defaultVal) {
+      try {
+        const val = localStorage.getItem(key);
+        return val !== null ? JSON.parse(val) : defaultVal;
+      } catch (e) {
+        console.warn('[Storage Read Warning]', e);
+        return defaultVal;
+      }
+    }
+
+    function safeSetStorage(key, val) {
+      try {
+        localStorage.setItem(key, typeof val === 'string' ? val : JSON.stringify(val));
+        return true;
+      } catch (e) {
+        console.warn('[Storage Write Warning]', e);
+        return false;
+      }
+    }
 
     // ==========================================
-    // Accurate Physical Specifications [P0]
+    // Canvas RoundRect Polyfill for Older Browsers
+    // ==========================================
+    function drawRoundRectPath(ctx, x, y, w, h, r) {
+      if (ctx.roundRect) {
+        ctx.beginPath();
+        ctx.roundRect(x, y, w, h, r);
+      } else {
+        ctx.beginPath();
+        ctx.moveTo(x + r, y);
+        ctx.lineTo(x + w - r, y);
+        ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+        ctx.lineTo(x + w, y + h - r);
+        ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+        ctx.lineTo(x + r, y + h);
+        ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+        ctx.lineTo(x, y + r);
+        ctx.quadraticCurveTo(x, y, x + r, y);
+        ctx.closePath();
+      }
+    }
+
+    // ==========================================
+    // State Management
+    // ==========================================
+    let currentPaper = 'a4';
+    let currentCutLine = true;
+    let currentSafeArea = true;
+    let currentBackside = false;
+    let currentFitMode = 'cover';
+    let uploadedImages = []; // Array of { src, img, id, rotation, dpi }
+    let currentLang = 'en';
+    let draggedIndex = null;
+    let targetUploadSlot = null;
+    let selectedPlaceholderTheme = 'purple';
+
+    // ==========================================
+    // Accurate Physical Specifications [P0 & Research-Driven Formats]
     // ==========================================
     const paperSpecs = {
       'a4': {
@@ -508,15 +727,25 @@
         cardW_mm: 55, cardH_mm: 85,
         cols: 3, rows: 3, maxSlots: 9
       },
-      'a4-polaroid': {
-        sheetW_mm: 210, sheetH_mm: 297,
-        cardW_mm: 54, cardH_mm: 86,
-        cols: 3, rows: 3, maxSlots: 9
-      },
       '4x6': {
         sheetW_mm: 101.6, sheetH_mm: 152.4,
         cardW_mm: 46, cardH_mm: 70,
         cols: 2, rows: 2, maxSlots: 4
+      },
+      'a4-bts-tour': {
+        sheetW_mm: 210, sheetH_mm: 297,
+        cardW_mm: 70, cardH_mm: 100,
+        cols: 2, rows: 2, maxSlots: 4
+      },
+      'japan-l-size': {
+        sheetW_mm: 210, sheetH_mm: 297,
+        cardW_mm: 89, cardH_mm: 127,
+        cols: 2, rows: 2, maxSlots: 4
+      },
+      'a4-polaroid': {
+        sheetW_mm: 210, sheetH_mm: 297,
+        cardW_mm: 54, cardH_mm: 86,
+        cols: 3, rows: 3, maxSlots: 9
       },
       '5x7': {
         sheetW_mm: 127, sheetH_mm: 177.8,
@@ -545,14 +774,13 @@
     // ==========================================
     function calculateLayout(spec, containerWidth, isPrint = false) {
       if (isPrint) {
-        // Precise 300 DPI Resolution Formula: pixels = mm * 300 / 25.4
         const pxPerMm = 300.0 / 25.4;
         const sheetW_px = Math.round(spec.sheetW_mm * pxPerMm);
         const sheetH_px = Math.round(spec.sheetH_mm * pxPerMm);
         const cardW_px = Math.round(spec.cardW_mm * pxPerMm);
         const cardH_px = Math.round(spec.cardH_mm * pxPerMm);
-        const gap_px = Math.round(2.0 * pxPerMm); // 2mm physical cutting gap [P0]
-        const cornerR_px = Math.round(3.0 * pxPerMm); // 3mm rounded corner [P1.1]
+        const gap_px = Math.round(2.0 * pxPerMm);
+        const cornerR_px = Math.round(3.0 * pxPerMm);
 
         const totalGridW_px = spec.cols * cardW_px + (spec.cols - 1) * gap_px;
         const totalGridH_px = spec.rows * cardH_px + (spec.rows - 1) * gap_px;
@@ -565,41 +793,30 @@
           startX, startY
         };
       } else {
-        // [P0] Scale based on container width to calculate responsive hard pixels
         const scale = containerWidth / spec.sheetW_mm;
         const sheetH_px = spec.sheetH_mm * scale;
         const cardW_px = spec.cardW_mm * scale;
         const cardH_px = spec.cardH_mm * scale;
-        const gap_px = 2.0 * scale; // 2mm physical gap [P0]
-        const cornerR_px = 3.0 * scale; // 3mm rounded corner [P1.1]
-        const safeArea_px = 2.0 * scale; // 2mm safe zone guide [P1.2]
+        const gap_px = 2.0 * scale;
+        const cornerR_px = 3.0 * scale;
+        const safeArea_px = 2.0 * scale;
 
         const totalGridW_px = spec.cols * cardW_px + (spec.cols - 1) * gap_px;
         const totalGridH_px = spec.rows * cardH_px + (spec.rows - 1) * gap_px;
 
-        // [P0] Center via calculated padding
         const padX_px = Math.max(0, (containerWidth - totalGridW_px) / 2.0);
         const padY_px = Math.max(0, (sheetH_px - totalGridH_px) / 2.0);
 
         return {
-          scale,
-          sheetW_px: containerWidth,
-          sheetH_px,
-          cardW_px,
-          cardH_px,
-          gap_px,
-          cornerR_px,
-          safeArea_px,
-          totalGridW_px,
-          totalGridH_px,
-          padX_px,
-          padY_px
+          scale, sheetW_px: containerWidth, sheetH_px,
+          cardW_px, cardH_px, gap_px, cornerR_px, safeArea_px,
+          totalGridW_px, totalGridH_px, padX_px, padY_px
         };
       }
     }
 
     // ==========================================
-    // Full 10-Language Dictionary
+    // Full 10-Language Dictionary with Complete UI Localization
     // ==========================================
     const i18nData = {
       "en": {
@@ -608,20 +825,25 @@
         "nav_tool_letter": "Fan Letter Pro",
         "hero_title_1": "Photocard Print Grid Generator",
         "hero_title_2": "300 DPI High-Res Printable PDF",
-        "hero_desc": "Effortlessly arrange standard 55×85mm photocards, Polaroids, or mini photos on various paper sheets. 100% client-side privacy-first PDF export with precision cut-lines.",
+        "hero_desc": "Arrange standard 55×85mm photocards, BTS 70×100mm tour cards, Japanese L-size bromides, and Polaroids with intelligent DPI resolution check, 2mm cutting gaps, and 100% client-side privacy.",
         "label_step1": "1. Upload Images",
         "dropzone_title": "Click to upload or drag & drop",
         "dropzone_desc": "PNG, JPG, WEBP (Supports batch selection)",
+        "btn_gen_placeholders": "Generate Missing PC Placeholders",
         "label_step2": "2. Paper Size & Card Format",
-        "label_multi_sizes": "8 Formats Available",
+        "label_multi_sizes": "10 Formats Available",
         "paper_a4_title": "📄 A4 Standard",
         "paper_a4_desc": "55×85mm • 3×3 (9 cards)",
         "paper_letter_title": "📑 US Letter",
         "paper_letter_desc": "8.5×11\" • 3×3 (9 cards)",
+        "paper_4x6_title": "🖼️ 4×6\" Retail Photo",
+        "paper_4x6_desc": "46×70mm • 2×2 (4 cards)",
+        "paper_tour_title": "💜 Tour Mini PC",
+        "paper_tour_desc": "70×100mm • 2×2 (4 cards)",
+        "paper_bromide_title": "🇯🇵 Japan L-Bromide",
+        "paper_bromide_desc": "89×127mm • 2×2 (4 photos)",
         "paper_polaroid_title": "🏷️ Polaroid Mini",
         "paper_polaroid_desc": "A4 Sheet • 3×3 (9 cards)",
-        "paper_4x6_title": "🖼️ 4×6\" Photo Paper",
-        "paper_4x6_desc": "46×70mm • 2×2 (4 cards)",
         "paper_5x7_title": "📸 5×7\" Photo Paper",
         "paper_5x7_desc": "55×85mm • 2×2 (4 cards)",
         "paper_a5_title": "📐 A5 Hand Diary",
@@ -632,7 +854,9 @@
         "paper_a3_desc": "55×85mm • 4×4 (16 cards)",
         "badge_hot": "🔥 HOT",
         "badge_na": "🔥 USA",
-        "badge_mini": "🔥 Pocket",
+        "badge_retail": "$0.15",
+        "badge_tour": "70×100",
+        "badge_jp": "L判",
         "badge_save": "Eco",
         "badge_batch": "Batch",
         "opt_cutlines": "Show Scissor Cut Lines",
@@ -642,17 +866,30 @@
         "fit_cover": "Crop to Fill (No border)",
         "fit_contain": "Fit Entire Image (Show all)",
         "btn_download_pdf": "Download 300 DPI PDF (Print Ready)",
+        "btn_rendering_pdf": "Rendering 300 DPI PDF...",
         "pdf_note": "🔒 100% Client-Side Privacy: Images never leave your device.",
         "preview_sheet_title": "Printable Sheet Preview",
         "btn_clear_all": "Clear Sheet",
-        "tip_interactive": "Drag cards to swap positions. Hover to rotate ↻ or delete ✕.",
-        "tag_interactive": "Drag to swap",
+        "tip_interactive": "Drag cards to swap. Hover to rotate ↻, delete ✕, or inspect 🟢 DPI resolution.",
+        "tag_interactive": "Auto DPI Health Check",
         "feature_1": "📐 Millimeter-Precision Centering",
         "feature_2": "✂️ 2mm Physical Cutting Gaps",
-        "feature_3": "🖱️ Drag to Swap / Rotate / Delete",
+        "feature_3": "🔍 Intelligent DPI Resolution Check",
         "sec_photocard_history": "Recent Print Layouts",
         "btn_clear_history": "Clear",
         "empty_history": "No layout history yet. Exported projects will be saved here.",
+        "modal_placeholder_title": "Missing PC Placeholder Generator",
+        "modal_placeholder_desc": "Generate aesthetic printable placeholder cards for your empty binder pockets (fill wishlist gaps).",
+        "label_placeholder_text": "Placeholder Watermark Text:",
+        "label_placeholder_theme": "Aesthetic Color Theme:",
+        "label_placeholder_count": "Number of Placeholders:",
+        "btn_apply_placeholders": "Generate & Insert to Sheet",
+        "guide_size_title": "Comprehensive Idol Photocard Sizing & Sleeve Guide",
+        "guide_size_desc": "Universal standard dimensions across K-Pop, Japanese Bromides, Tour Mini PCs, and optimal card sleeve sizes.",
+        "guide_retail_title": "How to Print 4 Photocards for $0.15 at Walgreens/Walmart",
+        "guide_retail_desc1": "Standard 4×6\" photo prints cost only $0.15~$0.25 at Walgreens, Walmart, CVS, and local print shops. By selecting our 4×6\" template, you can fit 4 photocards seamlessly onto a single photo sheet.",
+        "guide_storage_title": "Photocard Archival & Acid-Free Storage Rules",
+        "guide_storage_desc1": "Never use cheap PVC binder pages! PVC contains chemical plasticizers that migrate into photocard ink over time, causing irreversible yellowing and sticking.",
         "footer_about": "About Us",
         "footer_privacy": "Privacy Policy",
         "footer_terms": "Terms of Service",
@@ -661,21 +898,12 @@
         "toast_swapped": "✨ Cards reordered successfully!",
         "toast_rotated": "↻ Card rotated 90°",
         "toast_pdf_ready": "🖨️ 300 DPI PDF downloaded!",
+        "toast_placeholders_added": "🎴 Placeholders generated and inserted!",
         "card_label_empty": "Upload Photo",
         "card_label_drag": "Drag to swap",
         "card_label_delete": "Delete this card",
         "card_label_rotate": "Rotate 90°",
-        "card_label_safe": "Safe Area",
-        "faq_title": "Photocard Printing FAQ & DIY Guide",
-        "faq_desc": "Learn paper selection, sizing standards, and home printing recommendations",
-        "faq_q1": "What is the standard size for idol photocards?",
-        "faq_a1": "Standard idol photocards measure exactly 55×85mm (2.16×3.35 inches) with rounded corners (r=2.5mm~3mm). Instax Mini polaroids measure 54×86mm. StanKit Studio supports both dimensions with pixel-perfect millimeter precision.",
-        "faq_q2": "Which paper should I use for printing at home?",
-        "faq_a2": "We recommend 250gsm~300gsm double-sided glossy or matte photo paper. If your home inkjet printer supports it, 300gsm RC glossy paper provides the most authentic official merchandise feel and thickness.",
-        "faq_q3": "Are my uploaded photos safe and private?",
-        "faq_a3": "100% yes. StanKit Studio processes and arranges all images purely inside your web browser using HTML5 Canvas & Web Workers. Zero images or user data are ever uploaded to external servers.",
-        "faq_q4": "How do I reorder or delete cards on the grid?",
-        "faq_a4": "Simply drag any card with your mouse and drop it onto another slot to swap positions. To remove a photo, hover over its card slot and click the red ✕ delete button."
+        "card_label_safe": "Safe Area"
       },
       "zh": {
         "badge_hub": "追星微工具箱",
@@ -683,20 +911,25 @@
         "nav_tool_letter": "多语言粉丝信专业版",
         "hero_title_1": "小卡排版打印生成器",
         "hero_title_2": "300 DPI 高清可打印 PDF",
-        "hero_desc": "一键将 55×85mm 标准小卡、拍立得或三寸照片自动排列到 A4 / US Letter / 相纸等多种规格上。纯浏览器本地处理，支持拖拽调位、单张删除与裁切辅助线。",
+        "hero_desc": "一键将 55×85mm 标准小卡、BTS 70×100mm 巡演大卡、日本 L判 生写真或拍立得自动排列到 A4 / US Letter / 4×6\" 相纸上。内置 DPI 智能画质检测、2mm 裁剪缝与 100% 浏览器本地隐私保护。",
         "label_step1": "1. 上传小卡照片",
         "dropzone_title": "点击上传或直接拖拽图片到此处",
         "dropzone_desc": "支持 PNG、JPG、WEBP 批量选择",
+        "btn_gen_placeholders": "生成卡册缺失占位卡 (Wishlist)",
         "label_step2": "2. 纸张尺寸与规格",
-        "label_multi_sizes": "提供 8 种热门尺寸规格",
+        "label_multi_sizes": "提供 10 种热门尺寸规格",
         "paper_a4_title": "📄 A4 标准",
         "paper_a4_desc": "55×85mm • 3×3 (9张)",
         "paper_letter_title": "📑 US Letter",
         "paper_letter_desc": "8.5×11\" • 3×3 (9张)",
+        "paper_4x6_title": "🖼️ 4×6\" 超市相纸",
+        "paper_4x6_desc": "46×70mm • 2×2 (4张)",
+        "paper_tour_title": "💜 巡演大卡/留言卡",
+        "paper_tour_desc": "70×100mm • 2×2 (4张)",
+        "paper_bromide_title": "🇯🇵 日版生写真 (L判)",
+        "paper_bromide_desc": "89×127mm • 2×2 (4张)",
         "paper_polaroid_title": "🏷️ 拍立得 Mini",
         "paper_polaroid_desc": "A4 纸张 • 3×3 (9张)",
-        "paper_4x6_title": "🖼️ 4×6\" 六寸相纸",
-        "paper_4x6_desc": "46×70mm • 2×2 (4张)",
         "paper_5x7_title": "📸 5×7\" 七寸相纸",
         "paper_5x7_desc": "55×85mm • 2×2 (4张)",
         "paper_a5_title": "📐 A5 精致手帐",
@@ -707,9 +940,11 @@
         "paper_a3_desc": "55×85mm • 4×4 (16张)",
         "badge_hot": "🔥 热门",
         "badge_na": "🔥 北美",
-        "badge_mini": "🔥 便携",
-        "badge_save": "省纸推荐",
-        "badge_batch": "海量排版",
+        "badge_retail": "$0.15",
+        "badge_tour": "70×100",
+        "badge_jp": "L判",
+        "badge_save": "省纸",
+        "badge_batch": "批量",
         "opt_cutlines": "显示剪刀裁切辅助虚线",
         "opt_safe_area": "显示 2mm 出血安全线",
         "opt_back_template": "启用双面打印/背面模板",
@@ -717,17 +952,30 @@
         "fit_cover": "裁剪填满 (无白边)",
         "fit_contain": "完整显示 (留白)",
         "btn_download_pdf": "导出 300 DPI 高清 PDF (可直接打印)",
+        "btn_rendering_pdf": "正在渲染 300 DPI 高清 PDF...",
         "pdf_note": "🔒 100% 浏览器本地处理，照片零上传风险",
         "preview_sheet_title": "打印排版实时预览",
         "btn_clear_all": "清空当前纸张",
-        "tip_interactive": "鼠标可自由拖拽小卡调换顺序，悬浮可旋转 ↻ 或删除 ✕",
-        "tag_interactive": "支持拖拽排序",
+        "tip_interactive": "鼠标可拖拽调位，悬浮可旋转 ↻、删除 ✕ 或查看 🟢 DPI 画质",
+        "tag_interactive": "DPI 智能检测",
         "feature_1": "📐 真实毫米级居中排版",
         "feature_2": "✂️ 2mm 物理安全剪切缝",
-        "feature_3": "🖱️ 鼠标拖拽调位 / 旋转 / 删除",
+        "feature_3": "🔍 智能 DPI 清晰度检测",
         "sec_photocard_history": "最近排版记录",
         "btn_clear_history": "清空",
         "empty_history": "暂无排版记录，导出 PDF 后将自动保存在本地。",
+        "modal_placeholder_title": "卡册缺失卡占位符生成器 (Wishlist Placeholders)",
+        "modal_placeholder_desc": "为你的卡册空位一键生成高颜值占位卡，告别空荡荡的卡册并记录收卡心愿。",
+        "label_placeholder_text": "占位卡文字 / 本命与时期：",
+        "label_placeholder_theme": "美学配色主题：",
+        "label_placeholder_count": "生成数量：",
+        "btn_apply_placeholders": "生成并填入纸张空位",
+        "guide_size_title": "全球泛亚官方小卡与生写真尺寸对照与卡套指南",
+        "guide_size_desc": "涵盖韩娱专辑卡、巡演大卡、日本便利店写真、拍立得标准尺寸与无酸卡套选购建议。",
+        "guide_retail_title": "Walgreens / Walmart 4×6\" 廉价相纸打印实操指南 ($0.15 极速出片)",
+        "guide_retail_desc1": "在北美超市打印 4×6\" 照片仅需 $0.15~$0.25。通过选择我们的 4×6\" 模板，可在一张相纸上完美排入 4 张小卡，成本直降 80%。",
+        "guide_storage_title": "卡册收纳防褪色与无酸 (Acid-Free) 保养科普",
+        "guide_storage_desc1": "切勿使用劣质 PVC 内页！PVC 含有害增塑剂，长期接触会导致小卡油墨粘连、变黄与覆膜脱落，务必认准 PP / CPP 无酸材质。",
         "footer_about": "关于本站",
         "footer_privacy": "隐私政策",
         "footer_terms": "服务条款",
@@ -736,21 +984,12 @@
         "toast_swapped": "✨ 小卡位置已成功调换！",
         "toast_rotated": "↻ 小卡已顺时针旋转 90°",
         "toast_pdf_ready": "🖨️ 300 DPI 高清 PDF 已导出！",
+        "toast_placeholders_added": "🎴 占位卡已成功生成并填入！",
         "card_label_empty": "上传小卡",
         "card_label_drag": "拖拽排序",
         "card_label_delete": "删除此小卡",
         "card_label_rotate": "旋转90°",
-        "card_label_safe": "安全区",
-        "faq_title": "小卡打印常见问题与 DIY 指南 (FAQ)",
-        "faq_desc": "了解相纸材质选择、小卡标准尺寸与家庭打印机调优建议",
-        "faq_q1": "官方小卡的标准尺寸是多少？",
-        "faq_a1": "主流明星官方小卡尺寸为严格的 55×85mm（圆角约 2.5~3mm），富士拍立得 Mini 照片为 54×86mm。StanKit Studio 均提供精准毫米级排版。",
-        "faq_q2": "在家用打印机打印推荐使用什么纸张？",
-        "faq_a2": "推荐使用 250g~300g 双面高光或哑光相纸。如果打印机支持，300g RC 绒面/高光相纸最接近官方正版小卡的厚实硬度与光泽质感。",
-        "faq_q3": "上传的照片安全吗？会被保存到服务器吗？",
-        "faq_a3": "绝对安全。StanKit Studio 完全在您的浏览器端离线处理所有排版渲染，没有任何图片数据会上传到外部服务器。",
-        "faq_q4": "如何调整小卡顺序或删除不需要的照片？",
-        "faq_a4": "直接按住任意小卡拖拽到目标位置即可调换顺序；鼠标悬浮在小卡上方点击右上角的红色 ✕ 即可快速删除。"
+        "card_label_safe": "安全区"
       },
       "zh-TW": {
         "badge_hub": "追星微工具箱",
@@ -758,20 +997,25 @@
         "nav_tool_letter": "多語言粉絲信專業版",
         "hero_title_1": "小卡排版列印生成器",
         "hero_title_2": "300 DPI 高清可列印 PDF",
-        "hero_desc": "一鍵將 55×85mm 標準小卡、拍立得或三寸相片自動排列到 A4 / US Letter / 相紙等多種規格上。純瀏覽器本地處理，支援拖拽調位、單張刪除與裁切輔助線。",
+        "hero_desc": "一鍵將 55×85mm 標準小卡、BTS 70×100mm 巡演大卡、日本 L判 生寫真或拍立得自動排列到 A4 / US Letter / 4×6\" 相紙上。內置 DPI 智能畫質檢測、2mm 裁剪縫與 100% 瀏覽器本地隱私保護。",
         "label_step1": "1. 上傳小卡相片",
         "dropzone_title": "點擊上傳或直接拖曳圖片到此處",
         "dropzone_desc": "支援 PNG、JPG、WEBP 批量選擇",
+        "btn_gen_placeholders": "生成卡冊缺失占位卡 (Wishlist)",
         "label_step2": "2. 紙張尺寸與規格",
-        "label_multi_sizes": "提供 8 種熱門尺寸規格",
+        "label_multi_sizes": "提供 10 種熱門尺寸規格",
         "paper_a4_title": "📄 A4 標準",
         "paper_a4_desc": "55×85mm • 3×3 (9張)",
         "paper_letter_title": "📑 US Letter",
         "paper_letter_desc": "8.5×11\" • 3×3 (9張)",
+        "paper_4x6_title": "🖼️ 4×6\" 超市相紙",
+        "paper_4x6_desc": "46×70mm • 2×2 (4張)",
+        "paper_tour_title": "💜 巡演大卡/留言卡",
+        "paper_tour_desc": "70×100mm • 2×2 (4張)",
+        "paper_bromide_title": "🇯🇵 日版生寫真 (L判)",
+        "paper_bromide_desc": "89×127mm • 2×2 (4張)",
         "paper_polaroid_title": "🏷️ 拍立得 Mini",
         "paper_polaroid_desc": "A4 紙張 • 3×3 (9張)",
-        "paper_4x6_title": "🖼️ 4×6\" 六寸相紙",
-        "paper_4x6_desc": "46×70mm • 2×2 (4張)",
         "paper_5x7_title": "📸 5×7\" 七寸相紙",
         "paper_5x7_desc": "55×85mm • 2×2 (4張)",
         "paper_a5_title": "📐 A5 精緻手帳",
@@ -782,9 +1026,11 @@
         "paper_a3_desc": "55×85mm • 4×4 (16張)",
         "badge_hot": "🔥 熱門",
         "badge_na": "🔥 北美",
-        "badge_mini": "🔥 便攜",
-        "badge_save": "省紙推薦",
-        "badge_batch": "海量排版",
+        "badge_retail": "$0.15",
+        "badge_tour": "70×100",
+        "badge_jp": "L判",
+        "badge_save": "省紙",
+        "badge_batch": "批量",
         "opt_cutlines": "顯示剪刀裁切輔助虛線",
         "opt_safe_area": "顯示 2mm 出血安全線",
         "opt_back_template": "啟用雙面列印/背面模板",
@@ -792,17 +1038,30 @@
         "fit_cover": "裁剪填滿 (無白邊)",
         "fit_contain": "完整顯示 (留白)",
         "btn_download_pdf": "導出 300 DPI 高清 PDF (可直接列印)",
+        "btn_rendering_pdf": "正在渲染 300 DPI 高清 PDF...",
         "pdf_note": "🔒 100% 瀏覽器本地處理，相片零上傳風險",
         "preview_sheet_title": "列印排版即時預覽",
         "btn_clear_all": "清空當前紙張",
-        "tip_interactive": "滑鼠可自由拖曳小卡調換順序，懸浮可旋轉 ↻ 或刪除 ✕",
-        "tag_interactive": "支援拖拽排序",
+        "tip_interactive": "滑鼠可拖曳調位，懸浮可旋轉 ↻、刪除 ✕ 或查看 🟢 DPI 畫質",
+        "tag_interactive": "DPI 智能檢測",
         "feature_1": "📐 真實毫米級居中排版",
         "feature_2": "✂️ 2mm 物理安全剪切縫",
-        "feature_3": "🖱️ 滑鼠拖拽調位 / 旋轉 / 刪除",
+        "feature_3": "🔍 智能 DPI 清晰度檢測",
         "sec_photocard_history": "最近排版記錄",
         "btn_clear_history": "清空",
         "empty_history": "暫無排版記錄，導出 PDF 後將自動保存在本地。",
+        "modal_placeholder_title": "卡冊缺失卡占位符生成器 (Wishlist Placeholders)",
+        "modal_placeholder_desc": "為你的卡冊空位一鍵生成高顏值占位卡，告別空蕩蕩的卡冊並記錄收卡心願。",
+        "label_placeholder_text": "占位卡文字 / 本命與時期：",
+        "label_placeholder_theme": "美學配色主題：",
+        "label_placeholder_count": "生成數量：",
+        "btn_apply_placeholders": "生成並填入紙張空位",
+        "guide_size_title": "全球泛亞官方小卡與生寫真尺寸對照與卡套指南",
+        "guide_size_desc": "涵蓋韓娛專輯卡、巡演大卡、日本便利店寫真、拍立得標準尺寸與無酸卡套選購建議。",
+        "guide_retail_title": "Walgreens / Walmart 4×6\" 廉價相紙列印實操指南 ($0.15 極速出片)",
+        "guide_retail_desc1": "在北美超市列印 4×6\" 照片僅需 $0.15~$0.25。通過選擇我們的 4×6\" 模板，可在一張相紙上完美排入 4 張小卡，成本直降 80%。",
+        "guide_storage_title": "卡冊收納防褪色與無酸 (Acid-Free) 保養科普",
+        "guide_storage_desc1": "切勿使用劣質 PVC 內頁！PVC 含有害增塑劑，長期接觸會導致小卡油墨粘連、變黃與覆膜脫落，務必認準 PP / CPP 無酸材質。",
         "footer_about": "關於我們",
         "footer_privacy": "隱私政策",
         "footer_terms": "服務條款",
@@ -811,21 +1070,12 @@
         "toast_swapped": "✨ 小卡位置已成功調換！",
         "toast_rotated": "↻ 小卡已順時針旋轉 90°",
         "toast_pdf_ready": "🖨️ 300 DPI 高清 PDF 已導出！",
+        "toast_placeholders_added": "🎴 占位卡已成功生成並填入！",
         "card_label_empty": "上傳小卡",
         "card_label_drag": "拖拽排序",
         "card_label_delete": "刪除此小卡",
         "card_label_rotate": "旋轉90°",
-        "card_label_safe": "安全區",
-        "faq_title": "小卡列印常見問題與 DIY 指南 (FAQ)",
-        "faq_desc": "了解相紙材質選擇、小卡標準尺寸與家用印表機設定建議",
-        "faq_q1": "官方小卡的標準尺寸是多少？",
-        "faq_a1": "主流明星官方小卡尺寸為嚴格的 55×85mm，富士拍立得 Mini 相片為 54×86mm。StanKit Studio 均提供精準毫米級排版。",
-        "faq_q2": "在家用印表機列印推薦使用什麼紙張？",
-        "faq_a2": "推薦使用 250g~300g 雙面高光或霧面相紙，300g RC 相紙最接近官方正版小卡的厚實質感。",
-        "faq_q3": "上傳的相片安全嗎？",
-        "faq_a3": "絕對安全。StanKit Studio 完全在您的瀏覽器端離線處理所有排版渲染，沒有任何相片數據會上傳到外部伺服器。",
-        "faq_q4": "如何調整小卡順序或刪除不需要的相片？",
-        "faq_a4": "直接按住任意小卡拖曳到目標位置即可調換順序；滑鼠懸浮在小卡上方點擊右上角的紅色 ✕ 即可快速刪除。"
+        "card_label_safe": "安全區"
       },
       "ko": {
         "badge_hub": "팬덤 마이크로 툴",
@@ -833,20 +1083,25 @@
         "nav_tool_letter": "팬레터 프로",
         "hero_title_1": "포토카드 인쇄 그리드 생성기",
         "hero_title_2": "300 DPI 초고화질 출력 PDF",
-        "hero_desc": "55×85mm 표준 포토카드 또는 폴라로이드를 A4, Letter, 인화지 등 다양한 용지에 자동 배열하여 인쇄용 300 DPI PDF로 즉시 내보냅니다.",
+        "hero_desc": "55×85mm 표준 포토카드, 70×100mm 투어 미니포카, 일본 브로마이드, 폴라로이드를 A4, 4×6인치 인화지에 자동 배열하고 DPI 화질을 검사합니다.",
         "label_step1": "1. 이미지 업로드",
         "dropzone_title": "클릭하여 업로드 또는 드래그 앤 드롭",
         "dropzone_desc": "PNG, JPG, WEBP 일괄 지원",
+        "btn_gen_placeholders": "위시리스트 빈자리 카드 생성",
         "label_step2": "2. 용지 규격 및 카드 포맷",
-        "label_multi_sizes": "8가지 다양한 규격 지원",
+        "label_multi_sizes": "10가지 다양한 규격 지원",
         "paper_a4_title": "📄 A4 표준 규격",
         "paper_a4_desc": "55×85mm • 3×3 (9장)",
         "paper_letter_title": "📑 US Letter",
         "paper_letter_desc": "8.5×11\" • 3×3 (9장)",
-        "paper_polaroid_title": "🏷️ 폴라로이드 Mini",
-        "paper_polaroid_desc": "A4 용지 • 3×3 (9장)",
         "paper_4x6_title": "🖼️ 4×6\" 인화지",
         "paper_4x6_desc": "46×70mm • 2×2 (4장)",
+        "paper_tour_title": "💜 투어 미니포카",
+        "paper_tour_desc": "70×100mm • 2×2 (4장)",
+        "paper_bromide_title": "🇯🇵 일본 L판 브로마이드",
+        "paper_bromide_desc": "89×127mm • 2×2 (4장)",
+        "paper_polaroid_title": "🏷️ 폴라로이드 Mini",
+        "paper_polaroid_desc": "A4 용지 • 3×3 (9장)",
         "paper_5x7_title": "📸 5×7\" 인화지",
         "paper_5x7_desc": "55×85mm • 2×2 (4장)",
         "paper_a5_title": "📐 A5 다이어리",
@@ -857,7 +1112,9 @@
         "paper_a3_desc": "55×85mm • 4×4 (16장)",
         "badge_hot": "🔥 인기",
         "badge_na": "🔥 북미",
-        "badge_mini": "🔥 휴대용",
+        "badge_retail": "$0.15",
+        "badge_tour": "70×100",
+        "badge_jp": "L판",
         "badge_save": "절약",
         "badge_batch": "대량",
         "opt_cutlines": "가위 재단선 표시",
@@ -867,17 +1124,30 @@
         "fit_cover": "여백 없이 채우기",
         "fit_contain": "전체 이미지 맞춤",
         "btn_download_pdf": "300 DPI PDF 다운로드 (인쇄용)",
+        "btn_rendering_pdf": "300 DPI PDF 렌더링 중...",
         "pdf_note": "🔒 100% 로컬 브라우저 처리: 이미지가 서버로 전송되지 않습니다.",
         "preview_sheet_title": "인쇄 시트 실시간 미리보기",
         "btn_clear_all": "시트 비우기",
-        "tip_interactive": "마우스 드래그로 순서 변경, ↻ 회전 또는 ✕ 삭제 가능",
-        "tag_interactive": "드래그 정렬 지원",
+        "tip_interactive": "드래그로 순서 변경, ↻ 회전, ✕ 삭제, 🟢 DPI 검사 가능",
+        "tag_interactive": "DPI 화질 검사",
         "feature_1": "📐 mm 단위 정밀 중앙 정렬",
         "feature_2": "✂️ 2mm 물리적 재단 간격",
-        "feature_3": "🖱️ 마우스 드래그 / 회전 / 삭제",
+        "feature_3": "🔍 지능형 DPI 해상도 검사",
         "sec_photocard_history": "최근 인쇄 프로젝트",
         "btn_clear_history": "비우기",
         "empty_history": "저장된 기록이 없습니다.",
+        "modal_placeholder_title": "포카 바인더 위시리스트 카드 생성기",
+        "modal_placeholder_desc": "바인더 빈자리를 채우는 감성적인 플레이스홀더 카드를 만드세요.",
+        "label_placeholder_text": "표시할 문구 / 멤버 이름:",
+        "label_placeholder_theme": "컬러 테마:",
+        "label_placeholder_count": "생성 매수:",
+        "btn_apply_placeholders": "생성 후 시트에 추가",
+        "guide_size_title": "아이돌 포토카드 공식 규격 및 슬리브 가이드",
+        "guide_size_desc": "앨범 포카, 투어 미니포카, 일본 브로마이드 크기와 무산소 슬리브 보관 팁.",
+        "guide_retail_title": "4×6 인화지 가성비 출력 팁",
+        "guide_retail_desc1": "4×6인치 템플릿으로 4장의 포카를 한 번에 저렴하게 인화할 수 있습니다.",
+        "guide_storage_title": "무산소(Acid-Free) 바인더 보관법",
+        "guide_storage_desc1": "PVC 재질은 포카를 손상시킬 수 있으니 반드시 PP/CPP 무산소 슬리브를 사용하세요.",
         "footer_about": "소개",
         "footer_privacy": "개인정보처리방침",
         "footer_terms": "이용약관",
@@ -886,21 +1156,12 @@
         "toast_swapped": "✨ 카드 위치가 변경되었습니다!",
         "toast_rotated": "↻ 카드가 90° 회전되었습니다!",
         "toast_pdf_ready": "🖨️ 300 DPI PDF가 다운로드되었습니다!",
+        "toast_placeholders_added": "🎴 위시리스트 카드가 추가되었습니다!",
         "card_label_empty": "포카 추가",
         "card_label_drag": "드래그 정렬",
         "card_label_delete": "삭제",
         "card_label_rotate": "90° 회전",
-        "card_label_safe": "안전 영역",
-        "faq_title": "포토카드 인쇄 자주 묻는 질문 (FAQ)",
-        "faq_desc": "인화지 규격과 가정용 프린터 팁",
-        "faq_q1": "표준 포토카드 규격은 얼마인가요?",
-        "faq_a1": "공식 포토카드는 정확히 55×85mm (인스탁스 미니 54×86mm) 입니다.",
-        "faq_q2": "어떤 용지를 사용하는 것이 좋은가요?",
-        "faq_a2": "250gsm~300gsm 인화지 사용을 추천합니다.",
-        "faq_q3": "사진이 서버에 저장되나요?",
-        "faq_a3": "아닙니다. 100% 브라우저 내부에서만 처리됩니다.",
-        "faq_q4": "카드 순서는 어떻게 바꾸나요?",
-        "faq_a4": "마우스로 카드를 끌어다 놓으면 순서가 바뀝니다."
+        "card_label_safe": "안전 영역"
       },
       "ja": {
         "badge_hub": "推し活ツール",
@@ -908,20 +1169,25 @@
         "nav_tool_letter": "ファンレター Pro",
         "hero_title_1": "トレカ印刷グリッド生成ツール",
         "hero_title_2": "300 DPI 高解像度 印刷用 PDF",
-        "hero_desc": "55×85mmの標準トレカやチェキ写真をA4、US Letter、L判相紙などに自動整列し、裁断線付きの300 DPI高解像度PDFを出力します。",
+        "hero_desc": "55×85mmトレカ、BTS 70×100mmツアーミニフォト、L判生写真、チェキをA4やL判用紙に自動配置し、DPI解像度チェック付きで300 DPI PDFを出力します。",
         "label_step1": "1. 写真をアップロード",
         "dropzone_title": "クリックまたはドラッグ＆ドロップ",
         "dropzone_desc": "PNG, JPG, WEBP（一括選択可能）",
+        "btn_gen_placeholders": "バインダー穴埋めカード生成",
         "label_step2": "2. 用紙サイズ＆カード規格",
-        "label_multi_sizes": "8種類の人気サイズに対応",
+        "label_multi_sizes": "10種類の人気サイズに対応",
         "paper_a4_title": "📄 A4 標準規格",
         "paper_a4_desc": "55×85mm • 3×3 (9枚)",
         "paper_letter_title": "📑 US レター",
         "paper_letter_desc": "8.5×11\" • 3×3 (9枚)",
+        "paper_4x6_title": "🖼️ 4×6\" フォト紙",
+        "paper_4x6_desc": "46×70mm • 2×2 (4枚)",
+        "paper_tour_title": "💜 ツアーミニフォト",
+        "paper_tour_desc": "70×100mm • 2×2 (4枚)",
+        "paper_bromide_title": "🇯🇵 コンビニL判生写真",
+        "paper_bromide_desc": "89×127mm • 2×2 (4枚)",
         "paper_polaroid_title": "🏷️ チェキ Mini",
         "paper_polaroid_desc": "A4 用紙 • 3×3 (9枚)",
-        "paper_4x6_title": "🖼️ L判/KG フォト紙",
-        "paper_4x6_desc": "46×70mm • 2×2 (4枚)",
         "paper_5x7_title": "📸 2L判 フォト紙",
         "paper_5x7_desc": "55×85mm • 2×2 (4枚)",
         "paper_a5_title": "📐 A5 手帳サイズ",
@@ -932,7 +1198,9 @@
         "paper_a3_desc": "55×85mm • 4×4 (16枚)",
         "badge_hot": "🔥 定番",
         "badge_na": "🔥 北米",
-        "badge_mini": "🔥 携帯",
+        "badge_retail": "$0.15",
+        "badge_tour": "70×100",
+        "badge_jp": "L判",
         "badge_save": "節約",
         "badge_batch": "大量",
         "opt_cutlines": "裁断ガイド線を表示",
@@ -942,17 +1210,30 @@
         "fit_cover": "余白なしで配置",
         "fit_contain": "全体を表示",
         "btn_download_pdf": "300 DPI PDFをダウンロード (印刷用)",
+        "btn_rendering_pdf": "300 DPI PDFを生成中...",
         "pdf_note": "🔒 100% ローカル処理：写真が外部サーバーに送信されることはありません。",
         "preview_sheet_title": "印刷シートプレビュー",
         "btn_clear_all": "シートをクリア",
-        "tip_interactive": "ドラッグで入れ替え、ホバーで ↻ 回転や ✕ 削除が可能",
-        "tag_interactive": "並び替え対応",
+        "tip_interactive": "ドラッグで入れ替え、ホバーで ↻ 回転、✕ 削除、🟢 DPI 確認",
+        "tag_interactive": "DPI 解像度チェック",
         "feature_1": "📐 ミリ単位の精密中央配置",
         "feature_2": "✂️ 2mm 物理裁断マージン",
-        "feature_3": "🖱️ ドラッグで入れ替え / 回転 / 削除",
+        "feature_3": "🔍 スマート DPI 画質判定",
         "sec_photocard_history": "最近の印刷履歴",
         "btn_clear_history": "クリア",
         "empty_history": "履歴はありません。",
+        "modal_placeholder_title": "トレカ空き枠プレースホルダー生成",
+        "modal_placeholder_desc": "バインダーの空きポケットを埋めるお洒落なウィッシュリストカードを作成します。",
+        "label_placeholder_text": "表示テキスト / 推し名:",
+        "label_placeholder_theme": "カラーテーマ:",
+        "label_placeholder_count": "生成枚数:",
+        "btn_apply_placeholders": "生成してシートに配置",
+        "guide_size_title": "公式トレカ・生写真サイズ＆スリーブ比較ガイド",
+        "guide_size_desc": "K-POPトレカ、ツアーミニフォト、コンビニL判写真の規格と無酸スリーブ選びの基本。",
+        "guide_retail_title": "写真用紙でお得にプリントするコツ",
+        "guide_retail_desc1": "4×6インチ用紙で4枚のトレカをまとめて高コスパで印刷できます。",
+        "guide_storage_title": "無酸(Acid-Free)スリーブでの劣化防止保管",
+        "guide_storage_desc1": "PVCは色移りの原因になるため、PPやCPPの無酸スリーブを選びましょう。",
         "footer_about": "概要",
         "footer_privacy": "プライバシーポリシー",
         "footer_terms": "利用規約",
@@ -961,21 +1242,12 @@
         "toast_swapped": "✨ カードの順番を入れ替えました！",
         "toast_rotated": "↻ カードを90°回転しました！",
         "toast_pdf_ready": "🖨️ 300 DPI PDFを出力しました！",
+        "toast_placeholders_added": "🎴 プレースホルダーを配置しました！",
         "card_label_empty": "写真を追加",
         "card_label_drag": "ドラッグで移動",
         "card_label_delete": "削除",
         "card_label_rotate": "90°回転",
-        "card_label_safe": "安全エリア",
-        "faq_title": "トレカ自作・印刷 Q&A",
-        "faq_desc": "用紙選びや印刷のコツ",
-        "faq_q1": "公式トレカの標準サイズは？",
-        "faq_a1": "55×85mm（チェキMiniは54×86mm）です。",
-        "faq_q2": "自宅印刷におすすめの用紙は？",
-        "faq_a2": "250g〜300gの厚手光沢紙がおすすめです。",
-        "faq_q3": "アップロードした写真は安全ですか？",
-        "faq_a3": "端末内でのみ処理されるため完全に安全です。",
-        "faq_q4": "カードの並び替え方法は？",
-        "faq_a4": "マウスでドラッグするだけで入れ替え可能です。"
+        "card_label_safe": "安全エリア"
       },
       "id": {
         "badge_hub": "Alat Fandom",
@@ -983,20 +1255,25 @@
         "nav_tool_letter": "Fan Letter Pro",
         "hero_title_1": "Pembuat Grid Cetak Photocard",
         "hero_title_2": "PDF 300 DPI Siap Cetak Kualitas Tinggi",
-        "hero_desc": "Atur photocard 55×85mm standar atau Polaroid pada kertas A4, US Letter, atau kertas foto. Ekspor PDF 100% aman dan privat.",
+        "hero_desc": "Atur photocard standar 55×85mm, mini PC tour 70×100mm, dan foto Polaroid dengan cek resolusi DPI otomatis dan privasi 100%.",
         "label_step1": "1. Unggah Gambar",
         "dropzone_title": "Klik untuk unggah atau seret file ke sini",
         "dropzone_desc": "PNG, JPG, WEBP (Mendukung banyak file)",
+        "btn_gen_placeholders": "Buat Kartu Placeholder Binder",
         "label_step2": "2. Ukuran Kertas & Format Kartu",
-        "label_multi_sizes": "Tersedia 8 Ukuran",
+        "label_multi_sizes": "Tersedia 10 Ukuran",
         "paper_a4_title": "📄 A4 Standar",
         "paper_a4_desc": "55×85mm • 3×3 (9 kartu)",
         "paper_letter_title": "📑 US Letter",
         "paper_letter_desc": "8.5×11\" • 3×3 (9 kartu)",
-        "paper_polaroid_title": "🏷️ Polaroid Mini",
-        "paper_polaroid_desc": "Kertas A4 • 3×3 (9 kartu)",
         "paper_4x6_title": "🖼️ Kertas Foto 4×6\"",
         "paper_4x6_desc": "46×70mm • 2×2 (4 kartu)",
+        "paper_tour_title": "💜 Tour Mini PC",
+        "paper_tour_desc": "70×100mm • 2×2 (4 kartu)",
+        "paper_bromide_title": "🇯🇵 Bromide Jepang L",
+        "paper_bromide_desc": "89×127mm • 2×2 (4 foto)",
+        "paper_polaroid_title": "🏷️ Polaroid Mini",
+        "paper_polaroid_desc": "Kertas A4 • 3×3 (9 kartu)",
         "paper_5x7_title": "📸 Kertas Foto 5×7\"",
         "paper_5x7_desc": "55×85mm • 2×2 (4 kartu)",
         "paper_a5_title": "📐 A5 Buku Harian",
@@ -1007,7 +1284,9 @@
         "paper_a3_desc": "55×85mm • 4×4 (16 kartu)",
         "badge_hot": "🔥 Populer",
         "badge_na": "🔥 USA",
-        "badge_mini": "🔥 Praktis",
+        "badge_retail": "$0.15",
+        "badge_tour": "70×100",
+        "badge_jp": "L判",
         "badge_save": "Hemat",
         "badge_batch": "Banyak",
         "opt_cutlines": "Tampilkan Garis Potong Gunting",
@@ -1017,17 +1296,30 @@
         "fit_cover": "Pangkas Penuh (Tanpa Bingkai)",
         "fit_contain": "Tampilkan Utuh",
         "btn_download_pdf": "Unduh PDF 300 DPI (Siap Cetak)",
+        "btn_rendering_pdf": "Merender PDF 300 DPI...",
         "pdf_note": "🔒 100% Privasi Klien: Foto Anda tidak pernah diunggah ke server.",
         "preview_sheet_title": "Pratinjau Lembar Cetak",
         "btn_clear_all": "Kosongkan Lembar",
-        "tip_interactive": "Seret untuk menukar posisi. Arahkan kursor untuk memutar ↻ atau menghapus ✕.",
-        "tag_interactive": "Mendukung Seret",
+        "tip_interactive": "Seret untuk menukar posisi. Putar ↻, hapus ✕, atau periksa 🟢 resolusi DPI.",
+        "tag_interactive": "Cek Kualitas DPI",
         "feature_1": "📐 Penempatan Presisi Milimeter",
         "feature_2": "✂️ Celah Pemotongan Fisik 2mm",
-        "feature_3": "🖱️ Seret / Putar / Hapus",
+        "feature_3": "🔍 Pemeriksaan Resolusi DPI Cerdas",
         "sec_photocard_history": "Riwayat Proyek Cetak",
         "btn_clear_history": "Hapus",
         "empty_history": "Belum ada riwayat tata letak.",
+        "modal_placeholder_title": "Pembuat Kartu Placeholder Binder",
+        "modal_placeholder_desc": "Isi saku binder kosong Anda dengan kartu placeholder wishlist yang estetik.",
+        "label_placeholder_text": "Teks Placeholder / Nama Bias:",
+        "label_placeholder_theme": "Tema Warna:",
+        "label_placeholder_count": "Jumlah Kartu:",
+        "btn_apply_placeholders": "Buat & Masukkan ke Lembar",
+        "guide_size_title": "Panduan Ukuran Photocard & Sleeve Standar",
+        "guide_size_desc": "Standar ukuran album PC, tour mini PC, bromide Jepang, dan tips sleeve bebas asam.",
+        "guide_retail_title": "Tips Cetak Hemat Kertas Foto 4×6\"",
+        "guide_retail_desc1": "Cetak 4 photocard dalam 1 lembar 4×6\" di toko foto terdekat dengan harga murah.",
+        "guide_storage_title": "Penyimpanan Kartu Bebas Asam (Acid-Free)",
+        "guide_storage_desc1": "Hindari binder PVC yang dapat merusak tinta foto. Selalu gunakan sleeve PP/CPP.",
         "footer_about": "Tentang Kami",
         "footer_privacy": "Kebijakan Privasi",
         "footer_terms": "Syarat Layanan",
@@ -1036,21 +1328,12 @@
         "toast_swapped": "✨ Urutan kartu berhasil ditukar!",
         "toast_rotated": "↻ Kartu diputar 90°",
         "toast_pdf_ready": "🖨️ PDF 300 DPI berhasil diunduh!",
+        "toast_placeholders_added": "🎴 Placeholder berhasil ditambahkan!",
         "card_label_empty": "Unggah Foto",
         "card_label_drag": "Seret untuk urutkan",
         "card_label_delete": "Hapus kartu ini",
         "card_label_rotate": "Putar 90°",
-        "card_label_safe": "Area Aman",
-        "faq_title": "FAQ Cetak Photocard & Panduan DIY",
-        "faq_desc": "Pelajari standar ukuran dan jenis kertas",
-        "faq_q1": "Berapa ukuran standar photocard idola?",
-        "faq_a1": "Ukuran standar adalah 55×85mm (Polaroid Mini 54×86mm).",
-        "faq_q2": "Kertas apa yang direkomendasikan untuk cetak sendiri?",
-        "faq_a2": "Kertas foto glossy atau matte 250gsm~300gsm.",
-        "faq_q3": "Apakah foto saya aman?",
-        "faq_a3": "100% aman karena diproses di browser Anda sendiri.",
-        "faq_q4": "Bagaimana cara menukar urutan kartu?",
-        "faq_a4": "Cukup seret kartu dengan mouse dan letakkan di posisi yang diinginkan."
+        "card_label_safe": "Area Aman"
       },
       "ms": {
         "badge_hub": "Alat Peminat",
@@ -1058,20 +1341,25 @@
         "nav_tool_letter": "Fan Letter Pro",
         "hero_title_1": "Penjana Grid Cetak Kad Foto",
         "hero_title_2": "PDF 300 DPI Sedia Cetak Kualiti Tinggi",
-        "hero_desc": "Susun kad foto 55×85mm piawai atau Polaroid pada kertas A4, US Letter, atau kertas foto dengan garisan pemotong tepat.",
+        "hero_desc": "Susun kad foto standard 55×85mm, tour mini PC 70×100mm, dan foto Polaroid dengan semakan resolusi DPI automatik.",
         "label_step1": "1. Muat Naik Gambar",
         "dropzone_title": "Klik untuk muat naik atau seret fail ke sini",
         "dropzone_desc": "PNG, JPG, WEBP (Sokong pilihan kelompok)",
+        "btn_gen_placeholders": "Jana Kad Placeholder Binder",
         "label_step2": "2. Saiz Kertas & Format Kad",
-        "label_multi_sizes": "8 Saiz Tersedia",
+        "label_multi_sizes": "10 Saiz Tersedia",
         "paper_a4_title": "📄 A4 Piawai",
         "paper_a4_desc": "55×85mm • 3×3 (9 kad)",
         "paper_letter_title": "📑 US Letter",
         "paper_letter_desc": "8.5×11\" • 3×3 (9 kad)",
-        "paper_polaroid_title": "🏷️ Polaroid Mini",
-        "paper_polaroid_desc": "Kertas A4 • 3×3 (9 kad)",
         "paper_4x6_title": "🖼️ Kertas Foto 4×6\"",
         "paper_4x6_desc": "46×70mm • 2×2 (4 kad)",
+        "paper_tour_title": "💜 Tour Mini PC",
+        "paper_tour_desc": "70×100mm • 2×2 (4 kad)",
+        "paper_bromide_title": "🇯🇵 Bromide Jepun L",
+        "paper_bromide_desc": "89×127mm • 2×2 (4 foto)",
+        "paper_polaroid_title": "🏷️ Polaroid Mini",
+        "paper_polaroid_desc": "Kertas A4 • 3×3 (9 kad)",
         "paper_5x7_title": "📸 Kertas Foto 5×7\"",
         "paper_5x7_desc": "55×85mm • 2×2 (4 kad)",
         "paper_a5_title": "📐 A5 Buku Diari",
@@ -1082,7 +1370,9 @@
         "paper_a3_desc": "55×85mm • 4×4 (16 kad)",
         "badge_hot": "🔥 Hangat",
         "badge_na": "🔥 USA",
-        "badge_mini": "🔥 Mudah Alih",
+        "badge_retail": "$0.15",
+        "badge_tour": "70×100",
+        "badge_jp": "L判",
         "badge_save": "Jimat",
         "badge_batch": "Banyak",
         "opt_cutlines": "Tunjukkan Garisan Gunting",
@@ -1092,17 +1382,30 @@
         "fit_cover": "Pangkas Penuh (Tanpa Sempadan)",
         "fit_contain": "Papar Keseluruhan",
         "btn_download_pdf": "Muat Turun PDF 300 DPI (Sedia Cetak)",
+        "btn_rendering_pdf": "Menjana PDF 300 DPI...",
         "pdf_note": "🔒 100% Privasi: Foto anda tidak pernah dimuat naik ke pelayan.",
         "preview_sheet_title": "Pratonton Helaian Cetakan",
         "btn_clear_all": "Kosongkan Helaian",
-        "tip_interactive": "Seret untuk menukar kedudukan. Putar ↻ atau padam ✕.",
-        "tag_interactive": "Sokong Seretan",
+        "tip_interactive": "Seret untuk susun. Putar ↻, padam ✕, atau semak 🟢 resolusi DPI.",
+        "tag_interactive": "Semakan Kualiti DPI",
         "feature_1": "📐 Kedudukan Tengah Tepat",
         "feature_2": "✂️ Jurang Pemotongan Fizikal 2mm",
-        "feature_3": "🖱️ Seret / Putar / Padam",
+        "feature_3": "🔍 Pemeriksaan Resolusi DPI Pintar",
         "sec_photocard_history": "Sejarah Susun Atur",
         "btn_clear_history": "Padam",
         "empty_history": "Tiada sejarah susun atur.",
+        "modal_placeholder_title": "Penjana Kad Placeholder Binder",
+        "modal_placeholder_desc": "Hasilkan kad placeholder wishlist estetik untuk mengisi poket binder anda.",
+        "label_placeholder_text": "Teks / Nama Bias:",
+        "label_placeholder_theme": "Tema Warna:",
+        "label_placeholder_count": "Bilangan Kad:",
+        "btn_apply_placeholders": "Jana & Masukkan ke Helaian",
+        "guide_size_title": "Panduan Saiz Kad Foto & Sleeve Piawai",
+        "guide_size_desc": "Ketahui piawaian saiz album PC, tour mini PC, dan petua penjagaan tanpa asid.",
+        "guide_retail_title": "Panduan Cetakan Kertas Foto 4×6\"",
+        "guide_retail_desc1": "Muatkan 4 kad foto pada satu helaian 4×6\" untuk penjimatan maksimum.",
+        "guide_storage_title": "Penyimpanan Bebas Asid (Acid-Free)",
+        "guide_storage_desc1": "Elakkan binder PVC yang merosakkan dakwat. Gunakan sleeve PP/CPP sahaja.",
         "footer_about": "Tentang Kami",
         "footer_privacy": "Dasar Privasi",
         "footer_terms": "Syarat Perkhidmatan",
@@ -1111,21 +1414,12 @@
         "toast_swapped": "✨ Susunan kad berjaya ditukar!",
         "toast_rotated": "↻ Kad diputar 90°",
         "toast_pdf_ready": "🖨️ PDF 300 DPI berjaya dimuat turun!",
+        "toast_placeholders_added": "🎴 Placeholder berjaya ditambah!",
         "card_label_empty": "Muat Naik Foto",
         "card_label_drag": "Seret untuk susun",
         "card_label_delete": "Padam kad ini",
         "card_label_rotate": "Putar 90°",
-        "card_label_safe": "Zon Selamat",
-        "faq_title": "Soalan Lazim (FAQ) Cetak Kad Foto",
-        "faq_desc": "Ketahui panduan saiz dan kertas cetakan",
-        "faq_q1": "Apakah saiz piawai kad foto idola?",
-        "faq_a1": "Saiz rasmi adalah 55×85mm (Polaroid Mini 54×86mm).",
-        "faq_q2": "Kertas apakah yang sesuai untuk cetakan rumah?",
-        "faq_a2": "Kertas foto glossy 250gsm~300gsm adalah disyorkan.",
-        "faq_q3": "Adakah gambar saya selamat?",
-        "faq_a3": "100% selamat kerana diproses dalam pelayar anda sahaja.",
-        "faq_q4": "Bagaimanakah cara menyusun semula kad?",
-        "faq_a4": "Hanya seret kad ke kedudukan yang diingini."
+        "card_label_safe": "Zon Selamat"
       },
       "th": {
         "badge_hub": "กล่องเครื่องมือแฟนคลับ",
@@ -1133,20 +1427,25 @@
         "nav_tool_letter": "เขียนจดหมายแฟนคลับ Pro",
         "hero_title_1": "โปรแกรมจัดหน้าพิมพ์โฟโต้การ์ด",
         "hero_title_2": "PDF ความละเอียดสูง 300 DPI พร้อมพิมพ์",
-        "hero_desc": "จัดเรียงโฟโต้การ์ดมาตรฐาน 55×85 มม. หรือโพลารอยด์ลงบนกระดาษ A4, US Letter หรือกระดาษพิมพ์ภาพถ่าย พร้อมส่งออก PDF คมชัดสูง 300 DPI",
+        "hero_desc": "จัดเรียงโฟโต้การ์ดมาตรฐาน 55×85 มม., ทัวร์มินิการ์ด BTS 70×100 มม., โบรไมด์ญี่ปุ่น และโพลารอยด์ พร้อมระบบตรวจวัดความละเอียด DPI อัตโนมัติ",
         "label_step1": "1. อัปโหลดรูปภาพ",
         "dropzone_title": "คลิกเพื่ออัปโหลดหรือลากไฟล์มาวาง",
         "dropzone_desc": "รองรับ PNG, JPG, WEBP หลายไฟล์พร้อมกัน",
+        "btn_gen_placeholders": "สร้างการ์ดคั่นสมุดสะสม (Wishlist)",
         "label_step2": "2. ขนาดกระดาษและรูปแบบการ์ด",
-        "label_multi_sizes": "มีให้เลือก 8 ขนาด",
+        "label_multi_sizes": "มีให้เลือก 10 ขนาด",
         "paper_a4_title": "📄 A4 มาตรฐาน",
         "paper_a4_desc": "55×85 มม. • 3×3 (9 ใบ)",
         "paper_letter_title": "📑 US Letter",
         "paper_letter_desc": "8.5×11 นิ้ว • 3×3 (9 ใบ)",
-        "paper_polaroid_title": "🏷️ โพลารอยด์ Mini",
-        "paper_polaroid_desc": "กระดาษ A4 • 3×3 (9 ใบ)",
         "paper_4x6_title": "🖼️ กระดาษรูป 4×6 นิ้ว",
         "paper_4x6_desc": "46×70 มม. • 2×2 (4 ใบ)",
+        "paper_tour_title": "💜 ทัวร์มินิการ์ด",
+        "paper_tour_desc": "70×100 มม. • 2×2 (4 ใบ)",
+        "paper_bromide_title": "🇯🇵 รูปโบรไมด์ญี่ปุ่น L",
+        "paper_bromide_desc": "89×127 มม. • 2×2 (4 รูป)",
+        "paper_polaroid_title": "🏷️ โพลารอยด์ Mini",
+        "paper_polaroid_desc": "กระดาษ A4 • 3×3 (9 ใบ)",
         "paper_5x7_title": "📸 กระดาษรูป 5×7 นิ้ว",
         "paper_5x7_desc": "55×85 มม. • 2×2 (4 ใบ)",
         "paper_a5_title": "📐 A5 สมุดไดอารี่",
@@ -1157,7 +1456,9 @@
         "paper_a3_desc": "55×85 มม. • 4×4 (16 ใบ)",
         "badge_hot": "🔥 ยอดฮิต",
         "badge_na": "🔥 อเมริกา",
-        "badge_mini": "🔥 พกพา",
+        "badge_retail": "$0.15",
+        "badge_tour": "70×100",
+        "badge_jp": "L判",
         "badge_save": "ประหยัด",
         "badge_batch": "จำนวนมาก",
         "opt_cutlines": "แสดงเส้นประสำหรับตัด",
@@ -1167,17 +1468,30 @@
         "fit_cover": "ตัดเต็มกรอบ (ไม่มีขอบขาว)",
         "fit_contain": "แสดงรูปเต็มภาพ (มีขอบขาว)",
         "btn_download_pdf": "ดาวน์โหลด PDF 300 DPI (พร้อมพิมพ์)",
+        "btn_rendering_pdf": "กำลังเรนเดอร์ PDF 300 DPI...",
         "pdf_note": "🔒 ปลอดภัย 100%: ประมวลผลภายในเครื่องของคุณเท่านั้น",
         "preview_sheet_title": "ตัวอย่างหน้าพิมพ์สด",
         "btn_clear_all": "ล้างภาพทั้งหมด",
-        "tip_interactive": "ลากเพื่อสลับตำแหน่ง หมุน ↻ หรือลบ ✕ ได้อย่างอิสระ",
-        "tag_interactive": "รองรับการลากสลับ",
+        "tip_interactive": "ลากเพื่อสลับตำแหน่ง หมุน ↻ ลบ ✕ หรือตรวจเช็ค 🟢 ค่า DPI",
+        "tag_interactive": "ตรวจวัดค่า DPI",
         "feature_1": "📐 จัดกึ่งกลางระดับมิลลิเมตร",
         "feature_2": "✂️ ช่องว่างสำหรับตัด 2 มม.",
-        "feature_3": "🖱️ ลากสลับ / หมุน / ลบการ์ด",
+        "feature_3": "🔍 ตรวจเช็คความคมชัด DPI อัจฉริยะ",
         "sec_photocard_history": "ประวัติการจัดหน้าล่าสุด",
         "btn_clear_history": "ล้างประวัติ",
         "empty_history": "ยังไม่มีประวัติการจัดหน้า",
+        "modal_placeholder_title": "สร้างการ์ดคั่น Wishlist สำหรับสมุดสะสม",
+        "modal_placeholder_desc": "เติมเต็มช่องว่างในแฟ้มสะสมการ์ดของคุณด้วยการ์ดคั่นสไตล์มินิมอล",
+        "label_placeholder_text": "ข้อความบนการ์ด / ชื่อเมน:",
+        "label_placeholder_theme": "ธีมสี:",
+        "label_placeholder_count": "จำนวนการ์ด:",
+        "btn_apply_placeholders": "สร้างและใส่ลงในหน้าพิมพ์",
+        "guide_size_title": "คู่มือขนาดโฟโต้การ์ดไอดอลและซองใสมาตรฐาน",
+        "guide_size_desc": "มาตรฐานขนาดการ์ดอัลบั้ม มินิการ์ดทัวร์ รูปโบรไมด์ญี่ปุ่น และซองใสไร้กรด (Acid-Free)",
+        "guide_retail_title": "วิธีพิมพ์โฟโต้การ์ด 4 ใบบนกระดาษ 4×6 นิ้วแบบประหยัด",
+        "guide_retail_desc1": "พิมพ์ 4 การ์ดลงบนกระดาษรูปขนาด 4×6 นิ้ว ช่วยประหยัดค่าใช้จ่ายได้มากถึง 80%",
+        "guide_storage_title": "การเก็บรักษาการ์ดด้วยซองไร้กรด (Acid-Free)",
+        "guide_storage_desc1": "ห้ามใช้แฟ้ม PVC ราคาถูกเพราะสารพลาสติกจะทำลายหมึกพิมพ์ ให้ใช้ซอง PP/CPP เสมอ",
         "footer_about": "เกี่ยวกับเรา",
         "footer_privacy": "นโยบายความเป็นส่วนตัว",
         "footer_terms": "ข้อกำหนดการใช้งาน",
@@ -1186,21 +1500,12 @@
         "toast_swapped": "✨ สลับตำแหน่งเรียบร้อยแล้ว!",
         "toast_rotated": "↻ หมุนการ์ด 90° แล้ว!",
         "toast_pdf_ready": "🖨️ ส่งออก PDF 300 DPI แล้ว!",
+        "toast_placeholders_added": "🎴 เพิ่มการ์ดคั่นเรียบร้อยแล้ว!",
         "card_label_empty": "เพิ่มรูปภาพ",
         "card_label_drag": "ลากเพื่อสลับ",
         "card_label_delete": "ลบการ์ดใบนี้",
         "card_label_rotate": "หมุน 90°",
-        "card_label_safe": "ระยะปลอดภัย",
-        "faq_title": "คำถามที่พบบ่อยเกี่ยวกับการพิมพ์โฟโต้การ์ด (FAQ)",
-        "faq_desc": "เรียนรู้ขนาดมาตรฐานและการเลือกกระดาษพิมพ์",
-        "faq_q1": "ขนาดมาตรฐานของโฟโต้การ์ดคือเท่าไหร่?",
-        "faq_a1": "ขนาดมาตรฐานคือ 55×85 มม. (Instax Mini 54×86 มม.)",
-        "faq_q2": "ควรใช้กระดาษแบบไหนสำหรับพิมพ์เองที่บ้าน?",
-        "faq_a2": "แนะนำกระดาษอัดรูปผิวมันหรือกึ่งมันความหนา 250gsm~300gsm",
-        "faq_q3": "รูปที่อัปโหลดปลอดภัยหรือไม่?",
-        "faq_a3": "ปลอดภัย 100% เพราะประมวลผลบนเบราว์เซอร์ของคุณเท่านั้น",
-        "faq_q4": "สลับตำแหน่งการ์ดอย่างไร?",
-        "faq_a4": "สามารถใช้เมาส์ลากการ์ดไปยังตำแหน่งที่ต้องการได้ทันที"
+        "card_label_safe": "ระยะปลอดภัย"
       },
       "ar": {
         "badge_hub": "أدوات الفاندوم",
@@ -1208,20 +1513,25 @@
         "nav_tool_letter": "رسائل المعجبين Pro",
         "hero_title_1": "أداة طباعة بطاقات فوتوكارد",
         "hero_title_2": "ملف PDF عالي الدقة 300 DPI جاهز للطباعة",
-        "hero_desc": "قم بترتيب بطاقات 55×85 مم على ورق A4 أو Letter تلقائياً مع خطوط قص دقيقة وتصدير فوري لملفات PDF بدقة 300 DPI.",
+        "hero_desc": "قم بترتيب بطاقات 55×85 مم وبطاقات الجولات 70×100 مم والصور مع فحص دقة DPI الذكي وحماية الخصوصية 100%.",
         "label_step1": "1. رفع الصور",
         "dropzone_title": "انقر للرفع أو اسحب الصور هنا",
         "dropzone_desc": "يدعم PNG, JPG, WEBP دفعة واحدة",
+        "btn_gen_placeholders": "إنشاء بطاقات حجز الخانات الفارغة",
         "label_step2": "2. حجم الورق والبطاقة",
-        "label_multi_sizes": "8 أحجام متوفرة",
+        "label_multi_sizes": "10 أحجام متوفرة",
         "paper_a4_title": "📄 A4 قياسي",
         "paper_a4_desc": "55×85 مم • 3×3 (9 بطاقات)",
         "paper_letter_title": "📑 US Letter",
         "paper_letter_desc": "8.5×11 بوصة • 3×3 (9 بطاقات)",
-        "paper_polaroid_title": "🏷️ بولارويد Mini",
-        "paper_polaroid_desc": "ورق A4 • 3×3 (9 بطاقات)",
         "paper_4x6_title": "🖼️ ورق صور 4×6",
         "paper_4x6_desc": "46×70 مم • 2×2 (4 بطاقات)",
+        "paper_tour_title": "💜 بطاقة الجولات Mini PC",
+        "paper_tour_desc": "70×100 مم • 2×2 (4 بطاقات)",
+        "paper_bromide_title": "🇯🇵 برومايد ياباني L",
+        "paper_bromide_desc": "89×127 مم • 2×2 (4 صور)",
+        "paper_polaroid_title": "🏷️ بولارويد Mini",
+        "paper_polaroid_desc": "ورق A4 • 3×3 (9 بطاقات)",
         "paper_5x7_title": "📸 ورق صور 5×7",
         "paper_5x7_desc": "55×85 مم • 2×2 (4 بطاقات)",
         "paper_a5_title": "📐 A5 يوميات",
@@ -1232,7 +1542,9 @@
         "paper_a3_desc": "55×85 مم • 4×4 (16 بطاقة)",
         "badge_hot": "🔥 شائع",
         "badge_na": "🔥 أمريكا",
-        "badge_mini": "🔥 محمول",
+        "badge_retail": "$0.15",
+        "badge_tour": "70×100",
+        "badge_jp": "L判",
         "badge_save": "توفير",
         "badge_batch": "كميات",
         "opt_cutlines": "إظهار خطوط القص",
@@ -1242,17 +1554,30 @@
         "fit_cover": "ملء كامل (بدون حواف)",
         "fit_contain": "إظهار الصورة كاملة",
         "btn_download_pdf": "تحميل PDF بدقة 300 DPI (جاهز للطباعة)",
+        "btn_rendering_pdf": "جاري تجهيز ملف PDF بدقة 300 DPI...",
         "pdf_note": "🔒 خصوصية 100%: تتم معالجة الصور داخل جهازك بالكامل.",
         "preview_sheet_title": "معاينة ورقة الطباعة المباشرة",
         "btn_clear_all": "مسح الورقة",
-        "tip_interactive": "اسحب البطاقات لتبديل المواقع، وقم بالتدوير ↻ أو الحذف ✕.",
-        "tag_interactive": "يدعم السحب",
+        "tip_interactive": "اسحب للتبديل، دور ↻، احذف ✕، أو افحص 🟢 دقة DPI.",
+        "tag_interactive": "فحص دقة DPI",
         "feature_1": "📐 توسيط دقيق بالمليمتر",
         "feature_2": "✂️ فجوات قص مادية 2 مم",
-        "feature_3": "🖱️ سحب / تدوير / حذف",
+        "feature_3": "🔍 فحص ذكي لدقة وجودة DPI",
         "sec_photocard_history": "المشاريع الأخيرة",
         "btn_clear_history": "مسح",
         "empty_history": "لا توجد مشاريع سابقة.",
+        "modal_placeholder_title": "مولد بطاقات حجز الخانات لألبومات البطاقات",
+        "modal_placeholder_desc": "املأ خانات بايندر البطاقات الفارغة ببطاقات أمنيات أنيقة وقابلة للطباعة.",
+        "label_placeholder_text": "النص أو اسم النجم:",
+        "label_placeholder_theme": "نمط الألوان:",
+        "label_placeholder_count": "عدد البطاقات:",
+        "btn_apply_placeholders": "إنشاء وإدراج في الورقة",
+        "guide_size_title": "دليل مقاسات بطاقات الفوتوكارد وأكياس الحماية",
+        "guide_size_desc": "المقاسات المعتمدة لبطاقات الألبومات وبطاقات الجولات وأكياس الحفظ الخالية من الأحماض.",
+        "guide_retail_title": "كيفية طباعة 4 بطاقات بتكلفة $0.15 على ورق 4×6",
+        "guide_retail_desc1": "وفر حتى 80% من تكلفة الطباعة باستخدام نموذج 4×6 لطباعة 4 بطاقات دفعة واحدة.",
+        "guide_storage_title": "قواعد الحفظ الخالي من الأحماض (Acid-Free)",
+        "guide_storage_desc1": "تجنب تماماً استخدام جيوب PVC الرخيصة لحماية ألوان وصور البطاقات من التلف.",
         "footer_about": "من نحن",
         "footer_privacy": "سياسة الخصوصية",
         "footer_terms": "شروط الخدمة",
@@ -1261,21 +1586,12 @@
         "toast_swapped": "✨ تم تبديل الترتيب بنجاح!",
         "toast_rotated": "↻ تم تدوير البطاقة 90 درجة!",
         "toast_pdf_ready": "🖨️ تم تحميل ملف PDF جاهز للطباعة!",
+        "toast_placeholders_added": "🎴 تم إنشاء بطاقات الحجز بنجاح!",
         "card_label_empty": "إضافة صورة",
         "card_label_drag": "سحب للتبديل",
         "card_label_delete": "حذف البطاقة",
         "card_label_rotate": "تدوير 90°",
-        "card_label_safe": "منطقة آمنة",
-        "faq_title": "الأسئلة الشائعة حول طباعة البطاقات (FAQ)",
-        "faq_desc": "تعرف على المقاسات القياسية ونصائح الورق",
-        "faq_q1": "ما هو الحجم القياسي لبطاقات الفوتوكارد؟",
-        "faq_a1": "المقاس القياسي هو 55×85 مم (بولارويد ميني 54×86 مم).",
-        "faq_q2": "ما هو نوع الورق الموصى به للطباعة المنزلية؟",
-        "faq_a2": "نوصي بورق صور لامع أو مطفي بوزن 250 إلى 300 جرام.",
-        "faq_q3": "هل صوري المرفوعة آمنة؟",
-        "faq_a3": "نعم بنسبة 100%، تتم المعالجة بالكامل داخل متصفحك.",
-        "faq_q4": "كيف يمكنني إعادة ترتيب البطاقات؟",
-        "faq_a4": "ببساطة اسحب أي بطاقة بالفأرة وأسقطها في المكان المطلوب."
+        "card_label_safe": "منطقة آمنة"
       },
       "es": {
         "badge_hub": "Herramientas de Fandom",
@@ -1283,20 +1599,25 @@
         "nav_tool_letter": "Generador de Cartas Pro",
         "hero_title_1": "Generador de Impresión de Photocards",
         "hero_title_2": "PDF de Alta Resolución 300 DPI Listo para Imprimir",
-        "hero_desc": "Organiza photocards estándar de 55×85mm en hojas A4, US Letter o papel fotográfico con líneas de corte y exportación instantánea a PDF en 300 DPI.",
+        "hero_desc": "Organiza photocards estándar de 55×85mm, mini cards de tour 70×100mm, bromides japoneses y Polaroids con verificación inteligente de DPI y 100% de privacidad local.",
         "label_step1": "1. Subir Imágenes",
         "dropzone_title": "Haz clic para subir o arrastra imágenes aquí",
         "dropzone_desc": "PNG, JPG, WEBP (Permite selección múltiple)",
+        "btn_gen_placeholders": "Generar Marcadores de Binder (Wishlist)",
         "label_step2": "2. Tamaño de Papel y Formato",
-        "label_multi_sizes": "8 Formatos Disponibles",
+        "label_multi_sizes": "10 Formatos Disponibles",
         "paper_a4_title": "📄 A4 Estándar",
         "paper_a4_desc": "55×85mm • 3×3 (9 tarjetas)",
         "paper_letter_title": "📑 US Letter",
         "paper_letter_desc": "8.5×11\" • 3×3 (9 tarjetas)",
-        "paper_polaroid_title": "🏷️ Polaroid Mini",
-        "paper_polaroid_desc": "Hoja A4 • 3×3 (9 tarjetas)",
         "paper_4x6_title": "🖼️ Papel Foto 4×6\"",
         "paper_4x6_desc": "46×70mm • 2×2 (4 tarjetas)",
+        "paper_tour_title": "💜 Tour Mini PC",
+        "paper_tour_desc": "70×100mm • 2×2 (4 tarjetas)",
+        "paper_bromide_title": "🇯🇵 Bromide Japón L",
+        "paper_bromide_desc": "89×127mm • 2×2 (4 fotos)",
+        "paper_polaroid_title": "🏷️ Polaroid Mini",
+        "paper_polaroid_desc": "Hoja A4 • 3×3 (9 tarjetas)",
         "paper_5x7_title": "📸 Papel Foto 5×7\"",
         "paper_5x7_desc": "55×85mm • 2×2 (4 tarjetas)",
         "paper_a5_title": "📐 A5 Agenda",
@@ -1307,7 +1628,9 @@
         "paper_a3_desc": "55×85mm • 4×4 (16 tarjetas)",
         "badge_hot": "🔥 Popular",
         "badge_na": "🔥 USA",
-        "badge_mini": "🔥 Portátil",
+        "badge_retail": "$0.15",
+        "badge_tour": "70×100",
+        "badge_jp": "L判",
         "badge_save": "Ahorro",
         "badge_batch": "Lote",
         "opt_cutlines": "Mostrar Líneas de Corte",
@@ -1317,17 +1640,30 @@
         "fit_cover": "Recortar y Llenar (Sin bordes)",
         "fit_contain": "Ajustar Imagen Completa",
         "btn_download_pdf": "Descargar PDF 300 DPI (Listo para Imprimir)",
+        "btn_rendering_pdf": "Renderizando PDF 300 DPI...",
         "pdf_note": "🔒 100% Privacidad Local: Tus fotos nunca salen de tu dispositivo.",
         "preview_sheet_title": "Vista Previa de la Hoja",
         "btn_clear_all": "Limpiar Hoja",
-        "tip_interactive": "Arrastra para reordenar. Pasa el cursor para rotar ↻ o eliminar ✕.",
-        "tag_interactive": "Arrastre activo",
+        "tip_interactive": "Arrastra para reordenar. Rota ↻, elimina ✕ o comprueba la resolución 🟢 DPI.",
+        "tag_interactive": "Comprobación DPI",
         "feature_1": "📐 Centrado de Precisión Milimétrica",
         "feature_2": "✂️ Separación Física de Corte de 2mm",
-        "feature_3": "🖱️ Arrastrar / Rotar / Eliminar",
+        "feature_3": "🔍 Detección Inteligente de Calidad DPI",
         "sec_photocard_history": "Proyectos Recientes",
         "btn_clear_history": "Borrar",
         "empty_history": "No hay proyectos guardados todavía.",
+        "modal_placeholder_title": "Generador de Marcadores de Binder",
+        "modal_placeholder_desc": "Crea elegantes tarjetas de wishlist para llenar los bolsillos vacíos de tu binder.",
+        "label_placeholder_text": "Texto del Marcador / Nombre del Bias:",
+        "label_placeholder_theme": "Tema de Color:",
+        "label_placeholder_count": "Cantidad de Tarjetas:",
+        "btn_apply_placeholders": "Generar e Insertar en Hoja",
+        "guide_size_title": "Guía de Tamaños de Photocards y Fundas",
+        "guide_size_desc": "Medidas estándar de álbumes, tour mini cards, bromides y fundas libres de ácido.",
+        "guide_retail_title": "Cómo Imprimir 4 Photocards por $0.15 en 4×6\"",
+        "guide_retail_desc1": "Ahorra un 80% imprimiendo 4 photocards en una sola hoja fotográfica 4×6\".",
+        "guide_storage_title": "Reglas de Conservación Libre de Ácido (Acid-Free)",
+        "guide_storage_desc1": "Nunca uses fundas de PVC baratas. Protege siempre tus cartas con fundas de PP/CPP.",
         "footer_about": "Acerca de",
         "footer_privacy": "Política de Privacidad",
         "footer_terms": "Términos de Servicio",
@@ -1336,21 +1672,12 @@
         "toast_swapped": "✨ ¡Tarjetas reordenadas con éxito!",
         "toast_rotated": "↻ ¡Tarjeta rotada 90°!",
         "toast_pdf_ready": "🖨️ ¡PDF 300 DPI descargado!",
+        "toast_placeholders_added": "🎴 ¡Marcadores generados correctamente!",
         "card_label_empty": "Subir Foto",
         "card_label_drag": "Arrastrar para mover",
         "card_label_delete": "Eliminar esta tarjeta",
         "card_label_rotate": "Rotar 90°",
-        "card_label_safe": "Zona Segura",
-        "faq_title": "Preguntas Frecuentes (FAQ) y Guía DIY",
-        "faq_desc": "Aprende sobre tipos de papel y estándares de tamaño",
-        "faq_q1": "¿Cuál es el tamaño estándar de una photocard?",
-        "faq_a1": "El tamaño oficial estándar es de 55×85mm (Polaroid Mini 54×86mm).",
-        "faq_q2": "¿Qué papel se recomienda para imprimir en casa?",
-        "faq_a2": "Recomendamos papel fotográfico brillante o mate de 250 a 300 g/m².",
-        "faq_q3": "¿Mis fotos están seguras?",
-        "faq_a3": "100% seguras, se procesan únicamente en tu navegador.",
-        "faq_q4": "¿Cómo reordeno las tarjetas?",
-        "faq_a4": "Simplemente arrastra cualquier tarjeta con el ratón a la posición deseada."
+        "card_label_safe": "Zona Segura"
       }
     };
 
@@ -1372,16 +1699,14 @@
     function changeLanguage(lang) {
       if (!i18nData[lang]) lang = 'en';
       currentLang = lang;
-      localStorage.setItem('stankit_lang', lang);
+      safeSetStorage('stankit_lang', lang);
       
-      // Update HTML lang and direction (RTL for Arabic)
       document.documentElement.lang = lang;
       document.documentElement.dir = (lang === 'ar' ? 'rtl' : 'ltr');
 
       const sel = document.getElementById('lang-select');
       if (sel) sel.value = lang;
 
-      // Update all data-i18n elements
       const elements = document.querySelectorAll('[data-i18n]');
       elements.forEach(el => {
         const key = el.getAttribute('data-i18n');
@@ -1390,13 +1715,11 @@
         }
       });
 
-      // Update page SEO title and meta description
       const titleEl = document.getElementById('seo-title');
       if (titleEl && i18nData[lang]?.hero_title_1) {
         titleEl.innerText = `StanKit Studio | ${i18nData[lang].hero_title_1} (300 DPI)`;
       }
 
-      // Update select fit options
       const fitCover = document.querySelector('#select-fit option[value="cover"]');
       const fitContain = document.querySelector('#select-fit option[value="contain"]');
       if (fitCover && i18nData[lang]?.fit_cover) fitCover.innerText = i18nData[lang].fit_cover;
@@ -1414,15 +1737,14 @@
       if (!paperSpecs[paper]) paper = 'a4';
       currentPaper = paper;
 
-      // Update button active styles
-      const paperKeys = ['a4', 'letter', 'a4-polaroid', '4x6', '5x7', 'a5', 'a4-dense', 'a3'];
+      const paperKeys = ['a4', 'letter', '4x6', 'a4-bts-tour', 'japan-l-size', 'a4-polaroid', '5x7', 'a5', 'a4-dense', 'a3'];
       paperKeys.forEach(pKey => {
         const btn = document.getElementById(`btn-paper-${pKey}`);
         if (!btn) return;
         if (pKey === paper) {
-          btn.className = 'p-3 rounded-xl border border-indigo-600 bg-indigo-50 text-indigo-700 text-left transition relative cursor-pointer active:scale-98 shadow-xs';
+          btn.className = 'p-2.5 rounded-xl border border-indigo-600 bg-indigo-50 text-indigo-700 text-left transition relative cursor-pointer active:scale-98 shadow-xs';
         } else {
-          btn.className = 'p-3 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-left transition relative cursor-pointer active:scale-98';
+          btn.className = 'p-2.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-left transition relative cursor-pointer active:scale-98';
         }
       });
 
@@ -1436,7 +1758,7 @@
       const dimEl = document.getElementById('sheet-dim-label');
       if (!dimEl) return;
       const dict = i18nData[currentLang] || i18nData['en'];
-      const titleKey = `paper_${currentPaper.replace('-', '_')}_title`;
+      const titleKey = `paper_${currentPaper.replace(/-/g, '_')}_title`;
       const title = dict[titleKey] || spec.sheetW_mm + '×' + spec.sheetH_mm + 'mm';
       dimEl.innerText = `${title.replace(/^[^\s]+\s*/, '')} (${spec.sheetW_mm}×${spec.sheetH_mm}mm) • 300 DPI`;
     }
@@ -1472,11 +1794,19 @@
       }
     }
 
-    // [P1.3] Precision Slot Uploading Logic
+    // Precision Slot Uploading Logic
     function triggerUploadForSlot(slotIdx) {
       targetUploadSlot = slotIdx;
       const fileInput = document.getElementById('file-input');
       if (fileInput) fileInput.click();
+    }
+
+    // Intelligent DPI Calculation for Image
+    function calculateImageDPI(img, spec) {
+      if (!img || !img.width || !img.height) return 300;
+      const dpiX = (img.width / spec.cardW_mm) * 25.4;
+      const dpiY = (img.height / spec.cardH_mm) * 25.4;
+      return Math.round(Math.min(dpiX, dpiY));
     }
 
     function handleFileSelect(files) {
@@ -1495,38 +1825,43 @@
           reader.onload = (e) => {
             const img = new Image();
             img.onload = () => {
+              const dpi = calculateImageDPI(img, spec);
               resolve({
                 src: e.target.result,
                 img: img,
                 id: 'img_' + Math.random().toString(36).substr(2, 9),
-                rotation: 0 // [P1.4] Initial rotation state
+                rotation: 0,
+                dpi: dpi
               });
+            };
+            img.onerror = () => {
+              showToast('Failed to load an image file.', '⚠️');
+              resolve(null);
             };
             img.src = e.target.result;
           };
+          reader.onerror = () => resolve(null);
           reader.readAsDataURL(file);
         });
         loadPromises.push(p);
       });
 
       Promise.all(loadPromises).then(newItems => {
-        if (targetUploadSlot !== null && targetUploadSlot >= 0 && targetUploadSlot < maxSlots) {
-          // [P1.3] Insert precisely at target slot
-          const first = newItems[0];
+        const validItems = newItems.filter(Boolean);
+        if (targetUploadSlot !== null && targetUploadSlot >= 0 && targetUploadSlot < maxSlots && validItems.length > 0) {
+          const first = validItems[0];
           if (targetUploadSlot < uploadedImages.length) {
             uploadedImages[targetUploadSlot] = first;
           } else {
             uploadedImages.push(first);
           }
-          // Append any extra files
-          for (let i = 1; i < newItems.length; i++) {
+          for (let i = 1; i < validItems.length; i++) {
             if (uploadedImages.length < maxSlots) {
-              uploadedImages.push(newItems[i]);
+              uploadedImages.push(validItems[i]);
             }
           }
         } else {
-          // Standard batch append
-          newItems.forEach(item => {
+          validItems.forEach(item => {
             if (uploadedImages.length < maxSlots) {
               uploadedImages.push(item);
             }
@@ -1539,7 +1874,6 @@
       });
     }
 
-    // [P1.4] Rotate Single Card 90 Degrees Clockwise
     function rotateCard(index, event) {
       if (event) {
         event.stopPropagation();
@@ -1573,9 +1907,8 @@
     }
 
     // ==========================================
-    // Interactive Drag to Swap / Move Logic (Desktop & [P2.2] Mobile Touch)
+    // Interactive Drag to Swap / Move Logic
     // ==========================================
-
     function onDragStart(e) {
       draggedIndex = parseInt(e.currentTarget.dataset.index, 10);
       e.dataTransfer.effectAllowed = 'move';
@@ -1613,12 +1946,10 @@
       if (!hasSource) return;
 
       if (hasSource && hasTarget) {
-        // Swap cards between two populated slots
         const temp = uploadedImages[draggedIndex];
         uploadedImages[draggedIndex] = uploadedImages[targetIndex];
         uploadedImages[targetIndex] = temp;
       } else if (hasSource && !hasTarget) {
-        // Move card to target index
         const item = uploadedImages.splice(draggedIndex, 1)[0];
         if (targetIndex >= uploadedImages.length) {
           uploadedImages.push(item);
@@ -1632,7 +1963,7 @@
       trackGA4Event('reorder_cards', { from: draggedIndex, to: targetIndex });
     }
 
-    // [P2.2] Mobile Touch Event Support
+    // Mobile Touch Event Support
     let touchSourceIndex = null;
     let touchMoved = false;
 
@@ -1667,9 +1998,8 @@
     }
 
     // ==========================================
-    // [P0] Render Centered DOM Grid Preview
+    // [P0] Render Centered DOM Grid Preview with DPI Health Check
     // ==========================================
-
     function renderGridPreview() {
       const paperSheet = document.getElementById('paper-sheet');
       const cardGrid = document.getElementById('card-grid');
@@ -1679,23 +2009,19 @@
       const spec = paperSpecs[currentPaper] || paperSpecs['a4'];
       const dict = i18nData[currentLang] || i18nData['en'];
 
-      // [P0] Get responsive container width (max 440px)
       const containerW = previewContainer ? Math.min(previewContainer.clientWidth - 48, 440) : 420;
       const layout = calculateLayout(spec, containerW, false);
 
-      // [P0] 1. Set Paper Sheet Outer Pixel Dimensions and Centering Padding
       paperSheet.style.width = `${layout.sheetW_px}px`;
       paperSheet.style.height = `${layout.sheetH_px}px`;
       paperSheet.style.padding = `${layout.padY_px}px ${layout.padX_px}px`;
 
-      // [P0] 2. Set Exact Hard Pixels on Card Grid
       cardGrid.style.width = `${layout.totalGridW_px}px`;
       cardGrid.style.height = `${layout.totalGridH_px}px`;
       cardGrid.style.gap = `${layout.gap_px}px`;
       cardGrid.style.gridTemplateColumns = `repeat(${spec.cols}, ${layout.cardW_px}px)`;
       cardGrid.style.gridTemplateRows = `repeat(${spec.rows}, ${layout.cardH_px}px)`;
 
-      // Clear existing cells
       cardGrid.innerHTML = '';
 
       for (let i = 0; i < spec.maxSlots; i++) {
@@ -1704,22 +2030,31 @@
         cell.className = 'card-cell relative overflow-hidden flex items-center justify-center transition-all duration-150 group select-none cursor-pointer';
         cell.dataset.index = String(i);
 
-        // [P0] Hard Pixel Width & Height for each cell
         cell.style.width = `${layout.cardW_px}px`;
         cell.style.height = `${layout.cardH_px}px`;
-
-        // [P1.1] 3mm Rounded Corners
         cell.style.borderRadius = `${layout.cornerR_px}px`;
 
-        // Cut line border [P0]
         const cutBorderClass = currentCutLine ? 'border border-dashed border-slate-300' : 'border border-slate-200/60';
 
         if (hasImage) {
           const item = uploadedImages[i];
           const rotation = item.rotation || 0;
+          const currentDPI = calculateImageDPI(item.img, spec);
+          item.dpi = currentDPI;
+
+          let dpiBadgeClass = 'bg-emerald-500 text-white';
+          let dpiBadgeText = `🟢 ${currentDPI} DPI`;
+          if (currentDPI < 180) {
+            dpiBadgeClass = 'bg-rose-500 text-white animate-pulse';
+            dpiBadgeText = `🔴 ${currentDPI} DPI (Low)`;
+          } else if (currentDPI < 280) {
+            dpiBadgeClass = 'bg-amber-500 text-white';
+            dpiBadgeText = `🟡 ${currentDPI} DPI`;
+          }
+
           cell.classList.add('bg-white');
           cell.setAttribute('draggable', 'true');
-          cell.setAttribute('title', `Card #${i + 1} (${spec.cardW_mm}×${spec.cardH_mm}mm)`);
+          cell.setAttribute('title', `Card #${i + 1} (${spec.cardW_mm}×${spec.cardH_mm}mm, ${currentDPI} DPI)`);
 
           const fitClass = currentFitMode === 'contain' ? 'object-contain bg-slate-900/5' : 'object-cover';
 
@@ -1730,12 +2065,19 @@
             <!-- Scissor Cut Lines Overlay [P0] -->
             <div class="absolute inset-0 ${cutBorderClass} pointer-events-none z-10" style="border-radius: ${layout.cornerR_px}px;"></div>
 
-            <!-- [P1.2] Safe Area 2mm Guide (Dashed Inner Line) -->
+            <!-- Safe Area 2mm Guide -->
             ${currentSafeArea ? `
               <div class="absolute pointer-events-none z-15 border border-dashed border-indigo-400/40" style="inset: ${layout.safeArea_px}px; border-radius: ${Math.max(2, layout.cornerR_px - 2)}px;"></div>
             ` : ''}
 
-            <!-- Hover Action Overlay (Top bar with index badge, rotate button & delete button) [P1.4] -->
+            <!-- Bottom Left DPI Health Badge -->
+            <div class="absolute bottom-1 left-1 z-20 pointer-events-none group-hover:opacity-0 transition-opacity">
+              <span class="text-[8px] font-extrabold px-1.5 py-0.2 rounded-full shadow-xs backdrop-blur-xs ${dpiBadgeClass}">
+                ${dpiBadgeText}
+              </span>
+            </div>
+
+            <!-- Hover Action Overlay -->
             <div class="absolute inset-0 bg-slate-950/45 backdrop-blur-[1px] opacity-0 group-hover:opacity-100 transition-opacity duration-150 flex flex-col justify-between p-1.5 z-20" style="border-radius: ${layout.cornerR_px}px;">
               <div class="flex items-center justify-between w-full">
                 <span class="bg-slate-900/90 text-white text-[9px] font-extrabold px-1.5 py-0.5 rounded shadow-xs flex items-center space-x-0.5 cursor-grab active:cursor-grabbing">
@@ -1744,7 +2086,7 @@
                 </span>
                 
                 <div class="flex items-center space-x-1">
-                  <!-- [P1.4] Rotate 90° Button -->
+                  <!-- Rotate 90° Button -->
                   <button type="button" onclick="rotateCard(${i}, event)" title="${dict.card_label_rotate || 'Rotate 90°'}" class="w-5 h-5 rounded-full bg-indigo-600/90 hover:bg-indigo-600 text-white flex items-center justify-center text-[10px] font-bold shadow-md transition transform hover:scale-110 active:scale-90 cursor-pointer">
                     ↻
                   </button>
@@ -1756,37 +2098,40 @@
                 </div>
               </div>
 
-              <!-- Center Move Hint -->
-              <div class="my-auto text-center pointer-events-none">
-                <span class="bg-slate-900/85 text-white text-[9px] font-extrabold px-2 py-0.5 rounded-full shadow-xs backdrop-blur-xs inline-flex items-center space-x-1">
-                  <span>↕️</span>
-                  <span>${dict.card_label_drag || 'Drag to swap'}</span>
-                </span>
+              <!-- Center Move & DPI Status Hint -->
+              <div class="my-auto text-center pointer-events-none space-y-1">
+                <div>
+                  <span class="bg-slate-900/85 text-white text-[9px] font-extrabold px-2 py-0.5 rounded-full shadow-xs backdrop-blur-xs inline-flex items-center space-x-1">
+                    <span>↕️</span>
+                    <span>${dict.card_label_drag || 'Drag to swap'}</span>
+                  </span>
+                </div>
+                <div>
+                  <span class="text-[8px] font-extrabold px-2 py-0.5 rounded-full shadow-xs ${dpiBadgeClass}">
+                    ${dpiBadgeText}
+                  </span>
+                </div>
               </div>
               <div class="h-1"></div>
             </div>
           `;
 
-          // Bind Drag & Drop event listeners (Desktop)
           cell.addEventListener('dragstart', onDragStart);
           cell.addEventListener('dragend', onDragEnd);
           cell.addEventListener('dragover', onDragOver);
           cell.addEventListener('dragleave', onDragLeave);
           cell.addEventListener('drop', onDrop);
 
-          // [P2.2] Mobile Touch Listeners
           cell.addEventListener('touchstart', onTouchStart, { passive: true });
           cell.addEventListener('touchmove', onTouchMove, { passive: true });
           cell.addEventListener('touchend', onTouchEnd);
 
         } else {
-          // Empty Placeholder Slot [P1.3 Precision Upload Target]
           cell.classList.add('bg-slate-50/50', 'hover:bg-indigo-50/60', 'hover:border-indigo-400');
           cell.setAttribute('title', `Card #${i + 1}`);
           cell.onclick = () => triggerUploadForSlot(i);
 
           cell.innerHTML = `
-            <!-- Scissor Cut Lines Overlay -->
             <div class="absolute inset-0 ${cutBorderClass} pointer-events-none" style="border-radius: ${layout.cornerR_px}px;"></div>
 
             <div class="text-center p-1 space-y-1 pointer-events-none z-10">
@@ -1798,12 +2143,10 @@
             </div>
           `;
 
-          // Allow empty slots to accept dropped cards as well
           cell.addEventListener('dragover', onDragOver);
           cell.addEventListener('dragleave', onDragLeave);
           cell.addEventListener('drop', onDrop);
 
-          // [P2.2] Mobile Touch Listeners
           cell.addEventListener('touchstart', onTouchStart, { passive: true });
           cell.addEventListener('touchmove', onTouchMove, { passive: true });
           cell.addEventListener('touchend', onTouchEnd);
@@ -1814,16 +2157,141 @@
     }
 
     // ==========================================
-    // GA4 & LocalStorage Photocard History
+    // Missing PC Placeholder Generator
     // ==========================================
+    function openPlaceholderModal() {
+      const modal = document.getElementById('placeholder-modal');
+      const content = document.getElementById('placeholder-modal-content');
+      if (!modal) return;
+      modal.classList.remove('opacity-0', 'pointer-events-none');
+      modal.classList.add('opacity-100');
+      content.classList.remove('scale-95');
+      content.classList.add('scale-100');
+    }
 
+    function closePlaceholderModal() {
+      const modal = document.getElementById('placeholder-modal');
+      const content = document.getElementById('placeholder-modal-content');
+      if (!modal) return;
+      modal.classList.add('opacity-0', 'pointer-events-none');
+      modal.classList.remove('opacity-100');
+      content.classList.add('scale-95');
+      content.classList.remove('scale-100');
+    }
+
+    function selectPlaceholderTheme(theme) {
+      selectedPlaceholderTheme = theme;
+      ['purple', 'pink', 'mint', 'slate'].forEach(t => {
+        const btn = document.getElementById(`theme-${t}`);
+        if (btn) {
+          if (t === theme) {
+            btn.className = `p-2 rounded-xl border-2 border-indigo-600 bg-indigo-50 text-indigo-700 cursor-pointer font-bold`;
+          } else {
+            btn.className = `p-2 rounded-xl border border-slate-200 bg-slate-50 text-slate-700 cursor-pointer font-bold`;
+          }
+        }
+      });
+    }
+
+    function generatePlaceholders() {
+      const spec = paperSpecs[currentPaper] || paperSpecs['a4'];
+      const maxSlots = spec.maxSlots;
+      const textVal = (document.getElementById('ph-text').value || 'WISH LIST').trim().toUpperCase();
+      const countVal = document.getElementById('ph-count').value;
+
+      let slotsToFill = 0;
+      if (countVal === 'fill') {
+        slotsToFill = maxSlots - uploadedImages.length;
+      } else {
+        slotsToFill = parseInt(countVal, 10) || 1;
+      }
+
+      if (slotsToFill <= 0) {
+        showToast('Sheet is already full of cards!', '⚠️');
+        closePlaceholderModal();
+        return;
+      }
+
+      const canvas = document.createElement('canvas');
+      canvas.width = 650;
+      canvas.height = 1004;
+      const ctx = canvas.getContext('2d');
+
+      let grad1 = '#f3e8ff', grad2 = '#e0e7ff', textColor = '#6b21a8', subColor = '#9333ea';
+      if (selectedPlaceholderTheme === 'pink') {
+        grad1 = '#ffe4e6'; grad2 = '#fce7f3'; textColor = '#be123c'; subColor = '#e11d48';
+      } else if (selectedPlaceholderTheme === 'mint') {
+        grad1 = '#ccfbf1'; grad2 = '#d1fae5'; textColor = '#047857'; subColor = '#059669';
+      } else if (selectedPlaceholderTheme === 'slate') {
+        grad1 = '#f1f5f9'; grad2 = '#e2e8f0'; textColor = '#334155'; subColor = '#64748b';
+      }
+
+      const grad = ctx.createLinearGradient(0, 0, 650, 1004);
+      grad.addColorStop(0, grad1);
+      grad.addColorStop(1, grad2);
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, 650, 1004);
+
+      ctx.strokeStyle = subColor;
+      ctx.lineWidth = 4;
+      ctx.setLineDash([16, 12]);
+      ctx.strokeRect(36, 36, 650 - 72, 1004 - 72);
+
+      ctx.setLineDash([]);
+      ctx.fillStyle = textColor;
+      ctx.font = 'bold 24px "Plus Jakarta Sans", sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('✨ STANKIT COLLECTOR SERIES ✨', 325, 120);
+
+      ctx.font = '72px sans-serif';
+      ctx.fillText('🎴', 325, 420);
+
+      ctx.font = 'bold 36px "Plus Jakarta Sans", sans-serif';
+      ctx.fillStyle = textColor;
+      ctx.fillText(textVal, 325, 520);
+
+      ctx.font = '500 20px "Plus Jakarta Sans", sans-serif';
+      ctx.fillStyle = subColor;
+      ctx.fillText('OFFICIAL PHOTOCARD PLACEHOLDER', 325, 570);
+
+      ctx.font = 'bold 18px "Plus Jakarta Sans", sans-serif';
+      ctx.fillStyle = subColor;
+      ctx.fillText('55 × 85 MM • ARCHIVAL GRADE', 325, 920);
+
+      const placeholderDataUrl = canvas.toDataURL('image/jpeg', 0.95);
+
+      const phImg = new Image();
+      phImg.onload = () => {
+        for (let i = 0; i < slotsToFill; i++) {
+          if (uploadedImages.length < maxSlots) {
+            uploadedImages.push({
+              src: placeholderDataUrl,
+              img: phImg,
+              id: 'ph_' + Math.random().toString(36).substr(2, 9),
+              rotation: 0,
+              dpi: 300
+            });
+          }
+        }
+        updateUploadCounter();
+        renderGridPreview();
+        closePlaceholderModal();
+        showToast(i18nData[currentLang]?.toast_placeholders_added || 'Placeholders generated!', '🎴');
+        trackGA4Event('generate_placeholders', { count: slotsToFill, theme: selectedPlaceholderTheme });
+      };
+      phImg.src = placeholderDataUrl;
+    }
+
+    // ==========================================
+    // Safe LocalStorage Photocard History
+    // ==========================================
     function savePhotocardProjectToHistory() {
       try {
         if (uploadedImages.length === 0) return;
-        const history = JSON.parse(localStorage.getItem('stankit_photocard_history') || '[]');
+        const history = safeGetStorage('stankit_photocard_history', []);
         const spec = paperSpecs[currentPaper] || paperSpecs['a4'];
         const dict = i18nData[currentLang] || i18nData['en'];
-        const titleKey = `paper_${currentPaper.replace('-', '_')}_title`;
+        const titleKey = `paper_${currentPaper.replace(/-/g, '_')}_title`;
         const paperName = (dict[titleKey] || currentPaper.toUpperCase()).replace(/^[^\s]+\s*/, '');
 
         const entry = {
@@ -1837,7 +2305,7 @@
 
         history.unshift(entry);
         if (history.length > 10) history.pop();
-        localStorage.setItem('stankit_photocard_history', JSON.stringify(history));
+        safeSetStorage('stankit_photocard_history', history);
         renderPhotocardHistoryUI();
       } catch (err) {
         console.warn('History save error:', err);
@@ -1849,7 +2317,7 @@
       const badge = document.getElementById('photocard-history-badge');
       if (!container) return;
 
-      const history = JSON.parse(localStorage.getItem('stankit_photocard_history') || '[]');
+      const history = safeGetStorage('stankit_photocard_history', []);
       if (badge) badge.innerText = history.length;
       const dict = i18nData[currentLang] || i18nData['en'];
 
@@ -1880,15 +2348,17 @@
     }
 
     function deletePhotocardHistoryItem(index) {
-      const history = JSON.parse(localStorage.getItem('stankit_photocard_history') || '[]');
+      const history = safeGetStorage('stankit_photocard_history', []);
       history.splice(index, 1);
-      localStorage.setItem('stankit_photocard_history', JSON.stringify(history));
+      safeSetStorage('stankit_photocard_history', history);
       renderPhotocardHistoryUI();
     }
 
     function clearPhotocardHistory() {
       if (confirm('Clear all print layout history?')) {
-        localStorage.removeItem('stankit_photocard_history');
+        try {
+          localStorage.removeItem('stankit_photocard_history');
+        } catch (e) {}
         renderPhotocardHistoryUI();
       }
     }
@@ -1896,126 +2366,125 @@
     // ==========================================
     // [P0 & P1.1 & P1.4] 300 DPI High-Resolution PDF Export Engine
     // ==========================================
-
     function exportPDF() {
       if (uploadedImages.length === 0) {
         showToast('Please upload at least one image first!', '📷');
         return;
       }
 
-      const { jsPDF } = window.jspdf;
-      const spec = paperSpecs[currentPaper] || paperSpecs['a4'];
+      const btnPdf = document.getElementById('btn-export-pdf');
+      const btnPdfText = document.getElementById('btn-pdf-text');
+      const dict = i18nData[currentLang] || i18nData['en'];
 
-      // [P2.1] Calculate layout using the exact same unified formula
-      const layout = calculateLayout(spec, 0, true);
-
-      const offCanvas = document.createElement('canvas');
-      offCanvas.width = layout.sheetW_px;
-      offCanvas.height = layout.sheetH_px;
-      const ctx = offCanvas.getContext('2d');
-
-      // Pure White Background
-      ctx.fillStyle = '#ffffff';
-      ctx.fillRect(0, 0, layout.sheetW_px, layout.sheetH_px);
-
-      let cardIdx = 0;
-      for (let r = 0; r < spec.rows; r++) {
-        for (let c = 0; c < spec.cols; c++) {
-          const x = layout.startX + c * (layout.cardW_px + layout.gap_px);
-          const y = layout.startY + r * (layout.cardH_px + layout.gap_px);
-
-          if (cardIdx < uploadedImages.length) {
-            const item = uploadedImages[cardIdx];
-            const img = item.img;
-            const rotation = item.rotation || 0;
-
-            ctx.save();
-            ctx.beginPath();
-            
-            // [P1.1] Draw Rounded Corner Clipping in Canvas 300 DPI
-            if (ctx.roundRect) {
-              ctx.roundRect(x, y, layout.cardW_px, layout.cardH_px, layout.cornerR_px);
-            } else {
-              ctx.rect(x, y, layout.cardW_px, layout.cardH_px);
-            }
-            ctx.clip();
-
-            // [P1.4] Apply Image Rotation in Canvas Export
-            ctx.translate(x + layout.cardW_px / 2, y + layout.cardH_px / 2);
-            ctx.rotate((rotation * Math.PI) / 180);
-
-            const isSideways = (rotation === 90 || rotation === 270);
-            const targetW = isSideways ? layout.cardH_px : layout.cardW_px;
-            const targetH = isSideways ? layout.cardW_px : layout.cardH_px;
-
-            if (currentFitMode === 'cover') {
-              const hRatio = targetW / img.width;
-              const vRatio = targetH / img.height;
-              const ratio = Math.max(hRatio, vRatio);
-              const drawW = img.width * ratio;
-              const drawH = img.height * ratio;
-              ctx.drawImage(img, -drawW / 2, -drawH / 2, drawW, drawH);
-            } else {
-              const hRatio = targetW / img.width;
-              const vRatio = targetH / img.height;
-              const ratio = Math.min(hRatio, vRatio);
-              const drawW = img.width * ratio;
-              const drawH = img.height * ratio;
-              ctx.drawImage(img, -drawW / 2, -drawH / 2, drawW, drawH);
-            }
-            ctx.restore();
-          }
-
-          // [P0] Draw Scissor Cut Lines if enabled (2mm Gap Preserved)
-          if (currentCutLine) {
-            ctx.save();
-            ctx.setLineDash([12, 12]);
-            ctx.strokeStyle = '#cbd5e1';
-            ctx.lineWidth = 2;
-            if (ctx.roundRect) {
-              ctx.beginPath();
-              ctx.roundRect(x, y, layout.cardW_px, layout.cardH_px, layout.cornerR_px);
-              ctx.stroke();
-            } else {
-              ctx.strokeRect(x, y, layout.cardW_px, layout.cardH_px);
-            }
-            ctx.restore();
-          }
-
-          cardIdx++;
-        }
+      if (btnPdfText) {
+        btnPdfText.innerText = dict.btn_rendering_pdf || 'Rendering 300 DPI PDF...';
       }
 
-      // Generate jsPDF document
-      const doc = new jsPDF({
-        orientation: 'portrait',
-        unit: 'mm',
-        format: [spec.sheetW_mm, spec.sheetH_mm]
-      });
+      setTimeout(() => {
+        try {
+          const { jsPDF } = window.jspdf;
+          const spec = paperSpecs[currentPaper] || paperSpecs['a4'];
+          const layout = calculateLayout(spec, 0, true);
 
-      const imgData = offCanvas.toDataURL('image/jpeg', 0.98);
-      const pdfW = doc.internal.pageSize.getWidth();
-      const pdfH = doc.internal.pageSize.getHeight();
+          const offCanvas = document.createElement('canvas');
+          offCanvas.width = layout.sheetW_px;
+          offCanvas.height = layout.sheetH_px;
+          const ctx = offCanvas.getContext('2d');
 
-      doc.addImage(imgData, 'JPEG', 0, 0, pdfW, pdfH, undefined, 'FAST');
-      doc.save(`StanKit_${currentPaper.toUpperCase()}_300DPI.pdf`);
+          ctx.fillStyle = '#ffffff';
+          ctx.fillRect(0, 0, layout.sheetW_px, layout.sheetH_px);
 
-      savePhotocardProjectToHistory();
-      showToast(i18nData[currentLang]?.toast_pdf_ready || 'PDF downloaded!', '🖨️');
-      trackGA4Event('download_pdf', {
-        paper_type: currentPaper,
-        card_count: uploadedImages.length,
-        cut_line: currentCutLine
-      });
+          let cardIdx = 0;
+          for (let r = 0; r < spec.rows; r++) {
+            for (let c = 0; c < spec.cols; c++) {
+              const x = layout.startX + c * (layout.cardW_px + layout.gap_px);
+              const y = layout.startY + r * (layout.cardH_px + layout.gap_px);
+
+              if (cardIdx < uploadedImages.length) {
+                const item = uploadedImages[cardIdx];
+                const img = item.img;
+                const rotation = item.rotation || 0;
+
+                ctx.save();
+                drawRoundRectPath(ctx, x, y, layout.cardW_px, layout.cardH_px, layout.cornerR_px);
+                ctx.clip();
+
+                ctx.translate(x + layout.cardW_px / 2, y + layout.cardH_px / 2);
+                ctx.rotate((rotation * Math.PI) / 180);
+
+                const isSideways = (rotation === 90 || rotation === 270);
+                const targetW = isSideways ? layout.cardH_px : layout.cardW_px;
+                const targetH = isSideways ? layout.cardW_px : layout.cardH_px;
+
+                if (currentFitMode === 'cover') {
+                  const hRatio = targetW / img.width;
+                  const vRatio = targetH / img.height;
+                  const ratio = Math.max(hRatio, vRatio);
+                  const drawW = img.width * ratio;
+                  const drawH = img.height * ratio;
+                  ctx.drawImage(img, -drawW / 2, -drawH / 2, drawW, drawH);
+                } else {
+                  const hRatio = targetW / img.width;
+                  const vRatio = targetH / img.height;
+                  const ratio = Math.min(hRatio, vRatio);
+                  const drawW = img.width * ratio;
+                  const drawH = img.height * ratio;
+                  ctx.drawImage(img, -drawW / 2, -drawH / 2, drawW, drawH);
+                }
+                ctx.restore();
+              }
+
+              if (currentCutLine) {
+                ctx.save();
+                ctx.setLineDash([12, 12]);
+                ctx.strokeStyle = '#cbd5e1';
+                ctx.lineWidth = 2;
+                drawRoundRectPath(ctx, x, y, layout.cardW_px, layout.cardH_px, layout.cornerR_px);
+                ctx.stroke();
+                ctx.restore();
+              }
+
+              cardIdx++;
+            }
+          }
+
+          const doc = new jsPDF({
+            orientation: 'portrait',
+            unit: 'mm',
+            format: [spec.sheetW_mm, spec.sheetH_mm]
+          });
+
+          const imgData = offCanvas.toDataURL('image/jpeg', 0.98);
+          const pdfW = doc.internal.pageSize.getWidth();
+          const pdfH = doc.internal.pageSize.getHeight();
+
+          doc.addImage(imgData, 'JPEG', 0, 0, pdfW, pdfH, undefined, 'FAST');
+          doc.save(`StanKit_${currentPaper.toUpperCase()}_300DPI.pdf`);
+
+          savePhotocardProjectToHistory();
+          showToast(dict.toast_pdf_ready || 'PDF downloaded!', '🖨️');
+          trackGA4Event('download_pdf', {
+            paper_type: currentPaper,
+            card_count: uploadedImages.length,
+            cut_line: currentCutLine
+          });
+        } catch (err) {
+          console.error('PDF export error:', err);
+          showToast('PDF rendering error. Please try again.', '⚠️');
+        } finally {
+          if (btnPdfText) {
+            btnPdfText.innerText = dict.btn_download_pdf || 'Download 300 DPI PDF (Print Ready)';
+          }
+        }
+      }, 50);
     }
 
-    // Window Resize Event to dynamically refresh preview scale [P0]
     window.addEventListener('resize', () => {
       renderGridPreview();
     });
 
     window.addEventListener('DOMContentLoaded', () => {
-      const savedLang = localStorage.getItem('stankit_lang') || localStorage.getItem('cardgrid_lang');
+      const savedLang = safeGetStorage('stankit_lang', 'en');
       if (savedLang && i18nData[savedLang]) {
         changeLanguage(savedLang);
       } else {
@@ -2028,13 +2497,15 @@
   <!-- Ko-fi Floating Widget Overlay -->
   <script src="https://storage.ko-fi.com/cdn/scripts/overlay-widget.js"></script>
   <script>
-    kofiWidgetOverlay.draw('stankitstudio', {
-      'type': 'floating-chat',
-      'floating-chat.donatebutton.text': 'Support me',
-      'floating-chat.position': 'bottom-right',
-      'floating-chat.donatebutton.background-color': '#6366f1',
-      'floating-chat.donatebutton.text-color': '#ffffff'
-    });
+    try {
+      kofiWidgetOverlay.draw('stankitstudio', {
+        'type': 'floating-chat',
+        'floating-chat.donatebutton.text': 'Support me',
+        'floating-chat.position': 'bottom-right',
+        'floating-chat.donatebutton.background-color': '#6366f1',
+        'floating-chat.donatebutton.text-color': '#ffffff'
+      });
+    } catch(e) {}
   </script>
 </body>
 </html>
