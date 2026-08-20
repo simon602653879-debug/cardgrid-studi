@@ -42,10 +42,7 @@
         linear-gradient(45deg, #f1f5f9 25%, transparent 25%), 
         linear-gradient(-45deg, #f1f5f9 25%, transparent 25%), 
         linear-gradient(45deg, transparent 75%, #f1f5f9 75%), 
-        linear-gradient(-45deg, transparent 75%, #f1f5f9 75%);
-      background-size: 16px 16px;
-      background-position: 0 0, 0 8px, 8px -8px, -8px 0px;
-    }
+        linear-gradient(-45deg, transparent 75%, #f1f5f9 75%);\n      background-size: 16px 16px;\n      background-position: 0 0, 0 8px, 8px -8px, -8px 0px;\n    }
     
     /* Position Ko-fi Floating Widget to Bottom-Right */
     .floatingchat-container-wrap,
@@ -62,21 +59,22 @@
       margin-left: 0 !important;
     }
 
-    /* Interactive Slot Hover & Drag Styling */
-    .slot-interactive {
-      transition: all 0.15s ease-in-out;
+    /* Drag and Drop Visual Feedback Styles */
+    .card-cell {
+      transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
     }
-    .slot-interactive:hover .slot-actions {
-      opacity: 1;
-      pointer-events: auto;
+    .card-cell.is-dragging {
+      opacity: 0.45;
+      transform: scale(0.95);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     }
-    .slot-dragging {
-      opacity: 0.4;
-      border: 2px dashed #6366f1 !important;
+    .card-cell.is-drag-over {
+      transform: scale(1.03);
+      box-shadow: 0 0 0 2px #6366f1, 0 8px 20px rgba(99, 102, 241, 0.25);
+      z-index: 30;
     }
-    .slot-drag-over {
-      transform: scale(1.02);
-      box-shadow: 0 0 0 2px #4f46e5, 0 8px 16px rgba(79, 70, 229, 0.2);
+    .cut-line-border {
+      border: 1px dashed #cbd5e1;
     }
   </style>
   <link rel="canonical" href="https://stankit.vercel.app/">
@@ -206,7 +204,7 @@
             <div class="grid grid-cols-2 sm:grid-cols-2 gap-2 text-xs font-bold" id="paper-options-container">
               
               <!-- 1. A4 Standard (🔥 Popular) -->
-              <button type="button" onclick="setPaper('a4')" id="btn-paper-a4" class="p-3 rounded-xl border border-indigo-600 bg-indigo-50 text-indigo-700 text-left transition relative cursor-pointer active:scale-98">
+              <button type="button" onclick="setPaper('a4')" id="btn-paper-a4" class="p-3 rounded-xl border border-indigo-600 bg-indigo-50 text-indigo-700 text-left transition relative cursor-pointer active:scale-98 shadow-xs">
                 <div class="flex items-center justify-between">
                   <span class="font-extrabold text-xs">📄 A4 标准</span>
                   <span class="text-[9px] bg-rose-500 text-white px-1.5 py-0.2 rounded font-extrabold">🔥 热门</span>
@@ -238,7 +236,7 @@
                   <span class="font-extrabold text-xs">🖼️ 4×6" 六寸相纸</span>
                   <span class="text-[9px] bg-rose-500 text-white px-1.5 py-0.2 rounded font-extrabold">🔥 便携</span>
                 </div>
-                <div class="text-[11px] font-medium text-slate-500 mt-0.5">照片打印机 • 2×2 (4张)</div>
+                <div class="text-[11px] font-medium text-slate-500 mt-0.5">48×72mm • 2×2 (4张)</div>
               </button>
 
               <!-- 5. 5x7" Photo Paper -->
@@ -268,13 +266,13 @@
                 <div class="text-[11px] font-medium text-slate-500 mt-0.5">50×70mm • 3×4 (12张)</div>
               </button>
 
-              <!-- 8. A3 Commercial Batch (18-Cards) -->
+              <!-- 8. A3 Commercial Batch (16-Cards) -->
               <button type="button" onclick="setPaper('a3')" id="btn-paper-a3" class="p-3 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-left transition relative cursor-pointer active:scale-98">
                 <div class="flex items-center justify-between">
                   <span class="font-extrabold text-xs">🏢 A3 批量商用</span>
                   <span class="text-[9px] bg-purple-100 text-purple-700 px-1.5 py-0.2 rounded font-bold">海量排版</span>
                 </div>
-                <div class="text-[11px] font-medium text-slate-500 mt-0.5">55×85mm • 3×6 (18张)</div>
+                <div class="text-[11px] font-medium text-slate-500 mt-0.5">55×85mm • 4×4 (16张)</div>
               </button>
 
             </div>
@@ -333,7 +331,7 @@
 
       </div>
 
-      <!-- Right Area: Live Printable Grid Canvas Sheet with Interactive Overlay (7 Cols) -->
+      <!-- Right Area: Live Printable Grid DOM Sheet (Centered Layout with CSS Grid) -->
       <div class="lg:col-span-7 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
         <div class="flex items-center justify-between border-b border-slate-100 pb-3 flex-wrap gap-2">
           <div class="flex items-center space-x-2">
@@ -356,25 +354,27 @@
           <span class="text-[10px] text-indigo-600 font-extrabold bg-white px-2 py-0.5 rounded shadow-2xs">支持拖拽排序</span>
         </div>
 
-        <!-- Canvas Container with Checkerboard Background & Interactive Drag Overlay -->
-        <div class="w-full overflow-x-auto p-4 checkerboard-bg rounded-xl flex items-center justify-center border border-slate-200/80 relative select-none">
-          <div id="canvas-wrapper" class="relative inline-block shadow-lg rounded-sm bg-white">
-            <canvas id="print-canvas" class="block max-w-full h-auto border border-slate-300"></canvas>
-            <!-- Interactive HTML Overlay Grid directly over canvas slots -->
-            <div id="interactive-overlay" class="absolute inset-0 pointer-events-none"></div>
+        <!-- Paper Sheet Container with Checkerboard Background (Center Aligned) -->
+        <div class="w-full overflow-x-auto p-4 sm:p-6 checkerboard-bg rounded-xl flex items-center justify-center border border-slate-200/80 select-none">
+          <!-- The Physical Paper Sheet DOM (Aspect Ratio Scaled) -->
+          <div id="paper-sheet" class="bg-white shadow-xl rounded-sm border border-slate-300 relative flex items-center justify-center transition-all duration-200 ease-out" style="width: 100%; max-width: 440px;">
+            <!-- Perfectly Centered CSS Grid for Cards -->
+            <div id="card-grid" class="grid transition-all duration-200">
+              <!-- Rendered dynamically by renderGridPreview() -->
+            </div>
           </div>
         </div>
 
         <div class="text-[11px] text-slate-500 text-center flex flex-wrap items-center justify-center gap-x-4 gap-y-1">
-          <span>📐 标准 55×85mm 黄金尺寸</span>
-          <span>✂️ 1mm 安全裁切辅助虚线</span>
+          <span>📐 真实毫米级居中排版</span>
+          <span>✂️ 100% 贴合安全裁切线</span>
           <span>🖱️ 鼠标拖拽调位 / 独立删除</span>
         </div>
       </div>
 
     </div>
 
-    <!-- AdSense Placement moved to Bottom (Consistent with fan-letter.html) -->
+    <!-- AdSense Placement at Bottom -->
     <div class="max-w-6xl mx-auto mt-12 p-4 rounded-2xl border border-dashed border-slate-300 bg-slate-100 text-center text-xs text-slate-400">
       📢 Advertisement Placement (Google AdSense High-Conversion Banner Area)
     </div>
@@ -461,11 +461,11 @@
     let currentPaper = 'a4'; // 'a4', 'letter', 'a4-polaroid', '4x6', '5x7', 'a5', 'a4-dense', 'a3'
     let currentCutLine = true;
     let currentFitMode = 'cover';
-    let uploadedImages = []; // Array of Image objects
+    let uploadedImages = []; // Array of { src: string, img: Image, id: string }
     let currentLang = 'en';
     let draggedIndex = null;
 
-    // Specifications Map
+    // Accurate Physical Specifications Map
     const paperSpecs = {
       'a4': {
         name: 'A4 标准 (55×85mm)',
@@ -517,11 +517,11 @@
         dimLabel: 'A4 密集排版 (50×70mm) • 3×4 (12张) • 300 DPI'
       },
       'a3': {
-        name: 'A3 大画幅批量 (18张)',
+        name: 'A3 商用批量 (16张)',
         sheetW_mm: 297, sheetH_mm: 420,
         cardW_mm: 55, cardH_mm: 85,
-        cols: 3, rows: 6, maxSlots: 18,
-        dimLabel: 'A3 商用批量 (55×85mm) • 3×6 (18张) • 300 DPI'
+        cols: 4, rows: 4, maxSlots: 16,
+        dimLabel: 'A3 商用批量 (55×85mm) • 4×4 (16张) • 300 DPI'
       }
     };
 
@@ -552,7 +552,8 @@
         "footer_contact": "Contact Us",
         "toast_deleted": "🗑️ Card removed from grid",
         "toast_swapped": "✨ Cards reordered successfully!",
-        "toast_pdf_ready": "🖨️ 300 DPI PDF downloaded!"
+        "toast_pdf_ready": "🖨️ 300 DPI PDF downloaded!",
+        "card_label_empty": "Upload Photo"
       },
       "zh": {
         "badge_hub": "追星微工具箱",
@@ -580,7 +581,8 @@
         "footer_contact": "联系我们",
         "toast_deleted": "🗑️ 已删除该张小卡",
         "toast_swapped": "✨ 小卡位置已成功调换！",
-        "toast_pdf_ready": "🖨️ 300 DPI 高清 PDF 已导出！"
+        "toast_pdf_ready": "🖨️ 300 DPI 高清 PDF 已导出！",
+        "card_label_empty": "上传小卡"
       },
       "zh-TW": {
         "badge_hub": "追星微工具箱",
@@ -608,7 +610,8 @@
         "footer_contact": "聯絡我們",
         "toast_deleted": "🗑️ 已刪除該張小卡",
         "toast_swapped": "✨ 小卡位置已成功調換！",
-        "toast_pdf_ready": "🖨️ 300 DPI 高清 PDF 已導出！"
+        "toast_pdf_ready": "🖨️ 300 DPI 高清 PDF 已導出！",
+        "card_label_empty": "上傳小卡"
       },
       "ko": {
         "badge_hub": "팬덤 마이크로 툴",
@@ -636,7 +639,8 @@
         "footer_contact": "문의하기",
         "toast_deleted": "🗑️ 카드가 삭제되었습니다.",
         "toast_swapped": "✨ 카드 위치가 변경되었습니다!",
-        "toast_pdf_ready": "🖨️ 300 DPI PDF가 다운로드되었습니다!"
+        "toast_pdf_ready": "🖨️ 300 DPI PDF가 다운로드되었습니다!",
+        "card_label_empty": "포카 추가"
       },
       "ja": {
         "badge_hub": "推し活ツール",
@@ -664,7 +668,8 @@
         "footer_contact": "お問い合わせ",
         "toast_deleted": "🗑️ トレカを削除しました",
         "toast_swapped": "✨ カードの順番を入れ替えました！",
-        "toast_pdf_ready": "🖨️ 300 DPI PDFを出力しました！"
+        "toast_pdf_ready": "🖨️ 300 DPI PDFを出力しました！",
+        "card_label_empty": "写真を追加"
       },
       "th": {
         "badge_hub": "เครื่องมือแฟนคลับ",
@@ -692,7 +697,8 @@
         "footer_contact": "ติดต่อเรา",
         "toast_deleted": "🗑️ ลบการ์ดเรียบร้อยแล้ว",
         "toast_swapped": "✨ สลับตำแหน่งเรียบร้อยแล้ว!",
-        "toast_pdf_ready": "🖨️ ส่งออก PDF 300 DPI แล้ว!"
+        "toast_pdf_ready": "🖨️ ส่งออก PDF 300 DPI แล้ว!",
+        "card_label_empty": "เพิ่มรูปภาพ"
       },
       "ar": {
         "badge_hub": "أدوات الفاندوم",
@@ -720,7 +726,8 @@
         "footer_contact": "اتصل بنا",
         "toast_deleted": "🗑️ تم حذف البطاقة",
         "toast_swapped": "✨ تم تبديل الترتيب بنجاح!",
-        "toast_pdf_ready": "🖨️ تم تحميل ملف PDF جاهز للطباعة!"
+        "toast_pdf_ready": "🖨️ تم تحميل ملف PDF جاهز للطباعة!",
+        "card_label_empty": "إضافة بطاقة"
       },
       "es": {
         "badge_hub": "Herramientas de Fandom",
@@ -748,7 +755,8 @@
         "footer_contact": "Contacto",
         "toast_deleted": "🗑️ Tarjeta eliminada",
         "toast_swapped": "✨ ¡Tarjetas reordenadas con éxito!",
-        "toast_pdf_ready": "🖨️ ¡PDF 300 DPI descargado!"
+        "toast_pdf_ready": "🖨️ ¡PDF 300 DPI descargado!",
+        "card_label_empty": "Subir Foto"
       }
     };
 
@@ -803,19 +811,21 @@
       });
 
       const spec = paperSpecs[paper];
-      document.getElementById('sheet-dim-label').innerText = spec.dimLabel;
+      const dimEl = document.getElementById('sheet-dim-label');
+      if (dimEl) dimEl.innerText = spec.dimLabel;
+
       updateUploadCounter();
-      renderCanvasGrid();
+      renderGridPreview();
     }
 
     function toggleCutLines(checked) {
       currentCutLine = checked;
-      renderCanvasGrid();
+      renderGridPreview();
     }
 
     function setFitMode(mode) {
       currentFitMode = mode;
-      renderCanvasGrid();
+      renderGridPreview();
     }
 
     function updateUploadCounter() {
@@ -840,9 +850,13 @@
           const img = new Image();
           img.onload = () => {
             if (uploadedImages.length < maxSlots) {
-              uploadedImages.push(img);
+              uploadedImages.push({
+                src: e.target.result,
+                img: img,
+                id: 'img_' + Math.random().toString(36).substr(2, 9)
+              });
               updateUploadCounter();
-              renderCanvasGrid();
+              renderGridPreview();
             }
           };
           img.src = e.target.result;
@@ -852,11 +866,14 @@
     }
 
     function deleteCard(index, event) {
-      if (event) event.stopPropagation();
+      if (event) {
+        event.stopPropagation();
+        event.preventDefault();
+      }
       if (index >= 0 && index < uploadedImages.length) {
         uploadedImages.splice(index, 1);
         updateUploadCounter();
-        renderCanvasGrid();
+        renderGridPreview();
         showToast(i18nData[currentLang]?.toast_deleted || 'Card deleted', '🗑️');
       }
     }
@@ -864,203 +881,186 @@
     function clearAllImages() {
       uploadedImages = [];
       updateUploadCounter();
-      renderCanvasGrid();
+      renderGridPreview();
       showToast(i18nData[currentLang]?.btn_clear_all || 'Sheet cleared', '🗑️');
     }
 
-    // Drag & Drop handlers for reordering slots
-    function handleSlotDragStart(e, index) {
-      draggedIndex = index;
-      e.dataTransfer.effectAllowed = 'move';
-      e.dataTransfer.setData('text/plain', index);
-      const targetEl = e.currentTarget;
-      targetEl.classList.add('slot-dragging');
+    function triggerUploadForSlot(index) {
+      const fileInput = document.getElementById('file-input');
+      if (fileInput) fileInput.click();
     }
 
-    function handleSlotDragEnd(e) {
+    // ==========================================
+    // Interactive Drag to Swap / Move Logic
+    // ==========================================
+
+    function onDragStart(e) {
+      draggedIndex = parseInt(e.currentTarget.dataset.index, 10);
+      e.dataTransfer.effectAllowed = 'move';
+      e.dataTransfer.setData('text/plain', String(draggedIndex));
+      e.currentTarget.classList.add('is-dragging');
+    }
+
+    function onDragEnd(e) {
       draggedIndex = null;
-      document.querySelectorAll('.slot-interactive').forEach(el => {
-        el.classList.remove('slot-dragging', 'slot-drag-over');
+      document.querySelectorAll('.card-cell').forEach(el => {
+        el.classList.remove('is-dragging', 'is-drag-over');
       });
     }
 
-    function handleSlotDragOver(e) {
+    function onDragOver(e) {
       e.preventDefault();
       e.dataTransfer.dropEffect = 'move';
-      e.currentTarget.classList.add('slot-drag-over');
+      e.currentTarget.classList.add('is-drag-over');
     }
 
-    function handleSlotDragLeave(e) {
-      e.currentTarget.classList.remove('slot-drag-over');
+    function onDragLeave(e) {
+      e.currentTarget.classList.remove('is-drag-over');
     }
 
-    function handleSlotDrop(e, targetIndex) {
+    function onDrop(e) {
       e.preventDefault();
-      e.currentTarget.classList.remove('slot-drag-over');
+      e.currentTarget.classList.remove('is-drag-over');
 
-      if (draggedIndex === null || draggedIndex === targetIndex) return;
-      if (draggedIndex >= uploadedImages.length || targetIndex >= uploadedImages.length) return;
+      const targetIndex = parseInt(e.currentTarget.dataset.index, 10);
+      if (isNaN(draggedIndex) || isNaN(targetIndex) || draggedIndex === targetIndex) return;
 
-      // Swap elements in uploadedImages
-      const temp = uploadedImages[draggedIndex];
-      uploadedImages[draggedIndex] = uploadedImages[targetIndex];
-      uploadedImages[targetIndex] = temp;
+      const hasSource = draggedIndex < uploadedImages.length;
+      const hasTarget = targetIndex < uploadedImages.length;
 
-      renderCanvasGrid();
+      if (!hasSource) return;
+
+      if (hasSource && hasTarget) {
+        // Swap cards between two populated slots
+        const temp = uploadedImages[draggedIndex];
+        uploadedImages[draggedIndex] = uploadedImages[targetIndex];
+        uploadedImages[targetIndex] = temp;
+      } else if (hasSource && !hasTarget) {
+        // Move card to target index
+        const item = uploadedImages.splice(draggedIndex, 1)[0];
+        // Insert at target index or push
+        if (targetIndex >= uploadedImages.length) {
+          uploadedImages.push(item);
+        } else {
+          uploadedImages.splice(targetIndex, 0, item);
+        }
+      }
+
+      renderGridPreview();
       showToast(i18nData[currentLang]?.toast_swapped || 'Cards swapped!', '✨');
       trackGA4Event('reorder_cards', { from: draggedIndex, to: targetIndex });
     }
 
-    function renderCanvasGrid() {
-      const canvas = document.getElementById('print-canvas');
-      const ctx = canvas.getContext('2d');
-      const overlay = document.getElementById('interactive-overlay');
+    // ==========================================
+    // Render Responsive Centered DOM Grid Preview
+    // ==========================================
+
+    function renderGridPreview() {
+      const paperSheet = document.getElementById('paper-sheet');
+      const cardGrid = document.getElementById('card-grid');
+      if (!paperSheet || !cardGrid) return;
 
       const spec = paperSpecs[currentPaper] || paperSpecs['a4'];
-      const mmToPx = 3.7795; // 96 DPI CSS px approx
 
-      const sheetW = spec.sheetW_mm * mmToPx;
-      const sheetH = spec.sheetH_mm * mmToPx;
-      const cardW = spec.cardW_mm * mmToPx;
-      const cardH = spec.cardH_mm * mmToPx;
-      const cols = spec.cols;
-      const rows = spec.rows;
+      // 1. Set Paper Aspect Ratio
+      paperSheet.style.aspectRatio = `${spec.sheetW_mm} / ${spec.sheetH_mm}`;
 
-      canvas.width = sheetW;
-      canvas.height = sheetH;
+      // 2. Compute exact mathematical grid size as percentage of paper
+      const totalGridW_mm = spec.cols * spec.cardW_mm;
+      const totalGridH_mm = spec.rows * spec.cardH_mm;
 
-      // Background
-      ctx.fillStyle = '#ffffff';
-      ctx.fillRect(0, 0, sheetW, sheetH);
+      const gridWidthPercent = (totalGridW_mm / spec.sheetW_mm) * 100;
+      const gridHeightPercent = (totalGridH_mm / spec.sheetH_mm) * 100;
 
-      const totalGridW = cols * cardW;
-      const totalGridH = rows * cardH;
-      const startX = (sheetW - totalGridW) / 2;
-      const startY = (sheetH - totalGridH) / 2;
+      cardGrid.style.width = `${gridWidthPercent.toFixed(4)}%`;
+      cardGrid.style.height = `${gridHeightPercent.toFixed(4)}%`;
+      cardGrid.style.gridTemplateColumns = `repeat(${spec.cols}, 1fr)`;
+      cardGrid.style.gridTemplateRows = `repeat(${spec.rows}, 1fr)`;
 
-      // Clear interactive overlay
-      if (overlay) {
-        overlay.innerHTML = '';
-        overlay.style.width = sheetW + 'px';
-        overlay.style.height = sheetH + 'px';
-      }
+      // Clear existing cells
+      cardGrid.innerHTML = '';
 
-      let imgIdx = 0;
-      for (let r = 0; r < rows; r++) {
-        for (let c = 0; c < cols; c++) {
-          const x = startX + c * cardW;
-          const y = startY + r * cardH;
+      for (let i = 0; i < spec.maxSlots; i++) {
+        const hasImage = i < uploadedImages.length;
+        const cell = document.createElement('div');
+        cell.className = 'card-cell relative overflow-hidden flex items-center justify-center transition-all duration-150 group select-none cursor-pointer';
+        cell.dataset.index = String(i);
 
-          // Border for card slot
-          ctx.strokeStyle = '#e2e8f0';
-          ctx.lineWidth = 1;
-          ctx.strokeRect(x, y, cardW, cardH);
+        // Aspect ratio of the cell matches exact physical mm ratio of the card
+        cell.style.aspectRatio = `${spec.cardW_mm} / ${spec.cardH_mm}`;
 
-          const hasImage = imgIdx < uploadedImages.length;
+        // Cut line border
+        const cutBorderClass = currentCutLine ? 'border border-dashed border-slate-300' : 'border border-slate-200/60';
 
-          if (hasImage) {
-            const img = uploadedImages[imgIdx];
-            ctx.save();
-            ctx.beginPath();
-            ctx.rect(x, y, cardW, cardH);
-            ctx.clip();
+        if (hasImage) {
+          const item = uploadedImages[i];
+          cell.classList.add('bg-white');
+          cell.setAttribute('draggable', 'true');
+          cell.setAttribute('title', `Card #${i + 1} (${spec.cardW_mm}×${spec.cardH_mm}mm) • 拖拽调序，点击右上角 ✕ 删除`);
 
-            if (currentFitMode === 'cover') {
-              const hRatio = cardW / img.width;
-              const vRatio = cardH / img.height;
-              const ratio = Math.max(hRatio, vRatio);
-              const centerShiftX = (cardW - img.width * ratio) / 2;
-              const centerShiftY = (cardH - img.height * ratio) / 2;
-              ctx.drawImage(img, 0, 0, img.width, img.height, x + centerShiftX, y + centerShiftY, img.width * ratio, img.height * ratio);
-            } else {
-              const hRatio = cardW / img.width;
-              const vRatio = cardH / img.height;
-              const ratio = Math.min(hRatio, vRatio);
-              const centerShiftX = (cardW - img.width * ratio) / 2;
-              const centerShiftY = (cardH - img.height * ratio) / 2;
-              ctx.drawImage(img, 0, 0, img.width, img.height, x + centerShiftX, y + centerShiftY, img.width * ratio, img.height * ratio);
-            }
-            ctx.restore();
-          } else {
-            // Placeholder slot text
-            ctx.fillStyle = '#94a3b8';
-            ctx.font = '10px sans-serif';
-            ctx.textAlign = 'center';
-            ctx.fillText(`Card ${imgIdx + 1} (${spec.cardW_mm}×${spec.cardH_mm}mm)`, x + cardW / 2, y + cardH / 2);
-          }
+          const fitClass = currentFitMode === 'contain' ? 'object-contain bg-slate-900/5' : 'object-cover';
 
-          // Cut line markings
-          if (currentCutLine) {
-            ctx.setLineDash([4, 4]);
-            ctx.strokeStyle = '#cbd5e1';
-            ctx.lineWidth = 1;
-            ctx.strokeRect(x, y, cardW, cardH);
-            ctx.setLineDash([]);
-          }
-
-          // Build HTML Interactive Overlay Element with 100% Responsive Percentage Positioning
-          if (overlay) {
-            const slotEl = document.createElement('div');
-            const thisIdx = imgIdx;
+          cell.innerHTML = `
+            <!-- Photo Image -->
+            <img src="${item.src}" alt="Card ${i + 1}" class="w-full h-full ${fitClass} block pointer-events-none" />
             
-            // Convert canvas coordinate bounds into responsive percentages
-            const leftPct = (x / sheetW) * 100;
-            const topPct = (y / sheetH) * 100;
-            const widthPct = (cardW / sheetW) * 100;
-            const heightPct = (cardH / sheetH) * 100;
+            <!-- Scissor Cut Lines Overlay -->
+            <div class="absolute inset-0 ${cutBorderClass} pointer-events-none z-10"></div>
 
-            slotEl.style.left = leftPct + '%';
-            slotEl.style.top = topPct + '%';
-            slotEl.style.width = widthPct + '%';
-            slotEl.style.height = heightPct + '%';
+            <!-- Hover Action Overlay (Top bar with index badge and delete button) -->
+            <div class="absolute inset-0 bg-slate-950/40 backdrop-blur-[1px] opacity-0 group-hover:opacity-100 transition-opacity duration-150 flex flex-col justify-between p-1.5 z-20">
+              <div class="flex items-center justify-between w-full">
+                <span class="bg-slate-900/90 text-white text-[9px] font-extrabold px-1.5 py-0.5 rounded shadow-xs flex items-center space-x-0.5 cursor-grab active:cursor-grabbing">
+                  <span>⋮⋮</span>
+                  <span>#${i + 1}</span>
+                </span>
+                <button type="button" onclick="deleteCard(${i}, event)" title="删除此小卡" class="w-5 h-5 rounded-full bg-rose-600 hover:bg-rose-700 text-white flex items-center justify-center text-[10px] font-bold shadow-md transition transform hover:scale-110 active:scale-90 cursor-pointer">
+                  ✕
+                </button>
+              </div>
+              <div class="my-auto text-center pointer-events-none">
+                <span class="bg-slate-900/85 text-white text-[9px] font-extrabold px-2 py-0.5 rounded-full shadow-xs backdrop-blur-xs inline-flex items-center space-x-1">
+                  <span>↕️</span>
+                  <span>拖拽排序</span>
+                </span>
+              </div>
+              <div class="h-2"></div>
+            </div>
+          `;
 
-            if (hasImage) {
-              slotEl.className = 'absolute slot-interactive pointer-events-auto rounded-sm border border-transparent hover:border-indigo-400 hover:bg-slate-950/40 hover:backdrop-blur-[1px] transition-all duration-150 cursor-grab active:cursor-grabbing flex flex-col justify-between p-1.5 group select-none';
-              slotEl.setAttribute('draggable', 'true');
-              slotEl.setAttribute('title', `Card #${thisIdx + 1} • 按住拖拽可调位，点击 ✕ 快速删除`);
-              slotEl.ondragstart = (e) => handleSlotDragStart(e, thisIdx);
-              slotEl.ondragend = handleSlotDragEnd;
-              slotEl.ondragover = handleSlotDragOver;
-              slotEl.ondragleave = handleSlotDragLeave;
-              slotEl.ondrop = (e) => handleSlotDrop(e, thisIdx);
+          // Bind Drag & Drop event listeners
+          cell.addEventListener('dragstart', onDragStart);
+          cell.addEventListener('dragend', onDragEnd);
+          cell.addEventListener('dragover', onDragOver);
+          cell.addEventListener('dragleave', onDragLeave);
+          cell.addEventListener('drop', onDrop);
 
-              slotEl.innerHTML = `
-                <div class="opacity-0 group-hover:opacity-100 transition-opacity duration-150 flex items-center justify-between w-full">
-                  <span class="bg-slate-900/90 text-white text-[9px] font-extrabold px-1.5 py-0.5 rounded shadow-xs flex items-center space-x-0.5">
-                    <span>⋮⋮</span>
-                    <span>#${thisIdx + 1}</span>
-                  </span>
-                  <button type="button" onclick="deleteCard(${thisIdx}, event)" title="删除此小卡" class="w-5 h-5 rounded-full bg-rose-600/90 hover:bg-rose-600 text-white flex items-center justify-center text-[10px] font-bold shadow-md transition transform hover:scale-110 active:scale-90 cursor-pointer">
-                    ✕
-                  </button>
-                </div>
-                <div class="opacity-0 group-hover:opacity-100 transition-opacity duration-150 my-auto text-center pointer-events-none">
-                  <span class="bg-slate-900/85 text-white text-[9px] font-extrabold px-2 py-0.5 rounded-full shadow-xs backdrop-blur-xs inline-flex items-center space-x-1">
-                    <span>↕️</span>
-                    <span>拖拽排序</span>
-                  </span>
-                </div>
-                <div class="h-2"></div>
-              `;
-            } else {
-              slotEl.className = 'absolute slot-interactive pointer-events-auto rounded-sm border border-transparent hover:border-indigo-400/80 hover:bg-indigo-500/10 transition-all duration-150 cursor-pointer flex items-center justify-center p-1.5 group select-none';
-              slotEl.onclick = () => document.getElementById('file-input').click();
-              slotEl.setAttribute('title', `点击上传照片到 Card #${thisIdx + 1}`);
-              slotEl.innerHTML = `
-                <div class="opacity-0 group-hover:opacity-100 transition-opacity duration-150 flex flex-col items-center justify-center text-indigo-600">
-                  <div class="w-6 h-6 rounded-full bg-white shadow-xs border border-indigo-200 flex items-center justify-center text-xs font-bold text-indigo-600 mb-0.5">
-                    +
-                  </div>
-                  <span class="text-[9px] font-extrabold bg-white/90 px-1.5 py-0.2 rounded shadow-2xs">上传小卡</span>
-                </div>
-              `;
-            }
+        } else {
+          // Empty Placeholder Slot
+          cell.classList.add('bg-slate-50/50', 'hover:bg-indigo-50/60', 'hover:border-indigo-400');
+          cell.setAttribute('title', `点击上传照片到 Card #${i + 1}`);
+          cell.onclick = () => triggerUploadForSlot(i);
 
-            overlay.appendChild(slotEl);
-          }
+          cell.innerHTML = `
+            <!-- Scissor Cut Lines Overlay -->
+            <div class="absolute inset-0 ${cutBorderClass} pointer-events-none"></div>
 
-          imgIdx++;
+            <div class="text-center p-1 space-y-1 pointer-events-none z-10">
+              <span class="text-[9px] font-bold text-slate-400 group-hover:text-indigo-600 transition block">Card ${i + 1}</span>
+              <div class="w-6 h-6 rounded-full bg-white shadow-2xs border border-slate-200 group-hover:border-indigo-300 group-hover:bg-indigo-600 group-hover:text-white flex items-center justify-center text-xs font-bold text-slate-400 transition mx-auto">
+                +
+              </div>
+              <span class="text-[9px] font-extrabold text-slate-400 group-hover:text-indigo-600 transition block">${spec.cardW_mm}×${spec.cardH_mm}mm</span>
+            </div>
+          `;
+
+          // Allow empty slots to accept dropped cards as well
+          cell.addEventListener('dragover', onDragOver);
+          cell.addEventListener('dragleave', onDragLeave);
+          cell.addEventListener('drop', onDrop);
         }
+
+        cardGrid.appendChild(cell);
       }
     }
 
@@ -1112,7 +1112,8 @@
         itemEl.innerHTML = `
           <div class="space-y-0.5">
             <div class="flex items-center space-x-1.5">
-              <span class="font-extrabold text-slate-800">${item.paperType}</span>\n              <span class="text-[10px] px-1.5 py-0.2 rounded bg-indigo-50 text-indigo-700 font-bold">${item.cardCount} 张小卡</span>
+              <span class="font-extrabold text-slate-800">${item.paperType}</span>
+              <span class="text-[10px] px-1.5 py-0.2 rounded bg-indigo-50 text-indigo-700 font-bold">${item.cardCount} 张小卡</span>
               <span class="text-[10px] text-slate-400">${item.cutLine ? '✂️裁切线' : ''}</span>
             </div>
             <div class="text-[10px] text-slate-400">${item.dateStr} ${item.timeStr}</div>
@@ -1139,6 +1140,10 @@
       }
     }
 
+    // ==========================================
+    // 300 DPI High-Resolution PDF Export Engine
+    // ==========================================
+
     function exportPDF() {
       if (uploadedImages.length === 0) {
         showToast('请先上传至少一张小卡照片！', '📷');
@@ -1148,15 +1153,83 @@
       const { jsPDF } = window.jspdf;
       const spec = paperSpecs[currentPaper] || paperSpecs['a4'];
 
+      // Precise 300 DPI Resolution Formula: pixels = mm * 300 / 25.4
+      const pxPerMm = 300.0 / 25.4;
+      const sheetW_px = Math.round(spec.sheetW_mm * pxPerMm);
+      const sheetH_px = Math.round(spec.sheetH_mm * pxPerMm);
+      const cardW_px = Math.round(spec.cardW_mm * pxPerMm);
+      const cardH_px = Math.round(spec.cardH_mm * pxPerMm);
+
+      const offCanvas = document.createElement('canvas');
+      offCanvas.width = sheetW_px;
+      offCanvas.height = sheetH_px;
+      const ctx = offCanvas.getContext('2d');
+
+      // Pure White Background
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, sheetW_px, sheetH_px);
+
+      // Centered Grid coordinates
+      const totalGridW = spec.cols * cardW_px;
+      const totalGridH = spec.rows * cardH_px;
+      const startX = Math.round((sheetW_px - totalGridW) / 2);
+      const startY = Math.round((sheetH_px - totalGridH) / 2);
+
+      let cardIdx = 0;
+      for (let r = 0; r < spec.rows; r++) {
+        for (let c = 0; c < spec.cols; c++) {
+          const x = startX + c * cardW_px;
+          const y = startY + r * cardH_px;
+
+          if (cardIdx < uploadedImages.length) {
+            const item = uploadedImages[cardIdx];
+            const img = item.img;
+
+            ctx.save();
+            ctx.beginPath();
+            ctx.rect(x, y, cardW_px, cardH_px);
+            ctx.clip();
+
+            if (currentFitMode === 'cover') {
+              const hRatio = cardW_px / img.width;
+              const vRatio = cardH_px / img.height;
+              const ratio = Math.max(hRatio, vRatio);
+              const shiftX = (cardW_px - img.width * ratio) / 2;
+              const shiftY = (cardH_px - img.height * ratio) / 2;
+              ctx.drawImage(img, 0, 0, img.width, img.height, x + shiftX, y + shiftY, img.width * ratio, img.height * ratio);
+            } else {
+              const hRatio = cardW_px / img.width;
+              const vRatio = cardH_px / img.height;
+              const ratio = Math.min(hRatio, vRatio);
+              const shiftX = (cardW_px - img.width * ratio) / 2;
+              const shiftY = (cardH_px - img.height * ratio) / 2;
+              ctx.drawImage(img, 0, 0, img.width, img.height, x + shiftX, y + shiftY, img.width * ratio, img.height * ratio);
+            }
+            ctx.restore();
+          }
+
+          // Draw Scissor Cut Lines if enabled
+          if (currentCutLine) {
+            ctx.save();
+            ctx.setLineDash([12, 12]);
+            ctx.strokeStyle = '#cbd5e1';
+            ctx.lineWidth = 2;
+            ctx.strokeRect(x, y, cardW_px, cardH_px);
+            ctx.restore();
+          }
+
+          cardIdx++;
+        }
+      }
+
+      // Generate jsPDF document
       const doc = new jsPDF({
         orientation: 'portrait',
         unit: 'mm',
         format: [spec.sheetW_mm, spec.sheetH_mm]
       });
 
-      const canvas = document.getElementById('print-canvas');
-      const imgData = canvas.toDataURL('image/jpeg', 1.0);
-
+      const imgData = offCanvas.toDataURL('image/jpeg', 0.98);
       const pdfW = doc.internal.pageSize.getWidth();
       const pdfH = doc.internal.pageSize.getHeight();
 
