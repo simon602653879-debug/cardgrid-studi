@@ -62,26 +62,28 @@
       margin-left: 0 !important;
     }
 
-    /* Drag and Drop Visual Feedback Styles */
+    /* Drag and Drop Visual Feedback Styles [P0 & P2.2] */
     .card-cell {
       transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+      touch-action: none;
     }
     .card-cell.is-dragging {
       opacity: 0.45;
       transform: scale(0.95);
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      z-index: 40;
     }
     .card-cell.is-drag-over {
       transform: scale(1.03);
       box-shadow: 0 0 0 2px #6366f1, 0 8px 20px rgba(99, 102, 241, 0.25);
-      z-index: 30;
+      z-index: 50;
     }
   </style>
   <link rel="canonical" href="https://stankit.vercel.app/">
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col justify-between">
 
-  <!-- Navigation Header Matching fan-letter.html -->
+  <!-- Navigation Header -->
   <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
     <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
       
@@ -180,7 +182,7 @@
               </label>
               <span class="text-xs font-bold text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-full border border-indigo-100" id="upload-counter">0/9 cards</span>
             </div>
-            <div id="drop-zone" onclick="document.getElementById('file-input').click()" class="border-2 border-dashed border-indigo-200 hover:border-indigo-500 bg-indigo-50/40 hover:bg-indigo-50/80 transition rounded-2xl p-6 text-center cursor-pointer space-y-2 group active:scale-98">
+            <div id="drop-zone" onclick="triggerUploadForSlot(null)" class="border-2 border-dashed border-indigo-200 hover:border-indigo-500 bg-indigo-50/40 hover:bg-indigo-50/80 transition rounded-2xl p-6 text-center cursor-pointer space-y-2 group active:scale-98">
               <input type="file" id="file-input" multiple accept="image/*" class="hidden" onchange="handleFileSelect(this.files)">
               <div class="w-12 h-12 rounded-2xl bg-white shadow-sm border border-indigo-100 flex items-center justify-center mx-auto text-2xl group-hover:scale-110 transition transform">
                 📷
@@ -234,9 +236,9 @@
               <button type="button" onclick="setPaper('4x6')" id="btn-paper-4x6" class="p-3 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-left transition relative cursor-pointer active:scale-98">
                 <div class="flex items-center justify-between">
                   <span class="font-extrabold text-xs" data-i18n="paper_4x6_title">🖼️ 4×6" Photo Paper</span>
-                  <span class="text-[9px] bg-rose-500 text-white px-1.5 py-0.2 rounded font-extrabold" data-i18n="badge_mini">🔥 Portable</span>
+                  <span class="text-[9px] bg-rose-500 text-white px-1.5 py-0.2 rounded font-extrabold" data-i18n="badge_mini">🔥 Pocket</span>
                 </div>
-                <div class="text-[11px] font-medium text-slate-500 mt-0.5" data-i18n="paper_4x6_desc">48×72mm • 2×2 (4 cards)</div>
+                <div class="text-[11px] font-medium text-slate-500 mt-0.5" data-i18n="paper_4x6_desc">46×70mm • 2×2 (4 cards)</div>
               </button>
 
               <!-- 5. 5x7" Photo Paper -->
@@ -263,7 +265,7 @@
                   <span class="font-extrabold text-xs" data-i18n="paper_dense_title">⚡ A4 Dense 12-Cards</span>
                   <span class="text-[9px] bg-emerald-100 text-emerald-700 px-1.5 py-0.2 rounded font-bold" data-i18n="badge_save">Eco</span>
                 </div>
-                <div class="text-[11px] font-medium text-slate-500 mt-0.5" data-i18n="paper_dense_desc">50×70mm • 3×4 (12 cards)</div>
+                <div class="text-[11px] font-medium text-slate-500 mt-0.5" data-i18n="paper_dense_desc">50×68mm • 3×4 (12 cards)</div>
               </button>
 
               <!-- 8. A3 Commercial Batch (16-Cards) -->
@@ -278,22 +280,44 @@
             </div>
           </div>
 
-          <!-- Step 3: Options (Cut Lines & Fill Mode) -->
-          <div class="space-y-3 pt-2 border-t border-slate-100">
+          <!-- Step 3: Options (Cut Lines, Fill Mode, Safe Area & Back Template) -->
+          <div class="space-y-3 pt-2 border-t border-slate-100 text-xs">
             <div class="flex items-center justify-between">
-              <span class="text-xs font-bold text-slate-700" data-i18n="opt_cutlines">Show Scissor Cut Lines</span>
+              <span class="font-bold text-slate-700" data-i18n="opt_cutlines">Show Scissor Cut Lines</span>
               <label class="relative inline-flex items-center cursor-pointer">
                 <input type="checkbox" id="check-cutlines" checked onchange="toggleCutLines(this.checked)" class="sr-only peer">
                 <div class="w-9 h-5 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-indigo-600"></div>
               </label>
             </div>
 
+            <!-- [P1.2] Safe Area Margin Overlay Toggle -->
             <div class="flex items-center justify-between">
-              <span class="text-xs font-bold text-slate-700" data-i18n="opt_fit">Image Fit Mode</span>
+              <span class="font-bold text-slate-700" data-i18n="opt_safe_area">Show 2mm Safe Area Guides</span>
+              <label class="relative inline-flex items-center cursor-pointer">
+                <input type="checkbox" id="check-safearea" checked onchange="toggleSafeArea(this.checked)" class="sr-only peer">
+                <div class="w-9 h-5 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-indigo-600"></div>
+              </label>
+            </div>
+
+            <!-- Image Fit Mode -->
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-slate-700" data-i18n="opt_fit">Image Fit Mode</span>
               <select id="select-fit" onchange="setFitMode(this.value)" class="bg-slate-100 border border-slate-200 text-slate-700 text-xs font-bold rounded-lg px-2.5 py-1.5 focus:outline-none focus:ring-2 focus:ring-indigo-500">
                 <option value="cover" data-i18n="fit_cover">Crop to Fill (No border)</option>
                 <option value="contain" data-i18n="fit_contain">Fit Entire Image (Show all)</option>
               </select>
+            </div>
+
+            <!-- [P1.5] Backside Print Template Option Placeholder -->
+            <div class="flex items-center justify-between pt-1 border-t border-slate-100">
+              <div class="flex items-center space-x-1.5">
+                <span class="font-bold text-slate-700" data-i18n="opt_back_template">Double-Sided Back Template</span>
+                <span class="text-[9px] bg-slate-100 text-slate-500 px-1.5 py-0.2 rounded font-bold">PRO</span>
+              </div>
+              <label class="relative inline-flex items-center cursor-pointer">
+                <input type="checkbox" id="check-backside" onchange="toggleBacksideTemplate(this.checked)" class="sr-only peer">
+                <div class="w-9 h-5 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-indigo-600"></div>
+              </label>
             </div>
           </div>
 
@@ -331,7 +355,7 @@
 
       </div>
 
-      <!-- Right Area: Live Printable Grid DOM Sheet (Centered Layout with CSS Grid) -->
+      <!-- Right Area: Live Printable Grid DOM Sheet (P0: Centered via Unified Padding) -->
       <div class="lg:col-span-7 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
         <div class="flex items-center justify-between border-b border-slate-100 pb-3 flex-wrap gap-2">
           <div class="flex items-center space-x-2">
@@ -349,17 +373,17 @@
         <div class="p-2.5 rounded-xl bg-indigo-50/60 border border-indigo-100 text-indigo-900 text-xs flex items-center justify-between">
           <span class="flex items-center space-x-1.5 font-bold">
             <span>💡</span>
-            <span data-i18n="tip_interactive">Drag cards to swap positions. Hover and click ✕ to delete individual cards.</span>
+            <span data-i18n="tip_interactive">Drag cards to swap positions. Hover to rotate ↻ or delete ✕.</span>
           </span>
           <span class="text-[10px] text-indigo-600 font-extrabold bg-white px-2 py-0.5 rounded shadow-2xs" data-i18n="tag_interactive">Drag to swap</span>
         </div>
 
-        <!-- Paper Sheet Container with Checkerboard Background (Center Aligned) -->
-        <div class="w-full overflow-x-auto p-4 sm:p-6 checkerboard-bg rounded-xl flex items-center justify-center border border-slate-200/80 select-none">
-          <!-- The Physical Paper Sheet DOM (Aspect Ratio Scaled) -->
-          <div id="paper-sheet" class="bg-white shadow-xl rounded-sm border border-slate-300 relative flex items-center justify-center transition-all duration-200 ease-out" style="width: 100%; max-width: 440px;">
-            <!-- Perfectly Centered CSS Grid for Cards -->
-            <div id="card-grid" class="grid transition-all duration-200">
+        <!-- Paper Sheet Container with Checkerboard Background (P0: Padding Centered) -->
+        <div id="preview-sheet-container" class="w-full overflow-x-auto p-4 sm:p-6 checkerboard-bg rounded-xl flex items-center justify-center border border-slate-200/80 select-none">
+          <!-- The Physical Paper Sheet DOM (Box-Sizing border-box, Padding Centers Grid) -->
+          <div id="paper-sheet" class="bg-white shadow-xl rounded-sm border border-slate-300 relative transition-all duration-150 ease-out" style="box-sizing: border-box;">
+            <!-- Perfectly Centered CSS Grid for Cards (P0: Hard Pixel Dimensions from Scale) -->
+            <div id="card-grid" class="grid">
               <!-- Rendered dynamically by renderGridPreview() -->
             </div>
           </div>
@@ -367,8 +391,8 @@
 
         <div class="text-[11px] text-slate-500 text-center flex flex-wrap items-center justify-center gap-x-4 gap-y-1">
           <span data-i18n="feature_1">📐 Millimeter-Precision Centering</span>
-          <span data-i18n="feature_2">✂️ 100% Flush Scissor Cut Lines</span>
-          <span data-i18n="feature_3">🖱️ Drag to Swap / Delete</span>
+          <span data-i18n="feature_2">✂️ 2mm Physical Cutting Gaps</span>
+          <span data-i18n="feature_3">🖱️ Drag to Swap / Rotate / Delete</span>
         </div>
       </div>
 
@@ -457,15 +481,22 @@
 
   <!-- Application Logic -->
   <script>
-    // State
+    // ==========================================
+    // State Management
+    // ==========================================
     let currentPaper = 'a4'; // 'a4', 'letter', 'a4-polaroid', '4x6', '5x7', 'a5', 'a4-dense', 'a3'
     let currentCutLine = true;
+    let currentSafeArea = true; // [P1.2] Safe Area Margins Guide
+    let currentBackside = false; // [P1.5] Backside template toggle
     let currentFitMode = 'cover';
-    let uploadedImages = []; // Array of { src: string, img: Image, id: string }
+    let uploadedImages = []; // Array of { src: string, img: Image, id: string, rotation: number }
     let currentLang = 'en';
     let draggedIndex = null;
+    let targetUploadSlot = null; // [P1.3] Precision slot index for upload
 
-    // Accurate Physical Specifications Map
+    // ==========================================
+    // Accurate Physical Specifications [P0]
+    // ==========================================
     const paperSpecs = {
       'a4': {
         sheetW_mm: 210, sheetH_mm: 297,
@@ -484,7 +515,7 @@
       },
       '4x6': {
         sheetW_mm: 101.6, sheetH_mm: 152.4,
-        cardW_mm: 48, cardH_mm: 72,
+        cardW_mm: 46, cardH_mm: 70,
         cols: 2, rows: 2, maxSlots: 4
       },
       '5x7': {
@@ -499,7 +530,7 @@
       },
       'a4-dense': {
         sheetW_mm: 210, sheetH_mm: 297,
-        cardW_mm: 50, cardH_mm: 70,
+        cardW_mm: 50, cardH_mm: 68,
         cols: 3, rows: 4, maxSlots: 12
       },
       'a3': {
@@ -509,7 +540,67 @@
       }
     };
 
-    // Full 10-Language Dictionary with Complete UI Localization
+    // ==========================================
+    // [P2.1] Unified Layout Math Utility Engine
+    // ==========================================
+    function calculateLayout(spec, containerWidth, isPrint = false) {
+      if (isPrint) {
+        // Precise 300 DPI Resolution Formula: pixels = mm * 300 / 25.4
+        const pxPerMm = 300.0 / 25.4;
+        const sheetW_px = Math.round(spec.sheetW_mm * pxPerMm);
+        const sheetH_px = Math.round(spec.sheetH_mm * pxPerMm);
+        const cardW_px = Math.round(spec.cardW_mm * pxPerMm);
+        const cardH_px = Math.round(spec.cardH_mm * pxPerMm);
+        const gap_px = Math.round(2.0 * pxPerMm); // 2mm physical cutting gap [P0]
+        const cornerR_px = Math.round(3.0 * pxPerMm); // 3mm rounded corner [P1.1]
+
+        const totalGridW_px = spec.cols * cardW_px + (spec.cols - 1) * gap_px;
+        const totalGridH_px = spec.rows * cardH_px + (spec.rows - 1) * gap_px;
+        const startX = Math.round((sheetW_px - totalGridW_px) / 2);
+        const startY = Math.round((sheetH_px - totalGridH_px) / 2);
+
+        return {
+          pxPerMm, sheetW_px, sheetH_px, cardW_px, cardH_px,
+          gap_px, cornerR_px, totalGridW_px, totalGridH_px,
+          startX, startY
+        };
+      } else {
+        // [P0] Scale based on container width to calculate responsive hard pixels
+        const scale = containerWidth / spec.sheetW_mm;
+        const sheetH_px = spec.sheetH_mm * scale;
+        const cardW_px = spec.cardW_mm * scale;
+        const cardH_px = spec.cardH_mm * scale;
+        const gap_px = 2.0 * scale; // 2mm physical gap [P0]
+        const cornerR_px = 3.0 * scale; // 3mm rounded corner [P1.1]
+        const safeArea_px = 2.0 * scale; // 2mm safe zone guide [P1.2]
+
+        const totalGridW_px = spec.cols * cardW_px + (spec.cols - 1) * gap_px;
+        const totalGridH_px = spec.rows * cardH_px + (spec.rows - 1) * gap_px;
+
+        // [P0] Center via calculated padding
+        const padX_px = Math.max(0, (containerWidth - totalGridW_px) / 2.0);
+        const padY_px = Math.max(0, (sheetH_px - totalGridH_px) / 2.0);
+
+        return {
+          scale,
+          sheetW_px: containerWidth,
+          sheetH_px,
+          cardW_px,
+          cardH_px,
+          gap_px,
+          cornerR_px,
+          safeArea_px,
+          totalGridW_px,
+          totalGridH_px,
+          padX_px,
+          padY_px
+        };
+      }
+    }
+
+    // ==========================================
+    // Full 10-Language Dictionary
+    // ==========================================
     const i18nData = {
       "en": {
         "badge_hub": "Fandom Micro-Tools",
@@ -530,13 +621,13 @@
         "paper_polaroid_title": "🏷️ Polaroid Mini",
         "paper_polaroid_desc": "A4 Sheet • 3×3 (9 cards)",
         "paper_4x6_title": "🖼️ 4×6\" Photo Paper",
-        "paper_4x6_desc": "48×72mm • 2×2 (4 cards)",
+        "paper_4x6_desc": "46×70mm • 2×2 (4 cards)",
         "paper_5x7_title": "📸 5×7\" Photo Paper",
         "paper_5x7_desc": "55×85mm • 2×2 (4 cards)",
         "paper_a5_title": "📐 A5 Hand Diary",
         "paper_a5_desc": "148×210mm • 2×2 (4 cards)",
         "paper_dense_title": "⚡ A4 Dense 12-Cards",
-        "paper_dense_desc": "50×70mm • 3×4 (12 cards)",
+        "paper_dense_desc": "50×68mm • 3×4 (12 cards)",
         "paper_a3_title": "🏢 A3 Batch Commercial",
         "paper_a3_desc": "55×85mm • 4×4 (16 cards)",
         "badge_hot": "🔥 HOT",
@@ -545,6 +636,8 @@
         "badge_save": "Eco",
         "badge_batch": "Batch",
         "opt_cutlines": "Show Scissor Cut Lines",
+        "opt_safe_area": "Show 2mm Safe Area Guides",
+        "opt_back_template": "Double-Sided Back Template",
         "opt_fit": "Image Fit Mode",
         "fit_cover": "Crop to Fill (No border)",
         "fit_contain": "Fit Entire Image (Show all)",
@@ -552,11 +645,11 @@
         "pdf_note": "🔒 100% Client-Side Privacy: Images never leave your device.",
         "preview_sheet_title": "Printable Sheet Preview",
         "btn_clear_all": "Clear Sheet",
-        "tip_interactive": "Drag cards to swap positions. Hover and click ✕ to delete individual cards.",
+        "tip_interactive": "Drag cards to swap positions. Hover to rotate ↻ or delete ✕.",
         "tag_interactive": "Drag to swap",
         "feature_1": "📐 Millimeter-Precision Centering",
-        "feature_2": "✂️ 100% Flush Scissor Cut Lines",
-        "feature_3": "🖱️ Drag to Swap / Delete",
+        "feature_2": "✂️ 2mm Physical Cutting Gaps",
+        "feature_3": "🖱️ Drag to Swap / Rotate / Delete",
         "sec_photocard_history": "Recent Print Layouts",
         "btn_clear_history": "Clear",
         "empty_history": "No layout history yet. Exported projects will be saved here.",
@@ -566,10 +659,13 @@
         "footer_contact": "Contact Us",
         "toast_deleted": "🗑️ Card removed from grid",
         "toast_swapped": "✨ Cards reordered successfully!",
+        "toast_rotated": "↻ Card rotated 90°",
         "toast_pdf_ready": "🖨️ 300 DPI PDF downloaded!",
         "card_label_empty": "Upload Photo",
         "card_label_drag": "Drag to swap",
         "card_label_delete": "Delete this card",
+        "card_label_rotate": "Rotate 90°",
+        "card_label_safe": "Safe Area",
         "faq_title": "Photocard Printing FAQ & DIY Guide",
         "faq_desc": "Learn paper selection, sizing standards, and home printing recommendations",
         "faq_q1": "What is the standard size for idol photocards?",
@@ -600,13 +696,13 @@
         "paper_polaroid_title": "🏷️ 拍立得 Mini",
         "paper_polaroid_desc": "A4 纸张 • 3×3 (9张)",
         "paper_4x6_title": "🖼️ 4×6\" 六寸相纸",
-        "paper_4x6_desc": "48×72mm • 2×2 (4张)",
+        "paper_4x6_desc": "46×70mm • 2×2 (4张)",
         "paper_5x7_title": "📸 5×7\" 七寸相纸",
         "paper_5x7_desc": "55×85mm • 2×2 (4张)",
         "paper_a5_title": "📐 A5 精致手帐",
         "paper_a5_desc": "148×210mm • 2×2 (4张)",
         "paper_dense_title": "⚡ A4 密集 12张",
-        "paper_dense_desc": "50×70mm • 3×4 (12张)",
+        "paper_dense_desc": "50×68mm • 3×4 (12张)",
         "paper_a3_title": "🏢 A3 批量商用",
         "paper_a3_desc": "55×85mm • 4×4 (16张)",
         "badge_hot": "🔥 热门",
@@ -615,6 +711,8 @@
         "badge_save": "省纸推荐",
         "badge_batch": "海量排版",
         "opt_cutlines": "显示剪刀裁切辅助虚线",
+        "opt_safe_area": "显示 2mm 出血安全线",
+        "opt_back_template": "启用双面打印/背面模板",
         "opt_fit": "图片填充模式",
         "fit_cover": "裁剪填满 (无白边)",
         "fit_contain": "完整显示 (留白)",
@@ -622,11 +720,11 @@
         "pdf_note": "🔒 100% 浏览器本地处理，照片零上传风险",
         "preview_sheet_title": "打印排版实时预览",
         "btn_clear_all": "清空当前纸张",
-        "tip_interactive": "鼠标可自由拖拽小卡调换顺序，悬浮点击 ✕ 即可删除单张",
+        "tip_interactive": "鼠标可自由拖拽小卡调换顺序，悬浮可旋转 ↻ 或删除 ✕",
         "tag_interactive": "支持拖拽排序",
         "feature_1": "📐 真实毫米级居中排版",
-        "feature_2": "✂️ 100% 贴合安全裁切线",
-        "feature_3": "🖱️ 鼠标拖拽调位 / 独立删除",
+        "feature_2": "✂️ 2mm 物理安全剪切缝",
+        "feature_3": "🖱️ 鼠标拖拽调位 / 旋转 / 删除",
         "sec_photocard_history": "最近排版记录",
         "btn_clear_history": "清空",
         "empty_history": "暂无排版记录，导出 PDF 后将自动保存在本地。",
@@ -636,10 +734,13 @@
         "footer_contact": "联系我们",
         "toast_deleted": "🗑️ 已删除该张小卡",
         "toast_swapped": "✨ 小卡位置已成功调换！",
+        "toast_rotated": "↻ 小卡已顺时针旋转 90°",
         "toast_pdf_ready": "🖨️ 300 DPI 高清 PDF 已导出！",
         "card_label_empty": "上传小卡",
         "card_label_drag": "拖拽排序",
         "card_label_delete": "删除此小卡",
+        "card_label_rotate": "旋转90°",
+        "card_label_safe": "安全区",
         "faq_title": "小卡打印常见问题与 DIY 指南 (FAQ)",
         "faq_desc": "了解相纸材质选择、小卡标准尺寸与家庭打印机调优建议",
         "faq_q1": "官方小卡的标准尺寸是多少？",
@@ -670,13 +771,13 @@
         "paper_polaroid_title": "🏷️ 拍立得 Mini",
         "paper_polaroid_desc": "A4 紙張 • 3×3 (9張)",
         "paper_4x6_title": "🖼️ 4×6\" 六寸相紙",
-        "paper_4x6_desc": "48×72mm • 2×2 (4張)",
+        "paper_4x6_desc": "46×70mm • 2×2 (4張)",
         "paper_5x7_title": "📸 5×7\" 七寸相紙",
         "paper_5x7_desc": "55×85mm • 2×2 (4張)",
         "paper_a5_title": "📐 A5 精緻手帳",
         "paper_a5_desc": "148×210mm • 2×2 (4張)",
         "paper_dense_title": "⚡ A4 密集 12張",
-        "paper_dense_desc": "50×70mm • 3×4 (12張)",
+        "paper_dense_desc": "50×68mm • 3×4 (12張)",
         "paper_a3_title": "🏢 A3 批量商用",
         "paper_a3_desc": "55×85mm • 4×4 (16張)",
         "badge_hot": "🔥 熱門",
@@ -685,6 +786,8 @@
         "badge_save": "省紙推薦",
         "badge_batch": "海量排版",
         "opt_cutlines": "顯示剪刀裁切輔助虛線",
+        "opt_safe_area": "顯示 2mm 出血安全線",
+        "opt_back_template": "啟用雙面列印/背面模板",
         "opt_fit": "圖片填充模式",
         "fit_cover": "裁剪填滿 (無白邊)",
         "fit_contain": "完整顯示 (留白)",
@@ -692,11 +795,11 @@
         "pdf_note": "🔒 100% 瀏覽器本地處理，相片零上傳風險",
         "preview_sheet_title": "列印排版即時預覽",
         "btn_clear_all": "清空當前紙張",
-        "tip_interactive": "滑鼠可自由拖曳小卡調換順序，懸浮點擊 ✕ 即可刪除單張",
+        "tip_interactive": "滑鼠可自由拖曳小卡調換順序，懸浮可旋轉 ↻ 或刪除 ✕",
         "tag_interactive": "支援拖拽排序",
         "feature_1": "📐 真實毫米級居中排版",
-        "feature_2": "✂️ 100% 貼合安全裁切線",
-        "feature_3": "🖱️ 滑鼠拖拽調位 / 獨立刪除",
+        "feature_2": "✂️ 2mm 物理安全剪切縫",
+        "feature_3": "🖱️ 滑鼠拖拽調位 / 旋轉 / 刪除",
         "sec_photocard_history": "最近排版記錄",
         "btn_clear_history": "清空",
         "empty_history": "暫無排版記錄，導出 PDF 後將自動保存在本地。",
@@ -706,10 +809,13 @@
         "footer_contact": "聯絡我們",
         "toast_deleted": "🗑️ 已刪除該張小卡",
         "toast_swapped": "✨ 小卡位置已成功調換！",
+        "toast_rotated": "↻ 小卡已順時針旋轉 90°",
         "toast_pdf_ready": "🖨️ 300 DPI 高清 PDF 已導出！",
         "card_label_empty": "上傳小卡",
         "card_label_drag": "拖拽排序",
         "card_label_delete": "刪除此小卡",
+        "card_label_rotate": "旋轉90°",
+        "card_label_safe": "安全區",
         "faq_title": "小卡列印常見問題與 DIY 指南 (FAQ)",
         "faq_desc": "了解相紙材質選擇、小卡標準尺寸與家用印表機設定建議",
         "faq_q1": "官方小卡的標準尺寸是多少？",
@@ -740,13 +846,13 @@
         "paper_polaroid_title": "🏷️ 폴라로이드 Mini",
         "paper_polaroid_desc": "A4 용지 • 3×3 (9장)",
         "paper_4x6_title": "🖼️ 4×6\" 인화지",
-        "paper_4x6_desc": "48×72mm • 2×2 (4장)",
+        "paper_4x6_desc": "46×70mm • 2×2 (4장)",
         "paper_5x7_title": "📸 5×7\" 인화지",
         "paper_5x7_desc": "55×85mm • 2×2 (4장)",
         "paper_a5_title": "📐 A5 다이어리",
         "paper_a5_desc": "148×210mm • 2×2 (4장)",
         "paper_dense_title": "⚡ A4 밀집 12장",
-        "paper_dense_desc": "50×70mm • 3×4 (12장)",
+        "paper_dense_desc": "50×68mm • 3×4 (12장)",
         "paper_a3_title": "🏢 A3 대량 상업용",
         "paper_a3_desc": "55×85mm • 4×4 (16장)",
         "badge_hot": "🔥 인기",
@@ -755,6 +861,8 @@
         "badge_save": "절약",
         "badge_batch": "대량",
         "opt_cutlines": "가위 재단선 표시",
+        "opt_safe_area": "2mm 안전 여백 표시",
+        "opt_back_template": "양면 인쇄 / 뒷면 템플릿",
         "opt_fit": "이미지 맞춤 방식",
         "fit_cover": "여백 없이 채우기",
         "fit_contain": "전체 이미지 맞춤",
@@ -762,11 +870,11 @@
         "pdf_note": "🔒 100% 로컬 브라우저 처리: 이미지가 서버로 전송되지 않습니다.",
         "preview_sheet_title": "인쇄 시트 실시간 미리보기",
         "btn_clear_all": "시트 비우기",
-        "tip_interactive": "마우스 드래그로 카드 순서를 바꾸고, ✕ 버튼을 눌러 개별 삭제할 수 있습니다.",
+        "tip_interactive": "마우스 드래그로 순서 변경, ↻ 회전 또는 ✕ 삭제 가능",
         "tag_interactive": "드래그 정렬 지원",
         "feature_1": "📐 mm 단위 정밀 중앙 정렬",
-        "feature_2": "✂️ 100% 일치하는 가위 재단선",
-        "feature_3": "🖱️ 마우스 드래그 순서 변경 / 삭제",
+        "feature_2": "✂️ 2mm 물리적 재단 간격",
+        "feature_3": "🖱️ 마우스 드래그 / 회전 / 삭제",
         "sec_photocard_history": "최근 인쇄 프로젝트",
         "btn_clear_history": "비우기",
         "empty_history": "저장된 기록이 없습니다.",
@@ -776,10 +884,13 @@
         "footer_contact": "문의하기",
         "toast_deleted": "🗑️ 카드가 삭제되었습니다.",
         "toast_swapped": "✨ 카드 위치가 변경되었습니다!",
+        "toast_rotated": "↻ 카드가 90° 회전되었습니다!",
         "toast_pdf_ready": "🖨️ 300 DPI PDF가 다운로드되었습니다!",
         "card_label_empty": "포카 추가",
         "card_label_drag": "드래그 정렬",
         "card_label_delete": "삭제",
+        "card_label_rotate": "90° 회전",
+        "card_label_safe": "안전 영역",
         "faq_title": "포토카드 인쇄 자주 묻는 질문 (FAQ)",
         "faq_desc": "인화지 규격과 가정용 프린터 팁",
         "faq_q1": "표준 포토카드 규격은 얼마인가요?",
@@ -810,13 +921,13 @@
         "paper_polaroid_title": "🏷️ チェキ Mini",
         "paper_polaroid_desc": "A4 用紙 • 3×3 (9枚)",
         "paper_4x6_title": "🖼️ L判/KG フォト紙",
-        "paper_4x6_desc": "48×72mm • 2×2 (4枚)",
+        "paper_4x6_desc": "46×70mm • 2×2 (4枚)",
         "paper_5x7_title": "📸 2L判 フォト紙",
         "paper_5x7_desc": "55×85mm • 2×2 (4枚)",
         "paper_a5_title": "📐 A5 手帳サイズ",
         "paper_a5_desc": "148×210mm • 2×2 (4枚)",
         "paper_dense_title": "⚡ A4 密集 12枚",
-        "paper_dense_desc": "50×70mm • 3×4 (12枚)",
+        "paper_dense_desc": "50×68mm • 3×4 (12枚)",
         "paper_a3_title": "🏢 A3 大量印刷",
         "paper_a3_desc": "55×85mm • 4×4 (16枚)",
         "badge_hot": "🔥 定番",
@@ -825,6 +936,8 @@
         "badge_save": "節約",
         "badge_batch": "大量",
         "opt_cutlines": "裁断ガイド線を表示",
+        "opt_safe_area": "2mm 安全マージンを表示",
+        "opt_back_template": "両面印刷 / 裏面テンプレート",
         "opt_fit": "画像フィットモード",
         "fit_cover": "余白なしで配置",
         "fit_contain": "全体を表示",
@@ -832,11 +945,11 @@
         "pdf_note": "🔒 100% ローカル処理：写真が外部サーバーに送信されることはありません。",
         "preview_sheet_title": "印刷シートプレビュー",
         "btn_clear_all": "シートをクリア",
-        "tip_interactive": "ドラッグでカードの位置を入れ替え、✕ボタンで1枚ずつ削除できます。",
+        "tip_interactive": "ドラッグで入れ替え、ホバーで ↻ 回転や ✕ 削除が可能",
         "tag_interactive": "並び替え対応",
         "feature_1": "📐 ミリ単位の精密中央配置",
-        "feature_2": "✂️ 100% ピッタリ重なる裁断線",
-        "feature_3": "🖱️ ドラッグで入れ替え / 削除",
+        "feature_2": "✂️ 2mm 物理裁断マージン",
+        "feature_3": "🖱️ ドラッグで入れ替え / 回転 / 削除",
         "sec_photocard_history": "最近の印刷履歴",
         "btn_clear_history": "クリア",
         "empty_history": "履歴はありません。",
@@ -846,10 +959,13 @@
         "footer_contact": "お問い合わせ",
         "toast_deleted": "🗑️ トレカを削除しました",
         "toast_swapped": "✨ カードの順番を入れ替えました！",
+        "toast_rotated": "↻ カードを90°回転しました！",
         "toast_pdf_ready": "🖨️ 300 DPI PDFを出力しました！",
         "card_label_empty": "写真を追加",
         "card_label_drag": "ドラッグで移動",
         "card_label_delete": "削除",
+        "card_label_rotate": "90°回転",
+        "card_label_safe": "安全エリア",
         "faq_title": "トレカ自作・印刷 Q&A",
         "faq_desc": "用紙選びや印刷のコツ",
         "faq_q1": "公式トレカの標準サイズは？",
@@ -880,13 +996,13 @@
         "paper_polaroid_title": "🏷️ Polaroid Mini",
         "paper_polaroid_desc": "Kertas A4 • 3×3 (9 kartu)",
         "paper_4x6_title": "🖼️ Kertas Foto 4×6\"",
-        "paper_4x6_desc": "48×72mm • 2×2 (4 kartu)",
+        "paper_4x6_desc": "46×70mm • 2×2 (4 kartu)",
         "paper_5x7_title": "📸 Kertas Foto 5×7\"",
         "paper_5x7_desc": "55×85mm • 2×2 (4 kartu)",
         "paper_a5_title": "📐 A5 Buku Harian",
         "paper_a5_desc": "148×210mm • 2×2 (4 kartu)",
         "paper_dense_title": "⚡ A4 Padat 12-Kartu",
-        "paper_dense_desc": "50×70mm • 3×4 (12 kartu)",
+        "paper_dense_desc": "50×68mm • 3×4 (12 kartu)",
         "paper_a3_title": "🏢 A3 Komersial",
         "paper_a3_desc": "55×85mm • 4×4 (16 kartu)",
         "badge_hot": "🔥 Populer",
@@ -895,6 +1011,8 @@
         "badge_save": "Hemat",
         "badge_batch": "Banyak",
         "opt_cutlines": "Tampilkan Garis Potong Gunting",
+        "opt_safe_area": "Tampilkan Garis Area Aman 2mm",
+        "opt_back_template": "Templat Sisi Belakang",
         "opt_fit": "Mode Pas Gambar",
         "fit_cover": "Pangkas Penuh (Tanpa Bingkai)",
         "fit_contain": "Tampilkan Utuh",
@@ -902,11 +1020,11 @@
         "pdf_note": "🔒 100% Privasi Klien: Foto Anda tidak pernah diunggah ke server.",
         "preview_sheet_title": "Pratinjau Lembar Cetak",
         "btn_clear_all": "Kosongkan Lembar",
-        "tip_interactive": "Seret kartu untuk menukar posisi. Arahkan kursor dan klik ✕ untuk menghapus.",
+        "tip_interactive": "Seret untuk menukar posisi. Arahkan kursor untuk memutar ↻ atau menghapus ✕.",
         "tag_interactive": "Mendukung Seret",
         "feature_1": "📐 Penempatan Presisi Milimeter",
-        "feature_2": "✂️ Garis Gunting Sempurna",
-        "feature_3": "🖱️ Seret untuk Tukar / Hapus",
+        "feature_2": "✂️ Celah Pemotongan Fisik 2mm",
+        "feature_3": "🖱️ Seret / Putar / Hapus",
         "sec_photocard_history": "Riwayat Proyek Cetak",
         "btn_clear_history": "Hapus",
         "empty_history": "Belum ada riwayat tata letak.",
@@ -916,10 +1034,13 @@
         "footer_contact": "Hubungi Kami",
         "toast_deleted": "🗑️ Kartu berhasil dihapus",
         "toast_swapped": "✨ Urutan kartu berhasil ditukar!",
+        "toast_rotated": "↻ Kartu diputar 90°",
         "toast_pdf_ready": "🖨️ PDF 300 DPI berhasil diunduh!",
         "card_label_empty": "Unggah Foto",
         "card_label_drag": "Seret untuk urutkan",
         "card_label_delete": "Hapus kartu ini",
+        "card_label_rotate": "Putar 90°",
+        "card_label_safe": "Area Aman",
         "faq_title": "FAQ Cetak Photocard & Panduan DIY",
         "faq_desc": "Pelajari standar ukuran dan jenis kertas",
         "faq_q1": "Berapa ukuran standar photocard idola?",
@@ -950,13 +1071,13 @@
         "paper_polaroid_title": "🏷️ Polaroid Mini",
         "paper_polaroid_desc": "Kertas A4 • 3×3 (9 kad)",
         "paper_4x6_title": "🖼️ Kertas Foto 4×6\"",
-        "paper_4x6_desc": "48×72mm • 2×2 (4 kad)",
+        "paper_4x6_desc": "46×70mm • 2×2 (4 kad)",
         "paper_5x7_title": "📸 Kertas Foto 5×7\"",
         "paper_5x7_desc": "55×85mm • 2×2 (4 kad)",
         "paper_a5_title": "📐 A5 Buku Diari",
         "paper_a5_desc": "148×210mm • 2×2 (4 kad)",
         "paper_dense_title": "⚡ A4 Padat 12-Kad",
-        "paper_dense_desc": "50×70mm • 3×4 (12 kad)",
+        "paper_dense_desc": "50×68mm • 3×4 (12 kad)",
         "paper_a3_title": "🏢 A3 Komersial",
         "paper_a3_desc": "55×85mm • 4×4 (16 kad)",
         "badge_hot": "🔥 Hangat",
@@ -965,6 +1086,8 @@
         "badge_save": "Jimat",
         "badge_batch": "Banyak",
         "opt_cutlines": "Tunjukkan Garisan Gunting",
+        "opt_safe_area": "Tunjukkan Garisan Kawasan Selamat 2mm",
+        "opt_back_template": "Templat Bahagian Belakang",
         "opt_fit": "Mod Padanan Imej",
         "fit_cover": "Pangkas Penuh (Tanpa Sempadan)",
         "fit_contain": "Papar Keseluruhan",
@@ -972,11 +1095,11 @@
         "pdf_note": "🔒 100% Privasi: Foto anda tidak pernah dimuat naik ke pelayan.",
         "preview_sheet_title": "Pratonton Helaian Cetakan",
         "btn_clear_all": "Kosongkan Helaian",
-        "tip_interactive": "Seret kad untuk menukar kedudukan. Klik ✕ untuk memadam.",
+        "tip_interactive": "Seret untuk menukar kedudukan. Putar ↻ atau padam ✕.",
         "tag_interactive": "Sokong Seretan",
         "feature_1": "📐 Kedudukan Tengah Tepat",
-        "feature_2": "✂️ Garisan Pemotong Kemas",
-        "feature_3": "🖱️ Seret untuk Tukar / Padam",
+        "feature_2": "✂️ Jurang Pemotongan Fizikal 2mm",
+        "feature_3": "🖱️ Seret / Putar / Padam",
         "sec_photocard_history": "Sejarah Susun Atur",
         "btn_clear_history": "Padam",
         "empty_history": "Tiada sejarah susun atur.",
@@ -986,10 +1109,13 @@
         "footer_contact": "Hubungi Kami",
         "toast_deleted": "🗑️ Kad telah dipadamkan",
         "toast_swapped": "✨ Susunan kad berjaya ditukar!",
+        "toast_rotated": "↻ Kad diputar 90°",
         "toast_pdf_ready": "🖨️ PDF 300 DPI berjaya dimuat turun!",
         "card_label_empty": "Muat Naik Foto",
         "card_label_drag": "Seret untuk susun",
         "card_label_delete": "Padam kad ini",
+        "card_label_rotate": "Putar 90°",
+        "card_label_safe": "Zon Selamat",
         "faq_title": "Soalan Lazim (FAQ) Cetak Kad Foto",
         "faq_desc": "Ketahui panduan saiz dan kertas cetakan",
         "faq_q1": "Apakah saiz piawai kad foto idola?",
@@ -1020,13 +1146,13 @@
         "paper_polaroid_title": "🏷️ โพลารอยด์ Mini",
         "paper_polaroid_desc": "กระดาษ A4 • 3×3 (9 ใบ)",
         "paper_4x6_title": "🖼️ กระดาษรูป 4×6 นิ้ว",
-        "paper_4x6_desc": "48×72 มม. • 2×2 (4 ใบ)",
+        "paper_4x6_desc": "46×70 มม. • 2×2 (4 ใบ)",
         "paper_5x7_title": "📸 กระดาษรูป 5×7 นิ้ว",
         "paper_5x7_desc": "55×85 มม. • 2×2 (4 ใบ)",
         "paper_a5_title": "📐 A5 สมุดไดอารี่",
         "paper_a5_desc": "148×210 มม. • 2×2 (4 ใบ)",
         "paper_dense_title": "⚡ A4 อัดแน่น 12 ใบ",
-        "paper_dense_desc": "50×70 มม. • 3×4 (12 ใบ)",
+        "paper_dense_desc": "50×68 มม. • 3×4 (12 ใบ)",
         "paper_a3_title": "🏢 A3 ปริมาณมาก",
         "paper_a3_desc": "55×85 มม. • 4×4 (16 ใบ)",
         "badge_hot": "🔥 ยอดฮิต",
@@ -1035,6 +1161,8 @@
         "badge_save": "ประหยัด",
         "badge_batch": "จำนวนมาก",
         "opt_cutlines": "แสดงเส้นประสำหรับตัด",
+        "opt_safe_area": "แสดงเส้นระยะปลอดภัย 2 มม.",
+        "opt_back_template": "เทมเพลตพิมพ์สองด้าน/ด้านหลัง",
         "opt_fit": "โหมดจัดขนาดภาพ",
         "fit_cover": "ตัดเต็มกรอบ (ไม่มีขอบขาว)",
         "fit_contain": "แสดงรูปเต็มภาพ (มีขอบขาว)",
@@ -1042,11 +1170,11 @@
         "pdf_note": "🔒 ปลอดภัย 100%: ประมวลผลภายในเครื่องของคุณเท่านั้น",
         "preview_sheet_title": "ตัวอย่างหน้าพิมพ์สด",
         "btn_clear_all": "ล้างภาพทั้งหมด",
-        "tip_interactive": "ลากเพื่อสลับตำแหน่งการ์ด และคลิก ✕ เพื่อลบทีละใบ",
+        "tip_interactive": "ลากเพื่อสลับตำแหน่ง หมุน ↻ หรือลบ ✕ ได้อย่างอิสระ",
         "tag_interactive": "รองรับการลากสลับ",
         "feature_1": "📐 จัดกึ่งกลางระดับมิลลิเมตร",
-        "feature_2": "✂️ เส้นไกด์ตัดตรงขอบพอดี 100%",
-        "feature_3": "🖱️ ลากสลับตำแหน่ง / ลบทีละใบ",
+        "feature_2": "✂️ ช่องว่างสำหรับตัด 2 มม.",
+        "feature_3": "🖱️ ลากสลับ / หมุน / ลบการ์ด",
         "sec_photocard_history": "ประวัติการจัดหน้าล่าสุด",
         "btn_clear_history": "ล้างประวัติ",
         "empty_history": "ยังไม่มีประวัติการจัดหน้า",
@@ -1056,10 +1184,13 @@
         "footer_contact": "ติดต่อเรา",
         "toast_deleted": "🗑️ ลบการ์ดเรียบร้อยแล้ว",
         "toast_swapped": "✨ สลับตำแหน่งเรียบร้อยแล้ว!",
+        "toast_rotated": "↻ หมุนการ์ด 90° แล้ว!",
         "toast_pdf_ready": "🖨️ ส่งออก PDF 300 DPI แล้ว!",
         "card_label_empty": "เพิ่มรูปภาพ",
         "card_label_drag": "ลากเพื่อสลับ",
         "card_label_delete": "ลบการ์ดใบนี้",
+        "card_label_rotate": "หมุน 90°",
+        "card_label_safe": "ระยะปลอดภัย",
         "faq_title": "คำถามที่พบบ่อยเกี่ยวกับการพิมพ์โฟโต้การ์ด (FAQ)",
         "faq_desc": "เรียนรู้ขนาดมาตรฐานและการเลือกกระดาษพิมพ์",
         "faq_q1": "ขนาดมาตรฐานของโฟโต้การ์ดคือเท่าไหร่?",
@@ -1090,13 +1221,13 @@
         "paper_polaroid_title": "🏷️ بولارويد Mini",
         "paper_polaroid_desc": "ورق A4 • 3×3 (9 بطاقات)",
         "paper_4x6_title": "🖼️ ورق صور 4×6",
-        "paper_4x6_desc": "48×72 مم • 2×2 (4 بطاقات)",
+        "paper_4x6_desc": "46×70 مم • 2×2 (4 بطاقات)",
         "paper_5x7_title": "📸 ورق صور 5×7",
         "paper_5x7_desc": "55×85 مم • 2×2 (4 بطاقات)",
         "paper_a5_title": "📐 A5 يوميات",
         "paper_a5_desc": "148×210 مم • 2×2 (4 بطاقات)",
         "paper_dense_title": "⚡ A4 مكثف 12 بطاقة",
-        "paper_dense_desc": "50×70 مم • 3×4 (12 بطاقة)",
+        "paper_dense_desc": "50×68 مم • 3×4 (12 بطاقة)",
         "paper_a3_title": "🏢 A3 تجاري كبير",
         "paper_a3_desc": "55×85 مم • 4×4 (16 بطاقة)",
         "badge_hot": "🔥 شائع",
@@ -1105,6 +1236,8 @@
         "badge_save": "توفير",
         "badge_batch": "كميات",
         "opt_cutlines": "إظهار خطوط القص",
+        "opt_safe_area": "إظهار خطوط المنطقة الآمنة 2 مم",
+        "opt_back_template": "قالب الطباعة على الوجهين",
         "opt_fit": "نمط ملء الصورة",
         "fit_cover": "ملء كامل (بدون حواف)",
         "fit_contain": "إظهار الصورة كاملة",
@@ -1112,11 +1245,11 @@
         "pdf_note": "🔒 خصوصية 100%: تتم معالجة الصور داخل جهازك بالكامل.",
         "preview_sheet_title": "معاينة ورقة الطباعة المباشرة",
         "btn_clear_all": "مسح الورقة",
-        "tip_interactive": "اسحب البطاقات لتبديل المواقع، وانقر على ✕ للحذف الفردي.",
+        "tip_interactive": "اسحب البطاقات لتبديل المواقع، وقم بالتدوير ↻ أو الحذف ✕.",
         "tag_interactive": "يدعم السحب",
         "feature_1": "📐 توسيط دقيق بالمليمتر",
-        "feature_2": "✂️ خطوط قص متطابقة 100%",
-        "feature_3": "🖱️ سحب للتبديل / حذف",
+        "feature_2": "✂️ فجوات قص مادية 2 مم",
+        "feature_3": "🖱️ سحب / تدوير / حذف",
         "sec_photocard_history": "المشاريع الأخيرة",
         "btn_clear_history": "مسح",
         "empty_history": "لا توجد مشاريع سابقة.",
@@ -1126,10 +1259,13 @@
         "footer_contact": "اتصل بنا",
         "toast_deleted": "🗑️ تم حذف البطاقة",
         "toast_swapped": "✨ تم تبديل الترتيب بنجاح!",
+        "toast_rotated": "↻ تم تدوير البطاقة 90 درجة!",
         "toast_pdf_ready": "🖨️ تم تحميل ملف PDF جاهز للطباعة!",
         "card_label_empty": "إضافة صورة",
         "card_label_drag": "سحب للتبديل",
         "card_label_delete": "حذف البطاقة",
+        "card_label_rotate": "تدوير 90°",
+        "card_label_safe": "منطقة آمنة",
         "faq_title": "الأسئلة الشائعة حول طباعة البطاقات (FAQ)",
         "faq_desc": "تعرف على المقاسات القياسية ونصائح الورق",
         "faq_q1": "ما هو الحجم القياسي لبطاقات الفوتوكارد؟",
@@ -1160,13 +1296,13 @@
         "paper_polaroid_title": "🏷️ Polaroid Mini",
         "paper_polaroid_desc": "Hoja A4 • 3×3 (9 tarjetas)",
         "paper_4x6_title": "🖼️ Papel Foto 4×6\"",
-        "paper_4x6_desc": "48×72mm • 2×2 (4 tarjetas)",
+        "paper_4x6_desc": "46×70mm • 2×2 (4 tarjetas)",
         "paper_5x7_title": "📸 Papel Foto 5×7\"",
         "paper_5x7_desc": "55×85mm • 2×2 (4 tarjetas)",
         "paper_a5_title": "📐 A5 Agenda",
         "paper_a5_desc": "148×210mm • 2×2 (4 tarjetas)",
         "paper_dense_title": "⚡ A4 Denso 12 Tarjetas",
-        "paper_dense_desc": "50×70mm • 3×4 (12 tarjetas)",
+        "paper_dense_desc": "50×68mm • 3×4 (12 tarjetas)",
         "paper_a3_title": "🏢 A3 Lote Comercial",
         "paper_a3_desc": "55×85mm • 4×4 (16 tarjetas)",
         "badge_hot": "🔥 Popular",
@@ -1175,6 +1311,8 @@
         "badge_save": "Ahorro",
         "badge_batch": "Lote",
         "opt_cutlines": "Mostrar Líneas de Corte",
+        "opt_safe_area": "Mostrar Guías de Área Segura de 2mm",
+        "opt_back_template": "Plantilla de Reverso",
         "opt_fit": "Modo de Ajuste",
         "fit_cover": "Recortar y Llenar (Sin bordes)",
         "fit_contain": "Ajustar Imagen Completa",
@@ -1182,11 +1320,11 @@
         "pdf_note": "🔒 100% Privacidad Local: Tus fotos nunca salen de tu dispositivo.",
         "preview_sheet_title": "Vista Previa de la Hoja",
         "btn_clear_all": "Limpiar Hoja",
-        "tip_interactive": "Arrastra con el ratón para cambiar el orden, haz clic en ✕ para eliminar tarjetas individuales.",
+        "tip_interactive": "Arrastra para reordenar. Pasa el cursor para rotar ↻ o eliminar ✕.",
         "tag_interactive": "Arrastre activo",
         "feature_1": "📐 Centrado de Precisión Milimétrica",
-        "feature_2": "✂️ Líneas de Corte 100% Ajustadas",
-        "feature_3": "🖱️ Arrastrar / Eliminar",
+        "feature_2": "✂️ Separación Física de Corte de 2mm",
+        "feature_3": "🖱️ Arrastrar / Rotar / Eliminar",
         "sec_photocard_history": "Proyectos Recientes",
         "btn_clear_history": "Borrar",
         "empty_history": "No hay proyectos guardados todavía.",
@@ -1196,10 +1334,13 @@
         "footer_contact": "Contacto",
         "toast_deleted": "🗑️ Tarjeta eliminada",
         "toast_swapped": "✨ ¡Tarjetas reordenadas con éxito!",
+        "toast_rotated": "↻ ¡Tarjeta rotada 90°!",
         "toast_pdf_ready": "🖨️ ¡PDF 300 DPI descargado!",
         "card_label_empty": "Subir Foto",
         "card_label_drag": "Arrastrar para mover",
         "card_label_delete": "Eliminar esta tarjeta",
+        "card_label_rotate": "Rotar 90°",
+        "card_label_safe": "Zona Segura",
         "faq_title": "Preguntas Frecuentes (FAQ) y Guía DIY",
         "faq_desc": "Aprende sobre tipos de papel y estándares de tamaño",
         "faq_q1": "¿Cuál es el tamaño estándar de una photocard?",
@@ -1261,6 +1402,7 @@
       if (fitCover && i18nData[lang]?.fit_cover) fitCover.innerText = i18nData[lang].fit_cover;
       if (fitContain && i18nData[lang]?.fit_contain) fitContain.innerText = i18nData[lang].fit_contain;
 
+      updateDimensionLabel();
       updateUploadCounter();
       renderGridPreview();
       renderPhotocardHistoryUI();
@@ -1304,6 +1446,19 @@
       renderGridPreview();
     }
 
+    function toggleSafeArea(checked) {
+      currentSafeArea = checked;
+      renderGridPreview();
+    }
+
+    function toggleBacksideTemplate(checked) {
+      currentBackside = checked;
+      renderGridPreview();
+      if (checked) {
+        showToast('Double-Sided Print Template enabled! (背面模板已启用)', '🖨️');
+      }
+    }
+
     function setFitMode(mode) {
       currentFitMode = mode;
       renderGridPreview();
@@ -1317,6 +1472,13 @@
       }
     }
 
+    // [P1.3] Precision Slot Uploading Logic
+    function triggerUploadForSlot(slotIdx) {
+      targetUploadSlot = slotIdx;
+      const fileInput = document.getElementById('file-input');
+      if (fileInput) fileInput.click();
+    }
+
     function handleFileSelect(files) {
       if (!files || files.length === 0) return;
       const spec = paperSpecs[currentPaper] || paperSpecs['a4'];
@@ -1324,26 +1486,70 @@
 
       trackGA4Event('upload_photocards', { count: files.length });
 
-      Array.from(files).forEach(file => {
-        if (uploadedImages.length >= maxSlots) return;
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          const img = new Image();
-          img.onload = () => {
-            if (uploadedImages.length < maxSlots) {
-              uploadedImages.push({
+      const fileList = Array.from(files);
+      let loadPromises = [];
+
+      fileList.forEach(file => {
+        const p = new Promise((resolve) => {
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            const img = new Image();
+            img.onload = () => {
+              resolve({
                 src: e.target.result,
                 img: img,
-                id: 'img_' + Math.random().toString(36).substr(2, 9)
+                id: 'img_' + Math.random().toString(36).substr(2, 9),
+                rotation: 0 // [P1.4] Initial rotation state
               });
-              updateUploadCounter();
-              renderGridPreview();
-            }
+            };
+            img.src = e.target.result;
           };
-          img.src = e.target.result;
-        };
-        reader.readAsDataURL(file);
+          reader.readAsDataURL(file);
+        });
+        loadPromises.push(p);
       });
+
+      Promise.all(loadPromises).then(newItems => {
+        if (targetUploadSlot !== null && targetUploadSlot >= 0 && targetUploadSlot < maxSlots) {
+          // [P1.3] Insert precisely at target slot
+          const first = newItems[0];
+          if (targetUploadSlot < uploadedImages.length) {
+            uploadedImages[targetUploadSlot] = first;
+          } else {
+            uploadedImages.push(first);
+          }
+          // Append any extra files
+          for (let i = 1; i < newItems.length; i++) {
+            if (uploadedImages.length < maxSlots) {
+              uploadedImages.push(newItems[i]);
+            }
+          }
+        } else {
+          // Standard batch append
+          newItems.forEach(item => {
+            if (uploadedImages.length < maxSlots) {
+              uploadedImages.push(item);
+            }
+          });
+        }
+
+        targetUploadSlot = null;
+        updateUploadCounter();
+        renderGridPreview();
+      });
+    }
+
+    // [P1.4] Rotate Single Card 90 Degrees Clockwise
+    function rotateCard(index, event) {
+      if (event) {
+        event.stopPropagation();
+        event.preventDefault();
+      }
+      if (index >= 0 && index < uploadedImages.length) {
+        uploadedImages[index].rotation = ((uploadedImages[index].rotation || 0) + 90) % 360;
+        renderGridPreview();
+        showToast(i18nData[currentLang]?.toast_rotated || 'Card rotated 90°', '↻');
+      }
     }
 
     function deleteCard(index, event) {
@@ -1366,13 +1572,8 @@
       showToast(i18nData[currentLang]?.btn_clear_all || 'Sheet cleared', '🗑️');
     }
 
-    function triggerUploadForSlot(index) {
-      const fileInput = document.getElementById('file-input');
-      if (fileInput) fileInput.click();
-    }
-
     // ==========================================
-    // Interactive Drag to Swap / Move Logic
+    // Interactive Drag to Swap / Move Logic (Desktop & [P2.2] Mobile Touch)
     // ==========================================
 
     function onDragStart(e) {
@@ -1431,32 +1632,68 @@
       trackGA4Event('reorder_cards', { from: draggedIndex, to: targetIndex });
     }
 
+    // [P2.2] Mobile Touch Event Support
+    let touchSourceIndex = null;
+    let touchMoved = false;
+
+    function onTouchStart(e) {
+      touchSourceIndex = parseInt(e.currentTarget.dataset.index, 10);
+      touchMoved = false;
+    }
+
+    function onTouchMove(e) {
+      touchMoved = true;
+    }
+
+    function onTouchEnd(e) {
+      if (!touchMoved || touchSourceIndex === null) {
+        touchSourceIndex = null;
+        return;
+      }
+      const touch = e.changedTouches[0];
+      const targetElement = document.elementFromPoint(touch.clientX, touch.clientY);
+      const cardCell = targetElement ? targetElement.closest('.card-cell') : null;
+      if (cardCell && cardCell.dataset.index !== undefined) {
+        const targetIndex = parseInt(cardCell.dataset.index, 10);
+        if (touchSourceIndex !== targetIndex && touchSourceIndex < uploadedImages.length) {
+          draggedIndex = touchSourceIndex;
+          onDrop({
+            preventDefault: () => {},
+            currentTarget: cardCell
+          });
+        }
+      }
+      touchSourceIndex = null;
+    }
+
     // ==========================================
-    // Render Responsive Centered DOM Grid Preview
+    // [P0] Render Centered DOM Grid Preview
     // ==========================================
 
     function renderGridPreview() {
       const paperSheet = document.getElementById('paper-sheet');
       const cardGrid = document.getElementById('card-grid');
+      const previewContainer = document.getElementById('preview-sheet-container');
       if (!paperSheet || !cardGrid) return;
 
       const spec = paperSpecs[currentPaper] || paperSpecs['a4'];
       const dict = i18nData[currentLang] || i18nData['en'];
 
-      // 1. Set Paper Aspect Ratio
-      paperSheet.style.aspectRatio = `${spec.sheetW_mm} / ${spec.sheetH_mm}`;
+      // [P0] Get responsive container width (max 440px)
+      const containerW = previewContainer ? Math.min(previewContainer.clientWidth - 48, 440) : 420;
+      const layout = calculateLayout(spec, containerW, false);
 
-      // 2. Compute exact mathematical grid size as percentage of paper
-      const totalGridW_mm = spec.cols * spec.cardW_mm;
-      const totalGridH_mm = spec.rows * spec.cardH_mm;
+      // [P0] 1. Set Paper Sheet Outer Pixel Dimensions and Centering Padding
+      paperSheet.style.width = `${layout.sheetW_px}px`;
+      paperSheet.style.height = `${layout.sheetH_px}px`;
+      paperSheet.style.padding = `${layout.padY_px}px ${layout.padX_px}px`;
 
-      const gridWidthPercent = (totalGridW_mm / spec.sheetW_mm) * 100;
-      const gridHeightPercent = (totalGridH_mm / spec.sheetH_mm) * 100;
-
-      cardGrid.style.width = `${gridWidthPercent.toFixed(4)}%`;
-      cardGrid.style.height = `${gridHeightPercent.toFixed(4)}%`;
-      cardGrid.style.gridTemplateColumns = `repeat(${spec.cols}, 1fr)`;
-      cardGrid.style.gridTemplateRows = `repeat(${spec.rows}, 1fr)`;
+      // [P0] 2. Set Exact Hard Pixels on Card Grid
+      cardGrid.style.width = `${layout.totalGridW_px}px`;
+      cardGrid.style.height = `${layout.totalGridH_px}px`;
+      cardGrid.style.gap = `${layout.gap_px}px`;
+      cardGrid.style.gridTemplateColumns = `repeat(${spec.cols}, ${layout.cardW_px}px)`;
+      cardGrid.style.gridTemplateRows = `repeat(${spec.rows}, ${layout.cardH_px}px)`;
 
       // Clear existing cells
       cardGrid.innerHTML = '';
@@ -1467,14 +1704,19 @@
         cell.className = 'card-cell relative overflow-hidden flex items-center justify-center transition-all duration-150 group select-none cursor-pointer';
         cell.dataset.index = String(i);
 
-        // Aspect ratio of the cell matches exact physical mm ratio of the card
-        cell.style.aspectRatio = `${spec.cardW_mm} / ${spec.cardH_mm}`;
+        // [P0] Hard Pixel Width & Height for each cell
+        cell.style.width = `${layout.cardW_px}px`;
+        cell.style.height = `${layout.cardH_px}px`;
 
-        // Cut line border
+        // [P1.1] 3mm Rounded Corners
+        cell.style.borderRadius = `${layout.cornerR_px}px`;
+
+        // Cut line border [P0]
         const cutBorderClass = currentCutLine ? 'border border-dashed border-slate-300' : 'border border-slate-200/60';
 
         if (hasImage) {
           const item = uploadedImages[i];
+          const rotation = item.rotation || 0;
           cell.classList.add('bg-white');
           cell.setAttribute('draggable', 'true');
           cell.setAttribute('title', `Card #${i + 1} (${spec.cardW_mm}×${spec.cardH_mm}mm)`);
@@ -1482,49 +1724,70 @@
           const fitClass = currentFitMode === 'contain' ? 'object-contain bg-slate-900/5' : 'object-cover';
 
           cell.innerHTML = `
-            <!-- Photo Image -->
-            <img src="${item.src}" alt="Card ${i + 1}" class="w-full h-full ${fitClass} block pointer-events-none" />
+            <!-- Photo Image with Rotation Support [P1.4] -->
+            <img src="${item.src}" alt="Card ${i + 1}" style="transform: rotate(${rotation}deg);" class="w-full h-full ${fitClass} block pointer-events-none transition-transform duration-200" />
             
-            <!-- Scissor Cut Lines Overlay -->
-            <div class="absolute inset-0 ${cutBorderClass} pointer-events-none z-10"></div>
+            <!-- Scissor Cut Lines Overlay [P0] -->
+            <div class="absolute inset-0 ${cutBorderClass} pointer-events-none z-10" style="border-radius: ${layout.cornerR_px}px;"></div>
 
-            <!-- Hover Action Overlay (Top bar with index badge and delete button) -->
-            <div class="absolute inset-0 bg-slate-950/40 backdrop-blur-[1px] opacity-0 group-hover:opacity-100 transition-opacity duration-150 flex flex-col justify-between p-1.5 z-20">
+            <!-- [P1.2] Safe Area 2mm Guide (Dashed Inner Line) -->
+            ${currentSafeArea ? `
+              <div class="absolute pointer-events-none z-15 border border-dashed border-indigo-400/40" style="inset: ${layout.safeArea_px}px; border-radius: ${Math.max(2, layout.cornerR_px - 2)}px;"></div>
+            ` : ''}
+
+            <!-- Hover Action Overlay (Top bar with index badge, rotate button & delete button) [P1.4] -->
+            <div class="absolute inset-0 bg-slate-950/45 backdrop-blur-[1px] opacity-0 group-hover:opacity-100 transition-opacity duration-150 flex flex-col justify-between p-1.5 z-20" style="border-radius: ${layout.cornerR_px}px;">
               <div class="flex items-center justify-between w-full">
                 <span class="bg-slate-900/90 text-white text-[9px] font-extrabold px-1.5 py-0.5 rounded shadow-xs flex items-center space-x-0.5 cursor-grab active:cursor-grabbing">
                   <span>⋮⋮</span>
                   <span>#${i + 1}</span>
                 </span>
-                <button type="button" onclick="deleteCard(${i}, event)" title="${dict.card_label_delete || 'Delete'}" class="w-5 h-5 rounded-full bg-rose-600 hover:bg-rose-700 text-white flex items-center justify-center text-[10px] font-bold shadow-md transition transform hover:scale-110 active:scale-90 cursor-pointer">
-                  ✕
-                </button>
+                
+                <div class="flex items-center space-x-1">
+                  <!-- [P1.4] Rotate 90° Button -->
+                  <button type="button" onclick="rotateCard(${i}, event)" title="${dict.card_label_rotate || 'Rotate 90°'}" class="w-5 h-5 rounded-full bg-indigo-600/90 hover:bg-indigo-600 text-white flex items-center justify-center text-[10px] font-bold shadow-md transition transform hover:scale-110 active:scale-90 cursor-pointer">
+                    ↻
+                  </button>
+
+                  <!-- Delete Button -->
+                  <button type="button" onclick="deleteCard(${i}, event)" title="${dict.card_label_delete || 'Delete'}" class="w-5 h-5 rounded-full bg-rose-600 hover:bg-rose-700 text-white flex items-center justify-center text-[10px] font-bold shadow-md transition transform hover:scale-110 active:scale-90 cursor-pointer">
+                    ✕
+                  </button>
+                </div>
               </div>
+
+              <!-- Center Move Hint -->
               <div class="my-auto text-center pointer-events-none">
                 <span class="bg-slate-900/85 text-white text-[9px] font-extrabold px-2 py-0.5 rounded-full shadow-xs backdrop-blur-xs inline-flex items-center space-x-1">
                   <span>↕️</span>
                   <span>${dict.card_label_drag || 'Drag to swap'}</span>
                 </span>
               </div>
-              <div class="h-2"></div>
+              <div class="h-1"></div>
             </div>
           `;
 
-          // Bind Drag & Drop event listeners
+          // Bind Drag & Drop event listeners (Desktop)
           cell.addEventListener('dragstart', onDragStart);
           cell.addEventListener('dragend', onDragEnd);
           cell.addEventListener('dragover', onDragOver);
           cell.addEventListener('dragleave', onDragLeave);
           cell.addEventListener('drop', onDrop);
 
+          // [P2.2] Mobile Touch Listeners
+          cell.addEventListener('touchstart', onTouchStart, { passive: true });
+          cell.addEventListener('touchmove', onTouchMove, { passive: true });
+          cell.addEventListener('touchend', onTouchEnd);
+
         } else {
-          // Empty Placeholder Slot
+          // Empty Placeholder Slot [P1.3 Precision Upload Target]
           cell.classList.add('bg-slate-50/50', 'hover:bg-indigo-50/60', 'hover:border-indigo-400');
           cell.setAttribute('title', `Card #${i + 1}`);
           cell.onclick = () => triggerUploadForSlot(i);
 
           cell.innerHTML = `
             <!-- Scissor Cut Lines Overlay -->
-            <div class="absolute inset-0 ${cutBorderClass} pointer-events-none"></div>
+            <div class="absolute inset-0 ${cutBorderClass} pointer-events-none" style="border-radius: ${layout.cornerR_px}px;"></div>
 
             <div class="text-center p-1 space-y-1 pointer-events-none z-10">
               <span class="text-[9px] font-bold text-slate-400 group-hover:text-indigo-600 transition block">Card ${i + 1}</span>
@@ -1539,6 +1802,11 @@
           cell.addEventListener('dragover', onDragOver);
           cell.addEventListener('dragleave', onDragLeave);
           cell.addEventListener('drop', onDrop);
+
+          // [P2.2] Mobile Touch Listeners
+          cell.addEventListener('touchstart', onTouchStart, { passive: true });
+          cell.addEventListener('touchmove', onTouchMove, { passive: true });
+          cell.addEventListener('touchend', onTouchEnd);
         }
 
         cardGrid.appendChild(cell);
@@ -1626,7 +1894,7 @@
     }
 
     // ==========================================
-    // 300 DPI High-Resolution PDF Export Engine
+    // [P0 & P1.1 & P1.4] 300 DPI High-Resolution PDF Export Engine
     // ==========================================
 
     function exportPDF() {
@@ -1638,68 +1906,79 @@
       const { jsPDF } = window.jspdf;
       const spec = paperSpecs[currentPaper] || paperSpecs['a4'];
 
-      // Precise 300 DPI Resolution Formula: pixels = mm * 300 / 25.4
-      const pxPerMm = 300.0 / 25.4;
-      const sheetW_px = Math.round(spec.sheetW_mm * pxPerMm);
-      const sheetH_px = Math.round(spec.sheetH_mm * pxPerMm);
-      const cardW_px = Math.round(spec.cardW_mm * pxPerMm);
-      const cardH_px = Math.round(spec.cardH_mm * pxPerMm);
+      // [P2.1] Calculate layout using the exact same unified formula
+      const layout = calculateLayout(spec, 0, true);
 
       const offCanvas = document.createElement('canvas');
-      offCanvas.width = sheetW_px;
-      offCanvas.height = sheetH_px;
+      offCanvas.width = layout.sheetW_px;
+      offCanvas.height = layout.sheetH_px;
       const ctx = offCanvas.getContext('2d');
 
       // Pure White Background
       ctx.fillStyle = '#ffffff';
-      ctx.fillRect(0, 0, sheetW_px, sheetH_px);
-
-      // Centered Grid coordinates
-      const totalGridW = spec.cols * cardW_px;
-      const totalGridH = spec.rows * cardH_px;
-      const startX = Math.round((sheetW_px - totalGridW) / 2);
-      const startY = Math.round((sheetH_px - totalGridH) / 2);
+      ctx.fillRect(0, 0, layout.sheetW_px, layout.sheetH_px);
 
       let cardIdx = 0;
       for (let r = 0; r < spec.rows; r++) {
         for (let c = 0; c < spec.cols; c++) {
-          const x = startX + c * cardW_px;
-          const y = startY + r * cardH_px;
+          const x = layout.startX + c * (layout.cardW_px + layout.gap_px);
+          const y = layout.startY + r * (layout.cardH_px + layout.gap_px);
 
           if (cardIdx < uploadedImages.length) {
             const item = uploadedImages[cardIdx];
             const img = item.img;
+            const rotation = item.rotation || 0;
 
             ctx.save();
             ctx.beginPath();
-            ctx.rect(x, y, cardW_px, cardH_px);
+            
+            // [P1.1] Draw Rounded Corner Clipping in Canvas 300 DPI
+            if (ctx.roundRect) {
+              ctx.roundRect(x, y, layout.cardW_px, layout.cardH_px, layout.cornerR_px);
+            } else {
+              ctx.rect(x, y, layout.cardW_px, layout.cardH_px);
+            }
             ctx.clip();
 
+            // [P1.4] Apply Image Rotation in Canvas Export
+            ctx.translate(x + layout.cardW_px / 2, y + layout.cardH_px / 2);
+            ctx.rotate((rotation * Math.PI) / 180);
+
+            const isSideways = (rotation === 90 || rotation === 270);
+            const targetW = isSideways ? layout.cardH_px : layout.cardW_px;
+            const targetH = isSideways ? layout.cardW_px : layout.cardH_px;
+
             if (currentFitMode === 'cover') {
-              const hRatio = cardW_px / img.width;
-              const vRatio = cardH_px / img.height;
+              const hRatio = targetW / img.width;
+              const vRatio = targetH / img.height;
               const ratio = Math.max(hRatio, vRatio);
-              const shiftX = (cardW_px - img.width * ratio) / 2;
-              const shiftY = (cardH_px - img.height * ratio) / 2;
-              ctx.drawImage(img, 0, 0, img.width, img.height, x + shiftX, y + shiftY, img.width * ratio, img.height * ratio);
+              const drawW = img.width * ratio;
+              const drawH = img.height * ratio;
+              ctx.drawImage(img, -drawW / 2, -drawH / 2, drawW, drawH);
             } else {
-              const hRatio = cardW_px / img.width;
-              const vRatio = cardH_px / img.height;
+              const hRatio = targetW / img.width;
+              const vRatio = targetH / img.height;
               const ratio = Math.min(hRatio, vRatio);
-              const shiftX = (cardW_px - img.width * ratio) / 2;
-              const shiftY = (cardH_px - img.height * ratio) / 2;
-              ctx.drawImage(img, 0, 0, img.width, img.height, x + shiftX, y + shiftY, img.width * ratio, img.height * ratio);
+              const drawW = img.width * ratio;
+              const drawH = img.height * ratio;
+              ctx.drawImage(img, -drawW / 2, -drawH / 2, drawW, drawH);
             }
             ctx.restore();
           }
 
-          // Draw Scissor Cut Lines if enabled
+          // [P0] Draw Scissor Cut Lines if enabled (2mm Gap Preserved)
           if (currentCutLine) {
             ctx.save();
             ctx.setLineDash([12, 12]);
             ctx.strokeStyle = '#cbd5e1';
             ctx.lineWidth = 2;
-            ctx.strokeRect(x, y, cardW_px, cardH_px);
+            if (ctx.roundRect) {
+              ctx.beginPath();
+              ctx.roundRect(x, y, layout.cardW_px, layout.cardH_px, layout.cornerR_px);
+              ctx.stroke();
+            } else {
+              ctx.strokeRect(x, y, layout.cardW_px, layout.cardH_px);
+            }
             ctx.restore();
           }
 
@@ -1729,6 +2008,11 @@
         cut_line: currentCutLine
       });
     }
+
+    // Window Resize Event to dynamically refresh preview scale [P0]
+    window.addEventListener('resize', () => {
+      renderGridPreview();
+    });
 
     window.addEventListener('DOMContentLoaded', () => {
       const savedLang = localStorage.getItem('stankit_lang') || localStorage.getItem('cardgrid_lang');
