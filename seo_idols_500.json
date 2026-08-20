@@ -2998,5 +2998,53 @@
     "name": "Feng Timo",
     "category": "C-Pop",
     "defaultPromptKeyword": "Feng Timo Buddha-like Girl sweet vocal live streaming letter"
+  },
+  {
+    "slug": "liu-yuning",
+    "name": "Liu Yuning",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Liu Yuning 刘宇宁 fan letter template Weverse"
+  },
+  {
+    "slug": "bai-jingting",
+    "name": "Bai Jingting",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Bai Jingting 白敬亭 fan letter template Weverse"
+  },
+  {
+    "slug": "wei-daxun",
+    "name": "Wei Daxun",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Wei Daxun 魏大勋 fan letter template Weverse"
+  },
+  {
+    "slug": "tnt-group",
+    "name": "Teens in Times (TNT)",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Teens in Times (TNT) 时代少年团 fan letter template Weverse"
+  },
+  {
+    "slug": "tian-xiwei",
+    "name": "Tian Xiwei",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Tian Xiwei 田曦薇 fan letter template Weverse"
+  },
+  {
+    "slug": "zhou-ye",
+    "name": "Zhou Ye",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Zhou Ye 周也 fan letter template Weverse"
+  },
+  {
+    "slug": "zhang-jingyi",
+    "name": "Zhang Jingyi",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Zhang Jingyi 张婧仪 fan letter template Weverse"
+  },
+  {
+    "slug": "wang-churan",
+    "name": "Wang Churan",
+    "category": "C-Pop",
+    "defaultPromptKeyword": "Wang Churan 王楚然 fan letter template Weverse"
   }
 ]

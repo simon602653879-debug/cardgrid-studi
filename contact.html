@@ -33,8 +33,57 @@
   </style>
 
   
-  <!-- Google Analytics GA4 -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-MEASUREMENT_ID"></script>
+    <!-- Analytics & UTM Attribution Engine -->
+  <script>
+    window.STANKIT_GA_ID = window.STANKIT_GA_ID || 'G-MEASUREMENT_ID';
+
+    (function initAttribution() {
+      try {
+        const urlParams = new URLSearchParams(window.location.search);
+        const utmSource = urlParams.get('utm_source') || urlParams.get('ref') || '';
+        const utmMedium = urlParams.get('utm_medium') || '';
+        const utmCampaign = urlParams.get('utm_campaign') || '';
+        const referrer = document.referrer || '';
+        if (utmSource || utmMedium || utmCampaign) {
+          const attribution = {
+            utm_source: utmSource,
+            utm_medium: utmMedium,
+            utm_campaign: utmCampaign,
+            referrer: referrer,
+            timestamp: Date.now()
+          };
+          sessionStorage.setItem('stankit_attribution', JSON.stringify(attribution));
+        }
+      } catch (e) {}
+    })();
+
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ window.dataLayer.push(arguments); }
+
+    if (window.STANKIT_GA_ID && window.STANKIT_GA_ID !== 'G-MEASUREMENT_ID' && window.STANKIT_GA_ID.startsWith('G-')) {
+      const gaScript = document.createElement('script');
+      gaScript.async = true;
+      gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=' + window.STANKIT_GA_ID;
+      document.head.appendChild(gaScript);
+      gtag('js', new Date());
+      gtag('config', window.STANKIT_GA_ID, { 'anonymize_ip': true });
+    } else {
+      console.log('[Analytics Notice] GA4 Measurement ID unconfigured. Set window.STANKIT_GA_ID with your real ID to activate live telemetry.');
+    }
+
+    function trackGA4Event(eventName, eventParams = {}) {
+      try {
+        const savedAttr = sessionStorage.getItem('stankit_attribution');
+        if (savedAttr) {
+          eventParams = Object.assign({}, JSON.parse(savedAttr), eventParams);
+        }
+      } catch (e) {}
+      if (typeof window.gtag === 'function') {
+        window.gtag('event', eventName, eventParams);
+      }
+      console.log('[Analytics Event]', eventName, eventParams);
+    }
+  </script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
@@ -50,6 +99,17 @@
   </script>
 
   <link rel="canonical" href="https://stankit.vercel.app/contact.html">
+  <!-- OpenGraph & Twitter Meta Tags -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="StanKit Studio | Free Fandom Micro-Tools">
+  <meta property="og:description" content="100% free DIY photocard grid generator, fan letter builder, and fandom micro-tools.">
+  <meta property="og:url" content="https://stankit.vercel.app/">
+  <meta property="og:site_name" content="StanKit Studio">
+  <meta property="og:image" content="https://stankit.vercel.app/assets/og-photocard.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://stankit.vercel.app/assets/og-photocard.png">
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col justify-between">
   

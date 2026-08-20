@@ -9,15 +9,19 @@
   <meta name="description" id="seo-desc" content="Free online tool to arrange and print idol photocards (55x85mm), BTS tour mini cards (70x100mm), Japanese L-size bromides (89x127mm), and Polaroids on A4, US Letter, 4x6 photo paper with 300 DPI high-res PDF output and DPI quality check.">
   <meta name="keywords" content="stankit, stankit studio, photocard print maker, photocard template a4, 4x6 walgreens photocard grid, bts mini photocard size, 70x100mm card, japanese bromide l size print, missing pc placeholder generator, diy photocard print sheet, 55x85mm card printer online, 300 dpi print">
 
-  <!-- OpenGraph & Twitter Meta Tags for Social Sharing & E-E-A-T -->
+    <!-- OpenGraph & Twitter Meta Tags for Social Sharing & E-E-A-T -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="StanKit Studio | Photocard Print Grid Maker (300 DPI)">
   <meta property="og:description" content="Free DIY tool to arrange 55x85mm photocards, Polaroids, and tour mini cards on A4, US Letter, or 4x6 photo paper with 300 DPI export.">
   <meta property="og:url" content="https://stankit.vercel.app/">
   <meta property="og:site_name" content="StanKit Studio">
+  <meta property="og:image" content="https://stankit.vercel.app/assets/og-photocard.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="StanKit Studio | Photocard Print Grid Maker (300 DPI)">
   <meta name="twitter:description" content="Free DIY tool to arrange 55x85mm photocards, Polaroids, and tour mini cards on A4, US Letter, or 4x6 photo paper with 300 DPI export.">
+  <meta name="twitter:image" content="https://stankit.vercel.app/assets/og-photocard.png">
 
   <!-- Schema.org JSON-LD Structured Data for Google AdSense & SEO -->
   <script type="application/ld+json">
@@ -53,19 +57,55 @@
   <!-- jsPDF for High-Res 300 DPI PDF Export -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
-  <!-- Google Analytics GA4 -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-MEASUREMENT_ID"></script>
+  <!-- Analytics & UTM Attribution Engine -->
   <script>
+    window.STANKIT_GA_ID = window.STANKIT_GA_ID || 'G-MEASUREMENT_ID';
+
+    (function initAttribution() {
+      try {
+        const urlParams = new URLSearchParams(window.location.search);
+        const utmSource = urlParams.get('utm_source') || urlParams.get('ref') || '';
+        const utmMedium = urlParams.get('utm_medium') || '';
+        const utmCampaign = urlParams.get('utm_campaign') || '';
+        const referrer = document.referrer || '';
+        if (utmSource || utmMedium || utmCampaign) {
+          const attribution = {
+            utm_source: utmSource,
+            utm_medium: utmMedium,
+            utm_campaign: utmCampaign,
+            referrer: referrer,
+            timestamp: Date.now()
+          };
+          sessionStorage.setItem('stankit_attribution', JSON.stringify(attribution));
+        }
+      } catch (e) {}
+    })();
+
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-MEASUREMENT_ID');
+    function gtag(){ window.dataLayer.push(arguments); }
+
+    if (window.STANKIT_GA_ID && window.STANKIT_GA_ID !== 'G-MEASUREMENT_ID' && window.STANKIT_GA_ID.startsWith('G-')) {
+      const gaScript = document.createElement('script');
+      gaScript.async = true;
+      gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=' + window.STANKIT_GA_ID;
+      document.head.appendChild(gaScript);
+      gtag('js', new Date());
+      gtag('config', window.STANKIT_GA_ID, { 'anonymize_ip': true });
+    } else {
+      console.log('[Analytics Notice] GA4 Measurement ID unconfigured. Set window.STANKIT_GA_ID with your real ID to activate live telemetry.');
+    }
 
     function trackGA4Event(eventName, eventParams = {}) {
-      if (typeof gtag === 'function') {
-        gtag('event', eventName, eventParams);
+      try {
+        const savedAttr = sessionStorage.getItem('stankit_attribution');
+        if (savedAttr) {
+          eventParams = Object.assign({}, JSON.parse(savedAttr), eventParams);
+        }
+      } catch (e) {}
+      if (typeof window.gtag === 'function') {
+        window.gtag('event', eventName, eventParams);
       }
-      console.log('[GA4 Event]', eventName, eventParams);
+      console.log('[Analytics Event]', eventName, eventParams);
     }
   </script>
 
@@ -162,6 +202,11 @@
 
       <!-- Right Actions: Language Switcher (10 Languages) -->
       <div class="flex items-center space-x-2 sm:space-x-3">
+        <!-- Header Share Button -->
+        <button type="button" onclick="triggerShareTool()" class="hidden sm:flex items-center space-x-1 px-3 py-1.5 rounded-lg bg-indigo-50 hover:bg-indigo-100 text-indigo-700 text-xs font-bold transition border border-indigo-200 cursor-pointer active:scale-95 shadow-2xs">
+          <span>✨</span>
+          <span data-i18n="nav_share">Share</span>
+        </button>
         <div class="relative">
           <select id="lang-select" onchange="changeLanguage(this.value)" class="bg-slate-100 border border-slate-200 text-slate-700 text-xs font-bold rounded-lg px-2.5 py-1.5 focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer appearance-none pr-7">
             <option value="en">🇺🇸 English</option>
@@ -276,7 +321,7 @@
               <button type="button" onclick="setPaper('4x6')" id="btn-paper-4x6" class="p-2.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-left transition relative cursor-pointer active:scale-98">
                 <div class="flex items-center justify-between">
                   <span class="font-extrabold text-xs" data-i18n="paper_4x6_title">🖼️ 4×6" Retail Photo</span>
-                  <span class="text-[9px] bg-emerald-500 text-white px-1.5 py-0.2 rounded font-extrabold" data-i18n="badge_retail">$0.15</span>
+                  <span class="text-[9px] bg-emerald-500 text-white px-1.5 py-0.2 rounded font-extrabold" data-i18n="badge_retail">4-in-1</span>
                 </div>
                 <div class="text-[10px] font-medium text-slate-500 mt-0.5" data-i18n="paper_4x6_desc">46×70mm • 2×2 (4 cards)</div>
               </button>
@@ -465,6 +510,49 @@
 
     </div>
 
+    
+  <!-- Achievement / Export Success Share Modal (Low-Friction Viral Growth) -->
+  <div id="share-modal" class="fixed inset-0 bg-slate-950/60 backdrop-blur-xs flex items-center justify-center p-4 z-50 opacity-0 pointer-events-none transition-opacity duration-200">
+    <div class="bg-white rounded-2xl max-w-sm w-full p-6 shadow-2xl space-y-4 border border-slate-100 transform scale-95 transition-transform duration-200 text-center" id="share-modal-content">
+      <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-indigo-500 to-rose-500 text-white flex items-center justify-center text-2xl mx-auto shadow-md shadow-indigo-100">
+        🎉
+      </div>
+      
+      <div class="space-y-1">
+        <h3 class="font-extrabold text-slate-900 text-base" data-i18n="share_modal_title">Print Ready! Share with Mutuals</h3>
+        <p class="text-xs text-slate-500" data-i18n="share_modal_desc">
+          Your 300 DPI high-res sheet is ready. Tell your fandom friends about this free DIY tool!
+        </p>
+      </div>
+
+      <div class="space-y-2 pt-2">
+        <!-- X (Twitter) Share Intent -->
+        <button type="button" onclick="shareOnX()" class="w-full py-2.5 px-4 rounded-xl bg-slate-900 hover:bg-black text-white font-extrabold text-xs flex items-center justify-center space-x-2 transition cursor-pointer active:scale-98">
+          <span>𝕏</span>
+          <span data-i18n="btn_share_x">Share on X (Twitter)</span>
+        </button>
+
+        <!-- Copy Referral Link & Slogan -->
+        <button type="button" onclick="copyShareLink()" class="w-full py-2.5 px-4 rounded-xl bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-extrabold text-xs flex items-center justify-center space-x-2 border border-indigo-200 transition cursor-pointer active:scale-98">
+          <span>📋</span>
+          <span data-i18n="btn_copy_share">Copy Share Text & Link</span>
+        </button>
+
+        <!-- Native Web Share (Mobile / Mac) -->
+        <button type="button" id="btn-native-share" onclick="nativeShare()" class="w-full py-2.5 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center justify-center space-x-2 transition cursor-pointer">
+          <span>📱</span>
+          <span data-i18n="btn_more_share">More Share Options</span>
+        </button>
+      </div>
+
+      <div class="pt-1">
+        <button type="button" onclick="closeShareModal()" class="text-xs font-bold text-slate-400 hover:text-slate-600 transition cursor-pointer" data-i18n="btn_close">
+          Maybe Later (关闭)
+        </button>
+      </div>
+    </div>
+  </div>
+
     <!-- Modal: Missing PC Placeholder Generator -->
     <div id="placeholder-modal" class="fixed inset-0 bg-slate-950/60 backdrop-blur-xs flex items-center justify-center p-4 z-50 opacity-0 pointer-events-none transition-opacity duration-200">
       <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl space-y-4 border border-slate-100 transform scale-95 transition-transform duration-200" id="placeholder-modal-content">
@@ -515,20 +603,28 @@
       </div>
     </div>
 
-    <!-- AdSense Compliant Banner Block -->
+        <!-- Community Support & 100% Free Tool Statement -->
     <div class="max-w-6xl mx-auto mt-12 overflow-hidden rounded-2xl bg-white border border-slate-200/80 shadow-2xs text-center">
-      <div class="p-4 sm:p-6 text-center space-y-2">
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
-             data-ad-slot="XXXXXXXXXX"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
-        <script>
-          try { (adsbygoogle = window.adsbygoogle || []).push({}); } catch(e) {}
-        </script>
-        <div class="text-[10px] text-slate-400 font-bold tracking-wider uppercase">
-          StanKit Studio • Free Fandom Digital Tools
+      <div class="p-5 sm:p-6 text-center space-y-3">
+        <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-indigo-50 text-indigo-700 text-xs font-extrabold border border-indigo-100">
+          <span>✨</span>
+          <span>100% Free & Client-Side Privacy</span>
+        </div>
+        <h4 class="text-sm font-extrabold text-slate-800 tracking-tight">
+          StanKit Studio is built with love for global fandoms
+        </h4>
+        <p class="text-xs text-slate-500 max-w-xl mx-auto leading-relaxed">
+          No mandatory subscriptions, no forced watermarks, and zero cloud photo uploads. If our tools save your crafting time, you can support future maintenance on Ko-fi.
+        </p>
+        <div class="pt-1 flex items-center justify-center gap-3 flex-wrap">
+          <a href="https://ko-fi.com/stankitstudio" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-1.5 px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xs transition shadow-xs">
+            <span>☕</span>
+            <span>Support on Ko-fi</span>
+          </a>
+          <a href="contact.html" class="inline-flex items-center space-x-1.5 px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs transition">
+            <span>💌</span>
+            <span>Request Idols & Feedback</span>
+          </a>
         </div>
       </div>
     </div>
@@ -594,15 +690,15 @@
         </div>
       </div>
 
-      <!-- Section 2: Retail Photo Kiosk ($0.15 Walgreens/Walmart) Print Guide -->
+      <!-- Section 2: Retail Photo Kiosk (4x6" 2x2 Grid) Print Guide -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs text-slate-700 leading-relaxed">
         <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-3">
           <h3 class="font-extrabold text-slate-900 text-sm flex items-center space-x-1.5">
             <span>🛒</span>
-            <span data-i18n="guide_retail_title">How to Print 4 Photocards for $0.15 at Walgreens/Walmart</span>
+            <span data-i18n="guide_retail_title">4×6" Retail Photo Paper (2×2 Grid) Printing & Budget Guide</span>
           </h3>
           <p class="text-slate-600" data-i18n="guide_retail_desc1">
-            Standard 4×6" photo prints cost only $0.15~$0.25 at Walgreens, Walmart, CVS, and local print shops. By selecting our <strong>4×6" (46×70mm 2×2)</strong> template, you can fit 4 photocards seamlessly onto a single photo sheet.
+            Based on standard 4×6" photo prints available at major pharmacies and retail kiosks (e.g. Walgreens, Walmart, CVS, typically $0.15~$0.25/sheet depending on local promotions and regional store pricing). By selecting our <strong>4×6" (46×70mm 2×2)</strong> template, you can arrange 4 photocards onto a single sheet to maximize paper efficiency.
           </p>
           <ul class="list-disc list-inside space-y-1 text-slate-600 text-[11px]">
             <li>Select <strong>4×6" Photo Paper</strong> format in StanKit Studio and export PDF/JPEG.</li>
@@ -820,6 +916,13 @@
     // ==========================================
     const i18nData = {
       "en": {
+        "nav_share": "Share",
+        "share_modal_title": "Print Ready! Share with Mutuals",
+        "share_modal_desc": "Your 300 DPI high-res sheet is ready. Tell your fandom friends about this free DIY tool!",
+        "btn_share_x": "Share on X (Twitter)",
+        "btn_copy_share": "Copy Share Text & Link",
+        "btn_more_share": "More Share Options",
+        "btn_close": "Maybe Later (Close)",
         "badge_hub": "Fandom Micro-Tools",
         "nav_tool_print": "Photocard Print Maker",
         "nav_tool_letter": "Fan Letter Pro",
@@ -854,7 +957,7 @@
         "paper_a3_desc": "55×85mm • 4×4 (16 cards)",
         "badge_hot": "🔥 HOT",
         "badge_na": "🔥 USA",
-        "badge_retail": "$0.15",
+        "badge_retail": "4-in-1",
         "badge_tour": "70×100",
         "badge_jp": "L判",
         "badge_save": "Eco",
@@ -886,8 +989,8 @@
         "btn_apply_placeholders": "Generate & Insert to Sheet",
         "guide_size_title": "Comprehensive Idol Photocard Sizing & Sleeve Guide",
         "guide_size_desc": "Universal standard dimensions across K-Pop, Japanese Bromides, Tour Mini PCs, and optimal card sleeve sizes.",
-        "guide_retail_title": "How to Print 4 Photocards for $0.15 at Walgreens/Walmart",
-        "guide_retail_desc1": "Standard 4×6\" photo prints cost only $0.15~$0.25 at Walgreens, Walmart, CVS, and local print shops. By selecting our 4×6\" template, you can fit 4 photocards seamlessly onto a single photo sheet.",
+        "guide_retail_title": "4×6\" Retail Photo Paper (2×2 Grid) Printing & Budget Guide",
+        "guide_retail_desc1": "Based on standard 4×6\" photo prints available at retail kiosks (e.g. Walgreens, Walmart, typically ~$0.15~$0.25/sheet depending on local store pricing). Selecting our 4×6\" template fits 4 photocards on one sheet to maximize paper efficiency." photo prints cost only $0.15~$0.25 at Walgreens, Walmart, CVS, and local print shops. By selecting our 4×6\" template, you can fit 4 photocards seamlessly onto a single photo sheet.",
         "guide_storage_title": "Photocard Archival & Acid-Free Storage Rules",
         "guide_storage_desc1": "Never use cheap PVC binder pages! PVC contains chemical plasticizers that migrate into photocard ink over time, causing irreversible yellowing and sticking.",
         "footer_about": "About Us",
@@ -906,6 +1009,13 @@
         "card_label_safe": "Safe Area"
       },
       "zh": {
+        "nav_share": "分享神器",
+        "share_modal_title": "🎉 导出成功！安利给追星搭子",
+        "share_modal_desc": "300 DPI 高清文件已就绪。一键将这个免费小卡排版工具分享到社交平台或群聊吧！",
+        "btn_share_x": "分享至 𝕏 (Twitter)",
+        "btn_copy_share": "一键复制安利文案与链接",
+        "btn_more_share": "更多系统分享方式",
+        "btn_close": "暂不分享 (关闭)",
         "badge_hub": "追星微工具箱",
         "nav_tool_print": "小卡排版打印生成器",
         "nav_tool_letter": "多语言粉丝信专业版",
@@ -940,7 +1050,7 @@
         "paper_a3_desc": "55×85mm • 4×4 (16张)",
         "badge_hot": "🔥 热门",
         "badge_na": "🔥 北美",
-        "badge_retail": "$0.15",
+        "badge_retail": "4合1拼版",
         "badge_tour": "70×100",
         "badge_jp": "L判",
         "badge_save": "省纸",
@@ -972,8 +1082,8 @@
         "btn_apply_placeholders": "生成并填入纸张空位",
         "guide_size_title": "全球泛亚官方小卡与生写真尺寸对照与卡套指南",
         "guide_size_desc": "涵盖韩娱专辑卡、巡演大卡、日本便利店写真、拍立得标准尺寸与无酸卡套选购建议。",
-        "guide_retail_title": "Walgreens / Walmart 4×6\" 廉价相纸打印实操指南 ($0.15 极速出片)",
-        "guide_retail_desc1": "在北美超市打印 4×6\" 照片仅需 $0.15~$0.25。通过选择我们的 4×6\" 模板，可在一张相纸上完美排入 4 张小卡，成本直降 80%。",
+        "guide_retail_title": "4×6\" 商超相纸拼版打印实操与省钱参考" 廉价相纸打印实操指南 ($0.15 极速出片)",
+        "guide_retail_desc1": "以北美部分商超/药店（如 Walgreens / Walmart / CVS）4×6\" 照片冲印常见单价 $0.15~$0.25 为例（实际价格及裁切政策以当地门店为准）。选择我们的 4×6\" (46×70mm 2×2) 拼版模板，单张相纸可容纳 4 张小卡，大幅提升相纸利用率。" 照片仅需 $0.15~$0.25。通过选择我们的 4×6\" 模板，可在一张相纸上完美排入 4 张小卡，成本直降 80%。",
         "guide_storage_title": "卡册收纳防褪色与无酸 (Acid-Free) 保养科普",
         "guide_storage_desc1": "切勿使用劣质 PVC 内页！PVC 含有害增塑剂，长期接触会导致小卡油墨粘连、变黄与覆膜脱落，务必认准 PP / CPP 无酸材质。",
         "footer_about": "关于本站",
@@ -992,6 +1102,13 @@
         "card_label_safe": "安全区"
       },
       "zh-TW": {
+        "nav_share": "分享神器",
+        "share_modal_title": "🎉 導出成功！安利給追星搭子",
+        "share_modal_desc": "300 DPI 高清文件已就緒。一鍵將這個免費小卡排版工具分享到社交平台或群聊吧！",
+        "btn_share_x": "分享至 𝕏 (Twitter)",
+        "btn_copy_share": "一鍵複製安利文案與鏈接",
+        "btn_more_share": "更多系統分享方式",
+        "btn_close": "暫不分享 (關閉)",
         "badge_hub": "追星微工具箱",
         "nav_tool_print": "小卡排版列印生成器",
         "nav_tool_letter": "多語言粉絲信專業版",
@@ -1026,7 +1143,7 @@
         "paper_a3_desc": "55×85mm • 4×4 (16張)",
         "badge_hot": "🔥 熱門",
         "badge_na": "🔥 北美",
-        "badge_retail": "$0.15",
+        "badge_retail": "4合1拼版",
         "badge_tour": "70×100",
         "badge_jp": "L判",
         "badge_save": "省紙",
@@ -1058,8 +1175,8 @@
         "btn_apply_placeholders": "生成並填入紙張空位",
         "guide_size_title": "全球泛亞官方小卡與生寫真尺寸對照與卡套指南",
         "guide_size_desc": "涵蓋韓娛專輯卡、巡演大卡、日本便利店寫真、拍立得標準尺寸與無酸卡套選購建議。",
-        "guide_retail_title": "Walgreens / Walmart 4×6\" 廉價相紙列印實操指南 ($0.15 極速出片)",
-        "guide_retail_desc1": "在北美超市列印 4×6\" 照片僅需 $0.15~$0.25。通過選擇我們的 4×6\" 模板，可在一張相紙上完美排入 4 張小卡，成本直降 80%。",
+        "guide_retail_title": "4×6\" 商超相紙拼版列印實操與省錢參考" 廉價相紙列印實操指南 ($0.15 極速出片)",
+        "guide_retail_desc1": "以北美部分商超/藥局（如 Walgreens / Walmart / CVS）4×6\" 照片沖印常見單價 $0.15~$0.25 為例（實際價格及裁切政策以當地門市為準）。選擇我們的 4×6\" (46×70mm 2×2) 拼版模板，單張相紙可容納 4 張小卡，大幅提升相紙利用率。" 照片僅需 $0.15~$0.25。通過選擇我們的 4×6\" 模板，可在一張相紙上完美排入 4 張小卡，成本直降 80%。",
         "guide_storage_title": "卡冊收納防褪色與無酸 (Acid-Free) 保養科普",
         "guide_storage_desc1": "切勿使用劣質 PVC 內頁！PVC 含有害增塑劑，長期接觸會導致小卡油墨粘連、變黃與覆膜脫落，務必認準 PP / CPP 無酸材質。",
         "footer_about": "關於我們",
@@ -1078,6 +1195,13 @@
         "card_label_safe": "安全區"
       },
       "ko": {
+        "nav_share": "공유하기",
+        "share_modal_title": "🎉 인쇄 준비 완료! 친구들과 공유하기",
+        "share_modal_desc": "300 DPI 초고화질 포토카드 파일이 준비되었습니다. 무료 도구를 친구들에게 추천해보세요!",
+        "btn_share_x": "𝕏 (Twitter)로 공유",
+        "btn_copy_share": "추천 문구 및 링크 복사",
+        "btn_more_share": "기타 공유 옵션",
+        "btn_close": "닫기",
         "badge_hub": "팬덤 마이크로 툴",
         "nav_tool_print": "포토카드 인쇄기",
         "nav_tool_letter": "팬레터 프로",
@@ -1112,7 +1236,7 @@
         "paper_a3_desc": "55×85mm • 4×4 (16장)",
         "badge_hot": "🔥 인기",
         "badge_na": "🔥 북미",
-        "badge_retail": "$0.15",
+        "badge_retail": "4장 분할",
         "badge_tour": "70×100",
         "badge_jp": "L판",
         "badge_save": "절약",
@@ -1144,8 +1268,8 @@
         "btn_apply_placeholders": "생성 후 시트에 추가",
         "guide_size_title": "아이돌 포토카드 공식 규격 및 슬리브 가이드",
         "guide_size_desc": "앨범 포카, 투어 미니포카, 일본 브로마이드 크기와 무산소 슬리브 보관 팁.",
-        "guide_retail_title": "4×6 인화지 가성비 출력 팁",
-        "guide_retail_desc1": "4×6인치 템플릿으로 4장의 포카를 한 번에 저렴하게 인화할 수 있습니다.",
+        "guide_retail_title": "4×6인치 인화지 4분할 알뜰 인쇄 가이드",
+        "guide_retail_desc1": "일반 사진 인화소의 4×6인치 규격을 활용한 가이드입니다 (매장 및 지역별 가격 상이). 4×6인치 템플릿으로 4장의 포카를 한 번에 인화하여 용지 효율을 높여보세요.",
         "guide_storage_title": "무산소(Acid-Free) 바인더 보관법",
         "guide_storage_desc1": "PVC 재질은 포카를 손상시킬 수 있으니 반드시 PP/CPP 무산소 슬리브를 사용하세요.",
         "footer_about": "소개",
@@ -1164,6 +1288,13 @@
         "card_label_safe": "안전 영역"
       },
       "ja": {
+        "nav_share": "シェア",
+        "share_modal_title": "🎉 印刷データ完成！お友達にシェア",
+        "share_modal_desc": "300 DPI高解像度データを出力しました。この無料トレカ作成ツールを推し仲間にシェアしませんか？",
+        "btn_share_x": "𝕏 (Twitter) でシェア",
+        "btn_copy_share": "シェア文とリンクをコピー",
+        "btn_more_share": "その他のシェア方法",
+        "btn_close": "閉じる",
         "badge_hub": "推し活ツール",
         "nav_tool_print": "トレカ印刷ツール",
         "nav_tool_letter": "ファンレター Pro",
@@ -1198,7 +1329,7 @@
         "paper_a3_desc": "55×85mm • 4×4 (16枚)",
         "badge_hot": "🔥 定番",
         "badge_na": "🔥 北米",
-        "badge_retail": "$0.15",
+        "badge_retail": "4分割配置",
         "badge_tour": "70×100",
         "badge_jp": "L判",
         "badge_save": "節約",
@@ -1230,8 +1361,8 @@
         "btn_apply_placeholders": "生成してシートに配置",
         "guide_size_title": "公式トレカ・生写真サイズ＆スリーブ比較ガイド",
         "guide_size_desc": "K-POPトレカ、ツアーミニフォト、コンビニL判写真の規格と無酸スリーブ選びの基本。",
-        "guide_retail_title": "写真用紙でお得にプリントするコツ",
-        "guide_retail_desc1": "4×6インチ用紙で4枚のトレカをまとめて高コスパで印刷できます。",
+        "guide_retail_title": "4×6インチ（KG/はがきサイズ）写真用紙 活用ガイド",
+        "guide_retail_desc1": "一般的な写真プリントサービス（店舗や地域により料金は異なります）向けに、4×6インチ用紙1枚に4枚のトレカをまとめて配置して用紙コストを最適化できます。",
         "guide_storage_title": "無酸(Acid-Free)スリーブでの劣化防止保管",
         "guide_storage_desc1": "PVCは色移りの原因になるため、PPやCPPの無酸スリーブを選びましょう。",
         "footer_about": "概要",
@@ -1250,6 +1381,13 @@
         "card_label_safe": "安全エリア"
       },
       "id": {
+        "nav_share": "Bagikan",
+        "share_modal_title": "🎉 Berhasil Ekspor! Bagikan ke Teman",
+        "share_modal_desc": "File 300 DPI Anda siap dicetak. Beritahu teman fandom Anda tentang alat gratis ini!",
+        "btn_share_x": "Bagikan di 𝕏 (Twitter)",
+        "btn_copy_share": "Salin Teks & Tautan",
+        "btn_more_share": "Pilihan Berbagi Lainnya",
+        "btn_close": "Tutup",
         "badge_hub": "Alat Fandom",
         "nav_tool_print": "Cetak Photocard",
         "nav_tool_letter": "Fan Letter Pro",
@@ -1284,7 +1422,7 @@
         "paper_a3_desc": "55×85mm • 4×4 (16 kartu)",
         "badge_hot": "🔥 Populer",
         "badge_na": "🔥 USA",
-        "badge_retail": "$0.15",
+        "badge_retail": "4-in-1",
         "badge_tour": "70×100",
         "badge_jp": "L判",
         "badge_save": "Hemat",
@@ -1316,8 +1454,8 @@
         "btn_apply_placeholders": "Buat & Masukkan ke Lembar",
         "guide_size_title": "Panduan Ukuran Photocard & Sleeve Standar",
         "guide_size_desc": "Standar ukuran album PC, tour mini PC, bromide Jepang, dan tips sleeve bebas asam.",
-        "guide_retail_title": "Tips Cetak Hemat Kertas Foto 4×6\"",
-        "guide_retail_desc1": "Cetak 4 photocard dalam 1 lembar 4×6\" di toko foto terdekat dengan harga murah.",
+        "guide_retail_title": "Panduan Cetak Kertas Foto 4×6\" (Grid 2×2)"",
+        "guide_retail_desc1": "Berdasarkan ukuran standar 4×6\" di gerai cetak foto (harga bergantung pada lokasi toko). Tata 4 photocard dalam 1 lembar untuk memaksimalkan efisiensi kertas." di toko foto terdekat dengan harga murah.",
         "guide_storage_title": "Penyimpanan Kartu Bebas Asam (Acid-Free)",
         "guide_storage_desc1": "Hindari binder PVC yang dapat merusak tinta foto. Selalu gunakan sleeve PP/CPP.",
         "footer_about": "Tentang Kami",
@@ -1336,6 +1474,13 @@
         "card_label_safe": "Area Aman"
       },
       "ms": {
+        "nav_share": "Kongsi",
+        "share_modal_title": "🎉 Berjaya Eksport! Kongsi Bersama Rakan",
+        "share_modal_desc": "Fail 300 DPI sedia untuk dicetak. Beritahu rakan peminat anda tentang alat percuma ini!",
+        "btn_share_x": "Kongsi di 𝕏 (Twitter)",
+        "btn_copy_share": "Salin Teks & Pautan",
+        "btn_more_share": "Pilihan Perkongsian Lain",
+        "btn_close": "Tutup",
         "badge_hub": "Alat Peminat",
         "nav_tool_print": "Cetak Kad Foto",
         "nav_tool_letter": "Fan Letter Pro",
@@ -1370,7 +1515,7 @@
         "paper_a3_desc": "55×85mm • 4×4 (16 kad)",
         "badge_hot": "🔥 Hangat",
         "badge_na": "🔥 USA",
-        "badge_retail": "$0.15",
+        "badge_retail": "4-dalam-1",
         "badge_tour": "70×100",
         "badge_jp": "L判",
         "badge_save": "Jimat",
@@ -1402,8 +1547,8 @@
         "btn_apply_placeholders": "Jana & Masukkan ke Helaian",
         "guide_size_title": "Panduan Saiz Kad Foto & Sleeve Piawai",
         "guide_size_desc": "Ketahui piawaian saiz album PC, tour mini PC, dan petua penjagaan tanpa asid.",
-        "guide_retail_title": "Panduan Cetakan Kertas Foto 4×6\"",
-        "guide_retail_desc1": "Muatkan 4 kad foto pada satu helaian 4×6\" untuk penjimatan maksimum.",
+        "guide_retail_title": "Panduan Cetakan Kertas Foto 4×6\" (Grid 2×2)"",
+        "guide_retail_desc1": "Berdasarkan saiz piawai 4×6\" di kedai cetakan foto (harga bergantung kepada lokasi). Susun 4 kad foto pada satu helaian untuk memaksimumkan penggunaan kertas." untuk penjimatan maksimum.",
         "guide_storage_title": "Penyimpanan Bebas Asid (Acid-Free)",
         "guide_storage_desc1": "Elakkan binder PVC yang merosakkan dakwat. Gunakan sleeve PP/CPP sahaja.",
         "footer_about": "Tentang Kami",
@@ -1422,6 +1567,13 @@
         "card_label_safe": "Zon Selamat"
       },
       "th": {
+        "nav_share": "แชร์",
+        "share_modal_title": "🎉 ส่งออกสำเร็จ! แชร์ให้เพื่อน",
+        "share_modal_desc": "ไฟล์ 300 DPI พร้อมพิมพ์แล้ว บอกต่อเพื่อนในด้อมเกี่ยวกับเครื่องมือฟรีนี้กันเถอะ!",
+        "btn_share_x": "แชร์บน 𝕏 (Twitter)",
+        "btn_copy_share": "คัดลอกข้อความและลิงก์",
+        "btn_more_share": "ตัวเลือกการแชร์เพิ่มเติม",
+        "btn_close": "ปิด",
         "badge_hub": "กล่องเครื่องมือแฟนคลับ",
         "nav_tool_print": "พิมพ์โฟโต้การ์ด",
         "nav_tool_letter": "เขียนจดหมายแฟนคลับ Pro",
@@ -1456,7 +1608,7 @@
         "paper_a3_desc": "55×85 มม. • 4×4 (16 ใบ)",
         "badge_hot": "🔥 ยอดฮิต",
         "badge_na": "🔥 อเมริกา",
-        "badge_retail": "$0.15",
+        "badge_retail": "4 รูป/แผ่น",
         "badge_tour": "70×100",
         "badge_jp": "L判",
         "badge_save": "ประหยัด",
@@ -1488,8 +1640,8 @@
         "btn_apply_placeholders": "สร้างและใส่ลงในหน้าพิมพ์",
         "guide_size_title": "คู่มือขนาดโฟโต้การ์ดไอดอลและซองใสมาตรฐาน",
         "guide_size_desc": "มาตรฐานขนาดการ์ดอัลบั้ม มินิการ์ดทัวร์ รูปโบรไมด์ญี่ปุ่น และซองใสไร้กรด (Acid-Free)",
-        "guide_retail_title": "วิธีพิมพ์โฟโต้การ์ด 4 ใบบนกระดาษ 4×6 นิ้วแบบประหยัด",
-        "guide_retail_desc1": "พิมพ์ 4 การ์ดลงบนกระดาษรูปขนาด 4×6 นิ้ว ช่วยประหยัดค่าใช้จ่ายได้มากถึง 80%",
+        "guide_retail_title": "คู่มือการพิมพ์ภาพขนาด 4×6 นิ้ว (ตาราง 2×2)",
+        "guide_retail_desc1": "อ้างอิงจากขนาดกระดาษรูปมาตรฐาน 4×6 นิ้ว (ราคาขึ้นอยู่กับร้านพิมพ์ในแต่ละพื้นที่) จัดวาง 4 รูปในแผ่นเดียวเพื่อความคุ้มค่าสูงสุด",
         "guide_storage_title": "การเก็บรักษาการ์ดด้วยซองไร้กรด (Acid-Free)",
         "guide_storage_desc1": "ห้ามใช้แฟ้ม PVC ราคาถูกเพราะสารพลาสติกจะทำลายหมึกพิมพ์ ให้ใช้ซอง PP/CPP เสมอ",
         "footer_about": "เกี่ยวกับเรา",
@@ -1508,6 +1660,13 @@
         "card_label_safe": "ระยะปลอดภัย"
       },
       "ar": {
+        "nav_share": "مشاركة",
+        "share_modal_title": "🎉 جاهز للطباعة! شارك مع أصدقائك",
+        "share_modal_desc": "تم تجهيز ملف 300 DPI. أخبر أصدقاءك في الفاندوم عن هذه الأداة المجانية!",
+        "btn_share_x": "مشاركة على 𝕏 (Twitter)",
+        "btn_copy_share": "نسخ النص والرابط",
+        "btn_more_share": "خيارات مشاركة أخرى",
+        "btn_close": "إغلاق",
         "badge_hub": "أدوات الفاندوم",
         "nav_tool_print": "طباعة البطاقات",
         "nav_tool_letter": "رسائل المعجبين Pro",
@@ -1542,7 +1701,7 @@
         "paper_a3_desc": "55×85 مم • 4×4 (16 بطاقة)",
         "badge_hot": "🔥 شائع",
         "badge_na": "🔥 أمريكا",
-        "badge_retail": "$0.15",
+        "badge_retail": "4 في 1",
         "badge_tour": "70×100",
         "badge_jp": "L判",
         "badge_save": "توفير",
@@ -1574,8 +1733,8 @@
         "btn_apply_placeholders": "إنشاء وإدراج في الورقة",
         "guide_size_title": "دليل مقاسات بطاقات الفوتوكارد وأكياس الحماية",
         "guide_size_desc": "المقاسات المعتمدة لبطاقات الألبومات وبطاقات الجولات وأكياس الحفظ الخالية من الأحماض.",
-        "guide_retail_title": "كيفية طباعة 4 بطاقات بتكلفة $0.15 على ورق 4×6",
-        "guide_retail_desc1": "وفر حتى 80% من تكلفة الطباعة باستخدام نموذج 4×6 لطباعة 4 بطاقات دفعة واحدة.",
+        "guide_retail_title": "دليل طباعة ورق الصور 4×6 (شبكة 2×2)",
+        "guide_retail_desc1": "بناءً على أحجام ورق الصور القياسية 4×6 في محلات الطباعة (تختلف الأسعار حسب المنطقة). رتّب 4 بطاقات في ورقة واحدة لتوفير المساحة والتكلفة.",
         "guide_storage_title": "قواعد الحفظ الخالي من الأحماض (Acid-Free)",
         "guide_storage_desc1": "تجنب تماماً استخدام جيوب PVC الرخيصة لحماية ألوان وصور البطاقات من التلف.",
         "footer_about": "من نحن",
@@ -1594,6 +1753,13 @@
         "card_label_safe": "منطقة آمنة"
       },
       "es": {
+        "nav_share": "Compartir",
+        "share_modal_title": "🎉 ¡Listo para imprimir! Comparte con amigos",
+        "share_modal_desc": "Tu hoja de 300 DPI está lista. ¡Recomienda esta herramienta gratuita a tus amigos del fandom!",
+        "btn_share_x": "Compartir en 𝕏 (Twitter)",
+        "btn_copy_share": "Copiar texto y enlace",
+        "btn_more_share": "Más opciones de compartir",
+        "btn_close": "Cerrar",
         "badge_hub": "Herramientas de Fandom",
         "nav_tool_print": "Imprimir Photocards",
         "nav_tool_letter": "Generador de Cartas Pro",
@@ -1628,7 +1794,7 @@
         "paper_a3_desc": "55×85mm • 4×4 (16 tarjetas)",
         "badge_hot": "🔥 Popular",
         "badge_na": "🔥 USA",
-        "badge_retail": "$0.15",
+        "badge_retail": "4 en 1",
         "badge_tour": "70×100",
         "badge_jp": "L判",
         "badge_save": "Ahorro",
@@ -1660,8 +1826,8 @@
         "btn_apply_placeholders": "Generar e Insertar en Hoja",
         "guide_size_title": "Guía de Tamaños de Photocards y Fundas",
         "guide_size_desc": "Medidas estándar de álbumes, tour mini cards, bromides y fundas libres de ácido.",
-        "guide_retail_title": "Cómo Imprimir 4 Photocards por $0.15 en 4×6\"",
-        "guide_retail_desc1": "Ahorra un 80% imprimiendo 4 photocards en una sola hoja fotográfica 4×6\".",
+        "guide_retail_title": "Guía de Impresión en Papel Foto 4×6\" (Cuícula 2×2)"",
+        "guide_retail_desc1": "Basado en el tamaño estándar 4×6\" disponible en tiendas de fotografía (precios según ubicación). Coloca 4 photocards en una sola hoja para optimizar el papel.".",
         "guide_storage_title": "Reglas de Conservación Libre de Ácido (Acid-Free)",
         "guide_storage_desc1": "Nunca uses fundas de PVC baratas. Protege siempre tus cartas con fundas de PP/CPP.",
         "footer_about": "Acerca de",
@@ -2366,6 +2532,100 @@
     // ==========================================
     // [P0 & P1.1 & P1.4] 300 DPI High-Resolution PDF Export Engine
     // ==========================================
+    
+    // ==========================================
+    // Low-Friction Viral Share Engine
+    // ==========================================
+    function getShareText() {
+      const dict = i18nData[currentLang] || i18nData['en'];
+      const appUrl = 'https://stankit.vercel.app/';
+      if (currentLang === 'zh' || currentLang === 'zh-TW') {
+        return `✨ 我在 StanKit Studio 排好了 300 DPI 超清小卡排版，自带裁切线和相纸尺寸，去便利店或超市打印只要几毛钱！免费免安装神器，安利给各位追星搭子：${appUrl}`;
+      } else if (currentLang === 'ko') {
+        return `✨ StanKit Studio에서 300 DPI 초고화질 포토카드 인쇄 그리드를 무료로 만들었어요! 재단선까지 완벽해요. 추천합니다: ${appUrl}`;
+      } else if (currentLang === 'ja') {
+        return `✨ StanKit Studioで300 DPI高解像度トレカ印刷シートを無料で作成しました！コンビニ印刷にもピッタリでおすすめです: ${appUrl}`;
+      } else {
+        return `✨ I just generated a 300 DPI high-res photocard print sheet for free on StanKit Studio! Precision cut lines & 100% client-side privacy. Try it here: ${appUrl}`;
+      }
+    }
+
+    function triggerShareTool() {
+      if (navigator.share) {
+        navigator.share({
+          title: 'StanKit Studio | Photocard Print Grid Maker',
+          text: getShareText(),
+          url: 'https://stankit.vercel.app/'
+        }).catch(() => openShareModal());
+      } else {
+        openShareModal();
+      }
+    }
+
+    function openShareModal() {
+      const modal = document.getElementById('share-modal');
+      const content = document.getElementById('share-modal-content');
+      if (!modal) return;
+      modal.classList.remove('opacity-0', 'pointer-events-none');
+      modal.classList.add('opacity-100');
+      content.classList.remove('scale-95');
+      content.classList.add('scale-100');
+    }
+
+    function closeShareModal() {
+      const modal = document.getElementById('share-modal');
+      const content = document.getElementById('share-modal-content');
+      if (!modal) return;
+      modal.classList.add('opacity-0', 'pointer-events-none');
+      modal.classList.remove('opacity-100');
+      content.classList.add('scale-95');
+      content.classList.remove('scale-100');
+    }
+
+    function shareOnX() {
+      const text = encodeURIComponent(getShareText());
+      const xUrl = `https://twitter.com/intent/tweet?text=${text}`;
+      window.open(xUrl, '_blank');
+      trackGA4Event('share_click', { platform: 'twitter_x' });
+      closeShareModal();
+    }
+
+    function copyShareLink() {
+      const text = getShareText();
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(() => {
+          showToast('📋 Share text & link copied to clipboard!', '✨');
+          trackGA4Event('share_click', { platform: 'clipboard' });
+          closeShareModal();
+        });
+      } else {
+        const tempInput = document.createElement('textarea');
+        tempInput.value = text;
+        document.body.appendChild(tempInput);
+        tempInput.select();
+        document.execCommand('copy');
+        document.body.removeChild(tempInput);
+        showToast('📋 Share text & link copied to clipboard!', '✨');
+        trackGA4Event('share_click', { platform: 'clipboard_fallback' });
+        closeShareModal();
+      }
+    }
+
+    function nativeShare() {
+      if (navigator.share) {
+        navigator.share({
+          title: 'StanKit Studio',
+          text: getShareText(),
+          url: 'https://stankit.vercel.app/'
+        }).then(() => {
+          trackGA4Event('share_click', { platform: 'web_share_api' });
+          closeShareModal();
+        }).catch(() => {});
+      } else {
+        copyShareLink();
+      }
+    }
+
     function exportPDF() {
       if (uploadedImages.length === 0) {
         showToast('Please upload at least one image first!', '📷');
@@ -2463,6 +2723,7 @@
 
           savePhotocardProjectToHistory();
           showToast(dict.toast_pdf_ready || 'PDF downloaded!', '🖨️');
+          setTimeout(() => { openShareModal(); }, 1200);
           trackGA4Event('download_pdf', {
             paper_type: currentPaper,
             card_count: uploadedImages.length,
