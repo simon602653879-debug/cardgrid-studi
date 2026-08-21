@@ -155,7 +155,7 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Sans+KR:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Sans+Thai:wght@400;500;700&family=Noto+Sans+Arabic:wght@400;500;700&display=swap');
     /* Minimal critical fallbacks keep upload/edit controls usable if Tailwind CDN fails. */
-    .hidden { display: none !important; }
+    .hidden { display: none; }
     .pointer-events-none { pointer-events: none !important; }
     .opacity-0 { opacity: 0 !important; }
     .opacity-100 { opacity: 1 !important; }
@@ -269,6 +269,23 @@
     .card-cell.is-selected {
       outline: 2px solid #6366f1;
       outline-offset: 2px;
+    }
+    .card-cell.has-image {
+      touch-action: pan-y;
+    }
+    .card-cell.has-image.is-selected {
+      cursor: grab;
+      touch-action: none;
+    }
+    .card-cell.is-panning {
+      cursor: grabbing !important;
+    }
+    .card-cell.is-selected .card-action-overlay {
+      background: transparent !important;
+      backdrop-filter: none !important;
+    }
+    .card-cell.is-selected .card-hover-hint {
+      opacity: 0;
     }
     @media (hover: hover) {
       .card-cell.is-selected .card-action-overlay {
@@ -646,12 +663,21 @@
 
         <div id="mobile-card-toolbar" class="hidden rounded-xl border border-indigo-200 bg-indigo-50/80 p-3" aria-live="polite">
           <div id="selected-card-label" class="mb-2 text-center text-xs font-extrabold text-indigo-900">Card 1 selected</div>
+          <div class="mb-3 rounded-lg border border-indigo-100 bg-white p-3">
+            <div class="mb-1.5 flex items-center justify-between text-xs font-bold text-indigo-900">
+              <label for="selected-card-zoom" data-i18n="card_zoom">Zoom</label>
+              <span id="selected-card-zoom-value" class="tabular-nums">100%</span>
+            </div>
+            <input id="selected-card-zoom" type="range" min="100" max="300" step="5" value="100" class="w-full accent-indigo-600" oninput="setSelectedCardZoom(this.value)" onchange="commitSelectedCardZoom()" data-i18n-aria-label="card_zoom" aria-label="Zoom" />
+            <p class="mt-1.5 text-[11px] leading-relaxed text-indigo-700" data-i18n="card_pan_help">Drag the selected photo to reposition it. Use the slider or mouse wheel to zoom.</p>
+          </div>
           <div class="grid grid-cols-2 gap-2">
             <button type="button" onclick="runSelectedCardAction('replace')" class="col-span-2 min-h-11 rounded-lg bg-white border border-indigo-200 px-2 py-2 text-xs font-bold text-indigo-800 flex items-center justify-center gap-1" data-i18n-aria-label="card_replace"><span aria-hidden="true">📷</span><span data-i18n="card_replace">Replace photo</span></button>
             <button type="button" id="mobile-move-earlier" onclick="runSelectedCardAction('earlier')" class="min-h-11 rounded-lg bg-white border border-indigo-200 px-2 py-2 text-xs font-bold text-indigo-800 flex items-center justify-center gap-1" data-i18n-aria-label="card_move_earlier"><span aria-hidden="true">←</span><span data-i18n="card_move_earlier">Move earlier</span></button>
             <button type="button" id="mobile-move-later" onclick="runSelectedCardAction('later')" class="min-h-11 rounded-lg bg-white border border-indigo-200 px-2 py-2 text-xs font-bold text-indigo-800 flex items-center justify-center gap-1" data-i18n-aria-label="card_move_later"><span data-i18n="card_move_later">Move later</span><span aria-hidden="true">→</span></button>
             <button type="button" onclick="runSelectedCardAction('rotate')" class="min-h-11 rounded-lg bg-indigo-600 px-2 py-2 text-xs font-bold text-white flex items-center justify-center gap-1" data-i18n-aria-label="card_label_rotate"><span aria-hidden="true">↻</span><span data-i18n="card_label_rotate">Rotate 90°</span></button>
             <button type="button" onclick="runSelectedCardAction('delete')" class="min-h-11 rounded-lg bg-rose-600 px-2 py-2 text-xs font-bold text-white flex items-center justify-center gap-1" data-i18n-aria-label="card_label_delete"><span aria-hidden="true">✕</span><span data-i18n="card_label_delete">Delete this card</span></button>
+            <button type="button" onclick="runSelectedCardAction('resetCrop')" class="col-span-2 min-h-11 rounded-lg border border-indigo-200 bg-white px-2 py-2 text-xs font-bold text-indigo-800 flex items-center justify-center gap-1" data-i18n-aria-label="card_reset_crop"><span aria-hidden="true">◎</span><span data-i18n="card_reset_crop">Reset position &amp; zoom</span></button>
           </div>
         </div>
 
@@ -999,7 +1025,7 @@
     let currentCutLine = true;
     let currentSafeArea = true;
     let currentFitMode = 'cover';
-    let uploadedImages = []; // Array of { src, img, id, rotation, dpi, objectUrl }
+    let uploadedImages = []; // Array of { src, img, id, rotation, dpi, objectUrl, offsetX, offsetY, zoom }
     let currentLang = 'en';
     let draggedIndex = null;
     let targetUploadSlot = null;
@@ -1008,6 +1034,10 @@
     let selectedCardIndex = null;
     let uploadInProgress = false;
     let exportInProgress = false;
+    let imagePanState = null;
+    const MIN_IMAGE_ZOOM = 1;
+    const MAX_IMAGE_ZOOM = 3;
+    const IMAGE_ZOOM_STEP = 0.05;
 
     // ==========================================
     // Accurate Physical Specifications [P0 & Research-Driven Formats]
@@ -1123,16 +1153,52 @@
       }
     }
 
-    function getImageDrawSize(img, targetW, targetH, rotation = 0, fitMode = currentFitMode) {
+    function clampNumber(value, min, max) {
+      return Math.min(max, Math.max(min, Number(value) || 0));
+    }
+
+    function normalizeImageTransform(item) {
+      if (!item) return;
+      item.zoom = clampNumber(item.zoom || MIN_IMAGE_ZOOM, MIN_IMAGE_ZOOM, MAX_IMAGE_ZOOM);
+      item.offsetX = Number.isFinite(Number(item.offsetX)) ? Number(item.offsetX) : 0;
+      item.offsetY = Number.isFinite(Number(item.offsetY)) ? Number(item.offsetY) : 0;
+    }
+
+    function getImageDrawSize(img, targetW, targetH, rotation = 0, fitMode = currentFitMode, zoom = MIN_IMAGE_ZOOM) {
       const isSideways = rotation === 90 || rotation === 270;
       const rotatedTargetW = isSideways ? targetH : targetW;
       const rotatedTargetH = isSideways ? targetW : targetH;
       const widthRatio = rotatedTargetW / img.width;
       const heightRatio = rotatedTargetH / img.height;
-      const ratio = fitMode === 'contain' ? Math.min(widthRatio, heightRatio) : Math.max(widthRatio, heightRatio);
+      const baseRatio = fitMode === 'contain' ? Math.min(widthRatio, heightRatio) : Math.max(widthRatio, heightRatio);
+      const ratio = baseRatio * clampNumber(zoom, MIN_IMAGE_ZOOM, MAX_IMAGE_ZOOM);
       return {
         width: img.width * ratio,
         height: img.height * ratio
+      };
+    }
+
+    function getImagePlacement(item, targetW, targetH, fitMode = currentFitMode) {
+      normalizeImageTransform(item);
+      const rotation = item.rotation || 0;
+      const drawSize = getImageDrawSize(item.img, targetW, targetH, rotation, fitMode, item.zoom);
+      const isSideways = rotation === 90 || rotation === 270;
+      const visualW = isSideways ? drawSize.height : drawSize.width;
+      const visualH = isSideways ? drawSize.width : drawSize.height;
+      const maxOffsetXPx = Math.max(0, (visualW - targetW) / 2);
+      const maxOffsetYPx = Math.max(0, (visualH - targetH) / 2);
+      const maxOffsetX = targetW ? maxOffsetXPx / targetW : 0;
+      const maxOffsetY = targetH ? maxOffsetYPx / targetH : 0;
+
+      item.offsetX = clampNumber(item.offsetX, -maxOffsetX, maxOffsetX);
+      item.offsetY = clampNumber(item.offsetY, -maxOffsetY, maxOffsetY);
+
+      return {
+        drawSize,
+        offsetXPx: item.offsetX * targetW,
+        offsetYPx: item.offsetY * targetH,
+        maxOffsetX,
+        maxOffsetY
       };
     }
 
@@ -2727,7 +2793,11 @@
         toast_share_error: "Sharing failed. Please copy the page address from your browser.",
         toast_pdf_library_error: "PDF export is unavailable because the PDF library did not load. Reload the page and try again.",
         toast_pdf_error: "PDF export failed. Try fewer images or reload the page.",
-        tip_interactive: "Drag to reorder. On phones, tap a card for large move, rotate and delete controls."
+        card_zoom: "Zoom",
+        card_reset_crop: "Reset position & zoom",
+        card_pan_help: "Drag the selected photo to reposition it. Use the slider or mouse wheel to zoom.",
+        card_reorder_handle: "Drag handle to reorder card",
+        tip_interactive: "Tap a card, then drag the photo to reposition it. Use the slider or mouse wheel to zoom; use ⋮⋮ to reorder."
       },
       zh: {
         opt_safe_area: "显示 2mm 安全区（仅预览）",
@@ -2749,7 +2819,11 @@
         toast_share_error: "分享失败，请从浏览器地址栏复制页面链接。",
         toast_pdf_library_error: "PDF 组件加载失败，暂时无法导出。请刷新页面后重试。",
         toast_pdf_error: "PDF 导出失败，请减少图片数量或刷新页面后重试。",
-        tip_interactive: "拖动可排序；手机上点选小卡后，可用大按钮移动、旋转或删除。"
+        card_zoom: "图片缩放",
+        card_reset_crop: "重置位置与缩放",
+        card_pan_help: "拖动已选中的照片可调整构图；滑块或鼠标滚轮可缩放。",
+        card_reorder_handle: "拖动此处调整小卡顺序",
+        tip_interactive: "点选小卡后拖动照片调整构图；用滑块或滚轮缩放，用 ⋮⋮ 调整顺序。"
       },
       "zh-TW": {
         opt_safe_area: "顯示 2mm 安全區（僅預覽）",
@@ -2771,7 +2845,11 @@
         toast_share_error: "分享失敗，請從瀏覽器網址列複製頁面連結。",
         toast_pdf_library_error: "PDF 元件載入失敗，暫時無法匯出。請重新整理頁面後再試。",
         toast_pdf_error: "PDF 匯出失敗，請減少圖片數量或重新整理頁面後再試。",
-        tip_interactive: "拖曳可排序；手機上點選小卡後，可用大按鈕移動、旋轉或刪除。"
+        card_zoom: "圖片縮放",
+        card_reset_crop: "重設位置與縮放",
+        card_pan_help: "拖曳已選取的照片可調整構圖；滑桿或滑鼠滾輪可縮放。",
+        card_reorder_handle: "拖曳此處調整小卡順序",
+        tip_interactive: "點選小卡後拖曳照片調整構圖；用滑桿或滾輪縮放，用 ⋮⋮ 調整順序。"
       },
       ko: {
         opt_safe_area: "2mm 안전 영역 표시 (미리보기 전용)",
@@ -2793,7 +2871,11 @@
         toast_share_error: "공유에 실패했습니다. 브라우저 주소 표시줄에서 링크를 복사해 주세요.",
         toast_pdf_library_error: "PDF 구성 요소를 불러오지 못해 내보낼 수 없습니다. 페이지를 새로고침해 주세요.",
         toast_pdf_error: "PDF 내보내기에 실패했습니다. 이미지 수를 줄이거나 페이지를 새로고침해 주세요.",
-        tip_interactive: "드래그로 순서를 바꿉니다. 휴대폰에서는 카드를 탭해 큰 이동·회전·삭제 버튼을 사용하세요."
+        card_zoom: "사진 확대/축소",
+        card_reset_crop: "위치와 확대 초기화",
+        card_pan_help: "선택한 사진을 드래그해 구도를 조정하세요. 슬라이더나 마우스 휠로 확대할 수 있습니다.",
+        card_reorder_handle: "카드 순서 변경 핸들",
+        tip_interactive: "카드를 선택한 뒤 사진을 드래그해 구도를 조정하세요. 슬라이더·휠로 확대하고 ⋮⋮로 순서를 바꿉니다."
       },
       ja: {
         opt_safe_area: "2mm安全エリアを表示（プレビューのみ）",
@@ -2815,7 +2897,11 @@
         toast_share_error: "共有に失敗しました。ブラウザーのアドレス欄からリンクをコピーしてください。",
         toast_pdf_library_error: "PDF機能を読み込めないため書き出せません。ページを再読み込みしてください。",
         toast_pdf_error: "PDFの書き出しに失敗しました。画像を減らすかページを再読み込みしてください。",
-        tip_interactive: "ドラッグで並べ替え。スマホではカードをタップし、大きな移動・回転・削除ボタンを使えます。"
+        card_zoom: "写真のズーム",
+        card_reset_crop: "位置とズームをリセット",
+        card_pan_help: "選択した写真をドラッグして構図を調整します。スライダーまたはマウスホイールでズームできます。",
+        card_reorder_handle: "カード並べ替えハンドル",
+        tip_interactive: "カードを選び、写真をドラッグして構図を調整。スライダー・ホイールでズームし、⋮⋮で並べ替えます。"
       },
       id: {
         opt_safe_area: "Tampilkan area aman 2mm (hanya pratinjau)",
@@ -2837,7 +2923,11 @@
         toast_share_error: "Berbagi gagal. Salin alamat halaman dari browser.",
         toast_pdf_library_error: "Ekspor PDF tidak tersedia karena komponen PDF gagal dimuat. Muat ulang halaman.",
         toast_pdf_error: "Ekspor PDF gagal. Kurangi gambar atau muat ulang halaman.",
-        tip_interactive: "Seret untuk mengurutkan. Di ponsel, ketuk kartu untuk tombol pindah, putar, dan hapus yang besar."
+        card_zoom: "Perbesar foto",
+        card_reset_crop: "Atur ulang posisi & zoom",
+        card_pan_help: "Seret foto yang dipilih untuk mengatur komposisi. Gunakan slider atau roda mouse untuk zoom.",
+        card_reorder_handle: "Pegangan untuk mengurutkan kartu",
+        tip_interactive: "Pilih kartu lalu seret foto untuk mengatur komposisi. Zoom dengan slider atau roda mouse; urutkan lewat ⋮⋮."
       },
       ms: {
         opt_safe_area: "Tunjuk kawasan selamat 2mm (pratonton sahaja)",
@@ -2859,7 +2949,11 @@
         toast_share_error: "Perkongsian gagal. Salin alamat halaman daripada pelayar.",
         toast_pdf_library_error: "Eksport PDF tidak tersedia kerana komponen PDF gagal dimuatkan. Muat semula halaman.",
         toast_pdf_error: "Eksport PDF gagal. Kurangkan imej atau muat semula halaman.",
-        tip_interactive: "Seret untuk menyusun. Pada telefon, ketik kad untuk butang pindah, putar dan padam yang besar."
+        card_zoom: "Zum foto",
+        card_reset_crop: "Tetapkan semula posisi & zum",
+        card_pan_help: "Seret foto yang dipilih untuk melaras komposisi. Gunakan peluncur atau roda tetikus untuk zum.",
+        card_reorder_handle: "Pemegang untuk menyusun kad",
+        tip_interactive: "Pilih kad lalu seret foto untuk melaras komposisi. Zum dengan peluncur atau roda tetikus; susun melalui ⋮⋮."
       },
       th: {
         opt_safe_area: "แสดงพื้นที่ปลอดภัย 2 มม. (เฉพาะตัวอย่าง)",
@@ -2881,7 +2975,11 @@
         toast_share_error: "แชร์ไม่สำเร็จ โปรดคัดลอกที่อยู่หน้าจากแถบที่อยู่ของเบราว์เซอร์",
         toast_pdf_library_error: "ส่งออก PDF ไม่ได้เพราะโหลดส่วนประกอบ PDF ไม่สำเร็จ โปรดรีเฟรชหน้า",
         toast_pdf_error: "ส่งออก PDF ไม่สำเร็จ โปรดลดจำนวนรูปหรือรีเฟรชหน้า",
-        tip_interactive: "ลากเพื่อเรียงลำดับ บนโทรศัพท์ให้แตะการ์ดเพื่อใช้ปุ่มย้าย หมุน และลบขนาดใหญ่"
+        card_zoom: "ซูมรูป",
+        card_reset_crop: "รีเซ็ตตำแหน่งและการซูม",
+        card_pan_help: "ลากรูปที่เลือกเพื่อปรับองค์ประกอบ ใช้แถบเลื่อนหรือล้อเมาส์เพื่อซูม",
+        card_reorder_handle: "จุดลากเพื่อเรียงลำดับการ์ด",
+        tip_interactive: "เลือกการ์ดแล้วลากรูปเพื่อปรับองค์ประกอบ ซูมด้วยแถบเลื่อนหรือล้อเมาส์ และใช้ ⋮⋮ เพื่อเรียงลำดับ"
       },
       ar: {
         opt_safe_area: "إظهار منطقة الأمان 2 مم (للمعاينة فقط)",
@@ -2903,7 +3001,11 @@
         toast_share_error: "فشلت المشاركة. انسخ عنوان الصفحة من شريط المتصفح.",
         toast_pdf_library_error: "تصدير PDF غير متاح لأن مكوّن PDF لم يُحمّل. أعد تحميل الصفحة.",
         toast_pdf_error: "فشل تصدير PDF. قلّل عدد الصور أو أعد تحميل الصفحة.",
-        tip_interactive: "اسحب لإعادة الترتيب. على الهاتف، اضغط البطاقة لاستخدام أزرار النقل والتدوير والحذف الكبيرة."
+        card_zoom: "تكبير الصورة",
+        card_reset_crop: "إعادة ضبط الموضع والتكبير",
+        card_pan_help: "اسحب الصورة المحددة لضبط التكوين. استخدم شريط التمرير أو عجلة الفأرة للتكبير.",
+        card_reorder_handle: "مقبض سحب لإعادة ترتيب البطاقة",
+        tip_interactive: "حدد بطاقة ثم اسحب الصورة لضبط التكوين. كبّر بالشريط أو عجلة الفأرة، ورتّب باستخدام ⋮⋮."
       },
       es: {
         opt_safe_area: "Mostrar zona segura de 2mm (solo vista previa)",
@@ -2925,7 +3027,11 @@
         toast_share_error: "No se pudo compartir. Copia la dirección de la página desde el navegador.",
         toast_pdf_library_error: "La exportación PDF no está disponible porque no se cargó el componente PDF. Recarga la página.",
         toast_pdf_error: "No se pudo exportar el PDF. Reduce las imágenes o recarga la página.",
-        tip_interactive: "Arrastra para ordenar. En el móvil, toca una tarjeta para usar botones grandes de mover, girar y borrar."
+        card_zoom: "Zoom de la foto",
+        card_reset_crop: "Restablecer posición y zoom",
+        card_pan_help: "Arrastra la foto seleccionada para ajustar el encuadre. Usa el control o la rueda del ratón para ampliar.",
+        card_reorder_handle: "Control para reordenar la tarjeta",
+        tip_interactive: "Selecciona una tarjeta y arrastra la foto para encuadrar. Amplía con el control o la rueda; reordena con ⋮⋮."
       }
     };
     Object.entries(printFlowI18n).forEach(([lang, values]) => Object.assign(i18nData[lang], values));
@@ -3115,14 +3221,14 @@
       if (fileInput) fileInput.click();
     }
 
-    function calculateImageDPI(img, spec, rotation = 0) {
+    function calculateImageDPI(img, spec, rotation = 0, zoom = MIN_IMAGE_ZOOM) {
       if (!img || !img.width || !img.height) return 300;
       const isSideways = rotation === 90 || rotation === 270;
       const targetWmm = isSideways ? spec.cardH_mm : spec.cardW_mm;
       const targetHmm = isSideways ? spec.cardW_mm : spec.cardH_mm;
       const dpiX = (img.width / targetWmm) * 25.4;
       const dpiY = (img.height / targetHmm) * 25.4;
-      return Math.round(Math.min(dpiX, dpiY));
+      return Math.round(Math.min(dpiX, dpiY) / clampNumber(zoom, MIN_IMAGE_ZOOM, MAX_IMAGE_ZOOM));
     }
 
     const SUPPORTED_IMAGE_TYPES = new Set(['image/jpeg', 'image/png', 'image/webp']);
@@ -3228,6 +3334,9 @@
           img,
           id: 'img_' + Math.random().toString(36).slice(2, 11),
           rotation: 0,
+          offsetX: 0,
+          offsetY: 0,
+          zoom: MIN_IMAGE_ZOOM,
           dpi: calculateImageDPI(img, spec, 0),
           objectUrl: true
         };
@@ -3416,6 +3525,8 @@
       const label = document.getElementById('selected-card-label');
       const earlier = document.getElementById('mobile-move-earlier');
       const later = document.getElementById('mobile-move-later');
+      const zoomSlider = document.getElementById('selected-card-zoom');
+      const zoomValue = document.getElementById('selected-card-zoom-value');
       if (!toolbar) return;
 
       const hasSelection = Number.isInteger(selectedCardIndex) && selectedCardIndex >= 0 && selectedCardIndex < uploadedImages.length;
@@ -3423,9 +3534,62 @@
       if (!hasSelection) return;
 
       const dict = i18nData[currentLang] || i18nData.en;
+      const item = uploadedImages[selectedCardIndex];
+      normalizeImageTransform(item);
       if (label) label.innerText = `${selectedCardIndex + 1} · ${dict.card_selected || 'selected'}`;
       if (earlier) earlier.disabled = selectedCardIndex <= 0;
       if (later) later.disabled = selectedCardIndex >= uploadedImages.length - 1;
+      if (zoomSlider) zoomSlider.value = String(Math.round(item.zoom * 100));
+      if (zoomValue) zoomValue.innerText = `${Math.round(item.zoom * 100)}%`;
+    }
+
+    function updateCardImagePreview(index) {
+      const item = uploadedImages[index];
+      const cell = document.querySelector(`#card-grid .card-cell[data-index="${index}"]`);
+      const photo = cell ? cell.querySelector('.card-photo') : null;
+      if (!item || !cell || !photo) return;
+
+      const rect = cell.getBoundingClientRect();
+      const placement = getImagePlacement(item, rect.width, rect.height, currentFitMode);
+      photo.style.left = `${rect.width / 2 + placement.offsetXPx}px`;
+      photo.style.top = `${rect.height / 2 + placement.offsetYPx}px`;
+      photo.style.width = `${placement.drawSize.width}px`;
+      photo.style.height = `${placement.drawSize.height}px`;
+      photo.style.transform = `translate(-50%,-50%) rotate(${item.rotation || 0}deg)`;
+      const spec = paperSpecs[currentPaper] || paperSpecs.a4;
+      const dpi = calculateImageDPI(item.img, spec, item.rotation || 0, item.zoom);
+      item.dpi = dpi;
+      const dpiText = dpi < 180 ? `🔴 ${dpi} DPI (Low)` : dpi < 280 ? `🟡 ${dpi} DPI` : `🟢 ${dpi} DPI`;
+      const dpiClasses = dpi < 180 ? ['bg-rose-500', 'animate-pulse'] : dpi < 280 ? ['bg-amber-500'] : ['bg-emerald-500'];
+      cell.querySelectorAll('.card-dpi-badge').forEach(badge => {
+        badge.innerText = dpiText;
+        badge.classList.remove('bg-rose-500', 'bg-amber-500', 'bg-emerald-500', 'animate-pulse');
+        badge.classList.add(...dpiClasses);
+      });
+      cell.setAttribute('aria-label', `Card ${index + 1}, ${spec.cardW_mm}×${spec.cardH_mm}mm, ${dpi} DPI`);
+      cell.setAttribute('title', `Card #${index + 1} (${spec.cardW_mm}×${spec.cardH_mm}mm, ${dpi} DPI)`);
+      if (selectedCardIndex === index) updateMobileCardToolbar();
+    }
+
+    function setSelectedCardZoom(value) {
+      if (!Number.isInteger(selectedCardIndex) || !uploadedImages[selectedCardIndex]) return;
+      uploadedImages[selectedCardIndex].zoom = clampNumber(Number(value) / 100, MIN_IMAGE_ZOOM, MAX_IMAGE_ZOOM);
+      updateCardImagePreview(selectedCardIndex);
+    }
+
+    function commitSelectedCardZoom() {
+      if (!Number.isInteger(selectedCardIndex) || !uploadedImages[selectedCardIndex]) return;
+      trackGA4Event('layout_edit', { action: 'zoom', value: Math.round(uploadedImages[selectedCardIndex].zoom * 100) });
+    }
+
+    function resetSelectedCardCrop() {
+      if (!Number.isInteger(selectedCardIndex) || !uploadedImages[selectedCardIndex]) return;
+      const item = uploadedImages[selectedCardIndex];
+      item.offsetX = 0;
+      item.offsetY = 0;
+      item.zoom = MIN_IMAGE_ZOOM;
+      updateCardImagePreview(selectedCardIndex);
+      trackGA4Event('layout_edit', { action: 'reset_crop' });
     }
 
     function runSelectedCardAction(action) {
@@ -3435,6 +3599,7 @@
       else if (action === 'later') moveCard(selectedCardIndex, 1);
       else if (action === 'rotate') rotateCard(selectedCardIndex);
       else if (action === 'delete') deleteCard(selectedCardIndex);
+      else if (action === 'resetCrop') resetSelectedCardCrop();
     }
 
     // ==========================================
@@ -3462,10 +3627,15 @@
     }
 
     function onDragStart(e) {
-      draggedIndex = parseInt(e.currentTarget.dataset.index, 10);
+      const cell = e.currentTarget.closest('.card-cell');
+      draggedIndex = cell ? parseInt(cell.dataset.index, 10) : null;
+      if (!Number.isInteger(draggedIndex)) {
+        e.preventDefault();
+        return;
+      }
       e.dataTransfer.effectAllowed = 'move';
       e.dataTransfer.setData('text/plain', String(draggedIndex));
-      e.currentTarget.classList.add('is-dragging');
+      cell.classList.add('is-dragging');
     }
 
     function onDragEnd(e) {
@@ -3494,79 +3664,69 @@
       reorderCards(draggedIndex, targetIndex);
     }
 
-    // Mobile touch drag uses a short hold so normal vertical page scrolling stays available.
-    let touchSourceIndex = null;
-    let touchMoved = false;
-    let touchDragActive = false;
-    let touchHoldTimer = null;
-    let touchStartX = 0;
-    let touchStartY = 0;
-    let touchSourceCell = null;
     let suppressCardClickUntil = 0;
 
-    function clearTouchDragState() {
-      if (touchHoldTimer) clearTimeout(touchHoldTimer);
-      touchHoldTimer = null;
-      touchSourceIndex = null;
-      touchMoved = false;
-      touchDragActive = false;
-      if (touchSourceCell) touchSourceCell.classList.remove('touch-drag-active', 'is-dragging');
-      touchSourceCell = null;
-      document.querySelectorAll('.card-cell.is-drag-over').forEach(el => el.classList.remove('is-drag-over'));
-    }
+    function startImagePan(index, e) {
+      if (!uploadedImages[index] || e.target.closest('button, input, .card-reorder-handle')) return;
+      if (e.pointerType === 'mouse' && e.button !== 0) return;
 
-    function onTouchStart(e) {
-      if (e.touches.length !== 1 || e.target.closest('button')) return;
-      touchSourceIndex = parseInt(e.currentTarget.dataset.index, 10);
-      touchMoved = false;
-      touchDragActive = false;
-      touchSourceCell = e.currentTarget;
-      touchStartX = e.touches[0].clientX;
-      touchStartY = e.touches[0].clientY;
-      touchHoldTimer = setTimeout(() => {
-        if (touchSourceIndex === null || !touchSourceCell) return;
-        touchDragActive = true;
-        touchSourceCell.classList.add('touch-drag-active', 'is-dragging');
-      }, 260);
-    }
+      const wasSelected = selectedCardIndex === index;
+      selectCard(index);
+      // On touch, the first tap selects without blocking normal page scrolling.
+      if (e.pointerType === 'touch' && !wasSelected) return;
 
-    function onTouchMove(e) {
-      if (touchSourceIndex === null || e.touches.length !== 1) return;
-      const touch = e.touches[0];
-      const distance = Math.hypot(touch.clientX - touchStartX, touch.clientY - touchStartY);
-      if (!touchDragActive) {
-        if (distance > 10) clearTouchDragState();
-        return;
-      }
+      const cell = e.currentTarget;
+      const item = uploadedImages[index];
+      normalizeImageTransform(item);
+      imagePanState = {
+        pointerId: e.pointerId,
+        index,
+        cell,
+        startX: e.clientX,
+        startY: e.clientY,
+        startOffsetX: item.offsetX,
+        startOffsetY: item.offsetY,
+        moved: false
+      };
+      cell.classList.add('is-panning');
+      try { cell.setPointerCapture(e.pointerId); } catch (error) {}
       e.preventDefault();
-      touchMoved = true;
-      document.querySelectorAll('.card-cell.is-drag-over').forEach(el => el.classList.remove('is-drag-over'));
-      const targetElement = document.elementFromPoint(touch.clientX, touch.clientY);
-      const cardCell = targetElement ? targetElement.closest('.card-cell') : null;
-      if (cardCell && cardCell !== touchSourceCell) cardCell.classList.add('is-drag-over');
     }
 
-    function onTouchEnd(e) {
-      if (touchHoldTimer) clearTimeout(touchHoldTimer);
-      touchHoldTimer = null;
-      if (!touchDragActive || !touchMoved || touchSourceIndex === null) {
-        clearTouchDragState();
-        return;
-      }
+    function moveImagePan(e) {
+      if (!imagePanState || imagePanState.pointerId !== e.pointerId) return;
+      const { index, cell } = imagePanState;
+      const item = uploadedImages[index];
+      if (!item) return;
+      const rect = cell.getBoundingClientRect();
+      const dx = e.clientX - imagePanState.startX;
+      const dy = e.clientY - imagePanState.startY;
+      if (Math.hypot(dx, dy) > 2) imagePanState.moved = true;
+      item.offsetX = imagePanState.startOffsetX + dx / rect.width;
+      item.offsetY = imagePanState.startOffsetY + dy / rect.height;
+      updateCardImagePreview(index);
       e.preventDefault();
-      const touch = e.changedTouches[0];
-      const targetElement = document.elementFromPoint(touch.clientX, touch.clientY);
-      const cardCell = targetElement ? targetElement.closest('.card-cell') : null;
-      if (cardCell && cardCell.dataset.index !== undefined) {
-        const targetIndex = parseInt(cardCell.dataset.index, 10);
-        reorderCards(touchSourceIndex, targetIndex);
-      }
-      suppressCardClickUntil = Date.now() + 450;
-      clearTouchDragState();
     }
 
-    function onTouchCancel() {
-      clearTouchDragState();
+    function endImagePan(e) {
+      if (!imagePanState || imagePanState.pointerId !== e.pointerId) return;
+      const { index, cell, moved } = imagePanState;
+      cell.classList.remove('is-panning');
+      try { cell.releasePointerCapture(e.pointerId); } catch (error) {}
+      imagePanState = null;
+      if (moved) {
+        suppressCardClickUntil = Date.now() + 350;
+        trackGA4Event('layout_edit', { action: 'pan', card: index + 1 });
+      }
+    }
+
+    function onCardWheel(index, e) {
+      if (selectedCardIndex !== index || !uploadedImages[index]) return;
+      e.preventDefault();
+      const direction = e.deltaY < 0 ? 1 : -1;
+      const nextZoom = uploadedImages[index].zoom + direction * IMAGE_ZOOM_STEP;
+      uploadedImages[index].zoom = clampNumber(nextZoom, MIN_IMAGE_ZOOM, MAX_IMAGE_ZOOM);
+      updateCardImagePreview(index);
     }
 
     // ==========================================
@@ -3612,9 +3772,9 @@
         if (hasImage) {
           const item = uploadedImages[globalIndex];
           const rotation = item.rotation || 0;
-          const currentDPI = calculateImageDPI(item.img, spec, rotation);
+          const currentDPI = calculateImageDPI(item.img, spec, rotation, item.zoom || MIN_IMAGE_ZOOM);
           item.dpi = currentDPI;
-          const drawSize = getImageDrawSize(item.img, layout.cardW_px, layout.cardH_px, rotation, currentFitMode);
+          const placement = getImagePlacement(item, layout.cardW_px, layout.cardH_px, currentFitMode);
 
           let dpiBadgeClass = 'bg-emerald-500 text-white';
           let dpiBadgeText = `🟢 ${currentDPI} DPI`;
@@ -3626,8 +3786,7 @@
             dpiBadgeText = `🟡 ${currentDPI} DPI`;
           }
 
-          cell.classList.add('bg-white');
-          cell.setAttribute('draggable', 'true');
+          cell.classList.add('bg-white', 'has-image');
           cell.setAttribute('tabindex', '0');
           cell.setAttribute('role', 'group');
           cell.setAttribute('aria-label', `Card ${globalIndex + 1}, ${spec.cardW_mm}×${spec.cardH_mm}mm, ${currentDPI} DPI`);
@@ -3657,7 +3816,7 @@
 
           cell.innerHTML = `
             <!-- Photo uses the same center/rotation/crop math as PDF export. -->
-            <img src="${item.src}" alt="Card ${globalIndex + 1}" style="position:absolute;left:50%;top:50%;width:${drawSize.width}px;height:${drawSize.height}px;max-width:none;max-height:none;transform:translate(-50%,-50%) rotate(${rotation}deg);transform-origin:center;" class="block pointer-events-none transition-transform duration-200" />
+            <img src="${item.src}" alt="Card ${globalIndex + 1}" style="position:absolute;left:${layout.cardW_px / 2 + placement.offsetXPx}px;top:${layout.cardH_px / 2 + placement.offsetYPx}px;width:${placement.drawSize.width}px;height:${placement.drawSize.height}px;max-width:none;max-height:none;transform:translate(-50%,-50%) rotate(${rotation}deg);transform-origin:center;" class="card-photo block pointer-events-none" />
             
             <!-- Scissor Cut Lines Overlay [P0] -->
             <div class="absolute inset-0 ${cutBorderClass} pointer-events-none z-10" style="border-radius: ${layout.cornerR_px}px;"></div>
@@ -3669,7 +3828,7 @@
 
             <!-- Bottom Left DPI Health Badge -->
             <div class="absolute bottom-1 left-1 z-20 pointer-events-none group-hover:opacity-0 transition-opacity">
-              <span class="text-[8px] font-extrabold px-1.5 py-0.2 rounded-full shadow-xs backdrop-blur-xs ${dpiBadgeClass}">
+              <span class="card-dpi-badge text-[8px] font-extrabold px-1.5 py-0.2 rounded-full shadow-xs backdrop-blur-xs ${dpiBadgeClass}">
                 ${dpiBadgeText}
               </span>
             </div>
@@ -3684,7 +3843,7 @@
             <!-- Hover Action Overlay -->
             <div class="card-action-overlay absolute inset-0 bg-slate-950/45 backdrop-blur-[1px] opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity duration-150 flex flex-col justify-between p-1.5 z-20" style="border-radius: ${layout.cornerR_px}px;">
               <div class="flex items-center justify-between w-full">
-                <span class="bg-slate-900/90 text-white text-[9px] font-extrabold px-1.5 py-0.5 rounded shadow-xs flex items-center space-x-0.5 cursor-grab active:cursor-grabbing">
+                <span draggable="true" title="${dict.card_reorder_handle || 'Drag handle to reorder card'}" aria-label="${dict.card_reorder_handle || 'Drag handle to reorder card'}" class="card-reorder-handle bg-slate-900/90 text-white text-[9px] font-extrabold px-1.5 py-0.5 rounded shadow-xs flex items-center space-x-0.5 cursor-grab active:cursor-grabbing">
                   <span>⋮⋮</span>
                   <span>#${globalIndex + 1}</span>
                 </span>
@@ -3708,15 +3867,15 @@
               </div>
 
               <!-- Center Move & DPI Status Hint -->
-              <div class="my-auto text-center pointer-events-none space-y-1">
+              <div class="card-hover-hint my-auto text-center pointer-events-none space-y-1 transition-opacity">
                 <div>
                   <span class="bg-slate-900/85 text-white text-[9px] font-extrabold px-2 py-0.5 rounded-full shadow-xs backdrop-blur-xs inline-flex items-center space-x-1">
                     <span>↕️</span>
-                    <span>${dict.card_label_drag || 'Drag to swap'}</span>
+                    <span>${dict.card_pan_help || 'Drag the selected photo to reposition it.'}</span>
                   </span>
                 </div>
                 <div>
-                  <span class="text-[8px] font-extrabold px-2 py-0.5 rounded-full shadow-xs ${dpiBadgeClass}">
+                  <span class="card-dpi-badge text-[8px] font-extrabold px-2 py-0.5 rounded-full shadow-xs ${dpiBadgeClass}">
                     ${dpiBadgeText}
                   </span>
                 </div>
@@ -3725,15 +3884,19 @@
             </div>
           `;
 
-          cell.addEventListener('dragstart', onDragStart);
-          cell.addEventListener('dragend', onDragEnd);
+          const reorderHandle = cell.querySelector('.card-reorder-handle');
+          if (reorderHandle) {
+            reorderHandle.addEventListener('dragstart', onDragStart);
+            reorderHandle.addEventListener('dragend', onDragEnd);
+          }
           cell.addEventListener('dragover', onDragOver);
           cell.addEventListener('dragleave', onDragLeave);
           cell.addEventListener('drop', onDrop);
-          cell.addEventListener('touchstart', onTouchStart, { passive: true });
-          cell.addEventListener('touchmove', onTouchMove, { passive: false });
-          cell.addEventListener('touchend', onTouchEnd, { passive: false });
-          cell.addEventListener('touchcancel', onTouchCancel, { passive: true });
+          cell.addEventListener('pointerdown', event => startImagePan(globalIndex, event));
+          cell.addEventListener('pointermove', moveImagePan);
+          cell.addEventListener('pointerup', endImagePan);
+          cell.addEventListener('pointercancel', endImagePan);
+          cell.addEventListener('wheel', event => onCardWheel(globalIndex, event), { passive: false });
 
         } else {
           cell.classList.add('bg-slate-50/50', 'hover:bg-indigo-50/60', 'hover:border-indigo-400');
@@ -4192,7 +4355,13 @@
       const spec = paperSpecs[exportPaper] || paperSpecs.a4;
       const exportCutLine = currentCutLine;
       const exportFitMode = currentFitMode;
-      const exportImages = uploadedImages.map(item => ({ img: item.img, rotation: item.rotation || 0 }));
+      const exportImages = uploadedImages.map(item => ({
+        img: item.img,
+        rotation: item.rotation || 0,
+        offsetX: Number(item.offsetX) || 0,
+        offsetY: Number(item.offsetY) || 0,
+        zoom: Number(item.zoom) || MIN_IMAGE_ZOOM
+      }));
       const pageCount = Math.ceil(exportImages.length / spec.maxSlots);
 
       if (btnPdfText) {
@@ -4249,11 +4418,20 @@
                 drawRoundRectPath(ctx, x, y, layout.cardW_px, layout.cardH_px, layout.cornerR_px);
                 ctx.clip();
 
-                ctx.translate(x + layout.cardW_px / 2, y + layout.cardH_px / 2);
+                const placement = getImagePlacement(item, layout.cardW_px, layout.cardH_px, exportFitMode);
+                ctx.translate(
+                  x + layout.cardW_px / 2 + placement.offsetXPx,
+                  y + layout.cardH_px / 2 + placement.offsetYPx
+                );
                 ctx.rotate((rotation * Math.PI) / 180);
 
-                const drawSize = getImageDrawSize(img, layout.cardW_px, layout.cardH_px, rotation, exportFitMode);
-                ctx.drawImage(img, -drawSize.width / 2, -drawSize.height / 2, drawSize.width, drawSize.height);
+                ctx.drawImage(
+                  img,
+                  -placement.drawSize.width / 2,
+                  -placement.drawSize.height / 2,
+                  placement.drawSize.width,
+                  placement.drawSize.height
+                );
                 ctx.restore();
               }
 
