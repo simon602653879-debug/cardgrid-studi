@@ -6,30 +6,33 @@
   const CONSENT_KEY = 'stankit_analytics_consent';
   const ATTRIBUTION_KEY = 'stankit_attribution';
   const VALID_GA_ID = /^G-[A-Z0-9]+$/i.test(GA_MEASUREMENT_ID);
+  const MAX_PENDING_EVENTS = 25;
+  const pendingEvents = [];
 
   window.STANKIT_GA_ID = GA_MEASUREMENT_ID;
   window.STANKIT_ANALYTICS_READY = false;
 
   const EVENT_PARAMS = Object.freeze({
     post_export_action: ['action'],
-    kofi_click: ['placement'],
+    support_click: ['placement'],
     change_language: ['selected_language'],
     preset_select: ['paper', 'source'],
     upload_start: ['file_count', 'paper'],
     upload_error: ['reason', 'paper', 'ignored_count', 'error_count'],
-    upload_complete: ['success_count', 'paper'],
+    upload_success: ['success_count', 'paper'],
     layout_edit: ['action', 'index', 'rotation', 'from', 'to', 'value', 'card'],
     generate_placeholders: ['count', 'theme'],
     share_click: ['platform'],
-    print_feedback_submit: ['printed', 'size_correct', 'paper'],
-    product_interest: ['product_id', 'price_test'],
+    print_result_feedback: ['result', 'paper'],
+    project_settings_save: ['paper', 'card_count', 'cut_line', 'storage'],
+    theme_interest_click: ['product_id', 'price_test', 'placement'],
     pdf_export_start: ['paper', 'card_count'],
     pdf_export_success: ['paper', 'card_count', 'cut_line', 'duration_ms'],
     pdf_export_error: ['reason', 'paper'],
     tool_view: ['tool', 'language'],
-    letter_template_select: ['template_id'],
-    letter_copy_success: ['copy_type'],
-    letter_export_success: ['export_format']
+    fan_letter_template_select: ['template_id'],
+    fan_letter_copy_success: ['copy_type'],
+    fan_letter_export_success: ['export_format']
   });
 
   const consentCopy = {
@@ -143,13 +146,24 @@
     window.gtag('config', GA_MEASUREMENT_ID, {
       anonymize_ip: true,
       allow_google_signals: false,
-      allow_ad_personalization_signals: false
+      allow_ad_personalization_signals: false,
+      send_page_view: false
+    });
+    const pagePath = window.location.pathname || '/';
+    window.gtag('event', 'page_view', {
+      page_location: window.location.origin + pagePath,
+      page_path: pagePath,
+      page_title: document.title
     });
     const script = document.createElement('script');
     script.async = true;
     script.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(GA_MEASUREMENT_ID);
     document.head.appendChild(script);
     window.STANKIT_ANALYTICS_READY = true;
+    while (pendingEvents.length) {
+      const pending = pendingEvents.shift();
+      window.gtag('event', pending.name, pending.params);
+    }
   }
 
   function sanitizeEventParams(eventName, eventParams) {
@@ -160,7 +174,7 @@
       const value = (eventParams || {})[key];
       if (typeof value === 'number' && Number.isFinite(value)) safe[key] = value;
       else if (typeof value === 'boolean') safe[key] = value;
-      else if (typeof value === 'string') safe[key] = value.slice(0, 80);
+      else if (typeof value === 'string') safe[key] = sanitizeValue(value, 80);
     });
     try {
       const attribution = JSON.parse(sessionStorage.getItem(ATTRIBUTION_KEY) || '{}');
@@ -172,10 +186,16 @@
   }
 
   window.trackGA4Event = function (eventName, eventParams) {
-    if (!VALID_GA_ID || !window.STANKIT_ANALYTICS_READY || typeof window.gtag !== 'function') return;
+    if (!VALID_GA_ID) return;
     const safeParams = sanitizeEventParams(eventName, eventParams);
     if (!safeParams) return;
-    window.gtag('event', eventName, safeParams);
+    if (window.STANKIT_ANALYTICS_READY && typeof window.gtag === 'function') {
+      window.gtag('event', eventName, safeParams);
+      return;
+    }
+    if (safeGetStorage(CONSENT_KEY) !== 'denied' && pendingEvents.length < MAX_PENDING_EVENTS) {
+      pendingEvents.push({ name: eventName, params: safeParams });
+    }
   };
 
   function buttonStyle(button, primary) {
@@ -213,6 +233,7 @@
     } else {
       if (typeof window.gtag === 'function') window.gtag('consent', 'update', { analytics_storage: 'denied' });
       window.STANKIT_ANALYTICS_READY = false;
+      pendingEvents.length = 0;
     }
     closeConsentDialog();
   }

@@ -608,14 +608,16 @@
             <button type="button" onclick="submitPrintFeedback('no')" class="px-3 py-2 rounded-xl bg-white border border-rose-200 text-rose-700 text-xs font-bold" data-i18n="feedback_no">Size was wrong</button>
           </div>
           <p id="print-feedback-status" class="hidden mt-2 text-xs font-bold text-emerald-700" data-i18n="feedback_thanks">Thanks—this helps us improve print accuracy.</p>
+          <p id="after-export-saved" class="hidden mt-2 text-[11px] font-semibold text-slate-500" data-i18n="after_export_saved">Settings saved in this browser; your photos were not saved.</p>
         </div>
         <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-2 gap-2 text-xs font-bold">
           <button type="button" onclick="openShareModal();trackGA4Event('post_export_action',{action:'share'});" class="rounded-xl border border-slate-200 bg-white px-3 py-2 hover:border-indigo-300" data-i18n="nav_share">Share</button>
           <a href="fan-letter.html" onclick="trackGA4Event('post_export_action',{action:'fan_letter'});" class="rounded-xl border border-slate-200 bg-white px-3 py-2 hover:border-indigo-300 text-center" data-i18n="after_export_fan_letter">Try fan letters</a>
           <button type="button" onclick="registerThemeInterest()" class="rounded-xl border border-slate-200 bg-white px-3 py-2 hover:border-rose-300" data-i18n="after_export_theme">Request theme packs</button>
-          <a href="https://ko-fi.com/stankitstudio" target="_blank" rel="noopener noreferrer" onclick="trackGA4Event('kofi_click',{placement:'post_export'});" class="rounded-xl border border-slate-200 bg-white px-3 py-2 hover:border-amber-300 text-center" data-i18n="after_export_support">Support the free tool</a>
+          <a href="https://ko-fi.com/stankitstudio" target="_blank" rel="noopener noreferrer" onclick="trackGA4Event('support_click',{placement:'post_export'});" class="rounded-xl border border-slate-200 bg-white px-3 py-2 hover:border-amber-300 text-center" data-i18n="after_export_support">Support the free tool</a>
         </div>
       </div>
+      <p id="theme-interest-status" class="hidden mt-3 text-center text-xs font-bold text-rose-700" data-i18n="theme_interest_thanks">Interest recorded—this is only a price test, not a purchase.</p>
     </section>
 
     
@@ -725,7 +727,7 @@
           Basic layout and PDF export stay free. If this saved you time, an optional Ko-fi tip helps cover maintenance.
         </p>
         <div class="pt-1 flex items-center justify-center gap-3 flex-wrap">
-          <a href="https://ko-fi.com/stankitstudio" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-1.5 px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xs transition shadow-xs">
+          <a href="https://ko-fi.com/stankitstudio" target="_blank" rel="noopener noreferrer" onclick="trackGA4Event('support_click',{placement:'below_print_tool'});" class="inline-flex items-center space-x-1.5 px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xs transition shadow-xs">
             <span>☕</span>
             <span data-i18n="support_kofi">Help keep StanKit free</span>
           </a>
@@ -2943,6 +2945,60 @@
     };
     Object.entries(printFlowI18n).forEach(([lang, values]) => Object.assign(i18nData[lang], values));
 
+    const revenueValidationI18n = {
+      en: {
+        after_export_saved: "Settings saved in this browser; your photos were not saved.",
+        after_export_theme: "Vote: Missing PC pack · US$3.90",
+        theme_interest_thanks: "Interest recorded—this is only a price test, not a purchase."
+      },
+      zh: {
+        after_export_saved: "排版设置已保存在此浏览器；照片不会被保存。",
+        after_export_theme: "投票：缺卡占位主题包 · US$3.90",
+        theme_interest_thanks: "已记录兴趣；这只是价格测试，并非购买。"
+      },
+      "zh-TW": {
+        after_export_saved: "排版設定已儲存在此瀏覽器；照片不會被儲存。",
+        after_export_theme: "投票：缺卡占位主題包 · US$3.90",
+        theme_interest_thanks: "已記錄興趣；這只是價格測試，並非購買。"
+      },
+      ko: {
+        after_export_saved: "배치 설정은 이 브라우저에 저장되었으며 사진은 저장되지 않았습니다.",
+        after_export_theme: "투표: 미보유 포카 테마 팩 · US$3.90",
+        theme_interest_thanks: "관심을 기록했습니다. 가격 테스트일 뿐 구매가 아닙니다."
+      },
+      ja: {
+        after_export_saved: "レイアウト設定はこのブラウザに保存され、写真は保存されていません。",
+        after_export_theme: "投票：未所持トレカ用パック · US$3.90",
+        theme_interest_thanks: "関心を記録しました。価格テストであり、購入ではありません。"
+      },
+      id: {
+        after_export_saved: "Pengaturan tata letak disimpan di browser ini; foto Anda tidak disimpan.",
+        after_export_theme: "Pilih: Paket placeholder PC · US$3.90",
+        theme_interest_thanks: "Minat dicatat—ini hanya uji harga, bukan pembelian."
+      },
+      ms: {
+        after_export_saved: "Tetapan susun atur disimpan dalam pelayar ini; foto anda tidak disimpan.",
+        after_export_theme: "Undi: Pek placeholder PC · US$3.90",
+        theme_interest_thanks: "Minat direkodkan—ini hanya ujian harga, bukan pembelian."
+      },
+      th: {
+        after_export_saved: "บันทึกการตั้งค่าการจัดวางไว้ในเบราว์เซอร์นี้แล้ว โดยไม่ได้บันทึกรูปของคุณ",
+        after_export_theme: "โหวต: แพ็กการ์ดแทนใบที่ขาด · US$3.90",
+        theme_interest_thanks: "บันทึกความสนใจแล้ว นี่เป็นเพียงการทดสอบราคา ไม่ใช่การซื้อ"
+      },
+      ar: {
+        after_export_saved: "حُفظت إعدادات التخطيط في هذا المتصفح، ولم تُحفظ صورك.",
+        after_export_theme: "صوّت: حزمة بطاقات النقص · US$3.90",
+        theme_interest_thanks: "تم تسجيل الاهتمام؛ هذا اختبار للسعر فقط وليس عملية شراء."
+      },
+      es: {
+        after_export_saved: "Los ajustes se guardaron en este navegador; tus fotos no se guardaron.",
+        after_export_theme: "Votar: pack de placeholders · US$3.90",
+        theme_interest_thanks: "Interés registrado: es solo una prueba de precio, no una compra."
+      }
+    };
+    Object.entries(revenueValidationI18n).forEach(([lang, values]) => Object.assign(i18nData[lang], values));
+
     function showToast(text, icon = '✨') {
       const box = document.getElementById('toast-box');
       const txt = document.getElementById('toast-text');
@@ -3337,7 +3393,7 @@
         }
 
         if (successCount > 0) {
-          trackGA4Event('upload_complete', { success_count: successCount, paper: currentPaper });
+          trackGA4Event('upload_success', { success_count: successCount, paper: currentPaper });
         }
       } finally {
         uploadInProgress = false;
@@ -4010,7 +4066,7 @@
     function savePhotocardProjectToHistory(exportState = {}) {
       try {
         const cardCount = exportState.cardCount ?? uploadedImages.length;
-        if (cardCount === 0) return;
+        if (cardCount === 0) return false;
         const savedHistory = safeGetStorage('stankit_photocard_history', []);
         const history = normalizePhotocardHistory(savedHistory);
         const paper = paperSpecs[exportState.paper] ? exportState.paper : currentPaper;
@@ -4032,10 +4088,13 @@
         if (history.length > 10) history.pop();
         if (!safeSetStorage('stankit_photocard_history', history)) {
           showToast(dict.toast_storage_error || 'Browser storage is unavailable.', '⚠️');
+          return false;
         }
         renderPhotocardHistoryUI();
+        return true;
       } catch (err) {
         console.warn('History save error:', err);
+        return false;
       }
     }
 
@@ -4217,10 +4276,12 @@
       }
     }
 
-    function showAfterExportPanel() {
+    function showAfterExportPanel(settingsSaved = false) {
       const panel = document.getElementById('after-export-panel');
       if (!panel) return;
       panel.classList.remove('hidden');
+      const savedMessage = document.getElementById('after-export-saved');
+      if (savedMessage) savedMessage.classList.toggle('hidden', !settingsSaved);
       panel.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 
@@ -4231,9 +4292,8 @@
     }
 
     function submitPrintFeedback(result) {
-      trackGA4Event('print_feedback_submit', {
-        printed: true,
-        size_correct: result === 'yes',
+      trackGA4Event('print_result_feedback', {
+        result: result === 'yes' ? 'correct' : 'incorrect',
         paper: currentPaper
       });
       if (!window.STANKIT_ANALYTICS_READY) {
@@ -4245,8 +4305,17 @@
     }
 
     function registerThemeInterest() {
-      trackGA4Event('product_interest', { product_id: 'missing-photocard-theme-pack', price_test: '3.90-4.90' });
-      window.location.href = 'contact.html?topic=theme-pack';
+      trackGA4Event('theme_interest_click', {
+        product_id: 'missing_photocard_theme_pack',
+        price_test: 'usd_3_90',
+        placement: 'post_export'
+      });
+      if (!window.STANKIT_ANALYTICS_READY) {
+        window.location.href = 'contact.html?topic=theme-pack';
+        return;
+      }
+      const status = document.getElementById('theme-interest-status');
+      if (status) status.classList.remove('hidden');
     }
 
     async function exportPDF() {
@@ -4375,15 +4444,23 @@
         }
 
         doc.save(`StanKit_${exportPaper.toUpperCase()}_300DPI.pdf`);
-        savePhotocardProjectToHistory({ paper: exportPaper, cardCount: exportImages.length, cutLine: exportCutLine });
+        const projectSettingsSaved = savePhotocardProjectToHistory({ paper: exportPaper, cardCount: exportImages.length, cutLine: exportCutLine });
         showToast(dict.toast_pdf_ready || 'PDF downloaded!', '🖨️');
-        showAfterExportPanel();
+        showAfterExportPanel(projectSettingsSaved);
         trackGA4Event('pdf_export_success', {
           paper: exportPaper,
           card_count: exportImages.length,
           cut_line: exportCutLine,
           duration_ms: Math.round(performance.now() - exportStartedAt)
         });
+        if (projectSettingsSaved) {
+          trackGA4Event('project_settings_save', {
+            paper: exportPaper,
+            card_count: exportImages.length,
+            cut_line: exportCutLine,
+            storage: 'local_history'
+          });
+        }
       } catch (err) {
         console.error('PDF export error:', err);
         const message = err && err.message === 'jspdf_unavailable'
