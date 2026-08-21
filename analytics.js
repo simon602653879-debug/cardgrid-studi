@@ -214,7 +214,7 @@
     button.id = 'stankit-analytics-settings';
     button.type = 'button';
     button.textContent = copy.settings;
-    button.style.cssText = 'position:fixed;left:12px;bottom:12px;z-index:39;min-height:36px;padding:7px 10px;border:1px solid #cbd5e1;border-radius:9px;background:#fff;color:#475569;font:700 12px/1.2 system-ui,sans-serif;box-shadow:0 4px 14px rgba(15,23,42,.12);cursor:pointer';
+    button.style.cssText = 'position:fixed;left:12px;bottom:12px;z-index:39;min-height:44px;padding:9px 12px;border:1px solid #cbd5e1;border-radius:10px;background:#fff;color:#475569;font:700 12px/1.2 system-ui,sans-serif;box-shadow:0 4px 14px rgba(15,23,42,.12);cursor:pointer';
     button.addEventListener('click', renderConsentDialog);
     document.body.appendChild(button);
   }
@@ -280,6 +280,18 @@
   }
 
   window.openAnalyticsPreferences = renderConsentDialog;
+
+  function refreshAnalyticsLanguage(event) {
+    if (!VALID_GA_ID) return;
+    const requestedLanguage = event && event.detail && event.detail.language;
+    const lang = requestedLanguage ? normalizeLanguage(requestedLanguage) : currentLanguage();
+    const copy = consentCopy[lang];
+    const settings = document.getElementById('stankit-analytics-settings');
+    if (settings) settings.textContent = copy.settings;
+    if (document.getElementById('stankit-analytics-consent')) renderConsentDialog();
+  }
+
+  window.addEventListener('stankit:languagechange', refreshAnalyticsLanguage);
 
   function initAnalytics() {
     if (!VALID_GA_ID) return;

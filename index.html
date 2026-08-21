@@ -57,7 +57,7 @@
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js';"></script>
 
   <!-- Shared consent-gated GA4 and UTM attribution -->
-  <script src="analytics.js"></script>
+  <script src="analytics.js?v=20260821-visual"></script>
 
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Sans+KR:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Sans+Thai:wght@400;500;700&family=Noto+Sans+Arabic:wght@400;500;700&display=swap');
@@ -73,6 +73,10 @@
     }
     body {
       font-family: 'Plus Jakarta Sans', 'Noto Sans Thai', 'Noto Sans Arabic', 'Noto Sans SC', 'Noto Sans KR', 'Noto Sans JP', sans-serif;
+      background:
+        radial-gradient(circle at 8% 9%, rgba(196, 181, 253, 0.22), transparent 25rem),
+        radial-gradient(circle at 92% 18%, rgba(251, 207, 232, 0.20), transparent 28rem),
+        linear-gradient(180deg, #fafaff 0%, #f8fafc 42%, #fffafa 100%);
     }
     main, main > *, .min-w-safe {
       min-width: 0;
@@ -138,8 +142,93 @@
       justify-content: center;
     }
     button:focus-visible, [role="button"]:focus-visible, select:focus-visible, input:focus-visible {
-      outline: 3px solid rgba(79, 70, 229, 0.55);
-      outline-offset: 2px;
+      outline: 3px solid #4338ca;
+      outline-offset: 3px;
+    }
+    .glass-header {
+      background: rgba(255, 255, 255, 0.88);
+      border-color: rgba(226, 232, 240, 0.82);
+      backdrop-filter: blur(18px) saturate(140%);
+    }
+    .hero-stage {
+      position: relative;
+      isolation: isolate;
+    }
+    .hero-stage::before,
+    .hero-stage::after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      width: 4.5rem;
+      height: 4.5rem;
+      border: 1px solid rgba(129, 140, 248, 0.18);
+      border-radius: 1.35rem;
+      background: rgba(255, 255, 255, 0.48);
+      box-shadow: 0 12px 35px rgba(99, 102, 241, 0.08);
+      transform: rotate(12deg);
+    }
+    .hero-stage::before { left: -3.75rem; top: 0.5rem; }
+    .hero-stage::after { right: -3.5rem; bottom: 0.5rem; transform: rotate(-9deg); }
+    .trust-chip {
+      background: rgba(255, 255, 255, 0.72) !important;
+      box-shadow: 0 5px 18px rgba(71, 85, 105, 0.05);
+      backdrop-filter: blur(10px);
+    }
+    .flow-strip {
+      position: relative;
+      padding: 0.35rem;
+      border: 1px solid rgba(226, 232, 240, 0.9);
+      border-radius: 1rem;
+      background: rgba(255, 255, 255, 0.64);
+      box-shadow: 0 8px 26px rgba(71, 85, 105, 0.05);
+      backdrop-filter: blur(12px);
+    }
+    .flow-step {
+      position: relative;
+      border: 0 !important;
+      background: transparent !important;
+    }
+    .flow-step + .flow-step::before {
+      content: "→";
+      position: absolute;
+      inset-inline-start: -0.8rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #a5b4fc;
+      font-weight: 800;
+    }
+    [dir="rtl"] .flow-step + .flow-step::before { content: "←"; }
+    .primary-hero-cta {
+      min-height: 46px;
+      box-shadow: 0 14px 30px rgba(79, 70, 229, 0.20);
+    }
+    .paper-quickstart,
+    .workspace-panel,
+    .post-export-panel {
+      background: rgba(255, 255, 255, 0.82) !important;
+      border-color: rgba(203, 213, 225, 0.76) !important;
+      box-shadow: 0 14px 42px rgba(71, 85, 105, 0.08), inset 0 1px 0 rgba(255,255,255,0.8) !important;
+      backdrop-filter: blur(14px);
+    }
+    .paper-quickstart button {
+      min-height: 4.25rem;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.85);
+    }
+    .workspace-panel {
+      border-radius: 1.35rem !important;
+    }
+    .workspace-panel #drop-zone {
+      background:
+        linear-gradient(135deg, rgba(238, 242, 255, 0.82), rgba(253, 242, 248, 0.72));
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.9);
+    }
+    .post-export-panel {
+      background: linear-gradient(135deg, rgba(236, 253, 245, 0.88), rgba(255, 255, 255, 0.9)) !important;
+    }
+    .mobile-export-panel { display: none; }
+    @media (max-width: 1023px) {
+      .desktop-export-panel, .desktop-history-panel { display: none !important; }
+      .mobile-export-panel { display: block; }
     }
     [dir="rtl"] .text-left {
       text-align: right !important;
@@ -152,6 +241,14 @@
       padding-right: 0.625rem;
       padding-left: 1.75rem;
     }
+    [dir="rtl"] .directional-arrow { display: inline-block; transform: scaleX(-1); }
+    [dir="rtl"] #btn-page-prev,
+    [dir="rtl"] #btn-page-next { transform: scaleX(-1); }
+    [dir="rtl"] .toggle-track::after { left: auto !important; right: 2px; }
+    [dir="rtl"] .peer:checked + .toggle-track::after { transform: translateX(-100%) !important; }
+    [dir="rtl"] .mobile-tools-nav,
+    [dir="rtl"] .header-actions,
+    [dir="rtl"] .brand-nav { direction: rtl; }
     @media (max-width: 479px) {
       .brand-name, .header-share-label {
         display: none !important;
@@ -159,18 +256,66 @@
       .header-shell {
         padding-left: 0.625rem !important;
         padding-right: 0.625rem !important;
+        height: 3.5rem !important;
       }
+      .header-logo { width: 2.25rem !important; height: 2.25rem !important; border-radius: 0.8rem !important; }
+      .header-shell > div > a { min-height: 44px; }
+      .header-action, #lang-select { min-height: 44px; }
+      .header-action { min-width: 44px; padding-left: 0.75rem !important; padding-right: 0.75rem !important; }
       #lang-select {
-        max-width: 8.75rem;
+        max-width: 8.5rem;
         padding-left: 0.5rem;
         font-size: 0.6875rem;
       }
+      .lang-chevron { top: 1.05rem !important; }
+      .mobile-tools-nav { padding: 0.375rem 0.625rem !important; gap: 0.375rem !important; }
+      .mobile-tools-nav a {
+        min-height: 44px;
+        flex: 1 1 0;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        white-space: normal !important;
+        line-height: 1.15;
+      }
+      main { padding-top: 1rem !important; }
+      .hero-stage { margin-bottom: 1rem !important; }
+      .hero-stage h1 { font-size: 1.55rem !important; line-height: 1.16 !important; }
+      .hero-stage::before, .hero-stage::after { display: none; }
+      .hero-trust { margin-top: 0.75rem !important; gap: 0.35rem !important; }
+      .trust-chip { padding: 0.3rem 0.55rem !important; font-size: 0.625rem !important; }
+      .flow-strip { margin-top: 0.75rem !important; gap: 0 !important; font-size: 0.625rem !important; }
+      .flow-step { padding: 0.5rem 0.15rem !important; }
+      .primary-hero-cta { margin-top: 0.75rem !important; }
+      .paper-quickstart { padding: 0.75rem !important; margin-bottom: 1rem !important; }
+      .paper-quickstart-copy { margin-bottom: 0.5rem !important; }
+      .paper-quickstart-grid { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; gap: 0.4rem !important; }
+      .paper-quickstart button { min-height: 5.4rem; padding: 0.55rem !important; text-align: start !important; }
+      .paper-quickstart button span:first-child { font-size: 0.6875rem !important; }
+      .paper-quickstart button span:last-child { font-size: 0.585rem !important; line-height: 1.28 !important; }
       .workspace-panel {
         padding: 1rem !important;
+      }
+      .workspace-panel button, .workspace-panel select { min-height: 44px; }
+      .post-export-panel button, .post-export-panel a {
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
       }
       #preview-sheet-container {
         padding: 0.5rem !important;
         overflow: hidden !important;
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto !important; }
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
       }
     }
     .card-cell.is-selected {
@@ -210,13 +355,13 @@
 <body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col justify-between">
 
     <!-- Navigation Header -->
-  <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+  <header class="glass-header bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
     <div class="header-shell max-w-6xl mx-auto px-4 h-16 flex items-center justify-between min-w-0">
       
       <!-- Brand & Navigation -->
-      <div class="flex items-center space-x-4 sm:space-x-6 flex-shrink-0">
-        <a href="index.html" class="flex items-center space-x-2.5 flex-shrink-0">
-          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-rose-500 flex items-center justify-center text-white font-bold text-xl shadow-md shadow-indigo-100 flex-shrink-0">
+      <div class="brand-nav flex items-center gap-4 sm:gap-6 flex-shrink-0">
+        <a href="index.html" class="flex items-center gap-2.5 flex-shrink-0">
+          <div class="header-logo w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-rose-500 flex items-center justify-center text-white font-bold text-xl shadow-md shadow-indigo-100 flex-shrink-0">
             ✨
           </div>
           <div class="flex-shrink-0">
@@ -226,7 +371,7 @@
         </a>
 
         <!-- Tools Nav -->
-        <nav class="hidden md:flex items-center space-x-1 text-xs font-bold text-slate-600">
+        <nav class="hidden md:flex items-center gap-1 text-xs font-bold text-slate-600">
           <a href="index.html" class="px-3 py-1.5 rounded-lg bg-indigo-50 text-indigo-700 border border-indigo-100 transition flex items-center space-x-1 whitespace-nowrap">
             <span>🖨️</span>
             <span data-i18n="nav_tool_print">Photocard Grid</span>
@@ -239,9 +384,9 @@
       </div>
 
       <!-- Right Actions: Share & Language Switcher -->
-      <div class="flex items-center space-x-2 sm:space-x-3 flex-shrink-0">
+      <div class="header-actions flex items-center gap-2 sm:gap-3 flex-shrink-0">
         <!-- Header Share Button -->
-        <button type="button" onclick="triggerShareTool()" class="flex items-center space-x-1 px-2.5 sm:px-3 py-1.5 rounded-lg bg-indigo-50 hover:bg-indigo-100 text-indigo-700 text-xs font-bold transition border border-indigo-200 cursor-pointer active:scale-95 shadow-2xs whitespace-nowrap">
+        <button type="button" onclick="triggerShareTool()" class="header-action flex items-center gap-1 px-2.5 sm:px-3 py-1.5 rounded-lg bg-indigo-50 hover:bg-indigo-100 text-indigo-700 text-xs font-bold transition border border-indigo-200 cursor-pointer active:scale-95 shadow-2xs whitespace-nowrap">
           <span>✨</span>
           <span class="header-share-label" data-i18n="nav_share">Share</span>
         </button>
@@ -265,7 +410,7 @@
   </header>
 
   <!-- Mobile Sub-Navigation Bar -->
-  <div class="md:hidden bg-white border-b border-slate-200 px-4 py-2 flex items-center space-x-2 overflow-x-auto text-xs font-bold">
+  <div class="mobile-tools-nav md:hidden bg-white/90 backdrop-blur-md border-b border-slate-200 px-4 py-2 flex items-center gap-2 overflow-x-auto text-xs font-bold">
     <a href="index.html" class="whitespace-nowrap px-2.5 py-1 rounded-md bg-indigo-50 text-indigo-700" data-i18n="nav_tool_print">🖨️ Photocard Grid</a>
     <a href="fan-letter.html" class="whitespace-nowrap px-2.5 py-1 rounded-md text-slate-600 hover:bg-slate-100" data-i18n="nav_tool_letter">💌 Fan Letter Builder</a>
   </div>
@@ -274,7 +419,7 @@
   <main class="w-full max-w-6xl mx-auto px-4 py-6 sm:py-8 flex-grow min-w-0">
     
     <!-- Hero / Headline Area -->
-    <div class="text-center max-w-3xl mx-auto mb-6 sm:mb-8">
+    <div class="hero-stage text-center max-w-3xl mx-auto mb-6 sm:mb-8">
       <h1 class="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-2">
         <span data-i18n="hero_title_1">Print Photocards at True Size</span>
         <br>
@@ -283,24 +428,27 @@
       <p class="text-slate-500 text-xs sm:text-sm leading-relaxed" data-i18n="hero_desc">
         Arrange photos on A4, Letter or photo paper and export a print-ready PDF at physical size. No account required.
       </p>
-      <div class="mt-4 flex flex-wrap items-center justify-center gap-2 text-[11px] sm:text-xs font-bold">
-        <span class="px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200" data-i18n="trust_local">🔒 Images processed locally</span>
-        <span class="px-3 py-1.5 rounded-full bg-indigo-50 text-indigo-800 border border-indigo-200" data-i18n="trust_no_signup">✓ No sign-up</span>
-        <span class="px-3 py-1.5 rounded-full bg-rose-50 text-rose-800 border border-rose-200" data-i18n="trust_true_size">📐 True-size 300 DPI PDF</span>
+      <button type="button" onclick="document.getElementById('drop-zone').scrollIntoView({behavior:'smooth', block:'center'})" class="primary-hero-cta mt-4 inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-indigo-600 to-rose-500 px-5 py-3 text-sm font-extrabold text-white hover:from-indigo-700 hover:to-rose-600 active:scale-98">
+        <span aria-hidden="true">📷</span><span data-i18n="flow_upload">Upload photos</span><span class="directional-arrow" aria-hidden="true">↓</span>
+      </button>
+      <div class="hero-trust mt-4 flex flex-wrap items-center justify-center gap-2 text-[11px] sm:text-xs font-bold">
+        <span class="trust-chip px-3 py-1.5 rounded-full text-emerald-800 border border-emerald-200" data-i18n="trust_local">🔒 Images processed locally</span>
+        <span class="trust-chip px-3 py-1.5 rounded-full text-indigo-800 border border-indigo-200" data-i18n="trust_no_signup">✓ No sign-up</span>
+        <span class="trust-chip px-3 py-1.5 rounded-full text-rose-800 border border-rose-200" data-i18n="trust_true_size">📐 True-size 300 DPI PDF</span>
       </div>
-      <div class="mt-4 grid grid-cols-3 gap-2 text-[11px] sm:text-xs font-extrabold text-slate-700" aria-label="Three-step workflow">
-        <div class="rounded-xl bg-white border border-slate-200 p-2.5"><span class="text-indigo-600">1</span> <span data-i18n="flow_choose">Choose paper</span></div>
-        <div class="rounded-xl bg-white border border-slate-200 p-2.5"><span class="text-indigo-600">2</span> <span data-i18n="flow_upload">Upload photos</span></div>
-        <div class="rounded-xl bg-white border border-slate-200 p-2.5"><span class="text-indigo-600">3</span> <span data-i18n="flow_export">Export PDF</span></div>
+      <div class="flow-strip mt-4 grid grid-cols-3 gap-2 text-[11px] sm:text-xs font-extrabold text-slate-700" aria-label="Three-step workflow">
+        <div class="flow-step rounded-xl p-2.5"><span class="text-indigo-600">1</span> <span data-i18n="flow_upload">Upload photos</span></div>
+        <div class="flow-step rounded-xl p-2.5"><span class="text-indigo-600">2</span> <span data-i18n="flow_choose">Choose paper</span></div>
+        <div class="flow-step rounded-xl p-2.5"><span class="text-indigo-600">3</span> <span data-i18n="flow_export">Export PDF</span></div>
       </div>
     </div>
 
-    <section class="mb-6 bg-white/90 border border-slate-200 rounded-2xl p-4 sm:p-5 shadow-sm" aria-labelledby="preset-recommendation-title">
-      <div class="mb-3 text-center sm:text-left">
+    <section class="paper-quickstart mb-6 bg-white/90 border border-slate-200 rounded-2xl p-4 sm:p-5 shadow-sm" aria-labelledby="preset-recommendation-title">
+      <div class="paper-quickstart-copy mb-3 text-center sm:text-left">
         <h2 id="preset-recommendation-title" class="text-sm font-extrabold text-slate-900" data-i18n="preset_title">Start with the paper you can actually print</h2>
         <p class="text-[11px] sm:text-xs text-slate-500 mt-1" data-i18n="preset_desc">You can change this later without uploading your photos again.</p>
       </div>
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+      <div class="paper-quickstart-grid grid grid-cols-1 sm:grid-cols-3 gap-2.5">
         <button type="button" onclick="chooseRecommendedPreset('a4')" class="text-left rounded-xl border border-indigo-200 bg-indigo-50/70 hover:bg-indigo-100 p-3 transition">
           <span class="block text-xs font-extrabold text-indigo-900">📄 A4</span>
           <span class="block text-[11px] text-indigo-700 mt-0.5" data-i18n="preset_a4_use">Best for home and copy-shop printing outside North America.</span>
@@ -469,7 +617,7 @@
               <span class="font-bold text-slate-700" data-i18n="opt_cutlines">Show Scissor Cut Lines</span>
               <label class="relative inline-flex items-center cursor-pointer">
                 <input type="checkbox" id="check-cutlines" checked onchange="toggleCutLines(this.checked)" class="sr-only peer">
-                <div class="w-9 h-5 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-indigo-600"></div>
+                <div class="toggle-track w-9 h-5 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-indigo-600"></div>
               </label>
             </div>
 
@@ -478,7 +626,7 @@
               <span class="font-bold text-slate-700" data-i18n="opt_safe_area">Show 2mm Safe Area Guides</span>
               <label class="relative inline-flex items-center cursor-pointer">
                 <input type="checkbox" id="check-safearea" checked onchange="toggleSafeArea(this.checked)" class="sr-only peer" aria-describedby="safe-area-note">
-                <div class="w-9 h-5 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-indigo-600"></div>
+                <div class="toggle-track w-9 h-5 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-indigo-600"></div>
               </label>
             </div>
             <p id="safe-area-note" class="text-[10px] text-slate-400 -mt-1" data-i18n="safe_area_note">Preview guide only; it is never printed in the PDF.</p>
@@ -495,7 +643,7 @@
           </div>
 
           <!-- Action Button: Download 300 DPI PDF -->
-          <div class="pt-2">
+          <div class="desktop-export-panel pt-2">
             <div class="mb-2 text-xs font-extrabold text-slate-900 uppercase tracking-wider" data-i18n="label_step3">3. Export a print-ready PDF</div>
             <button type="button" id="btn-export-pdf" onclick="exportPDF()" class="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-indigo-600 to-rose-500 hover:from-indigo-700 hover:to-rose-600 text-white font-extrabold text-sm shadow-md shadow-indigo-100 transition transform active:scale-98 flex items-center justify-center space-x-2 cursor-pointer">
               <span>🖨️</span>
@@ -509,7 +657,7 @@
         </div>
 
         <!-- LocalStorage Photocard Project History Card -->
-        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-3">
+        <div class="desktop-history-panel bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-3">
           <div class="flex items-center justify-between">
             <div class="flex items-center space-x-2">
               <span class="text-base">🕒</span>
@@ -580,8 +728,8 @@
           </div>
           <div class="grid grid-cols-2 gap-2">
             <button type="button" onclick="runSelectedCardAction('replace')" class="col-span-2 min-h-11 rounded-lg bg-white border border-indigo-200 px-2 py-2 text-xs font-bold text-indigo-800 flex items-center justify-center gap-1" data-i18n-aria-label="card_replace"><span aria-hidden="true">📷</span><span data-i18n="card_replace">Replace photo</span></button>
-            <button type="button" id="mobile-move-earlier" onclick="runSelectedCardAction('earlier')" class="min-h-11 rounded-lg bg-white border border-indigo-200 px-2 py-2 text-xs font-bold text-indigo-800 flex items-center justify-center gap-1" data-i18n-aria-label="card_move_earlier"><span aria-hidden="true">←</span><span data-i18n="card_move_earlier">Move earlier</span></button>
-            <button type="button" id="mobile-move-later" onclick="runSelectedCardAction('later')" class="min-h-11 rounded-lg bg-white border border-indigo-200 px-2 py-2 text-xs font-bold text-indigo-800 flex items-center justify-center gap-1" data-i18n-aria-label="card_move_later"><span data-i18n="card_move_later">Move later</span><span aria-hidden="true">→</span></button>
+            <button type="button" id="mobile-move-earlier" onclick="runSelectedCardAction('earlier')" class="min-h-11 rounded-lg bg-white border border-indigo-200 px-2 py-2 text-xs font-bold text-indigo-800 flex items-center justify-center gap-1" data-i18n-aria-label="card_move_earlier"><span class="directional-arrow" aria-hidden="true">←</span><span data-i18n="card_move_earlier">Move earlier</span></button>
+            <button type="button" id="mobile-move-later" onclick="runSelectedCardAction('later')" class="min-h-11 rounded-lg bg-white border border-indigo-200 px-2 py-2 text-xs font-bold text-indigo-800 flex items-center justify-center gap-1" data-i18n-aria-label="card_move_later"><span data-i18n="card_move_later">Move later</span><span class="directional-arrow" aria-hidden="true">→</span></button>
             <button type="button" onclick="runSelectedCardAction('rotate')" class="min-h-11 rounded-lg bg-indigo-600 px-2 py-2 text-xs font-bold text-white flex items-center justify-center gap-1" data-i18n-aria-label="card_label_rotate"><span aria-hidden="true">↻</span><span data-i18n="card_label_rotate">Rotate 90°</span></button>
             <button type="button" onclick="runSelectedCardAction('delete')" class="min-h-11 rounded-lg bg-rose-600 px-2 py-2 text-xs font-bold text-white flex items-center justify-center gap-1" data-i18n-aria-label="card_label_delete"><span aria-hidden="true">✕</span><span data-i18n="card_label_delete">Delete this card</span></button>
             <button type="button" onclick="runSelectedCardAction('resetCrop')" class="col-span-2 min-h-11 rounded-lg border border-indigo-200 bg-white px-2 py-2 text-xs font-bold text-indigo-800 flex items-center justify-center gap-1" data-i18n-aria-label="card_reset_crop"><span aria-hidden="true">◎</span><span data-i18n="card_reset_crop">Reset position &amp; zoom</span></button>
@@ -597,7 +745,16 @@
 
     </div>
 
-    <section id="after-export-panel" class="hidden mt-6 rounded-2xl border border-emerald-200 bg-gradient-to-br from-emerald-50 to-white p-5 sm:p-6 shadow-sm" aria-live="polite">
+    <section class="mobile-export-panel workspace-panel mt-6 bg-white p-4 rounded-2xl border border-slate-200 shadow-sm" aria-labelledby="mobile-export-title">
+      <div id="mobile-export-title" class="mb-2 text-xs font-extrabold text-slate-900 uppercase tracking-wider" data-i18n="label_step3">3. Export a print-ready PDF</div>
+      <button type="button" id="btn-export-pdf-mobile" onclick="exportPDF()" class="w-full min-h-12 py-3.5 px-4 rounded-xl bg-gradient-to-r from-indigo-600 to-rose-500 hover:from-indigo-700 hover:to-rose-600 text-white font-extrabold text-sm shadow-md shadow-indigo-100 transition transform active:scale-98 flex items-center justify-center gap-2 cursor-pointer">
+        <span aria-hidden="true">🖨️</span>
+        <span id="btn-pdf-text-mobile" data-i18n="btn_download_pdf">Download 300 DPI PDF (Print Ready)</span>
+      </button>
+      <p class="text-[10px] text-slate-500 text-center mt-2" data-i18n="pdf_note">🔒 Uploaded images are processed in this browser and are not sent to StanKit servers.</p>
+    </section>
+
+    <section id="after-export-panel" class="post-export-panel hidden mt-6 rounded-2xl border border-emerald-200 bg-gradient-to-br from-emerald-50 to-white p-5 sm:p-6 shadow-sm" aria-live="polite">
       <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
         <div class="max-w-xl">
           <p class="text-[11px] font-extrabold uppercase tracking-wider text-emerald-700" data-i18n="after_export_title">PDF exported successfully</p>
@@ -2052,7 +2209,7 @@
         hero_title_1: "Print Photocards at True Size",
         hero_title_2: "Upload → Choose Paper → Export 300 DPI PDF",
         hero_desc: "Arrange photos on A4, Letter or photo paper and export a print-ready PDF at physical size. No account required.",
-        label_step1: "2. Upload photos",
+        label_step1: "Upload photos",
         label_step2: "Paper size details",
         label_step3: "3. Export a print-ready PDF",
         pdf_note: "🔒 Uploaded images are processed in this browser and are not sent to StanKit servers.",
@@ -2115,7 +2272,7 @@
         hero_title_1: "按真实尺寸打印小卡",
         hero_title_2: "上传照片 → 选择纸张 → 导出 300 DPI PDF",
         hero_desc: "把照片排到 A4、Letter 或相纸上，导出符合物理尺寸的打印 PDF，无需注册。",
-        label_step1: "2. 上传照片",
+        label_step1: "上传照片",
         label_step2: "纸张尺寸详情",
         label_step3: "3. 导出可打印 PDF",
         pdf_note: "🔒 上传图片只在当前浏览器处理，不会发送到 StanKit 服务器。",
@@ -2178,7 +2335,7 @@
         hero_title_1: "按真實尺寸列印小卡",
         hero_title_2: "上傳照片 → 選擇紙張 → 匯出 300 DPI PDF",
         hero_desc: "把照片排到 A4、Letter 或相紙上，匯出符合實際尺寸的列印 PDF，無需註冊。",
-        label_step1: "2. 上傳照片",
+        label_step1: "上傳照片",
         label_step2: "紙張尺寸詳情",
         label_step3: "3. 匯出可列印 PDF",
         pdf_note: "🔒 上傳圖片只在目前瀏覽器處理，不會傳送到 StanKit 伺服器。",
@@ -2241,7 +2398,7 @@
         hero_title_1: "포토카드를 실제 크기로 인쇄하세요",
         hero_title_2: "사진 업로드 → 용지 선택 → 300 DPI PDF 내보내기",
         hero_desc: "A4, Letter 또는 사진 용지에 이미지를 배치하고 실제 크기의 인쇄용 PDF를 만드세요. 가입은 필요 없습니다.",
-        label_step1: "2. 사진 업로드",
+        label_step1: "사진 업로드",
         label_step2: "용지 크기 상세",
         label_step3: "3. 인쇄용 PDF 내보내기",
         pdf_note: "🔒 업로드한 이미지는 이 브라우저에서만 처리되며 StanKit 서버로 전송되지 않습니다.",
@@ -2304,7 +2461,7 @@
         hero_title_1: "トレカを実寸で印刷",
         hero_title_2: "写真をアップロード → 用紙を選択 → 300 DPI PDF",
         hero_desc: "A4、Letter、写真用紙に画像を配置し、実寸の印刷用PDFを書き出せます。登録は不要です。",
-        label_step1: "2. 写真をアップロード",
+        label_step1: "写真をアップロード",
         label_step2: "用紙サイズの詳細",
         label_step3: "3. 印刷用PDFを書き出す",
         pdf_note: "🔒 アップロード画像はこのブラウザ内だけで処理され、StanKitのサーバーには送信されません。",
@@ -2367,7 +2524,7 @@
         hero_title_1: "Cetak Photocard dengan Ukuran Sebenarnya",
         hero_title_2: "Unggah → Pilih Kertas → Ekspor PDF 300 DPI",
         hero_desc: "Susun foto di kertas A4, Letter, atau kertas foto lalu ekspor PDF siap cetak dengan ukuran fisik. Tanpa akun.",
-        label_step1: "2. Unggah foto",
+        label_step1: "Unggah foto",
         label_step2: "Detail ukuran kertas",
         label_step3: "3. Ekspor PDF siap cetak",
         pdf_note: "🔒 Gambar diproses di browser ini dan tidak dikirim ke server StanKit.",
@@ -2430,7 +2587,7 @@
         hero_title_1: "Cetak Photocard pada Saiz Sebenar",
         hero_title_2: "Muat Naik → Pilih Kertas → Eksport PDF 300 DPI",
         hero_desc: "Susun foto pada A4, Letter atau kertas foto dan eksport PDF sedia cetak pada saiz fizikal. Tanpa akaun.",
-        label_step1: "2. Muat naik foto",
+        label_step1: "Muat naik foto",
         label_step2: "Butiran saiz kertas",
         label_step3: "3. Eksport PDF sedia cetak",
         pdf_note: "🔒 Imej diproses dalam pelayar ini dan tidak dihantar ke pelayan StanKit.",
@@ -2493,7 +2650,7 @@
         hero_title_1: "พิมพ์โฟโต้การ์ดตามขนาดจริง",
         hero_title_2: "อัปโหลด → เลือกกระดาษ → ส่งออก PDF 300 DPI",
         hero_desc: "จัดรูปบนกระดาษ A4, Letter หรือกระดาษรูป แล้วส่งออก PDF พร้อมพิมพ์ตามขนาดจริง โดยไม่ต้องสมัครสมาชิก",
-        label_step1: "2. อัปโหลดรูป",
+        label_step1: "อัปโหลดรูป",
         label_step2: "รายละเอียดขนาดกระดาษ",
         label_step3: "3. ส่งออก PDF พร้อมพิมพ์",
         pdf_note: "🔒 รูปภาพประมวลผลในเบราว์เซอร์นี้และไม่ถูกส่งไปยังเซิร์ฟเวอร์ของ StanKit",
@@ -2556,7 +2713,7 @@
         hero_title_1: "اطبع بطاقات الصور بالحجم الحقيقي",
         hero_title_2: "ارفع الصور ← اختر الورق ← صدّر PDF بدقة 300 DPI",
         hero_desc: "رتّب الصور على ورق A4 أو Letter أو ورق الصور وصدّر ملف PDF جاهزاً للطباعة بالحجم الفعلي، بلا تسجيل.",
-        label_step1: "2. رفع الصور",
+        label_step1: "رفع الصور",
         label_step2: "تفاصيل حجم الورق",
         label_step3: "3. تصدير PDF جاهز للطباعة",
         pdf_note: "🔒 تُعالج الصور داخل هذا المتصفح ولا تُرسل إلى خوادم StanKit.",
@@ -2619,7 +2776,7 @@
         hero_title_1: "Imprime photocards a tamaño real",
         hero_title_2: "Sube fotos → Elige papel → Exporta PDF a 300 DPI",
         hero_desc: "Organiza fotos en A4, Letter o papel fotográfico y exporta un PDF listo para imprimir a tamaño físico. Sin cuenta.",
-        label_step1: "2. Subir fotos",
+        label_step1: "Subir fotos",
         label_step2: "Detalles del tamaño de papel",
         label_step3: "3. Exportar PDF listo para imprimir",
         pdf_note: "🔒 Las imágenes se procesan en este navegador y no se envían a los servidores de StanKit.",
@@ -3021,6 +3178,7 @@
       
       document.documentElement.lang = lang;
       document.documentElement.dir = (lang === 'ar' ? 'rtl' : 'ltr');
+      window.dispatchEvent(new CustomEvent('stankit:languagechange', { detail: { language: lang } }));
 
       const sel = document.getElementById('lang-select');
       if (sel) sel.value = lang;
@@ -4326,8 +4484,14 @@
       }
       if (exportInProgress) return;
 
-      const btnPdf = document.getElementById('btn-export-pdf');
-      const btnPdfText = document.getElementById('btn-pdf-text');
+      const btnPdfs = [
+        document.getElementById('btn-export-pdf'),
+        document.getElementById('btn-export-pdf-mobile')
+      ].filter(Boolean);
+      const btnPdfTexts = [
+        document.getElementById('btn-pdf-text'),
+        document.getElementById('btn-pdf-text-mobile')
+      ].filter(Boolean);
       const dict = i18nData[currentLang] || i18nData['en'];
       const exportPaper = currentPaper;
       const spec = paperSpecs[exportPaper] || paperSpecs.a4;
@@ -4342,15 +4506,15 @@
       }));
       const pageCount = Math.ceil(exportImages.length / spec.maxSlots);
 
-      if (btnPdfText) {
-        btnPdfText.innerText = dict.btn_rendering_pdf || 'Rendering 300 DPI PDF...';
-      }
+      btnPdfTexts.forEach(element => {
+        element.innerText = dict.btn_rendering_pdf || 'Rendering 300 DPI PDF...';
+      });
       exportInProgress = true;
-      if (btnPdf) {
-        btnPdf.disabled = true;
-        btnPdf.setAttribute('aria-busy', 'true');
-        btnPdf.classList.add('opacity-60', 'cursor-wait');
-      }
+      btnPdfs.forEach(button => {
+        button.disabled = true;
+        button.setAttribute('aria-busy', 'true');
+        button.classList.add('opacity-60', 'cursor-wait');
+      });
       const exportStartedAt = performance.now();
       trackGA4Event('pdf_export_start', { paper: exportPaper, card_count: exportImages.length });
 
@@ -4474,14 +4638,14 @@
           offCanvas.height = 1;
         }
         exportInProgress = false;
-        if (btnPdf) {
-          btnPdf.disabled = false;
-          btnPdf.removeAttribute('aria-busy');
-          btnPdf.classList.remove('opacity-60', 'cursor-wait');
-        }
-        if (btnPdfText) {
-          btnPdfText.innerText = dict.btn_download_pdf || 'Download 300 DPI PDF (Print Ready)';
-        }
+        btnPdfs.forEach(button => {
+          button.disabled = false;
+          button.removeAttribute('aria-busy');
+          button.classList.remove('opacity-60', 'cursor-wait');
+        });
+        btnPdfTexts.forEach(element => {
+          element.innerText = dict.btn_download_pdf || 'Download 300 DPI PDF (Print Ready)';
+        });
       }
     }
 
