@@ -3360,7 +3360,9 @@
       if (index >= 0 && index < uploadedImages.length) {
         uploadedImages[index].rotation = ((uploadedImages[index].rotation || 0) + 90) % 360;
         selectedCardIndex = index;
-        renderGridPreview();
+        updateCardImagePreview(index);
+        const cell = document.querySelector(`#card-grid .card-cell[data-index="${index}"]`);
+        if (cell) cell.classList.add('is-selected');
         updateMobileCardToolbar();
         showToast(i18nData[currentLang]?.toast_rotated || 'Card rotated 90°', '↻');
         trackGA4Event('layout_edit', { action: 'rotate', index, rotation: uploadedImages[index].rotation });
@@ -4357,13 +4359,18 @@
           }
 
           if (pageIndex > 0) doc.addPage([spec.sheetW_mm, spec.sheetH_mm], orientation);
-          let imgData = offCanvas.toDataURL('image/jpeg', 0.98);
-          if (!imgData || imgData === 'data:,') throw new Error('canvas_export_failed');
+          const imageBlob = await new Promise((resolve, reject) => {
+            offCanvas.toBlob(
+              blob => blob ? resolve(blob) : reject(new Error('canvas_export_failed')),
+              'image/jpeg',
+              0.98
+            );
+          });
+          const imageBytes = new Uint8Array(await imageBlob.arrayBuffer());
           const pdfW = doc.internal.pageSize.getWidth();
           const pdfH = doc.internal.pageSize.getHeight();
 
-          doc.addImage(imgData, 'JPEG', 0, 0, pdfW, pdfH, `stankit-page-${pageIndex}`, 'FAST');
-          imgData = null;
+          doc.addImage(imageBytes, 'JPEG', 0, 0, pdfW, pdfH, `stankit-page-${pageIndex}`, 'FAST');
           await new Promise(resolve => setTimeout(resolve, 0));
         }
 
@@ -4402,6 +4409,7 @@
     }
 
     let resizeFrame = null;
+    let previewResizeObserver = null;
     function schedulePreviewRender() {
       if (resizeFrame) cancelAnimationFrame(resizeFrame);
       resizeFrame = requestAnimationFrame(() => {
@@ -4437,10 +4445,10 @@
 
       const previewContainer = document.getElementById('preview-sheet-container');
       if (previewContainer && window.ResizeObserver) {
-        const ro = new ResizeObserver(() => {
+        previewResizeObserver = new ResizeObserver(() => {
           schedulePreviewRender();
         });
-        ro.observe(previewContainer);
+        previewResizeObserver.observe(previewContainer);
       }
 
       const dropZone = document.getElementById('drop-zone');
@@ -4472,9 +4480,21 @@
       renderGridPreview();
     });
 
-    window.addEventListener('beforeunload', () => {
+    function releasePageResources(event) {
+      // Keep resources alive when the page enters the back-forward cache.
+      if (event && event.type === 'pagehide' && event.persisted) return;
+      if (previewResizeObserver) {
+        previewResizeObserver.disconnect();
+        previewResizeObserver = null;
+      }
+      if (resizeFrame) {
+        cancelAnimationFrame(resizeFrame);
+        resizeFrame = null;
+      }
       uploadedImages.forEach(releaseImageResource);
-    });
+    }
+
+    window.addEventListener('pagehide', releasePageResources);
 
   </script>
 
