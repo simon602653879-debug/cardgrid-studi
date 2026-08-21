@@ -266,6 +266,15 @@
         overflow: hidden !important;
       }
     }
+    .card-cell.is-selected {
+      outline: 2px solid #6366f1;
+      outline-offset: 2px;
+    }
+    @media (hover: hover) {
+      .card-cell.is-selected .card-action-overlay {
+        opacity: 1 !important;
+      }
+    }
     @media (hover: none) {
       .card-mobile-actions {
         display: none !important;
@@ -635,7 +644,7 @@
           </div>
         </div>
 
-        <div id="mobile-card-toolbar" class="hidden lg:hidden rounded-xl border border-indigo-200 bg-indigo-50/80 p-3" aria-live="polite">
+        <div id="mobile-card-toolbar" class="hidden rounded-xl border border-indigo-200 bg-indigo-50/80 p-3" aria-live="polite">
           <div id="selected-card-label" class="mb-2 text-center text-xs font-extrabold text-indigo-900">Card 1 selected</div>
           <div class="grid grid-cols-2 gap-2">
             <button type="button" onclick="runSelectedCardAction('replace')" class="col-span-2 min-h-11 rounded-lg bg-white border border-indigo-200 px-2 py-2 text-xs font-bold text-indigo-800 flex items-center justify-center gap-1" data-i18n-aria-label="card_replace"><span aria-hidden="true">📷</span><span data-i18n="card_replace">Replace photo</span></button>
@@ -3396,6 +3405,9 @@
       }
       if (index < 0 || index >= uploadedImages.length) return;
       selectedCardIndex = index;
+      document.querySelectorAll('#card-grid .card-cell').forEach(cell => {
+        cell.classList.toggle('is-selected', Number(cell.dataset.index) === index);
+      });
       updateMobileCardToolbar();
     }
 
@@ -3589,6 +3601,7 @@
         const cell = document.createElement('div');
         cell.className = 'card-cell relative overflow-hidden flex items-center justify-center transition-all duration-150 group select-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-500';
         cell.dataset.index = String(globalIndex);
+        cell.classList.toggle('is-selected', hasImage && selectedCardIndex === globalIndex);
 
         cell.style.width = `${layout.cardW_px}px`;
         cell.style.height = `${layout.cardH_px}px`;
@@ -3669,7 +3682,7 @@
             </div>
 
             <!-- Hover Action Overlay -->
-            <div class="absolute inset-0 bg-slate-950/45 backdrop-blur-[1px] opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity duration-150 flex flex-col justify-between p-1.5 z-20" style="border-radius: ${layout.cornerR_px}px;">
+            <div class="card-action-overlay absolute inset-0 bg-slate-950/45 backdrop-blur-[1px] opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity duration-150 flex flex-col justify-between p-1.5 z-20" style="border-radius: ${layout.cornerR_px}px;">
               <div class="flex items-center justify-between w-full">
                 <span class="bg-slate-900/90 text-white text-[9px] font-extrabold px-1.5 py-0.5 rounded shadow-xs flex items-center space-x-0.5 cursor-grab active:cursor-grabbing">
                   <span>⋮⋮</span>
