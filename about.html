@@ -1,321 +1,117 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" dir="ltr">
 <head>
-  <meta charset="UTF-8">
-    <!-- High-Res Aesthetic Favicon -->
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>">
-  <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>StanKit Studio | About Us - Free Fandom Micro-Tools</title>
-  <meta name="description" content="Learn about StanKit Studio: an independent, privacy-first fandom micro-tool studio building 100% free DIY photocard grid generators, multilingual fan letter AI, and K-Pop community tools.">
-  <meta name="keywords" content="stankit, stankit studio, about stankit, kpop fandom tools, photocard printable grid, fan letter generator, indie web studio">
-  <script src="https://cdn.tailwindcss.com"></script>
-  
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
-    body { font-family: 'Plus Jakarta Sans', sans-serif; }
-    
-      /* Position Ko-fi Floating Widget to Bottom-Right with Clean Safe Z-Index */
-    .floatingchat-container-wrap,
-    .floatingchat-container-wrap-mobi,
-    .floatingchat-container,
-    div[class*="floatingchat-container"] {
-      left: auto !important;
-      right: 20px !important;
-      bottom: 20px !important;
-    }
-    .floating-chat-kofi-popup-iframe,
-    .floating-chat-kofi-popup-iframe-mobi,
-    iframe[class*="floating-chat-kofi"] {
-      left: auto !important;
-      right: 20px !important;
-    }
-  </style>
-
-  
-    <!-- Analytics & UTM Attribution Engine -->
-  <script>
-    window.STANKIT_GA_ID = window.STANKIT_GA_ID || 'G-MEASUREMENT_ID';
-
-    (function initAttribution() {
-      try {
-        const urlParams = new URLSearchParams(window.location.search);
-        const utmSource = urlParams.get('utm_source') || urlParams.get('ref') || '';
-        const utmMedium = urlParams.get('utm_medium') || '';
-        const utmCampaign = urlParams.get('utm_campaign') || '';
-        const referrer = document.referrer || '';
-        if (utmSource || utmMedium || utmCampaign) {
-          const attribution = {
-            utm_source: utmSource,
-            utm_medium: utmMedium,
-            utm_campaign: utmCampaign,
-            referrer: referrer,
-            timestamp: Date.now()
-          };
-          sessionStorage.setItem('stankit_attribution', JSON.stringify(attribution));
-        }
-      } catch (e) {}
-    })();
-
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){ window.dataLayer.push(arguments); }
-
-    if (window.STANKIT_GA_ID && window.STANKIT_GA_ID !== 'G-MEASUREMENT_ID' && window.STANKIT_GA_ID.startsWith('G-')) {
-      const gaScript = document.createElement('script');
-      gaScript.async = true;
-      gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=' + window.STANKIT_GA_ID;
-      document.head.appendChild(gaScript);
-      gtag('js', new Date());
-      gtag('config', window.STANKIT_GA_ID, { 'anonymize_ip': true });
-    } else {
-      console.log('[Analytics Notice] GA4 Measurement ID unconfigured. Set window.STANKIT_GA_ID with your real ID to activate live telemetry.');
-    }
-
-    function trackGA4Event(eventName, eventParams = {}) {
-      try {
-        const savedAttr = sessionStorage.getItem('stankit_attribution');
-        if (savedAttr) {
-          eventParams = Object.assign({}, JSON.parse(savedAttr), eventParams);
-        }
-      } catch (e) {}
-      if (typeof window.gtag === 'function') {
-        window.gtag('event', eventName, eventParams);
-      }
-      console.log('[Analytics Event]', eventName, eventParams);
-    }
-  </script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-MEASUREMENT_ID');
-
-    function trackGA4Event(eventName, eventParams = {}) {
-      if (typeof gtag === 'function') {
-        gtag('event', eventName, eventParams);
-      }
-      console.log('[GA4 Event]', eventName, eventParams);
-    }
-  </script>
-
-  <link rel="canonical" href="https://stankit.vercel.app/about.html">
-  <!-- OpenGraph & Twitter Meta Tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>About StanKit Studio | Independent Fan-Made Tools</title>
+  <meta name="description" content="Learn what StanKit Studio does, how its browser-based tools work, and why it is an independent, unofficial fan project.">
+  <link rel="canonical" href="https://stankit.vercel.app/about">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="StanKit Studio | Free Fandom Micro-Tools">
-  <meta property="og:description" content="100% free DIY photocard grid generator, fan letter builder, and fandom micro-tools.">
-  <meta property="og:url" content="https://stankit.vercel.app/">
+  <meta property="og:title" content="About StanKit Studio">
+  <meta property="og:description" content="Browser-based photocard layout and fan-letter drafting tools from an independent, unofficial fan project.">
+  <meta property="og:url" content="https://stankit.vercel.app/about">
   <meta property="og:site_name" content="StanKit Studio">
-  <meta property="og:image" content="https://stankit.vercel.app/assets/og-photocard.png">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="https://stankit.vercel.app/assets/og-photocard.png">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="About StanKit Studio">
+  <meta name="twitter:description" content="Independent browser-based tools for fandom projects.">
+  <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48dGV4dCB5PSIuOWVtIiBmb250LXNpemU9IjkwIj7inKg8L3RleHQ+PC9zdmc+">
+  <link rel="stylesheet" href="legal.css">
+  <script src="analytics.js"></script>
+  <script defer src="legal.js"></script>
 </head>
-<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col justify-between">
-  
-  <!-- Navigation Header with Multi-Tool Menu -->
-  <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
-    <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-      
-      <!-- Brand & Global Switcher -->
-      <div class="flex items-center space-x-6">
-        <a href="index.html" class="flex items-center space-x-2.5">
-          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-rose-500 flex items-center justify-center text-white font-bold text-xl shadow-md shadow-indigo-100">
-            ✨
-          </div>
-          <div>
-            <span class="text-lg font-extrabold tracking-tight bg-gradient-to-r from-indigo-600 to-rose-500 bg-clip-text text-transparent">StanKit Studio</span>
-            <span class="hidden sm:inline-block text-[11px] font-semibold px-2 py-0.5 ml-2 bg-indigo-50 text-indigo-700 rounded-full border border-indigo-100" data-i18n="badge_hub">Fandom Micro-Tools</span>
-          </div>
-        </a>
-
-        <!-- Tools Nav -->
-        <nav class="hidden md:flex items-center space-x-1 text-xs font-bold text-slate-600">
-          <a href="index.html" class="px-3 py-1.5 rounded-lg hover:text-indigo-600 hover:bg-slate-100 transition flex items-center space-x-1">
-            <span>🖨️</span>
-            <span data-i18n="nav_tool_print">Photocard Print Maker</span>
-          </a>
-          <a href="fan-letter.html" class="px-3 py-1.5 rounded-lg hover:text-indigo-600 hover:bg-slate-100 transition flex items-center space-x-1">
-            <span>💌</span>
-            <span data-i18n="nav_tool_letter">Fan Letter Pro</span>
-          </a>
-          <span class="px-2.5 py-1 text-slate-400 font-medium flex items-center space-x-1 cursor-not-allowed" title="Coming Soon">
-            <span>⏰</span>
-            <span>KST Clock</span>
-            <span class="text-[9px] bg-slate-100 text-slate-500 px-1 py-0.2 rounded">SOON</span>
-          </span>
-          <span class="px-2.5 py-1 text-slate-400 font-medium flex items-center space-x-1 cursor-not-allowed" title="Coming Soon">
-            <span>⏳</span>
-            <span>D-Day</span>
-            <span class="text-[9px] bg-slate-100 text-slate-500 px-1 py-0.2 rounded">SOON</span>
-          </span>
-        </nav>
-      </div>
-
-      <!-- Right Actions: Language Switcher (if on tool pages) & Coffee -->
-      <div class="flex items-center space-x-2 sm:space-x-3">
-        
-        
-      </div>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="index.html" aria-label="StanKit Studio home">
+        <span class="brand-mark" aria-hidden="true">✨</span>
+        <span class="brand-copy">StanKit Studio</span>
+      </a>
+      <nav class="header-nav" aria-label="Primary">
+        <a class="nav-link secondary-link" href="fan-letter.html">Fan letter tool</a>
+        <a class="nav-link" href="index.html">Back to print tool</a>
+      </nav>
     </div>
   </header>
 
-  <!-- Mobile Sub-Navigation Bar -->
-  <div class="md:hidden bg-white border-b border-slate-200 px-4 py-2 flex items-center space-x-2 overflow-x-auto text-xs font-bold">
-    <a href="index.html" class="whitespace-nowrap px-2.5 py-1 rounded-md text-slate-600 hover:bg-slate-100" data-i18n="nav_tool_print">🖨️ Photocard Grid</a>
-    <a href="fan-letter.html" class="whitespace-nowrap px-2.5 py-1 rounded-md text-slate-600 hover:bg-slate-100" data-i18n="nav_tool_letter">💌 Fan Letter Pro</a>
-  </div>
-
-
-  <main class="max-w-4xl mx-auto px-4 py-12 flex-grow">
-    
-    <!-- Hero Section -->
-    <div class="text-center mb-12">
-      <div class="inline-flex items-center space-x-1.5 px-3.5 py-1 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-700 text-xs font-bold mb-3">
-        <span>✨</span>
-        <span>Independent • 100% Free • Privacy-First</span>
-      </div>
-      <h1 class="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight mb-4">
-        Empowering Global Fandoms with <br>
-        <span class="bg-gradient-to-r from-indigo-600 to-rose-500 bg-clip-text text-transparent">Aesthetic, Lightweight Micro-Tools</span>
-      </h1>
-      <p class="text-slate-600 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
-        StanKit Studio is an indie web utility suite created by passionate fans for K-Pop, C-Pop, and global idol fandoms worldwide.
-      </p>
+  <main id="main-content" class="page-shell">
+    <div class="hero">
+      <p class="eyebrow">About this project</p>
+      <h1>Small browser tools for fan-made projects</h1>
+      <p class="lede">StanKit Studio provides a photocard print-layout maker and an editable fan-letter draft builder. It is maintained by Wang Qingsen (王庆森), an independent individual operator based in Nanjing, Jiangsu, China, with no account required for these tools.</p>
+      <p class="updated">Last updated: August 21, 2026</p>
     </div>
 
-    <!-- AdSense Responsive Banner Area -->
-    <div class="mb-10 p-3 rounded-xl border border-dashed border-slate-300 bg-slate-100 text-center text-xs text-slate-400">
-      📢 Advertisement Placement (Google AdSense Responsive Area)
-    </div>
+    <section class="card notice" aria-labelledby="independence-title">
+      <h2 id="independence-title">Unofficial and independent</h2>
+      <p class="no-margin"><strong>StanKit Studio is an unofficial fan-made utility.</strong> It is not affiliated with, operated by, sponsored by or endorsed by any artist, management company, agency, label or platform. Names and other references remain the property of their respective rights holders.</p>
+    </section>
 
-    <!-- Core Philosophy Cards -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-      <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-3">
-        <div class="w-10 h-10 rounded-xl bg-indigo-100 text-indigo-600 flex items-center justify-center text-xl font-bold">
-          🔒
-        </div>
-        <h2 class="text-lg font-bold text-slate-900">100% Privacy-First</h2>
-        <p class="text-sm text-slate-600 leading-relaxed">
-          Zero server uploads. All image rendering, PDF compiling, and fan letter generation run entirely in your local browser. Your photos and personal letters never leave your device.
-        </p>
+    <section class="card" aria-labelledby="tools-title">
+      <h2 id="tools-title">What the tools do</h2>
+      <div class="grid two">
+        <article class="card soft">
+          <h3>Photocard print layouts</h3>
+          <p>Arrange images on supported paper sizes and export a print-ready file. Uploaded image content is processed in the current browser rather than sent to a StanKit Studio image-processing server.</p>
+          <a href="index.html">Open the print tool</a>
+        </article>
+        <article class="card soft">
+          <h3>Editable fan-letter drafts</h3>
+          <p>Start from prewritten templates and customise the result. The builder is a template tool, not a promise of AI translation, cultural review or guaranteed honorific accuracy.</p>
+          <a href="fan-letter.html">Open the fan-letter tool</a>
+        </article>
       </div>
+    </section>
 
-      <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-3">
-        <div class="w-10 h-10 rounded-xl bg-rose-100 text-rose-600 flex items-center justify-center text-xl font-bold">
-          ⚡
+    <section class="card" aria-labelledby="principles-title">
+      <h2 id="principles-title">Product principles</h2>
+      <div class="grid three">
+        <div>
+          <h3>Clear scope</h3>
+          <p class="muted">Describe what the current static tools actually do without inventing user counts, certifications or professional-team claims.</p>
         </div>
-        <h2 class="text-lg font-bold text-slate-900">Zero Lag & Instant</h2>
-        <p class="text-sm text-slate-600 leading-relaxed">
-          No sign-up barriers, no paywalls, and no heavyweight apps to install. Open the link, craft what you need in seconds, and download high-resolution outputs instantly.
-        </p>
-      </div>
-
-      <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-3">
-        <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center text-xl font-bold">
-          💎
+        <div>
+          <h3>Local processing</h3>
+          <p class="muted">Keep uploaded image content in the browser while clearly disclosing browser storage and third-party network requests.</p>
         </div>
-        <h2 class="text-lg font-bold text-slate-900">Culturally Grounded</h2>
-        <p class="text-sm text-slate-600 leading-relaxed">
-          Built with authentic understanding of fandom rituals — from proper Korean honorifics (존댓말/해요체) to Weverse comment snipes, Bubble DMs, and standard 55×85mm photocard sizing.
-        </p>
-      </div>
-    </div>
-
-    <!-- Tools Breakdown -->
-    <div class="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm space-y-8 mb-12">
-      <h2 class="text-2xl font-bold text-slate-900 border-b border-slate-100 pb-4">Our Micro-Tools Suite</h2>
-      
-      <div class="space-y-6">
-        <div class="flex items-start space-x-4">
-          <div class="w-12 h-12 rounded-xl bg-indigo-50 text-indigo-600 flex-shrink-0 flex items-center justify-center text-2xl">
-            🖨️
-          </div>
-          <div>
-            <h3 class="text-base font-bold text-slate-900 flex items-center space-x-2">
-              <a href="index.html" class="hover:text-indigo-600 hover:underline">Photocard Print Maker</a>
-              <span class="text-[10px] bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded-full">Live</span>
-            </h3>
-            <p class="text-sm text-slate-600 mt-1 leading-relaxed">
-              Upload idol photos and automatically tile them into precise 55×85mm standard collectible grids with 300 DPI high-resolution PDF output, bleed lines, and optional cut markers.
-            </p>
-          </div>
-        </div>
-
-        <div class="flex items-start space-x-4">
-          <div class="w-12 h-12 rounded-xl bg-rose-50 text-rose-600 flex-shrink-0 flex items-center justify-center text-2xl">
-            💌
-          </div>
-          <div>
-            <h3 class="text-base font-bold text-slate-900 flex items-center space-x-2">
-              <a href="fan-letter.html" class="hover:text-indigo-600 hover:underline">Fan Letter Pro Studio</a>
-              <span class="text-[10px] bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded-full">Live</span>
-            </h3>
-            <p class="text-sm text-slate-600 mt-1 leading-relaxed">
-              Craft culturally accurate fan letters across 27+ fandom scenarios (comebacks, concerts, birthdays, enlistment, Weverse first comments, Bubble replies) with 4-dimensional tone sliders and custom memory slots.
-            </p>
-          </div>
-        </div>
-
-        <div class="flex items-start space-x-4">
-          <div class="w-12 h-12 rounded-xl bg-slate-100 text-slate-500 flex-shrink-0 flex items-center justify-center text-2xl">
-            ⏰
-          </div>
-          <div>
-            <h3 class="text-base font-bold text-slate-900 flex items-center space-x-2">
-              <span>KST Timezone Sync & Fandom Schedule Clock</span>
-              <span class="text-[10px] bg-indigo-50 text-indigo-600 font-bold px-2 py-0.5 rounded-full">In Progress</span>
-            </h3>
-            <p class="text-sm text-slate-600 mt-1 leading-relaxed">
-              Real-time Korea Standard Time (KST), China Standard Time (CST), and local timezone conversion with K-Pop broadcast schedules (Music Bank, Inkigayo, M Countdown).
-            </p>
-          </div>
+        <div>
+          <h3>User control</h3>
+          <p class="muted">Let users review drafts and exports, clear saved site data, and understand their responsibility for third-party content.</p>
         </div>
       </div>
-    </div>
+    </section>
 
-    <!-- Creator Note -->
-    <div class="bg-gradient-to-r from-indigo-50 to-purple-50 p-8 rounded-2xl border border-indigo-100 shadow-xs space-y-4">
-      <h2 class="text-xl font-bold text-slate-900">A Note from the Creator</h2>
-      <p class="text-sm text-slate-700 leading-relaxed">
-        Hi! I'm Simon, a data analyst and indie creator. Like many fans, I found myself frustrated by cluttered ad-heavy tools, clumsy machine translations that disrespected Korean honorifics, and awkward card sizing templates.
-      </p>
-      <p class="text-sm text-slate-700 leading-relaxed">
-        StanKit Studio was born to fix that: to provide clean, elegant, free utilities that make fandom life more joyful. If you find these tools helpful, considering </a> helps keep the servers running and tools ad-light!
-      </p>
-    </div>
+    <section id="critical-summary" class="card critical-summary" aria-labelledby="summary-title">
+      <div class="summary-head">
+        <h2 id="summary-title" class="summary-title">Key privacy, rights and independence summary</h2>
+        <div class="language-control">
+          <label for="summary-language">Summary language</label>
+          <select id="summary-language" aria-label="Summary language"></select>
+        </div>
+      </div>
+      <ul id="summary-list" class="summary-list"></ul>
+    </section>
 
+    <section class="card" aria-labelledby="contact-title">
+      <h2 id="contact-title">Questions, corrections or requests</h2>
+      <p>Use the contact page to prepare feedback for the public GitHub issue tracker. The site does not pretend that a static form sent a message.</p>
+      <div class="form-actions">
+        <a class="button primary" href="contact.html">Prepare feedback</a>
+        <a class="button secondary" href="https://ko-fi.com/stankitstudio" target="_blank" rel="noopener noreferrer">Optional Ko-fi support</a>
+      </div>
+    </section>
   </main>
 
-  
-  <!-- Legal & Compliance Footer (4 Major Compliance Links) -->
-    <!-- Legal & Compliance Footer (Centered Layout - 100% Clear from Floating Widget) -->
-  <footer class="bg-white border-t border-slate-200 mt-16 py-10 pb-28 sm:pb-20">
-    <div class="max-w-4xl mx-auto px-4 text-center space-y-3 text-xs text-slate-500">
-      <div class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 font-semibold text-slate-600">
-        <a href="about.html" class="hover:text-indigo-600 transition" data-i18n="footer_about">About Us (关于本站)</a>
-        <a href="privacy.html" class="hover:text-indigo-600 transition" data-i18n="footer_privacy">Privacy Policy (隐私政策)</a>
-        <a href="terms.html" class="hover:text-indigo-600 transition" data-i18n="footer_terms">Terms of Service (服务条款)</a>
-        <a href="contact.html" class="hover:text-indigo-600 transition" data-i18n="footer_contact">Contact Us (联系我们)</a>
-      </div>
-      <div class="text-[11px] text-slate-400">
-        <span>© 2026 StanKit Studio. All rights reserved. Built for global fandom communities.</span>
-      </div>
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <nav class="footer-nav" aria-label="Legal and information">
+        <a href="about.html" aria-current="page">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+      </nav>
+      <p class="footer-disclaimer">© 2026 StanKit Studio. Unofficial fan-made tool; not affiliated with or endorsed by any artist, agency, label or platform.</p>
     </div>
   </footer>
-
-  
-
-  <!-- Ko-fi Floating Widget Overlay (In-page Modal Support) -->
-  <script src="https://storage.ko-fi.com/cdn/scripts/overlay-widget.js"></script>
-  <script>
-    kofiWidgetOverlay.draw('stankitstudio', {
-      'type': 'floating-chat',
-      'floating-chat.donatebutton.text': 'Support me',
-      'floating-chat.position': 'bottom-right',
-      'floating-chat.donatebutton.background-color': '#6366f1',
-      'floating-chat.donatebutton.text-color': '#ffffff'
-    });
-  </script>
 </body>
 </html>

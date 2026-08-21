@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>">
+  <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48dGV4dCB5PSIuOWVtIiBmb250LXNpemU9IjkwIj7inKg8L3RleHQ+PC9zdmc+">
   <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Free Photocard Print Layout Maker | 300 DPI PDF – StanKit</title>
@@ -56,101 +56,8 @@
   <!-- jsPDF for High-Res 300 DPI PDF Export -->
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js';"></script>
 
-  <!-- Analytics & UTM Attribution Engine -->
-  <script>
-    window.STANKIT_GA_ID = window.STANKIT_GA_ID || 'G-MEASUREMENT_ID';
-
-    function sanitizeCampaignValue(value) {
-      return String(value || '')
-        .replace(/[^a-zA-Z0-9._-]/g, '_')
-        .replace(/_+/g, '_')
-        .slice(0, 64);
-    }
-
-    function getReferrerHost(referrer) {
-      if (!referrer) return '';
-      try {
-        return new URL(referrer).hostname.slice(0, 80);
-      } catch (e) {
-        return '';
-      }
-    }
-
-    (function initAttribution() {
-      try {
-        const urlParams = new URLSearchParams(window.location.search);
-        const utmSource = sanitizeCampaignValue(urlParams.get('utm_source') || urlParams.get('ref') || '');
-        const utmMedium = sanitizeCampaignValue(urlParams.get('utm_medium') || '');
-        const utmCampaign = sanitizeCampaignValue(urlParams.get('utm_campaign') || '');
-        const referrerHost = getReferrerHost(document.referrer || '');
-        if (utmSource || utmMedium || utmCampaign) {
-          const attribution = {
-            utm_source: utmSource,
-            utm_medium: utmMedium,
-            utm_campaign: utmCampaign,
-            referrer_host: referrerHost,
-            timestamp: Date.now()
-          };
-          sessionStorage.setItem('stankit_attribution', JSON.stringify(attribution));
-        }
-      } catch (e) {}
-    })();
-
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){ window.dataLayer.push(arguments); }
-
-    window.STANKIT_ANALYTICS_READY = Boolean(window.STANKIT_GA_ID && window.STANKIT_GA_ID !== 'G-MEASUREMENT_ID' && window.STANKIT_GA_ID.startsWith('G-'));
-
-    if (window.STANKIT_ANALYTICS_READY) {
-      const gaScript = document.createElement('script');
-      gaScript.async = true;
-      gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=' + window.STANKIT_GA_ID;
-      document.head.appendChild(gaScript);
-      gtag('js', new Date());
-      gtag('config', window.STANKIT_GA_ID, { 'anonymize_ip': true });
-    } else {
-      console.log('[Analytics Notice] GA4 Measurement ID unconfigured. Set window.STANKIT_GA_ID with your real ID to activate live telemetry.');
-    }
-
-    const ANALYTICS_ALLOWED_PARAMS = new Set([
-      'action', 'card_count', 'count', 'cut_line', 'duration_ms', 'error_count',
-      'file_count', 'from', 'ignored_count', 'index', 'language', 'paper',
-      'placement', 'platform', 'price_test', 'printed', 'product_id', 'reason',
-      'referrer_host', 'rotation', 'selected_language', 'size_correct', 'source',
-      'success_count', 'theme', 'timestamp', 'to', 'tool', 'utm_campaign',
-      'utm_medium', 'utm_source'
-    ]);
-
-    function sanitizeAnalyticsParams(params) {
-      const clean = {};
-      Object.entries(params || {}).forEach(([key, value]) => {
-        if (!ANALYTICS_ALLOWED_PARAMS.has(key)) return;
-        if (typeof value === 'number' && Number.isFinite(value)) {
-          clean[key] = value;
-        } else if (typeof value === 'boolean') {
-          clean[key] = value;
-        } else if (typeof value === 'string') {
-          clean[key] = value.slice(0, 80);
-        }
-      });
-      return clean;
-    }
-
-    function trackGA4Event(eventName, eventParams = {}) {
-      const safeEventName = /^[a-zA-Z0-9_]{1,40}$/.test(eventName) ? eventName : 'invalid_event_name';
-      try {
-        const savedAttr = sessionStorage.getItem('stankit_attribution');
-        if (savedAttr) {
-          eventParams = Object.assign({}, JSON.parse(savedAttr), eventParams);
-        }
-      } catch (e) {}
-      eventParams = sanitizeAnalyticsParams(eventParams);
-      if (window.STANKIT_ANALYTICS_READY && typeof window.gtag === 'function') {
-        window.gtag('event', safeEventName, eventParams);
-      }
-      console.log('[Analytics Event]', safeEventName, eventParams);
-    }
-  </script>
+  <!-- Shared consent-gated GA4 and UTM attribution -->
+  <script src="analytics.js"></script>
 
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Sans+KR:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Sans+Thai:wght@400;500;700&family=Noto+Sans+Arabic:wght@400;500;700&display=swap');

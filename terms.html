@@ -1,281 +1,135 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" dir="ltr">
 <head>
-  <meta charset="UTF-8">
-    <!-- High-Res Aesthetic Favicon -->
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>">
-  <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>StanKit Studio | Terms of Service</title>
-  <meta name="description" content="Terms of Service for StanKit Studio. Guidelines regarding fair use, intellectual property, disclaimer, and user responsibilities.">
-  <meta name="keywords" content="stankit terms of service, terms of use, fan craft disclaimer">
-  <script src="https://cdn.tailwindcss.com"></script>
-  
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
-    body { font-family: 'Plus Jakarta Sans', sans-serif; }
-    
-      /* Position Ko-fi Floating Widget to Bottom-Right with Clean Safe Z-Index */
-    .floatingchat-container-wrap,
-    .floatingchat-container-wrap-mobi,
-    .floatingchat-container,
-    div[class*="floatingchat-container"] {
-      left: auto !important;
-      right: 20px !important;
-      bottom: 20px !important;
-    }
-    .floating-chat-kofi-popup-iframe,
-    .floating-chat-kofi-popup-iframe-mobi,
-    iframe[class*="floating-chat-kofi"] {
-      left: auto !important;
-      right: 20px !important;
-    }
-  </style>
-
-  
-    <!-- Analytics & UTM Attribution Engine -->
-  <script>
-    window.STANKIT_GA_ID = window.STANKIT_GA_ID || 'G-MEASUREMENT_ID';
-
-    (function initAttribution() {
-      try {
-        const urlParams = new URLSearchParams(window.location.search);
-        const utmSource = urlParams.get('utm_source') || urlParams.get('ref') || '';
-        const utmMedium = urlParams.get('utm_medium') || '';
-        const utmCampaign = urlParams.get('utm_campaign') || '';
-        const referrer = document.referrer || '';
-        if (utmSource || utmMedium || utmCampaign) {
-          const attribution = {
-            utm_source: utmSource,
-            utm_medium: utmMedium,
-            utm_campaign: utmCampaign,
-            referrer: referrer,
-            timestamp: Date.now()
-          };
-          sessionStorage.setItem('stankit_attribution', JSON.stringify(attribution));
-        }
-      } catch (e) {}
-    })();
-
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){ window.dataLayer.push(arguments); }
-
-    if (window.STANKIT_GA_ID && window.STANKIT_GA_ID !== 'G-MEASUREMENT_ID' && window.STANKIT_GA_ID.startsWith('G-')) {
-      const gaScript = document.createElement('script');
-      gaScript.async = true;
-      gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=' + window.STANKIT_GA_ID;
-      document.head.appendChild(gaScript);
-      gtag('js', new Date());
-      gtag('config', window.STANKIT_GA_ID, { 'anonymize_ip': true });
-    } else {
-      console.log('[Analytics Notice] GA4 Measurement ID unconfigured. Set window.STANKIT_GA_ID with your real ID to activate live telemetry.');
-    }
-
-    function trackGA4Event(eventName, eventParams = {}) {
-      try {
-        const savedAttr = sessionStorage.getItem('stankit_attribution');
-        if (savedAttr) {
-          eventParams = Object.assign({}, JSON.parse(savedAttr), eventParams);
-        }
-      } catch (e) {}
-      if (typeof window.gtag === 'function') {
-        window.gtag('event', eventName, eventParams);
-      }
-      console.log('[Analytics Event]', eventName, eventParams);
-    }
-  </script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-MEASUREMENT_ID');
-
-    function trackGA4Event(eventName, eventParams = {}) {
-      if (typeof gtag === 'function') {
-        gtag('event', eventName, eventParams);
-      }
-      console.log('[GA4 Event]', eventName, eventParams);
-    }
-  </script>
-
-  <link rel="canonical" href="https://stankit.vercel.app/terms.html">
-  <!-- OpenGraph & Twitter Meta Tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Terms of Use | StanKit Studio</title>
+  <meta name="description" content="Terms for using StanKit Studio, including content rights, unofficial status, user responsibilities and output limitations.">
+  <link rel="canonical" href="https://stankit.vercel.app/terms">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="StanKit Studio | Free Fandom Micro-Tools">
-  <meta property="og:description" content="100% free DIY photocard grid generator, fan letter builder, and fandom micro-tools.">
-  <meta property="og:url" content="https://stankit.vercel.app/">
+  <meta property="og:title" content="StanKit Studio Terms of Use">
+  <meta property="og:description" content="Content rights, user responsibilities and limitations for the independent StanKit Studio fan tools.">
+  <meta property="og:url" content="https://stankit.vercel.app/terms">
   <meta property="og:site_name" content="StanKit Studio">
-  <meta property="og:image" content="https://stankit.vercel.app/assets/og-photocard.png">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="https://stankit.vercel.app/assets/og-photocard.png">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="StanKit Studio Terms of Use">
+  <meta name="twitter:description" content="Terms for using StanKit Studio’s independent fan-made tools.">
+  <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48dGV4dCB5PSIuOWVtIiBmb250LXNpemU9IjkwIj7inKg8L3RleHQ+PC9zdmc+">
+  <link rel="stylesheet" href="legal.css">
+  <script src="analytics.js"></script>
+  <script defer src="legal.js"></script>
 </head>
-<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col justify-between">
-  
-  <!-- Navigation Header with Multi-Tool Menu -->
-  <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
-    <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-      
-      <!-- Brand & Global Switcher -->
-      <div class="flex items-center space-x-6">
-        <a href="index.html" class="flex items-center space-x-2.5">
-          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-rose-500 flex items-center justify-center text-white font-bold text-xl shadow-md shadow-indigo-100">
-            ✨
-          </div>
-          <div>
-            <span class="text-lg font-extrabold tracking-tight bg-gradient-to-r from-indigo-600 to-rose-500 bg-clip-text text-transparent">StanKit Studio</span>
-            <span class="hidden sm:inline-block text-[11px] font-semibold px-2 py-0.5 ml-2 bg-indigo-50 text-indigo-700 rounded-full border border-indigo-100" data-i18n="badge_hub">Fandom Micro-Tools</span>
-          </div>
-        </a>
-
-        <!-- Tools Nav -->
-        <nav class="hidden md:flex items-center space-x-1 text-xs font-bold text-slate-600">
-          <a href="index.html" class="px-3 py-1.5 rounded-lg hover:text-indigo-600 hover:bg-slate-100 transition flex items-center space-x-1">
-            <span>🖨️</span>
-            <span data-i18n="nav_tool_print">Photocard Print Maker</span>
-          </a>
-          <a href="fan-letter.html" class="px-3 py-1.5 rounded-lg hover:text-indigo-600 hover:bg-slate-100 transition flex items-center space-x-1">
-            <span>💌</span>
-            <span data-i18n="nav_tool_letter">Fan Letter Pro</span>
-          </a>
-          <span class="px-2.5 py-1 text-slate-400 font-medium flex items-center space-x-1 cursor-not-allowed" title="Coming Soon">
-            <span>⏰</span>
-            <span>KST Clock</span>
-            <span class="text-[9px] bg-slate-100 text-slate-500 px-1 py-0.2 rounded">SOON</span>
-          </span>
-          <span class="px-2.5 py-1 text-slate-400 font-medium flex items-center space-x-1 cursor-not-allowed" title="Coming Soon">
-            <span>⏳</span>
-            <span>D-Day</span>
-            <span class="text-[9px] bg-slate-100 text-slate-500 px-1 py-0.2 rounded">SOON</span>
-          </span>
-        </nav>
-      </div>
-
-      <!-- Right Actions: Language Switcher (if on tool pages) & Coffee -->
-      <div class="flex items-center space-x-2 sm:space-x-3">
-        
-        
-      </div>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="index.html" aria-label="StanKit Studio home">
+        <span class="brand-mark" aria-hidden="true">✨</span>
+        <span class="brand-copy">StanKit Studio</span>
+      </a>
+      <nav class="header-nav" aria-label="Primary">
+        <a class="nav-link secondary-link" href="contact.html">Contact</a>
+        <a class="nav-link" href="index.html">Back to print tool</a>
+      </nav>
     </div>
   </header>
 
-  <!-- Mobile Sub-Navigation Bar -->
-  <div class="md:hidden bg-white border-b border-slate-200 px-4 py-2 flex items-center space-x-2 overflow-x-auto text-xs font-bold">
-    <a href="index.html" class="whitespace-nowrap px-2.5 py-1 rounded-md text-slate-600 hover:bg-slate-100" data-i18n="nav_tool_print">🖨️ Photocard Grid</a>
-    <a href="fan-letter.html" class="whitespace-nowrap px-2.5 py-1 rounded-md text-slate-600 hover:bg-slate-100" data-i18n="nav_tool_letter">💌 Fan Letter Pro</a>
-  </div>
-
-
-  <main class="max-w-4xl mx-auto px-4 py-12 flex-grow">
-    
-    <div class="bg-white p-8 sm:p-12 rounded-2xl border border-slate-200 shadow-sm space-y-8">
-      
-      <div>
-        <div class="text-xs font-bold text-indigo-600 uppercase tracking-wider mb-2">Terms & Guidelines</div>
-        <h1 class="text-3xl font-extrabold text-slate-900">Terms of Service</h1>
-        <p class="text-xs text-slate-400 mt-1">Last updated: August 19, 2026</p>
-      </div>
-
-      <div class="prose prose-slate max-w-none text-sm text-slate-600 space-y-6 leading-relaxed">
-        
-        <section class="space-y-2">
-          <h2 class="text-lg font-bold text-slate-900">1. Acceptance of Terms</h2>
-          <p>
-            By accessing and using <strong>StanKit Studio</strong> (<a href="https://stankit.vercel.app" class="text-indigo-600 underline">https://stankit.vercel.app</a>), you agree to comply with and be bound by these Terms of Service. If you do not agree to these terms, please do not use our services.
-          </p>
-        </section>
-
-        <section class="space-y-2">
-          <h2 class="text-lg font-bold text-slate-900">2. Description of Service & Permitted Use</h2>
-          <p>
-            StanKit Studio provides free, client-side productivity utilities designed for personal, non-commercial entertainment and fandom support (such as DIY photocard printable layout generation and multilingual fan letter assistance).
-          </p>
-          <p>
-            <strong>Permitted Use:</strong> You are authorized to use our tools for personal collections, non-commercial fan DIY crafts, and positive social media cheering. Commercial re-distribution of copyrighted artist likenesses generated through this tool is strictly subject to the laws of your jurisdiction and respective rights holders.
-          </p>
-        </section>
-
-        <section class="space-y-2">
-          <h2 class="text-lg font-bold text-slate-900">3. Intellectual Property Rights & Fair Use Notice</h2>
-          <p>
-            StanKit Studio is an independent fan-made utility. All trademarks, group names, artist likenesses, logos, and copyrighted materials referenced belong exclusively to their respective management agencies, entertainment companies, and artists.
-          </p>
-          <p>
-            References to idol names (e.g., BTS, Stray Kids, SEVENTEEN, aespa, Xiao Zhan, etc.) are used solely for descriptive, cultural nominative fair use to assist fans with localized spelling, honorific accuracy, and standard photocard dimensions. StanKit Studio is not affiliated with, endorsed by, or sponsored by any entertainment company.
-          </p>
-        </section>
-
-        <section class="space-y-2">
-          <h2 class="text-lg font-bold text-slate-900">4. User Responsibility & Conduct</h2>
-          <p>
-            Users are solely responsible for the images and text they process using our tools. You agree not to use our service to generate defamatory, abusive, harassing, or unlawful content.
-          </p>
-        </section>
-
-        <section class="space-y-2">
-          <h2 class="text-lg font-bold text-slate-900">5. Disclaimer of Warranties</h2>
-          <p>
-            The services are provided on an "AS IS" and "AS AVAILABLE" basis without warranties of any kind, whether express or implied. While we strive to ensure maximum accuracy in printing resolutions (300 DPI) and linguistic honorific accuracy, we make no guarantee that outputs will be error-free on every printer hardware or social platform.
-          </p>
-        </section>
-
-        <section class="space-y-2">
-          <h2 class="text-lg font-bold text-slate-900">6. Limitation of Liability</h2>
-          <p>
-            In no event shall StanKit Studio or its creators be liable for any indirect, incidental, special, or consequential damages resulting from the use or inability to use our tools.
-          </p>
-        </section>
-
-        <section class="space-y-2">
-          <h2 class="text-lg font-bold text-slate-900">7. Changes to Terms</h2>
-          <p>
-            We reserve the right to modify these Terms of Service at any time. Continued use of our website following any changes constitutes acceptance of the new terms.
-          </p>
-        </section>
-
-        <section class="space-y-2">
-          <h2 class="text-lg font-bold text-slate-900">8. Contact & Legal Inquiries</h2>
-          <p>
-            If you have questions regarding these Terms of Service, please reach out to us at <a href="mailto:stankit.studio@gmail.com" class="text-indigo-600 font-bold hover:underline">stankit.studio@gmail.com</a> or visit our <a href="contact.html" class="text-indigo-600 font-bold hover:underline">Contact Us</a> page.
-          </p>
-        </section>
-
-      </div>
-
+  <main id="main-content" class="page-shell">
+    <div class="hero">
+      <p class="eyebrow">Terms and responsibilities</p>
+      <h1>Terms of Use</h1>
+      <p class="lede">These terms explain the conditions for using the current free, browser-based StanKit Studio tools.</p>
+      <p class="updated">Effective and last updated: August 21, 2026</p>
     </div>
 
+    <section id="critical-summary" class="card critical-summary" aria-labelledby="summary-title">
+      <div class="summary-head">
+        <h2 id="summary-title" class="summary-title">Key privacy, rights and independence summary</h2>
+        <div class="language-control">
+          <label for="summary-language">Summary language</label>
+          <select id="summary-language" aria-label="Summary language"></select>
+        </div>
+      </div>
+      <ul id="summary-list" class="summary-list"></ul>
+    </section>
+
+    <article class="card prose" aria-label="Terms of Use full English version">
+      <section>
+        <h2>1. Acceptance</h2>
+        <p>By accessing or using StanKit Studio at <a href="https://stankit.vercel.app/">https://stankit.vercel.app/</a>, you agree to these Terms of Use and the <a href="privacy.html">Privacy Policy</a>. If you do not agree, do not use the tools.</p>
+      </section>
+
+      <section>
+        <h2>2. The service</h2>
+        <p>StanKit Studio is operated by Wang Qingsen (王庆森), an independent individual based in Nanjing, Jiangsu, China. It currently provides browser-based tools for arranging photocard print layouts and preparing editable fan-letter drafts. The service may change, be interrupted, or be withdrawn. No account, paid entitlement or guaranteed support response is offered by these terms.</p>
+      </section>
+
+      <section>
+        <h2>3. Unofficial fan-made status</h2>
+        <p><strong>StanKit Studio is an independent, unofficial fan-made utility.</strong> It is not affiliated with, operated by, sponsored by or endorsed by any artist, management company, agency, label or platform.</p>
+        <p>Artist names, group names, images, logos, trademarks, platform names and other third-party material remain subject to the rights of their respective holders. Their appearance in a tool or template does not imply permission, partnership or endorsement.</p>
+      </section>
+
+      <section>
+        <h2>4. Your content rights and permissions</h2>
+        <p>You are responsible for every image, name, logo, trademark, message and other item you upload, enter, edit, combine, download, print, publish, share or sell using the tools.</p>
+        <p><strong>You must own the relevant rights or have all permissions, licences or other lawful authority required for your intended use of uploaded images and exported content.</strong> This includes any necessary permission relating to copyright, trademarks, publicity or personality rights, privacy and platform rules.</p>
+        <p>Creating a layout, draft or export with StanKit Studio does not grant you ownership of, or a licence to, any third-party material. The site does not determine whether fair use, fair dealing, personal use or another exception applies in your country or situation.</p>
+      </section>
+
+      <section>
+        <h2>5. Acceptable use</h2>
+        <p>You must not use the tools to violate law or third-party rights; impersonate another person; harass, threaten or defame; distribute malware; bypass security; interfere with the site; or create deceptive content that falsely suggests official artist, agency, label or platform approval.</p>
+        <p>You are responsible for checking the rules of any printer, retailer, event, social platform, fan platform or marketplace where you use an output.</p>
+      </section>
+
+      <section>
+        <h2>6. Output and printing limitations</h2>
+        <p>Templates, dimensions, translations, names, honorifics, cultural notes, print settings and exports may contain errors or may not suit a particular printer, paper, cutting process, language context or platform rule. Review and test all outputs before relying on them.</p>
+        <p>The fan-letter tool provides editable template drafts and does not guarantee translation, cultural appropriateness, delivery, artist review or a response. The print tool cannot guarantee a physical result because printer scaling, drivers, paper handling and retailer settings are outside the site’s control.</p>
+      </section>
+
+      <section>
+        <h2>7. Third-party services and links</h2>
+        <p>The site may rely on or link to third-party hosting, code delivery, fonts, PDF libraries, analytics, GitHub and Ko-fi. Those services have their own terms and privacy practices. StanKit Studio does not control their availability or decisions.</p>
+      </section>
+
+      <section>
+        <h2>8. Disclaimer</h2>
+        <p>To the extent permitted by applicable law, the tools are provided “as is” and “as available,” without guarantees that they will be uninterrupted, error-free, accurate, suitable for a particular purpose or free of third-party claims. Nothing in these terms excludes rights or remedies that cannot lawfully be excluded.</p>
+      </section>
+
+      <section>
+        <h2>9. Limitation of responsibility</h2>
+        <p>To the extent permitted by applicable law, StanKit Studio’s maintainer is not responsible for indirect or consequential loss arising from use of, or inability to use, the tools; physical printing outcomes; loss of browser-stored drafts or settings; or third-party claims arising from content you chose to use.</p>
+      </section>
+
+      <section>
+        <h2>10. Governing law and disputes</h2>
+        <p>These terms and disputes arising out of or relating to StanKit Studio are governed by the laws of the People’s Republic of China as applied in mainland China, without regard to conflict-of-law rules.</p>
+        <p>Before starting formal proceedings, the parties should make a reasonable good-faith attempt to resolve the issue through the contact routes below. If a dispute cannot be resolved, it may be submitted to a people’s court that has jurisdiction under applicable law, including, where applicable, a competent court at the operator’s domicile in Nanjing, Jiangsu, China.</p>
+        <p><strong>Nothing in this section removes or restricts any mandatory consumer-protection, privacy, complaint, regulatory or forum right that applies to a user under applicable law.</strong></p>
+      </section>
+
+      <section>
+        <h2>11. Changes and contact</h2>
+        <p>These terms may be updated as the tools or legal requirements change. Material revisions will be reflected by the effective date above. Continued use after an update means the updated terms apply from that point, subject to rights that cannot be waived.</p>
+        <p>For non-confidential questions or corrections, use the <a href="contact.html">contact page</a> and submit the prepared text through the public GitHub issue tracker. Do not include confidential information or identity documents there.</p>
+        <p>For confidential privacy or legal requests, email <a class="break-anywhere" href="mailto:simon602653879@hotmail.com?subject=StanKit%20Studio%20privacy%20or%20legal%20request">simon602653879@hotmail.com</a>.</p>
+      </section>
+    </article>
   </main>
 
-  
-  <!-- Legal & Compliance Footer (4 Major Compliance Links) -->
-    <!-- Legal & Compliance Footer (Centered Layout - 100% Clear from Floating Widget) -->
-  <footer class="bg-white border-t border-slate-200 mt-16 py-10 pb-28 sm:pb-20">
-    <div class="max-w-4xl mx-auto px-4 text-center space-y-3 text-xs text-slate-500">
-      <div class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 font-semibold text-slate-600">
-        <a href="about.html" class="hover:text-indigo-600 transition" data-i18n="footer_about">About Us (关于本站)</a>
-        <a href="privacy.html" class="hover:text-indigo-600 transition" data-i18n="footer_privacy">Privacy Policy (隐私政策)</a>
-        <a href="terms.html" class="hover:text-indigo-600 transition" data-i18n="footer_terms">Terms of Service (服务条款)</a>
-        <a href="contact.html" class="hover:text-indigo-600 transition" data-i18n="footer_contact">Contact Us (联系我们)</a>
-      </div>
-      <div class="text-[11px] text-slate-400">
-        <span>© 2026 StanKit Studio. All rights reserved. Built for global fandom communities.</span>
-      </div>
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <nav class="footer-nav" aria-label="Legal and information">
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html" aria-current="page">Terms</a>
+      </nav>
+      <p class="footer-disclaimer">© 2026 StanKit Studio. Unofficial fan-made tool; not affiliated with or endorsed by any artist, agency, label or platform.</p>
     </div>
   </footer>
-
-  
-
-  <!-- Ko-fi Floating Widget Overlay (In-page Modal Support) -->
-  <script src="https://storage.ko-fi.com/cdn/scripts/overlay-widget.js"></script>
-  <script>
-    kofiWidgetOverlay.draw('stankitstudio', {
-      'type': 'floating-chat',
-      'floating-chat.donatebutton.text': 'Support me',
-      'floating-chat.position': 'bottom-right',
-      'floating-chat.donatebutton.background-color': '#6366f1',
-      'floating-chat.donatebutton.text-color': '#ffffff'
-    });
-  </script>
 </body>
 </html>
