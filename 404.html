@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Page Not Found | StanKit Studio</title>
+  <meta name="description" content="This StanKit Studio page could not be found. Return to the photocard print tool, fan-letter templates, or contact page.">
+  <meta name="robots" content="noindex, follow">
+  <link rel="canonical" href="https://stankit.vercel.app/404">
+  <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48dGV4dCB5PSIuOWVtIiBmb250LXNpemU9IjkwIj7inKg8L3RleHQ+PC9zdmc+">
+  <style>
+    :root {
+      color-scheme: light;
+      font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f8fafc;
+      color: #172033;
+    }
+    * { box-sizing: border-box; }
+    body {
+      min-height: 100vh;
+      margin: 0;
+      display: grid;
+      place-items: center;
+      padding: 1.25rem;
+      background:
+        radial-gradient(circle at 10% 10%, rgba(196, 181, 253, .38), transparent 25rem),
+        radial-gradient(circle at 90% 18%, rgba(251, 207, 232, .42), transparent 28rem),
+        linear-gradient(180deg, #fafaff, #fffafa);
+    }
+    main {
+      width: min(46rem, 100%);
+      padding: clamp(1.5rem, 5vw, 3.5rem);
+      border: 1px solid rgba(203, 213, 225, .86);
+      border-radius: 1.75rem;
+      background: rgba(255, 255, 255, .88);
+      box-shadow: 0 24px 70px rgba(71, 85, 105, .13);
+      text-align: center;
+      backdrop-filter: blur(16px);
+    }
+    .topbar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+    .brand { color: #4338ca; font-weight: 850; text-decoration: none; }
+    .language { display: flex; align-items: center; gap: .5rem; color: #64748b; font-size: .8rem; }
+    select { min-height: 2.5rem; border: 1px solid #cbd5e1; border-radius: .75rem; background: #fff; padding: 0 .75rem; color: #334155; font: inherit; }
+    .code { margin: clamp(2rem, 7vw, 4rem) 0 .25rem; color: #4f46e5; font-size: clamp(4.75rem, 20vw, 9rem); font-weight: 900; line-height: .85; letter-spacing: -.08em; }
+    .eyebrow { margin: 1rem 0 0; color: #be185d; font-size: .78rem; font-weight: 850; letter-spacing: .12em; text-transform: uppercase; }
+    h1 { margin: .65rem 0 0; font-size: clamp(1.7rem, 6vw, 2.65rem); line-height: 1.1; }
+    .body { max-width: 37rem; margin: 1rem auto 0; color: #64748b; line-height: 1.7; }
+    nav { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .75rem; margin-top: 1.75rem; }
+    .button { display: flex; align-items: center; justify-content: center; min-height: 3rem; padding: .75rem 1rem; border: 1px solid #cbd5e1; border-radius: .9rem; background: #fff; color: #334155; font-weight: 800; text-decoration: none; }
+    .button.primary { border-color: transparent; background: linear-gradient(135deg, #4f46e5, #e11d48); color: #fff; }
+    .button:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(71, 85, 105, .12); }
+    .button:focus-visible, select:focus-visible { outline: 3px solid #a5b4fc; outline-offset: 3px; }
+    @media (max-width: 36rem) {
+      .topbar { align-items: flex-start; flex-direction: column; }
+      nav { grid-template-columns: 1fr; }
+      .language { width: 100%; justify-content: space-between; }
+    }
+    @media (prefers-reduced-motion: reduce) { .button { transition: none; } }
+  </style>
+</head>
+<body>
+  <main aria-live="polite">
+    <div class="topbar">
+      <a class="brand" href="/">✨ StanKit Studio</a>
+      <label class="language" for="language-select">
+        <span data-copy="language">Language</span>
+        <select id="language-select">
+          <option value="en">English</option>
+          <option value="zh">简体中文</option>
+          <option value="zh-TW">繁體中文</option>
+          <option value="ko">한국어</option>
+          <option value="ja">日本語</option>
+          <option value="id">Bahasa Indonesia</option>
+          <option value="ms">Bahasa Melayu</option>
+          <option value="th">ไทย</option>
+          <option value="ar">العربية</option>
+          <option value="es">Español</option>
+        </select>
+      </label>
+    </div>
+    <div class="code" aria-hidden="true">404</div>
+    <p class="eyebrow" data-copy="eyebrow">That page is not here</p>
+    <h1 data-copy="title">Let’s get you back to a useful tool.</h1>
+    <p class="body" data-copy="body">The address may be old, incomplete, or mistyped. Choose a real page below; your browser-stored projects have not been changed.</p>
+    <nav aria-label="Useful pages">
+      <a class="button primary" href="/" data-copy="print">Open photocard print tool</a>
+      <a class="button" href="/fan-letter" data-copy="letter">Open fan-letter templates</a>
+      <a class="button" href="/about" data-copy="about">About StanKit Studio</a>
+      <a class="button" href="/contact" data-copy="contact">Report a broken link</a>
+    </nav>
+  </main>
+  <script>
+    const copy = {
+      en: { language: "Language", eyebrow: "That page is not here", title: "Let’s get you back to a useful tool.", body: "The address may be old, incomplete, or mistyped. Choose a real page below; your browser-stored projects have not been changed.", print: "Open photocard print tool", letter: "Open fan-letter templates", about: "About StanKit Studio", contact: "Report a broken link", documentTitle: "Page Not Found | StanKit Studio" },
+      zh: { language: "语言", eyebrow: "这个页面不存在", title: "返回一个真正有用的工具吧。", body: "链接可能已过期、不完整或输入有误。请选择下方的真实页面；浏览器内保存的项目不会受影响。", print: "打开小卡打印工具", letter: "打开粉丝信模板", about: "关于 StanKit Studio", contact: "报告失效链接", documentTitle: "页面未找到 | StanKit Studio" },
+      "zh-TW": { language: "語言", eyebrow: "這個頁面不存在", title: "返回一個真正有用的工具吧。", body: "連結可能已過期、不完整或輸入有誤。請選擇下方的真實頁面；瀏覽器內儲存的專案不會受影響。", print: "開啟小卡列印工具", letter: "開啟粉絲信範本", about: "關於 StanKit Studio", contact: "回報失效連結", documentTitle: "找不到頁面 | StanKit Studio" },
+      ko: { language: "언어", eyebrow: "페이지를 찾을 수 없습니다", title: "필요한 도구로 돌아가세요.", body: "주소가 오래되었거나 불완전하거나 잘못 입력되었을 수 있습니다. 아래의 실제 페이지를 선택하세요. 브라우저에 저장된 작업은 변경되지 않았습니다.", print: "포토카드 인쇄 도구 열기", letter: "팬레터 템플릿 열기", about: "StanKit Studio 소개", contact: "깨진 링크 신고", documentTitle: "페이지를 찾을 수 없음 | StanKit Studio" },
+      ja: { language: "言語", eyebrow: "ページが見つかりません", title: "使えるツールへ戻りましょう。", body: "URLが古い、不完全、または入力ミスの可能性があります。下の実在するページを選んでください。ブラウザに保存した作業は変更されていません。", print: "トレカ印刷ツールを開く", letter: "ファンレターテンプレートを開く", about: "StanKit Studioについて", contact: "リンク切れを報告", documentTitle: "ページが見つかりません | StanKit Studio" },
+      id: { language: "Bahasa", eyebrow: "Halaman ini tidak ditemukan", title: "Kembali ke alat yang berguna.", body: "Alamat mungkin sudah lama, tidak lengkap, atau salah ketik. Pilih halaman nyata di bawah; proyek yang tersimpan di browser tidak berubah.", print: "Buka alat cetak photocard", letter: "Buka templat surat penggemar", about: "Tentang StanKit Studio", contact: "Laporkan tautan rusak", documentTitle: "Halaman Tidak Ditemukan | StanKit Studio" },
+      ms: { language: "Bahasa", eyebrow: "Halaman ini tidak ditemui", title: "Kembali ke alat yang berguna.", body: "Alamat mungkin lama, tidak lengkap atau tersalah taip. Pilih halaman sebenar di bawah; projek yang disimpan dalam pelayar tidak berubah.", print: "Buka alat cetak photocard", letter: "Buka templat surat peminat", about: "Tentang StanKit Studio", contact: "Laporkan pautan rosak", documentTitle: "Halaman Tidak Ditemui | StanKit Studio" },
+      th: { language: "ภาษา", eyebrow: "ไม่พบหน้านี้", title: "กลับไปยังเครื่องมือที่ใช้งานได้", body: "ที่อยู่อาจเก่า ไม่ครบ หรือพิมพ์ผิด เลือกหน้าจริงด้านล่างได้เลย โปรเจกต์ที่บันทึกในเบราว์เซอร์ไม่ได้ถูกเปลี่ยนแปลง", print: "เปิดเครื่องมือพิมพ์โฟโต้การ์ด", letter: "เปิดเทมเพลตจดหมายแฟนคลับ", about: "เกี่ยวกับ StanKit Studio", contact: "รายงานลิงก์เสีย", documentTitle: "ไม่พบหน้า | StanKit Studio" },
+      ar: { language: "اللغة", eyebrow: "هذه الصفحة غير موجودة", title: "لنعد إلى أداة مفيدة.", body: "قد يكون العنوان قديماً أو ناقصاً أو مكتوباً بشكل خاطئ. اختر صفحة حقيقية أدناه؛ لم تتغير مشاريعك المحفوظة في المتصفح.", print: "فتح أداة طباعة البطاقات", letter: "فتح قوالب رسائل المعجبين", about: "حول StanKit Studio", contact: "الإبلاغ عن رابط معطّل", documentTitle: "الصفحة غير موجودة | StanKit Studio" },
+      es: { language: "Idioma", eyebrow: "Esta página no existe", title: "Volvamos a una herramienta útil.", body: "La dirección puede ser antigua, incompleta o estar mal escrita. Elige una página real; tus proyectos guardados en el navegador no han cambiado.", print: "Abrir la herramienta de impresión", letter: "Abrir plantillas de cartas", about: "Acerca de StanKit Studio", contact: "Informar de un enlace roto", documentTitle: "Página no encontrada | StanKit Studio" }
+    };
+    const htmlLanguage = { zh: "zh-CN", "zh-TW": "zh-TW" };
+    function normalizeLanguage(value) {
+      const raw = String(value || "").toLowerCase();
+      if (raw.startsWith("zh-tw") || raw.startsWith("zh-hk") || raw.startsWith("zh-mo") || raw.includes("hant")) return "zh-TW";
+      if (raw.startsWith("zh")) return "zh";
+      const short = raw.split("-")[0];
+      return copy[short] ? short : "en";
+    }
+    function preferredLanguage() {
+      try {
+        const saved = localStorage.getItem("stankit_lang");
+        if (saved && copy[saved]) return saved;
+      } catch (_) {}
+      const candidates = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language];
+      for (const candidate of candidates) {
+        const normalized = normalizeLanguage(candidate);
+        if (copy[normalized]) return normalized;
+      }
+      return "en";
+    }
+    function render(language, persist) {
+      const lang = copy[language] ? language : "en";
+      const strings = copy[lang];
+      document.documentElement.lang = htmlLanguage[lang] || lang;
+      document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+      document.title = strings.documentTitle;
+      document.querySelectorAll("[data-copy]").forEach((element) => {
+        element.textContent = strings[element.dataset.copy];
+      });
+      document.getElementById("language-select").value = lang;
+      if (persist) {
+        try { localStorage.setItem("stankit_lang", lang); } catch (_) {}
+      }
+    }
+    const languageSelect = document.getElementById("language-select");
+    languageSelect.addEventListener("change", () => render(languageSelect.value, true));
+    render(preferredLanguage(), false);
+  </script>
+</body>
+</html>

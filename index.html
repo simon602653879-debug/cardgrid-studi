@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Free Photocard Print Layout Maker | 300 DPI PDF – StanKit</title>
   <meta name="description" content="Arrange photocards on A4, Letter or 4×6 paper and export a true-size 300 DPI PDF. No sign-up; uploaded images stay in your browser.">
+  <link rel="canonical" href="https://stankit.vercel.app/">
 
     <!-- OpenGraph & Twitter Meta Tags for Social Sharing & E-E-A-T -->
   <meta property="og:type" content="website">
@@ -15,6 +16,7 @@
   <meta property="og:url" content="https://stankit.vercel.app/">
   <meta property="og:site_name" content="StanKit Studio">
   <meta property="og:image" content="https://stankit.vercel.app/assets/og-photocard-v2.png">
+  <meta property="og:image:type" content="image/png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="StanKit photocard print layout maker preview">
@@ -35,6 +37,7 @@
     "operatingSystem": "Any",
     "browserRequirements": "Requires JavaScript and a modern browser",
     "description": "A browser-based tool for arranging photocards on true-size paper and exporting a 300 DPI PDF.",
+    "image": "https://stankit.vercel.app/assets/og-photocard-v2.png",
     "isAccessibleForFree": true,
     "offers": {
       "@type": "Offer",
@@ -350,7 +353,6 @@
       }
     }
   </style>
-  <link rel="canonical" href="https://stankit.vercel.app/">
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col justify-between">
 
@@ -360,7 +362,7 @@
       
       <!-- Brand & Navigation -->
       <div class="brand-nav flex items-center gap-4 sm:gap-6 flex-shrink-0">
-        <a href="index.html" class="flex items-center gap-2.5 flex-shrink-0">
+        <a href="/" class="flex items-center gap-2.5 flex-shrink-0">
           <div class="header-logo w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-rose-500 flex items-center justify-center text-white font-bold text-xl shadow-md shadow-indigo-100 flex-shrink-0">
             ✨
           </div>
@@ -372,11 +374,11 @@
 
         <!-- Tools Nav -->
         <nav class="hidden md:flex items-center gap-1 text-xs font-bold text-slate-600">
-          <a href="index.html" class="px-3 py-1.5 rounded-lg bg-indigo-50 text-indigo-700 border border-indigo-100 transition flex items-center space-x-1 whitespace-nowrap">
+          <a href="/" class="px-3 py-1.5 rounded-lg bg-indigo-50 text-indigo-700 border border-indigo-100 transition flex items-center space-x-1 whitespace-nowrap">
             <span>🖨️</span>
             <span data-i18n="nav_tool_print">Photocard Grid</span>
           </a>
-          <a href="fan-letter.html" class="px-3 py-1.5 rounded-lg hover:text-indigo-600 hover:bg-slate-100 transition flex items-center space-x-1 whitespace-nowrap">
+          <a href="/fan-letter" class="px-3 py-1.5 rounded-lg hover:text-indigo-600 hover:bg-slate-100 transition flex items-center space-x-1 whitespace-nowrap">
             <span>💌</span>
             <span data-i18n="nav_tool_letter">Fan Letter Builder</span>
           </a>
@@ -391,7 +393,7 @@
           <span class="header-share-label" data-i18n="nav_share">Share</span>
         </button>
         <div class="relative flex-shrink-0">
-          <select id="lang-select" onchange="changeLanguage(this.value)" class="bg-slate-100 border border-slate-200 text-slate-700 text-xs font-bold rounded-lg px-2.5 py-1.5 focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer appearance-none pr-7">
+          <select id="lang-select" aria-label="Interface language" onchange="changeLanguage(this.value)" class="bg-slate-100 border border-slate-200 text-slate-700 text-xs font-bold rounded-lg px-2.5 py-1.5 focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer appearance-none pr-7">
             <option value="en">🇺🇸 English</option>
             <option value="zh">🇨🇳 简体中文</option>
             <option value="zh-TW">🇭🇰/🇹🇼 繁體中文</option>
@@ -411,8 +413,8 @@
 
   <!-- Mobile Sub-Navigation Bar -->
   <div class="mobile-tools-nav md:hidden bg-white/90 backdrop-blur-md border-b border-slate-200 px-4 py-2 flex items-center gap-2 overflow-x-auto text-xs font-bold">
-    <a href="index.html" class="whitespace-nowrap px-2.5 py-1 rounded-md bg-indigo-50 text-indigo-700" data-i18n="nav_tool_print">🖨️ Photocard Grid</a>
-    <a href="fan-letter.html" class="whitespace-nowrap px-2.5 py-1 rounded-md text-slate-600 hover:bg-slate-100" data-i18n="nav_tool_letter">💌 Fan Letter Builder</a>
+    <a href="/" class="whitespace-nowrap px-2.5 py-1 rounded-md bg-indigo-50 text-indigo-700" data-i18n="nav_tool_print">🖨️ Photocard Grid</a>
+    <a href="/fan-letter" class="whitespace-nowrap px-2.5 py-1 rounded-md text-slate-600 hover:bg-slate-100" data-i18n="nav_tool_letter">💌 Fan Letter Builder</a>
   </div>
 
   <!-- Main Workspace -->
@@ -769,7 +771,7 @@
         </div>
         <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-2 gap-2 text-xs font-bold">
           <button type="button" onclick="openShareModal();trackGA4Event('post_export_action',{action:'share'});" class="rounded-xl border border-slate-200 bg-white px-3 py-2 hover:border-indigo-300" data-i18n="nav_share">Share</button>
-          <a href="fan-letter.html" onclick="trackGA4Event('post_export_action',{action:'fan_letter'});" class="rounded-xl border border-slate-200 bg-white px-3 py-2 hover:border-indigo-300 text-center" data-i18n="after_export_fan_letter">Try fan letters</a>
+          <a href="/fan-letter" onclick="trackGA4Event('post_export_action',{action:'fan_letter'});" class="rounded-xl border border-slate-200 bg-white px-3 py-2 hover:border-indigo-300 text-center" data-i18n="after_export_fan_letter">Try fan letters</a>
           <button type="button" onclick="registerThemeInterest()" class="rounded-xl border border-slate-200 bg-white px-3 py-2 hover:border-rose-300" data-i18n="after_export_theme">Request theme packs</button>
           <a href="https://ko-fi.com/stankitstudio" target="_blank" rel="noopener noreferrer" onclick="trackGA4Event('support_click',{placement:'post_export'});" class="rounded-xl border border-slate-200 bg-white px-3 py-2 hover:border-amber-300 text-center" data-i18n="after_export_support">Support the free tool</a>
         </div>
@@ -888,7 +890,7 @@
             <span>☕</span>
             <span data-i18n="support_kofi">Help keep StanKit free</span>
           </a>
-          <a href="contact.html" class="inline-flex items-center space-x-1.5 px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs transition">
+          <a href="/contact" class="inline-flex items-center space-x-1.5 px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs transition">
             <span>💌</span>
             <span data-i18n="support_feedback">Send feedback</span>
           </a>
@@ -896,101 +898,82 @@
       </div>
     </div>
 
-    <!-- Deep SEO & E-E-A-T Knowledge Hub (Prevent Low-Value Content Penalty) -->
-    <div class="max-w-6xl mx-auto mt-8 space-y-8">
-      
-      <!-- Section 1: Comprehensive Photocard Size Chart & Card Sleeve Standards -->
+    <section id="print-help" lang="en" class="max-w-6xl mx-auto mt-8 space-y-8" aria-labelledby="print-guide-title">
       <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm space-y-6">
         <div class="border-b border-slate-100 pb-4">
-          <h2 class="text-lg sm:text-xl font-extrabold text-slate-900 tracking-tight flex items-center space-x-2">
-            <span>📏</span>
-            <span data-i18n="guide_size_title">Comprehensive Idol Photocard Sizing & Sleeve Guide</span>
+          <h2 id="print-guide-title" class="text-lg sm:text-xl font-extrabold text-slate-900 tracking-tight flex items-center gap-2">
+            <span aria-hidden="true">📏</span>
+            <span>Photocard paper sizes and print settings</span>
           </h2>
-          <p class="text-xs text-slate-500 font-medium mt-1" data-i18n="guide_size_desc">
-            Universal standard dimensions across K-Pop, Japanese Bromides, Tour Mini PCs, and optimal card sleeve sizes.
+          <p class="text-xs text-slate-600 font-medium mt-2 leading-relaxed">
+            These are StanKit output presets, not claims about an artist, album, printer, or official card standard. Measure the size you need and run one test print before producing a full batch.
           </p>
         </div>
 
         <div class="overflow-x-auto">
           <table class="w-full text-left text-xs border-collapse">
+            <caption class="sr-only">Paper and card dimensions produced by StanKit presets</caption>
             <thead>
               <tr class="bg-slate-50 border-b border-slate-200 text-slate-600 font-extrabold">
-                <th class="p-3">Category / Format</th>
-                <th class="p-3">Exact Physical Size</th>
-                <th class="p-3">Recommended Card Sleeve</th>
-                <th class="p-3">Common Examples & Agency Origin</th>
+                <th scope="col" class="p-3">Tool preset</th>
+                <th scope="col" class="p-3">PDF sheet</th>
+                <th scope="col" class="p-3">Card cell</th>
+                <th scope="col" class="p-3">Grid</th>
               </tr>
             </thead>
             <tbody class="divide-y divide-slate-100 text-slate-700">
-              <tr class="hover:bg-slate-50/60 transition">
-                <td class="p-3 font-bold text-indigo-700">Standard Album PC (官方专辑标准小卡)</td>
-                <td class="p-3 font-mono font-bold">55 × 85 mm</td>
-                <td class="p-3"><span class="bg-indigo-50 text-indigo-700 px-2 py-0.5 rounded font-bold">56×87mm / 57.5×89mm</span></td>
-                <td class="p-3">SM, HYBE, JYP, YG, Starship album inclusions, Lucky Draws, POBs</td>
-              </tr>
-              <tr class="hover:bg-slate-50/60 transition">
-                <td class="p-3 font-bold text-purple-700">BTS / Tour Mini Photocard (巡演大卡/留言卡)</td>
-                <td class="p-3 font-mono font-bold">70 × 100 mm</td>
-                <td class="p-3"><span class="bg-purple-50 text-purple-700 px-2 py-0.5 rounded font-bold">72×102mm / 73×105mm</span></td>
-                <td class="p-3">BTS Muster & Tour packs, TXT, SEVENTEEN, ENHYPEN concert merchandise</td>
-              </tr>
-              <tr class="hover:bg-slate-50/60 transition">
-                <td class="p-3 font-bold text-rose-700">Japan Conbini Bromide (日版便利店 L判 生写真)</td>
-                <td class="p-3 font-mono font-bold">89 × 127 mm (L判)</td>
-                <td class="p-3"><span class="bg-rose-50 text-rose-700 px-2 py-0.5 rounded font-bold">91×130mm (L-Size Bag)</span></td>
-                <td class="p-3">Lawson / FamilyMart / 7-Eleven Japanese printed bromides, Idol magazine photos</td>
-              </tr>
-              <tr class="hover:bg-slate-50/60 transition">
-                <td class="p-3 font-bold text-amber-700">Instax Mini Polaroid (富士拍立得 Mini 相纸)</td>
-                <td class="p-3 font-mono font-bold">54 × 86 mm</td>
-                <td class="p-3"><span class="bg-amber-50 text-amber-700 px-2 py-0.5 rounded font-bold">56×87mm (Snug Fit)</span></td>
-                <td class="p-3">Fujifilm Instax Mini instant prints, Special event lucky draw polaroids</td>
-              </tr>
-              <tr class="hover:bg-slate-50/60 transition">
-                <td class="p-3 font-bold text-emerald-700">PVC / Special Transparent Cards (透明/厚PVC卡)</td>
-                <td class="p-3 font-mono font-bold">55 × 85 mm (0.76mm)</td>
-                <td class="p-3"><span class="bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded font-bold">58×89mm (Thick Sleeve)</span></td>
-                <td class="p-3">Pop-up store ID cards, Credit-card style PVC cards, lenticular 3D cards</td>
-              </tr>
+              <tr><td class="p-3 font-bold text-indigo-700">A4 standard</td><td class="p-3">210 × 297 mm</td><td class="p-3">55 × 85 mm</td><td class="p-3">3 × 3</td></tr>
+              <tr><td class="p-3 font-bold text-indigo-700">US Letter</td><td class="p-3">215.9 × 279.4 mm</td><td class="p-3">55 × 85 mm</td><td class="p-3">3 × 3</td></tr>
+              <tr><td class="p-3 font-bold text-indigo-700">4 × 6 photo paper</td><td class="p-3">101.6 × 152.4 mm</td><td class="p-3">46 × 70 mm</td><td class="p-3">2 × 2</td></tr>
+              <tr><td class="p-3 font-bold text-indigo-700">70 × 100 on A4</td><td class="p-3">210 × 297 mm</td><td class="p-3">70 × 100 mm</td><td class="p-3">2 × 2</td></tr>
+              <tr><td class="p-3 font-bold text-indigo-700">89 × 127 on A4</td><td class="p-3">210 × 297 mm</td><td class="p-3">89 × 127 mm</td><td class="p-3">2 × 2</td></tr>
+              <tr><td class="p-3 font-bold text-indigo-700">54 × 86 on A4</td><td class="p-3">210 × 297 mm</td><td class="p-3">54 × 86 mm</td><td class="p-3">3 × 3</td></tr>
+              <tr><td class="p-3 font-bold text-indigo-700">5 × 7 photo paper</td><td class="p-3">127 × 177.8 mm</td><td class="p-3">55 × 85 mm</td><td class="p-3">2 × 2</td></tr>
+              <tr><td class="p-3 font-bold text-indigo-700">A5</td><td class="p-3">148 × 210 mm</td><td class="p-3">55 × 85 mm</td><td class="p-3">2 × 2</td></tr>
+              <tr><td class="p-3 font-bold text-indigo-700">Compact A4</td><td class="p-3">210 × 297 mm</td><td class="p-3">50 × 68 mm</td><td class="p-3">3 × 4</td></tr>
+              <tr><td class="p-3 font-bold text-indigo-700">A3 batch</td><td class="p-3">297 × 420 mm</td><td class="p-3">55 × 85 mm</td><td class="p-3">4 × 4</td></tr>
             </tbody>
           </table>
         </div>
+        <p class="text-[11px] text-slate-500 leading-relaxed">
+          The PDF page and card cells use the dimensions above. Final accuracy still depends on the print dialog, printer, kiosk, paper feed, and the resolution of each uploaded image.
+        </p>
       </div>
 
-      <!-- Section 2: Retail Photo Kiosk (4x6" 2x2 Grid) Print Guide -->
-      <div id="print-help" class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs text-slate-700 leading-relaxed">
-        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-3">
-          <h3 class="font-extrabold text-slate-900 text-sm flex items-center space-x-1.5">
-            <span>🛒</span>
-            <span data-i18n="guide_retail_title">4×6" Retail Photo Paper (2×2 Grid) Printing & Budget Guide</span>
-          </h3>
-          <p class="text-slate-600" data-i18n="guide_retail_desc1">
-            Based on standard 4×6" photo prints available at major pharmacies and retail kiosks (e.g. Walgreens, Walmart, CVS, typically $0.15~$0.25/sheet depending on local promotions and regional store pricing). By selecting our <strong>4×6" (46×70mm 2×2)</strong> template, you can arrange 4 photocards onto a single sheet to maximize paper efficiency.
-          </p>
-          <ul class="list-disc list-inside space-y-1 text-slate-600 text-[11px]">
-            <li>Select <strong>4×6" Photo Paper</strong> format in StanKit Studio and export PDF/JPEG.</li>
-            <li>In the retail kiosk app, select <strong>"Fill / True-to-size"</strong> (disable auto-crop).</li>
-            <li>Use a craft paper cutter or scissors along our dashed scissor cut-lines.</li>
-          </ul>
+      <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm space-y-6">
+        <div class="border-b border-slate-100 pb-4">
+          <h2 class="text-lg sm:text-xl font-extrabold text-slate-900 tracking-tight">Photocard printing FAQ</h2>
+          <p class="text-xs text-slate-500 font-medium mt-1">Practical checks for A4, Letter, and 4 × 6 output.</p>
         </div>
-
-        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-3">
-          <h3 class="font-extrabold text-slate-900 text-sm flex items-center space-x-1.5">
-            <span>🛡️</span>
-            <span data-i18n="guide_storage_title">Photocard Archival & Acid-Free Storage Rules</span>
-          </h3>
-          <p class="text-slate-600" data-i18n="guide_storage_desc1">
-            <strong>Never use cheap PVC binder pages!</strong> PVC contains chemical plasticizers that migrate into photocard ink over time, causing irreversible yellowing, sticking, and holographic foil peeling.
-          </p>
-          <ul class="list-disc list-inside space-y-1 text-slate-600 text-[11px]">
-            <li>Always choose <strong>Acid-Free & PVC-Free (PP or CPP)</strong> card sleeves.</li>
-            <li>Double-sleeve valuable photocards (56×87mm inner snug sleeve + 58×89mm outer hard sleeve).</li>
-            <li>Store binders vertically in a cool, dry place away from direct UV sunlight.</li>
-          </ul>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5 text-xs text-slate-700 leading-relaxed">
+          <article class="p-4 rounded-xl bg-slate-50 border border-slate-100 space-y-2">
+            <h3 class="font-extrabold text-slate-900 text-sm">How do I keep the physical card size accurate?</h3>
+            <p>Print the exported PDF at <strong>100% or Actual Size</strong>. Turn off Fit to Page, Shrink, Fill, and automatic cropping, then measure one test sheet before printing more.</p>
+          </article>
+          <article class="p-4 rounded-xl bg-slate-50 border border-slate-100 space-y-2">
+            <h3 class="font-extrabold text-slate-900 text-sm">Does 300 DPI guarantee a sharp result?</h3>
+            <p>No. StanKit builds the PDF canvas at 300 DPI, but a small or blurry source image cannot gain missing detail. Use the on-page quality warning as a check, not a guarantee.</p>
+          </article>
+          <article class="p-4 rounded-xl bg-slate-50 border border-slate-100 space-y-2">
+            <h3 class="font-extrabold text-slate-900 text-sm">Can I use the 4 × 6 preset at a photo kiosk?</h3>
+            <p>You can export the 4 × 6 PDF, but kiosks differ. Check whether the service crops, fills, or scales files, and place a single test order before a batch.</p>
+          </article>
+          <article class="p-4 rounded-xl bg-slate-50 border border-slate-100 space-y-2">
+            <h3 class="font-extrabold text-slate-900 text-sm">Are uploaded card images sent to StanKit?</h3>
+            <p>The current tool reads selected images in your browser to make the layout. It does not upload those selected image files to a StanKit server.</p>
+          </article>
+          <article class="p-4 rounded-xl bg-slate-50 border border-slate-100 space-y-2 md:col-span-2">
+            <h3 class="font-extrabold text-slate-900 text-sm">What do the cut lines and safe-area preview mean?</h3>
+            <p>Cut lines are optional guides around each cell. The layout keeps a 2 mm gap between cells. The safe-area overlay is a screen preview for checking important content and is not printed into the PDF.</p>
+          </article>
+        </div>
+        <div class="flex flex-wrap gap-3 pt-1">
+          <button type="button" onclick="document.getElementById('drop-zone').scrollIntoView({behavior:'smooth',block:'center'})" class="px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-extrabold">Start a print layout</button>
+          <a href="/fan-letter" class="px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-extrabold">Try fan-letter templates</a>
+          <a href="/contact?topic=print-size" class="px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-extrabold">Report a print-size issue</a>
         </div>
       </div>
-
-    </div>
+    </section>
 
   </main>
 
@@ -998,10 +981,10 @@
   <footer class="bg-white border-t border-slate-200 mt-16 py-10 pb-28 sm:pb-20">
     <div class="max-w-4xl mx-auto px-4 text-center space-y-3 text-xs text-slate-500">
       <div class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 font-semibold text-slate-600">
-        <a href="about.html" class="hover:text-indigo-600 transition" data-i18n="footer_about">About Us (关于本站)</a>
-        <a href="privacy.html" class="hover:text-indigo-600 transition" data-i18n="footer_privacy">Privacy Policy (隐私政策)</a>
-        <a href="terms.html" class="hover:text-indigo-600 transition" data-i18n="footer_terms">Terms of Service (服务条款)</a>
-        <a href="contact.html" class="hover:text-indigo-600 transition" data-i18n="footer_contact">Contact Us (联系我们)</a>
+        <a href="/about" class="hover:text-indigo-600 transition" data-i18n="footer_about">About Us (关于本站)</a>
+        <a href="/privacy" class="hover:text-indigo-600 transition" data-i18n="footer_privacy">Privacy Policy (隐私政策)</a>
+        <a href="/terms" class="hover:text-indigo-600 transition" data-i18n="footer_terms">Terms of Service (服务条款)</a>
+        <a href="/contact" class="hover:text-indigo-600 transition" data-i18n="footer_contact">Contact Us (联系我们)</a>
       </div>
       <div class="text-[11px] text-slate-400">
         <span data-i18n="footer_disclaimer">© 2026 StanKit Studio. Independent fan-made utility; not affiliated with artists, agencies, or platforms.</span>
@@ -1344,12 +1327,6 @@
     "btn_copy_share": "Copy Share Text & Link",
     "btn_more_share": "More Share Options",
     "btn_close": "Maybe Later (Close)",
-    "guide_size_title": "Comprehensive Idol Photocard Sizing & Sleeve Guide",
-    "guide_size_desc": "Universal standard dimensions across K-Pop, Japanese Bromides, Tour Mini PCs, and optimal card sleeve sizes.",
-    "guide_retail_title": "4×6\" Retail Photo Paper (2×2 Grid) Printing & Budget Guide",
-    "guide_retail_desc1": "Based on standard 4×6\" photo prints available at retail kiosks (e.g. Walgreens, Walmart, typically ~$0.15~$0.25/sheet depending on local store pricing). Selecting our 4×6\" template fits 4 photocards on one sheet to maximize paper efficiency.",
-    "guide_storage_title": "Photocard Archival & Acid-Free Storage Rules",
-    "guide_storage_desc1": "Never use cheap PVC binder pages! PVC contains chemical plasticizers that migrate into photocard ink over time, causing irreversible yellowing and sticking.",
     "footer_about": "About Us",
     "footer_privacy": "Privacy Policy",
     "footer_terms": "Terms of Service",
@@ -1437,12 +1414,6 @@
     "btn_copy_share": "一键复制安利文案与链接",
     "btn_more_share": "更多系统分享方式",
     "btn_close": "暂不分享 (关闭)",
-    "guide_size_title": "全球泛亚官方小卡与生写真尺寸对照与卡套指南",
-    "guide_size_desc": "涵盖韩娱专辑卡、巡演大卡、日本便利店写真、拍立得标准尺寸与无酸卡套选购建议。",
-    "guide_retail_title": "4×6\" 商超相纸拼版打印实操与省钱参考",
-    "guide_retail_desc1": "以北美部分商超/药店（如 Walgreens / Walmart / CVS）4×6\" 照片冲印常见单价 $0.15~$0.25 为例（实际价格及裁切政策以当地门店为准）。选择我们的 4×6\" (46×70mm 2×2) 拼版模板，单张相纸可容纳 4 张小卡，大幅提升相纸利用率。",
-    "guide_storage_title": "卡册收纳防褪色与无酸 (Acid-Free) 保养科普",
-    "guide_storage_desc1": "切勿使用劣质 PVC 内页！PVC 含有害增塑剂，长期接触会导致小卡油墨粘连、变黄与覆膜脱落，务必认准 PP / CPP 无酸材质。",
     "footer_about": "关于本站",
     "footer_privacy": "隐私政策",
     "footer_terms": "服务条款",
@@ -1530,12 +1501,6 @@
     "btn_copy_share": "一鍵複製安利文案與鏈接",
     "btn_more_share": "更多系統分享方式",
     "btn_close": "暫不分享 (關閉)",
-    "guide_size_title": "全球泛亞官方小卡與生寫真尺寸對照與卡套指南",
-    "guide_size_desc": "涵蓋韓娛專輯卡、巡演大卡、日本便利店寫真、拍立得標準尺寸與無酸卡套選購建議。",
-    "guide_retail_title": "4×6\" 商超相紙拼版列印實操與省錢參考",
-    "guide_retail_desc1": "以北美部分商超/藥局（如 Walgreens / Walmart / CVS）4×6\" 照片沖印常見單價 $0.15~$0.25 為例（實際價格及裁切政策以當地門市為準）。選擇我們的 4×6\" (46×70mm 2×2) 拼版模板，單張相紙可容納 4 張小卡，大幅提升相紙利用率。",
-    "guide_storage_title": "卡冊收納防褪色與無酸 (Acid-Free) 保養科普",
-    "guide_storage_desc1": "切勿使用劣質 PVC 內頁！PVC 含有害增塑劑，長期接觸會導致小卡油墨粘連、變黃與覆膜脫落，務必認準 PP / CPP 無酸材質。",
     "footer_about": "關於我們",
     "footer_privacy": "隱私政策",
     "footer_terms": "服務條款",
@@ -1623,12 +1588,6 @@
     "btn_copy_share": "추천 문구 및 링크 복사",
     "btn_more_share": "기타 공유 옵션",
     "btn_close": "닫기",
-    "guide_size_title": "아이돌 포토카드 공식 규격 및 슬리브 가이드",
-    "guide_size_desc": "앨범 포카, 투어 미니포카, 일본 브로마이드 크기와 무산소 슬리브 보관 팁.",
-    "guide_retail_title": "4×6인치 인화지 4분할 알뜰 인쇄 가이드",
-    "guide_retail_desc1": "일반 사진 인화소의 4×6인치 규격을 활용한 가이드입니다 (매장 및 지역별 가격 상이). 4×6인치 템플릿으로 4장의 포카를 한 번에 인화하여 용지 효율을 높여보세요.",
-    "guide_storage_title": "무산소(Acid-Free) 바인더 보관법",
-    "guide_storage_desc1": "PVC 재질은 포카를 손상시킬 수 있으니 반드시 PP/CPP 무산소 슬리브를 사용하세요.",
     "footer_about": "소개",
     "footer_privacy": "개인정보처리방침",
     "footer_terms": "이용약관",
@@ -1716,12 +1675,6 @@
     "btn_copy_share": "シェア文とリンクをコピー",
     "btn_more_share": "その他のシェア方法",
     "btn_close": "閉じる",
-    "guide_size_title": "公式トレカ・生写真サイズ＆スリーブ比較ガイド",
-    "guide_size_desc": "K-POPトレカ、ツアーミニフォト、コンビニL判写真の規格と無酸スリーブ選びの基本。",
-    "guide_retail_title": "4×6インチ（KG/はがきサイズ）写真用紙 活用ガイド",
-    "guide_retail_desc1": "一般的な写真プリントサービス（店舗や地域により料金は異なります）向けに、4×6インチ用紙1枚に4枚のトレカをまとめて配置して用紙コストを最適化できます。",
-    "guide_storage_title": "無酸(Acid-Free)スリーブでの劣化防止保管",
-    "guide_storage_desc1": "PVCは色移りの原因になるため、PPやCPPの無酸スリーブを選びましょう。",
     "footer_about": "概要",
     "footer_privacy": "プライバシーポリシー",
     "footer_terms": "利用規約",
@@ -1809,12 +1762,6 @@
     "btn_copy_share": "Copy Share Text & Link",
     "btn_more_share": "More Share Options",
     "btn_close": "Maybe Later (Close)",
-    "guide_size_title": "Comprehensive Idol Photocard Sizing & Sleeve Guide",
-    "guide_size_desc": "Universal standard dimensions across K-Pop, Japanese Bromides, Tour Mini PCs, and optimal card sleeve sizes.",
-    "guide_retail_title": "4×6\" Retail Photo Paper (2×2 Grid) Printing & Budget Guide",
-    "guide_retail_desc1": "Based on standard 4×6\" photo prints available at retail kiosks (e.g. Walgreens, Walmart, typically ~$0.15~$0.25/sheet depending on local store pricing). Selecting our 4×6\" template fits 4 photocards on one sheet to maximize paper efficiency.",
-    "guide_storage_title": "Photocard Archival & Acid-Free Storage Rules",
-    "guide_storage_desc1": "Never use cheap PVC binder pages! PVC contains chemical plasticizers that migrate into photocard ink over time, causing irreversible yellowing and sticking.",
     "footer_about": "About Us",
     "footer_privacy": "Privacy Policy",
     "footer_terms": "Terms of Service",
@@ -1902,12 +1849,6 @@
     "btn_copy_share": "Copy Share Text & Link",
     "btn_more_share": "More Share Options",
     "btn_close": "Maybe Later (Close)",
-    "guide_size_title": "Comprehensive Idol Photocard Sizing & Sleeve Guide",
-    "guide_size_desc": "Universal standard dimensions across K-Pop, Japanese Bromides, Tour Mini PCs, and optimal card sleeve sizes.",
-    "guide_retail_title": "4×6\" Retail Photo Paper (2×2 Grid) Printing & Budget Guide",
-    "guide_retail_desc1": "Based on standard 4×6\" photo prints available at retail kiosks (e.g. Walgreens, Walmart, typically ~$0.15~$0.25/sheet depending on local store pricing). Selecting our 4×6\" template fits 4 photocards on one sheet to maximize paper efficiency.",
-    "guide_storage_title": "Photocard Archival & Acid-Free Storage Rules",
-    "guide_storage_desc1": "Never use cheap PVC binder pages! PVC contains chemical plasticizers that migrate into photocard ink over time, causing irreversible yellowing and sticking.",
     "footer_about": "About Us",
     "footer_privacy": "Privacy Policy",
     "footer_terms": "Terms of Service",
@@ -1995,12 +1936,6 @@
     "btn_copy_share": "คัดลอกข้อความและลิงก์",
     "btn_more_share": "ตัวเลือกการแชร์เพิ่มเติม",
     "btn_close": "ปิด",
-    "guide_size_title": "คู่มือขนาดโฟโต้การ์ดไอดอลและซองใสมาตรฐาน",
-    "guide_size_desc": "มาตรฐานขนาดการ์ดอัลบั้ม มินิการ์ดทัวร์ รูปโบรไมด์ญี่ปุ่น และซองใสไร้กรด (Acid-Free)",
-    "guide_retail_title": "คู่มือการพิมพ์ภาพขนาด 4×6 นิ้ว (ตาราง 2×2)",
-    "guide_retail_desc1": "อ้างอิงจากขนาดกระดาษรูปมาตรฐาน 4×6 นิ้ว (ราคาขึ้นอยู่กับร้านพิมพ์ในแต่ละพื้นที่) จัดวาง 4 รูปในแผ่นเดียวเพื่อความคุ้มค่าสูงสุด",
-    "guide_storage_title": "การเก็บรักษาการ์ดด้วยซองไร้กรด (Acid-Free)",
-    "guide_storage_desc1": "ห้ามใช้แฟ้ม PVC ราคาถูกเพราะสารพลาสติกจะทำลายหมึกพิมพ์ ให้ใช้ซอง PP/CPP เสมอ",
     "footer_about": "เกี่ยวกับเรา",
     "footer_privacy": "นโยบายความเป็นส่วนตัว",
     "footer_terms": "ข้อกำหนดการใช้งาน",
@@ -2088,12 +2023,6 @@
     "btn_copy_share": "نسخ النص والرابط",
     "btn_more_share": "خيارات مشاركة أخرى",
     "btn_close": "إغلاق",
-    "guide_size_title": "دليل مقاسات بطاقات الفوتوكارد وأكياس الحماية",
-    "guide_size_desc": "المقاسات المعتمدة لبطاقات الألبومات وبطاقات الجولات وأكياس الحفظ الخالية من الأحماض.",
-    "guide_retail_title": "دليل طباعة ورق الصور 4×6 (شبكة 2×2)",
-    "guide_retail_desc1": "بناءً على أحجام ورق الصور القياسية 4×6 في محلات الطباعة (تختلف الأسعار حسب المنطقة). رتّب 4 بطاقات في ورقة واحدة لتوفير المساحة والتكلفة.",
-    "guide_storage_title": "قواعد الحفظ الخالي من الأحماض (Acid-Free)",
-    "guide_storage_desc1": "تجنب تماماً استخدام جيوب PVC الرخيصة لحماية ألوان وصور البطاقات من التلف.",
     "footer_about": "من نحن",
     "footer_privacy": "سياسة الخصوصية",
     "footer_terms": "شروط الخدمة",
@@ -2181,12 +2110,6 @@
     "btn_copy_share": "Copy Share Text & Link",
     "btn_more_share": "More Share Options",
     "btn_close": "Maybe Later (Close)",
-    "guide_size_title": "Comprehensive Idol Photocard Sizing & Sleeve Guide",
-    "guide_size_desc": "Universal standard dimensions across K-Pop, Japanese Bromides, Tour Mini PCs, and optimal card sleeve sizes.",
-    "guide_retail_title": "4×6\" Retail Photo Paper (2×2 Grid) Printing & Budget Guide",
-    "guide_retail_desc1": "Based on standard 4×6\" photo prints available at retail kiosks (e.g. Walgreens, Walmart, typically ~$0.15~$0.25/sheet depending on local store pricing). Selecting our 4×6\" template fits 4 photocards on one sheet to maximize paper efficiency.",
-    "guide_storage_title": "Photocard Archival & Acid-Free Storage Rules",
-    "guide_storage_desc1": "Never use cheap PVC binder pages! PVC contains chemical plasticizers that migrate into photocard ink over time, causing irreversible yellowing and sticking.",
     "footer_about": "About Us",
     "footer_privacy": "Privacy Policy",
     "footer_terms": "Terms of Service",
@@ -3171,12 +3094,28 @@
       }, 2200);
     }
 
+    function detectInterfaceLanguage() {
+      const candidates = Array.isArray(navigator.languages) && navigator.languages.length
+        ? navigator.languages
+        : [navigator.language || 'en'];
+      for (const rawLanguage of candidates) {
+        const normalized = String(rawLanguage).toLowerCase();
+        if (normalized.startsWith('zh')) {
+          return /(hant|tw|hk|mo)/.test(normalized) ? 'zh-TW' : 'zh';
+        }
+        const baseLanguage = normalized.split('-')[0];
+        if (i18nData[baseLanguage]) return baseLanguage;
+      }
+      return 'en';
+    }
+
     function changeLanguage(lang, source = 'user') {
       if (!i18nData[lang]) lang = 'en';
       currentLang = lang;
       const storageSaved = safeSetStorage('stankit_lang', lang);
       
-      document.documentElement.lang = lang;
+      const languageTagMap = { zh: 'zh-CN', 'zh-TW': 'zh-TW' };
+      document.documentElement.lang = languageTagMap[lang] || lang;
       document.documentElement.dir = (lang === 'ar' ? 'rtl' : 'ltr');
       window.dispatchEvent(new CustomEvent('stankit:languagechange', { detail: { language: lang } }));
 
@@ -4664,13 +4603,15 @@
     
     // Automatically re-render on container resize
     window.addEventListener('DOMContentLoaded', () => {
-      const savedLang = safeGetStorage('stankit_lang', 'en');
+      const savedLang = safeGetStorage('stankit_lang', '');
       if (savedLang && i18nData[savedLang]) {
         changeLanguage(savedLang, 'init');
       } else {
-        safeRemoveStorage('stankit_lang');
-        window.STANKIT_STORAGE_RECOVERED = true;
-        changeLanguage('en', 'init');
+        if (savedLang) {
+          safeRemoveStorage('stankit_lang');
+          window.STANKIT_STORAGE_RECOVERED = true;
+        }
+        changeLanguage(detectInterfaceLanguage(), 'init');
       }
       setPaper('a4', 'init');
 
