@@ -1,3 +1,7 @@
 User-agent: *
 Allow: /
+
+# Query-string states such as ?idol= and campaign tags share the page's
+# canonical URL. They are intentionally omitted from the sitemap; robots.txt
+# is not used as a canonicalization mechanism.
 Sitemap: https://stankit.vercel.app/sitemap.xml
