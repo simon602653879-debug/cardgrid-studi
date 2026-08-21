@@ -5,48 +5,47 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>">
   <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title id="seo-title">StanKit Studio | Photocard Print Grid Maker (300 DPI)</title>
-  <meta name="description" id="seo-desc" content="Free online tool to arrange and print idol photocards (55x85mm), BTS tour mini cards (70x100mm), Japanese L-size bromides (89x127mm), and Polaroids on A4, US Letter, 4x6 photo paper with 300 DPI high-res PDF output and DPI quality check.">
-  <meta name="keywords" content="stankit, stankit studio, photocard print maker, photocard template a4, 4x6 walgreens photocard grid, bts mini photocard size, 70x100mm card, japanese bromide l size print, missing pc placeholder generator, diy photocard print sheet, 55x85mm card printer online, 300 dpi print">
+  <title>Free Photocard Print Layout Maker | 300 DPI PDF – StanKit</title>
+  <meta name="description" content="Arrange photocards on A4, Letter or 4×6 paper and export a true-size 300 DPI PDF. No sign-up; uploaded images stay in your browser.">
 
     <!-- OpenGraph & Twitter Meta Tags for Social Sharing & E-E-A-T -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="StanKit Studio | Photocard Print Grid Maker (300 DPI)">
-  <meta property="og:description" content="Free DIY tool to arrange 55x85mm photocards, Polaroids, and tour mini cards on A4, US Letter, or 4x6 photo paper with 300 DPI export.">
+  <meta property="og:title" content="Free Photocard Print Layout Maker">
+  <meta property="og:description" content="Upload photos, choose paper, and export a true-size 300 DPI PDF. Images stay in your browser.">
   <meta property="og:url" content="https://stankit.vercel.app/">
   <meta property="og:site_name" content="StanKit Studio">
-  <meta property="og:image" content="https://stankit.vercel.app/assets/og-photocard.png">
+  <meta property="og:image" content="https://stankit.vercel.app/assets/og-photocard-v2.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="StanKit photocard print layout maker preview">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="StanKit Studio | Photocard Print Grid Maker (300 DPI)">
-  <meta name="twitter:description" content="Free DIY tool to arrange 55x85mm photocards, Polaroids, and tour mini cards on A4, US Letter, or 4x6 photo paper with 300 DPI export.">
-  <meta name="twitter:image" content="https://stankit.vercel.app/assets/og-photocard.png">
+  <meta name="twitter:title" content="Free Photocard Print Layout Maker">
+  <meta name="twitter:description" content="Create true-size A4, Letter and 4×6 photocard print sheets.">
+  <meta name="twitter:image" content="https://stankit.vercel.app/assets/og-photocard-v2.png">
+  <meta name="twitter:image:alt" content="StanKit photocard print layout maker preview">
 
   <!-- Schema.org JSON-LD Structured Data for Google AdSense & SEO -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "WebApplication",
-    "name": "StanKit Studio Photocard Print Grid Maker",
+    "name": "StanKit Photocard Print Layout Maker",
     "url": "https://stankit.vercel.app/",
     "applicationCategory": "DesignApplication",
-    "operatingSystem": "All",
-    "description": "Free online tool to arrange and print idol photocards (55x85mm), BTS tour mini cards (70x100mm), Japanese L-size bromides (89x127mm), and Polaroids on A4, US Letter, and 4x6 photo paper with 300 DPI high-res PDF output.",
+    "operatingSystem": "Any",
+    "browserRequirements": "Requires JavaScript and a modern browser",
+    "description": "A browser-based tool for arranging photocards on true-size paper and exporting a 300 DPI PDF.",
+    "isAccessibleForFree": true,
     "offers": {
       "@type": "Offer",
       "price": "0",
       "priceCurrency": "USD"
     },
     "featureList": [
-      "55x85mm Standard Photocard Grid",
-      "70x100mm Tour Mini Card Template",
-      "89x127mm Japanese L-Size Bromide Layout",
-      "Walgreens 4x6 Photo Paper Grid",
-      "300 DPI High-Resolution Printable PDF",
-      "Intelligent DPI Quality Check",
-      "Missing PC Wishlist Placeholder Generator",
-      "100% Client-Side Privacy Guarantee"
+      "A4, Letter and photo-paper layouts",
+      "True-size 300 DPI PDF export",
+      "2 mm cutting gap",
+      "Local browser image processing"
     ]
   }
   </script>
@@ -55,25 +54,41 @@
   <script src="https://cdn.tailwindcss.com"></script>
 
   <!-- jsPDF for High-Res 300 DPI PDF Export -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js';"></script>
 
   <!-- Analytics & UTM Attribution Engine -->
   <script>
     window.STANKIT_GA_ID = window.STANKIT_GA_ID || 'G-MEASUREMENT_ID';
 
+    function sanitizeCampaignValue(value) {
+      return String(value || '')
+        .replace(/[^a-zA-Z0-9._-]/g, '_')
+        .replace(/_+/g, '_')
+        .slice(0, 64);
+    }
+
+    function getReferrerHost(referrer) {
+      if (!referrer) return '';
+      try {
+        return new URL(referrer).hostname.slice(0, 80);
+      } catch (e) {
+        return '';
+      }
+    }
+
     (function initAttribution() {
       try {
         const urlParams = new URLSearchParams(window.location.search);
-        const utmSource = urlParams.get('utm_source') || urlParams.get('ref') || '';
-        const utmMedium = urlParams.get('utm_medium') || '';
-        const utmCampaign = urlParams.get('utm_campaign') || '';
-        const referrer = document.referrer || '';
+        const utmSource = sanitizeCampaignValue(urlParams.get('utm_source') || urlParams.get('ref') || '');
+        const utmMedium = sanitizeCampaignValue(urlParams.get('utm_medium') || '');
+        const utmCampaign = sanitizeCampaignValue(urlParams.get('utm_campaign') || '');
+        const referrerHost = getReferrerHost(document.referrer || '');
         if (utmSource || utmMedium || utmCampaign) {
           const attribution = {
             utm_source: utmSource,
             utm_medium: utmMedium,
             utm_campaign: utmCampaign,
-            referrer: referrer,
+            referrer_host: referrerHost,
             timestamp: Date.now()
           };
           sessionStorage.setItem('stankit_attribution', JSON.stringify(attribution));
@@ -84,7 +99,9 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){ window.dataLayer.push(arguments); }
 
-    if (window.STANKIT_GA_ID && window.STANKIT_GA_ID !== 'G-MEASUREMENT_ID' && window.STANKIT_GA_ID.startsWith('G-')) {
+    window.STANKIT_ANALYTICS_READY = Boolean(window.STANKIT_GA_ID && window.STANKIT_GA_ID !== 'G-MEASUREMENT_ID' && window.STANKIT_GA_ID.startsWith('G-'));
+
+    if (window.STANKIT_ANALYTICS_READY) {
       const gaScript = document.createElement('script');
       gaScript.async = true;
       gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=' + window.STANKIT_GA_ID;
@@ -95,24 +112,63 @@
       console.log('[Analytics Notice] GA4 Measurement ID unconfigured. Set window.STANKIT_GA_ID with your real ID to activate live telemetry.');
     }
 
+    const ANALYTICS_ALLOWED_PARAMS = new Set([
+      'action', 'card_count', 'count', 'cut_line', 'duration_ms', 'error_count',
+      'file_count', 'from', 'ignored_count', 'index', 'language', 'paper',
+      'placement', 'platform', 'price_test', 'printed', 'product_id', 'reason',
+      'referrer_host', 'rotation', 'selected_language', 'size_correct', 'source',
+      'success_count', 'theme', 'timestamp', 'to', 'tool', 'utm_campaign',
+      'utm_medium', 'utm_source'
+    ]);
+
+    function sanitizeAnalyticsParams(params) {
+      const clean = {};
+      Object.entries(params || {}).forEach(([key, value]) => {
+        if (!ANALYTICS_ALLOWED_PARAMS.has(key)) return;
+        if (typeof value === 'number' && Number.isFinite(value)) {
+          clean[key] = value;
+        } else if (typeof value === 'boolean') {
+          clean[key] = value;
+        } else if (typeof value === 'string') {
+          clean[key] = value.slice(0, 80);
+        }
+      });
+      return clean;
+    }
+
     function trackGA4Event(eventName, eventParams = {}) {
+      const safeEventName = /^[a-zA-Z0-9_]{1,40}$/.test(eventName) ? eventName : 'invalid_event_name';
       try {
         const savedAttr = sessionStorage.getItem('stankit_attribution');
         if (savedAttr) {
           eventParams = Object.assign({}, JSON.parse(savedAttr), eventParams);
         }
       } catch (e) {}
-      if (typeof window.gtag === 'function') {
-        window.gtag('event', eventName, eventParams);
+      eventParams = sanitizeAnalyticsParams(eventParams);
+      if (window.STANKIT_ANALYTICS_READY && typeof window.gtag === 'function') {
+        window.gtag('event', safeEventName, eventParams);
       }
-      console.log('[Analytics Event]', eventName, eventParams);
+      console.log('[Analytics Event]', safeEventName, eventParams);
     }
   </script>
 
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Sans+KR:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Sans+Thai:wght@400;500;700&family=Noto+Sans+Arabic:wght@400;500;700&display=swap');
+    /* Minimal critical fallbacks keep upload/edit controls usable if Tailwind CDN fails. */
+    .hidden { display: none !important; }
+    .pointer-events-none { pointer-events: none !important; }
+    .opacity-0 { opacity: 0 !important; }
+    .opacity-100 { opacity: 1 !important; }
+    html, body {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
+    }
     body {
       font-family: 'Plus Jakarta Sans', 'Noto Sans Thai', 'Noto Sans Arabic', 'Noto Sans SC', 'Noto Sans KR', 'Noto Sans JP', sans-serif;
+    }
+    main, main > *, .min-w-safe {
+      min-width: 0;
     }
     .checkerboard-bg {
       background-color: #f8fafc;
@@ -125,25 +181,20 @@
       background-position: 0 0, 0 8px, 8px -8px, -8px 0px;
     }
     
-    /* Position Ko-fi Floating Widget to Bottom-Right */
-    .floatingchat-container-wrap,
-    .floatingchat-container-wrap-mobi,
-    .floatingchat-container,
-    div[class*="floatingchat-container"],
-    .floating-chat-kofi-popup-iframe,
-    .floating-chat-kofi-popup-iframe-mobi,
-    iframe[class*="floating-chat-kofi"],
-    iframe[id*="kofi"] {
-      left: auto !important;
-      right: 20px !important;
-      bottom: 20px !important;
-      margin-left: 0 !important;
-    }
-
-    /* Drag and Drop Visual Feedback Styles [P0 & P2.2] */
+    /* Drag and Drop Visual Feedback */
     .card-cell {
       transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+      touch-action: pan-y;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .card-cell.touch-drag-active {
       touch-action: none;
+      opacity: 0.55;
+      transform: scale(0.97);
     }
     .card-cell.is-dragging {
       opacity: 0.45;
@@ -156,6 +207,70 @@
       box-shadow: 0 0 0 2px #6366f1, 0 8px 20px rgba(99, 102, 241, 0.25);
       z-index: 50;
     }
+    #paper-sheet, #card-grid {
+      direction: ltr;
+    }
+    #paper-sheet {
+      position: relative;
+      background: #fff;
+    }
+    #card-grid {
+      display: grid;
+    }
+    #preview-sheet-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #share-modal, #placeholder-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    button:focus-visible, [role="button"]:focus-visible, select:focus-visible, input:focus-visible {
+      outline: 3px solid rgba(79, 70, 229, 0.55);
+      outline-offset: 2px;
+    }
+    [dir="rtl"] .text-left {
+      text-align: right !important;
+    }
+    [dir="rtl"] .lang-chevron {
+      right: auto !important;
+      left: 0.5rem !important;
+    }
+    [dir="rtl"] #lang-select {
+      padding-right: 0.625rem;
+      padding-left: 1.75rem;
+    }
+    @media (max-width: 479px) {
+      .brand-name, .header-share-label {
+        display: none !important;
+      }
+      .header-shell {
+        padding-left: 0.625rem !important;
+        padding-right: 0.625rem !important;
+      }
+      #lang-select {
+        max-width: 8.75rem;
+        padding-left: 0.5rem;
+        font-size: 0.6875rem;
+      }
+      .workspace-panel {
+        padding: 1rem !important;
+      }
+      #preview-sheet-container {
+        padding: 0.5rem !important;
+        overflow: hidden !important;
+      }
+    }
+    @media (hover: none) {
+      .card-mobile-actions {
+        display: none !important;
+      }
+    }
   </style>
   <link rel="canonical" href="https://stankit.vercel.app/">
 </head>
@@ -163,7 +278,7 @@
 
     <!-- Navigation Header -->
   <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
-    <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+    <div class="header-shell max-w-6xl mx-auto px-4 h-16 flex items-center justify-between min-w-0">
       
       <!-- Brand & Navigation -->
       <div class="flex items-center space-x-4 sm:space-x-6 flex-shrink-0">
@@ -172,7 +287,7 @@
             ✨
           </div>
           <div class="flex-shrink-0">
-            <span class="text-base sm:text-lg font-extrabold tracking-tight bg-gradient-to-r from-indigo-600 to-rose-500 bg-clip-text text-transparent whitespace-nowrap">StanKit Studio</span>
+            <span class="brand-name text-base sm:text-lg font-extrabold tracking-tight bg-gradient-to-r from-indigo-600 to-rose-500 bg-clip-text text-transparent whitespace-nowrap">StanKit Studio</span>
             <span class="hidden lg:inline-block text-[11px] font-semibold px-2 py-0.5 ml-2 bg-indigo-50 text-indigo-700 rounded-full border border-indigo-100 whitespace-nowrap" data-i18n="badge_hub">Fandom Micro-Tools</span>
           </div>
         </a>
@@ -195,7 +310,7 @@
         <!-- Header Share Button -->
         <button type="button" onclick="triggerShareTool()" class="flex items-center space-x-1 px-2.5 sm:px-3 py-1.5 rounded-lg bg-indigo-50 hover:bg-indigo-100 text-indigo-700 text-xs font-bold transition border border-indigo-200 cursor-pointer active:scale-95 shadow-2xs whitespace-nowrap">
           <span>✨</span>
-          <span data-i18n="nav_share">Share</span>
+          <span class="header-share-label" data-i18n="nav_share">Share</span>
         </button>
         <div class="relative flex-shrink-0">
           <select id="lang-select" onchange="changeLanguage(this.value)" class="bg-slate-100 border border-slate-200 text-slate-700 text-xs font-bold rounded-lg px-2.5 py-1.5 focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer appearance-none pr-7">
@@ -210,7 +325,7 @@
             <option value="ar">🇸🇦 العربية</option>
             <option value="es">🇪🇸 Español</option>
           </select>
-          <span class="absolute right-2 top-2 pointer-events-none text-slate-400 text-[10px]">▼</span>
+          <span class="lang-chevron absolute right-2 top-2 pointer-events-none text-slate-400 text-[10px]">▼</span>
         </div>
       </div>
     </div>
@@ -223,55 +338,88 @@
   </div>
 
   <!-- Main Workspace -->
-  <main class="max-w-6xl mx-auto px-4 py-8 flex-grow">
+  <main class="w-full max-w-6xl mx-auto px-4 py-6 sm:py-8 flex-grow min-w-0">
     
     <!-- Hero / Headline Area -->
-    <div class="text-center max-w-2xl mx-auto mb-8">
+    <div class="text-center max-w-3xl mx-auto mb-6 sm:mb-8">
       <h1 class="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-2">
-        <span data-i18n="hero_title_1">Photocard Print Grid Generator</span>
+        <span data-i18n="hero_title_1">Print Photocards at True Size</span>
         <br>
-        <span class="bg-gradient-to-r from-indigo-600 to-rose-500 bg-clip-text text-transparent" data-i18n="hero_title_2">300 DPI High-Res Printable PDF</span>
+        <span class="bg-gradient-to-r from-indigo-600 to-rose-500 bg-clip-text text-transparent" data-i18n="hero_title_2">Upload → Choose Paper → Export 300 DPI PDF</span>
       </h1>
       <p class="text-slate-500 text-xs sm:text-sm leading-relaxed" data-i18n="hero_desc">
-        Arrange standard 55×85mm photocards, BTS 70×100mm tour cards, Japanese L-size bromides, and Polaroids with intelligent DPI resolution check, 2mm cutting gaps, and 100% client-side privacy.
+        Arrange photos on A4, Letter or photo paper and export a print-ready PDF at physical size. No account required.
       </p>
+      <div class="mt-4 flex flex-wrap items-center justify-center gap-2 text-[11px] sm:text-xs font-bold">
+        <span class="px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200" data-i18n="trust_local">🔒 Images processed locally</span>
+        <span class="px-3 py-1.5 rounded-full bg-indigo-50 text-indigo-800 border border-indigo-200" data-i18n="trust_no_signup">✓ No sign-up</span>
+        <span class="px-3 py-1.5 rounded-full bg-rose-50 text-rose-800 border border-rose-200" data-i18n="trust_true_size">📐 True-size 300 DPI PDF</span>
+      </div>
+      <div class="mt-4 grid grid-cols-3 gap-2 text-[11px] sm:text-xs font-extrabold text-slate-700" aria-label="Three-step workflow">
+        <div class="rounded-xl bg-white border border-slate-200 p-2.5"><span class="text-indigo-600">1</span> <span data-i18n="flow_choose">Choose paper</span></div>
+        <div class="rounded-xl bg-white border border-slate-200 p-2.5"><span class="text-indigo-600">2</span> <span data-i18n="flow_upload">Upload photos</span></div>
+        <div class="rounded-xl bg-white border border-slate-200 p-2.5"><span class="text-indigo-600">3</span> <span data-i18n="flow_export">Export PDF</span></div>
+      </div>
     </div>
+
+    <section class="mb-6 bg-white/90 border border-slate-200 rounded-2xl p-4 sm:p-5 shadow-sm" aria-labelledby="preset-recommendation-title">
+      <div class="mb-3 text-center sm:text-left">
+        <h2 id="preset-recommendation-title" class="text-sm font-extrabold text-slate-900" data-i18n="preset_title">Start with the paper you can actually print</h2>
+        <p class="text-[11px] sm:text-xs text-slate-500 mt-1" data-i18n="preset_desc">You can change this later without uploading your photos again.</p>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+        <button type="button" onclick="chooseRecommendedPreset('a4')" class="text-left rounded-xl border border-indigo-200 bg-indigo-50/70 hover:bg-indigo-100 p-3 transition">
+          <span class="block text-xs font-extrabold text-indigo-900">📄 A4</span>
+          <span class="block text-[11px] text-indigo-700 mt-0.5" data-i18n="preset_a4_use">Best for home and copy-shop printing outside North America.</span>
+        </button>
+        <button type="button" onclick="chooseRecommendedPreset('letter')" class="text-left rounded-xl border border-amber-200 bg-amber-50/70 hover:bg-amber-100 p-3 transition">
+          <span class="block text-xs font-extrabold text-amber-900">📑 US Letter</span>
+          <span class="block text-[11px] text-amber-800 mt-0.5" data-i18n="preset_letter_use">Best for home and campus printers in the US and Canada.</span>
+        </button>
+        <button type="button" onclick="chooseRecommendedPreset('4x6')" class="text-left rounded-xl border border-emerald-200 bg-emerald-50/70 hover:bg-emerald-100 p-3 transition">
+          <span class="block text-xs font-extrabold text-emerald-900">🖼️ 4×6</span>
+          <span class="block text-[11px] text-emerald-800 mt-0.5" data-i18n="preset_4x6_use">Best for photo kiosks; check whether the kiosk crops or scales.</span>
+        </button>
+      </div>
+    </section>
 
     <!-- Grid Two-Column Controls + Live Canvas Sheet -->
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
       
       <!-- Left Controls Panel (5 Cols) -->
-      <div class="lg:col-span-5 space-y-6">
+      <div class="lg:col-span-5 space-y-6 min-w-0">
         
         <!-- Upload & Settings Box -->
-        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-6">
+        <div class="workspace-panel bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-6">
           
           <!-- Step 1: Upload Images & Missing Card Generator -->
           <div>
             <div class="flex items-center justify-between mb-2">
               <label class="block text-xs font-extrabold text-slate-900 uppercase tracking-wider flex items-center space-x-1.5">
                 <span class="w-5 h-5 rounded-md bg-indigo-600 text-white flex items-center justify-center text-[10px] font-extrabold">1</span>
-                <span data-i18n="label_step1">1. Upload Images</span>
+                <span data-i18n="label_step1">2. Upload photos</span>
               </label>
-              <span class="text-xs font-bold text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-full border border-indigo-100" id="upload-counter">0/9 cards</span>
+              <span class="text-xs font-bold text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-full border border-indigo-100" id="upload-counter" aria-live="polite">0 cards • 1 page</span>
             </div>
 
             <!-- Upload Dropzone -->
-            <div id="drop-zone" onclick="triggerUploadForSlot(null)" class="border-2 border-dashed border-indigo-200 hover:border-indigo-500 bg-indigo-50/40 hover:bg-indigo-50/80 transition rounded-2xl p-5 text-center cursor-pointer space-y-2 group active:scale-98">
-              <input type="file" id="file-input" multiple accept="image/*" class="hidden" onchange="handleFileSelect(this.files)">
+            <div id="drop-zone" role="button" tabindex="0" aria-controls="file-input" onclick="triggerUploadForSlot(null)" class="border-2 border-dashed border-indigo-200 hover:border-indigo-500 bg-indigo-50/40 hover:bg-indigo-50/80 transition rounded-2xl p-5 text-center cursor-pointer space-y-2 group active:scale-98 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+              <input type="file" id="file-input" multiple accept="image/jpeg,image/png,image/webp" class="hidden" onclick="event.stopPropagation()" onchange="handleFileSelect(this.files)">
               <div class="w-11 h-11 rounded-2xl bg-white shadow-sm border border-indigo-100 flex items-center justify-center mx-auto text-xl group-hover:scale-110 transition transform">
                 📷
               </div>
               <div class="text-xs font-bold text-indigo-900" data-i18n="dropzone_title">Click to upload or drag & drop</div>
               <p class="text-[11px] text-slate-500" data-i18n="dropzone_desc">PNG, JPG, WEBP (Supports batch selection)</p>
             </div>
+            <p class="mt-2 text-[10px] sm:text-[11px] leading-relaxed text-slate-500" data-i18n="rights_notice">
+              Only upload images you have the right to use. StanKit Studio is an independent fan tool and is not affiliated with or endorsed by any artist, agency, or platform.
+            </p>
 
             <!-- Missing PC Placeholder Generator Trigger -->
             <div class="mt-2.5 flex items-center justify-between gap-2">
               <button type="button" onclick="openPlaceholderModal()" class="w-full py-2 px-3 rounded-xl bg-purple-50 hover:bg-purple-100 border border-purple-200 text-purple-700 font-bold text-xs flex items-center justify-center space-x-1.5 transition cursor-pointer">
                 <span>🎴</span>
                 <span data-i18n="btn_gen_placeholders">Generate Missing PC Placeholders</span>
-                <span class="text-[9px] bg-purple-200/70 text-purple-800 px-1 py-0.2 rounded font-extrabold">Etsy Pick</span>
               </button>
             </div>
           </div>
@@ -281,7 +429,7 @@
             <div class="flex items-center justify-between mb-2">
               <label class="block text-xs font-extrabold text-slate-900 uppercase tracking-wider flex items-center space-x-1.5">
                 <span class="w-5 h-5 rounded-md bg-indigo-600 text-white flex items-center justify-center text-[10px] font-extrabold">2</span>
-                <span data-i18n="label_step2">2. Paper Size & Card Format</span>
+                <span data-i18n="label_step2">Paper size details</span>
               </label>
               <span class="text-[10px] text-slate-400 font-bold" data-i18n="label_multi_sizes">10 Formats Available</span>
             </div>
@@ -396,10 +544,11 @@
             <div class="flex items-center justify-between">
               <span class="font-bold text-slate-700" data-i18n="opt_safe_area">Show 2mm Safe Area Guides</span>
               <label class="relative inline-flex items-center cursor-pointer">
-                <input type="checkbox" id="check-safearea" checked onchange="toggleSafeArea(this.checked)" class="sr-only peer">
+                <input type="checkbox" id="check-safearea" checked onchange="toggleSafeArea(this.checked)" class="sr-only peer" aria-describedby="safe-area-note">
                 <div class="w-9 h-5 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-indigo-600"></div>
               </label>
             </div>
+            <p id="safe-area-note" class="text-[10px] text-slate-400 -mt-1" data-i18n="safe_area_note">Preview guide only; it is never printed in the PDF.</p>
 
             <!-- Image Fit Mode -->
             <div class="flex items-center justify-between">
@@ -410,27 +559,17 @@
               </select>
             </div>
 
-            <!-- Backside Print Template Option Placeholder -->
-            <div class="flex items-center justify-between pt-1 border-t border-slate-100">
-              <div class="flex items-center space-x-1.5">
-                <span class="font-bold text-slate-700" data-i18n="opt_back_template">Double-Sided Back Template</span>
-                <span class="text-[9px] bg-slate-100 text-slate-500 px-1.5 py-0.2 rounded font-bold">PRO</span>
-              </div>
-              <label class="relative inline-flex items-center cursor-pointer">
-                <input type="checkbox" id="check-backside" onchange="toggleBacksideTemplate(this.checked)" class="sr-only peer">
-                <div class="w-9 h-5 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-indigo-600"></div>
-              </label>
-            </div>
           </div>
 
           <!-- Action Button: Download 300 DPI PDF -->
           <div class="pt-2">
+            <div class="mb-2 text-xs font-extrabold text-slate-900 uppercase tracking-wider" data-i18n="label_step3">3. Export a print-ready PDF</div>
             <button type="button" id="btn-export-pdf" onclick="exportPDF()" class="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-indigo-600 to-rose-500 hover:from-indigo-700 hover:to-rose-600 text-white font-extrabold text-sm shadow-md shadow-indigo-100 transition transform active:scale-98 flex items-center justify-center space-x-2 cursor-pointer">
               <span>🖨️</span>
               <span id="btn-pdf-text" data-i18n="btn_download_pdf">Download 300 DPI PDF (Print Ready)</span>
             </button>
             <p class="text-[10px] text-slate-400 text-center mt-2" data-i18n="pdf_note">
-              🔒 100% Client-Side Privacy: Images never leave your device.
+              🔒 Uploaded images are processed in this browser and are not sent to StanKit servers.
             </p>
           </div>
 
@@ -441,7 +580,7 @@
           <div class="flex items-center justify-between">
             <div class="flex items-center space-x-2">
               <span class="text-base">🕒</span>
-              <h3 class="text-xs font-extrabold text-slate-800 uppercase tracking-wide" data-i18n="sec_photocard_history">Recent Print Layouts</h3>
+              <h3 class="text-xs font-extrabold text-slate-800 uppercase tracking-wide" data-i18n="sec_photocard_history">Recent Export Log</h3>
               <span id="photocard-history-badge" class="text-[10px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded-full font-bold">0</span>
             </div>
             <button type="button" onclick="clearPhotocardHistory()" class="text-[11px] text-slate-400 hover:text-rose-600 font-bold transition flex items-center space-x-1 cursor-pointer">
@@ -458,13 +597,18 @@
       </div>
 
       <!-- Right Area: Live Printable Grid DOM Sheet (P0: Centered via Unified Padding) -->
-      <div class="lg:col-span-7 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+      <div class="workspace-panel lg:col-span-7 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4 min-w-0">
         <div class="flex items-center justify-between border-b border-slate-100 pb-3 flex-wrap gap-2">
           <div class="flex items-center space-x-2">
             <span class="text-xs font-extrabold text-slate-900 uppercase tracking-wide" data-i18n="preview_sheet_title">Printable Sheet Preview</span>
             <span id="sheet-dim-label" class="text-[11px] text-slate-400 font-bold">A4 (210×297mm) • 300 DPI</span>
           </div>
-          <div class="flex items-center space-x-2">
+          <div class="flex items-center gap-2 flex-wrap justify-end">
+            <div id="preview-page-controls" class="hidden items-center gap-1 rounded-lg border border-slate-200 bg-slate-50 p-1" aria-label="Preview pages" data-i18n-aria-label="page_preview">
+              <button type="button" id="btn-page-prev" onclick="changePreviewPage(-1)" class="min-w-8 h-8 px-2 rounded-md bg-white border border-slate-200 text-slate-700 font-extrabold disabled:opacity-40 disabled:cursor-not-allowed" data-i18n-aria-label="page_previous">←</button>
+              <span id="preview-page-label" class="min-w-20 text-center text-[11px] font-extrabold text-slate-700" aria-live="polite">Page 1 / 1</span>
+              <button type="button" id="btn-page-next" onclick="changePreviewPage(1)" class="min-w-8 h-8 px-2 rounded-md bg-white border border-slate-200 text-slate-700 font-extrabold disabled:opacity-40 disabled:cursor-not-allowed" data-i18n-aria-label="page_next">→</button>
+            </div>
             <button type="button" onclick="clearAllImages()" class="text-xs font-bold text-slate-400 hover:text-rose-600 transition flex items-center space-x-1 cursor-pointer" data-i18n="btn_clear_all">
               <span>🗑️</span><span data-i18n="btn_clear_all">Clear Sheet</span>
             </button>
@@ -481,13 +625,24 @@
         </div>
 
         <!-- Paper Sheet Container with Checkerboard Background (P0: Padding Centered) -->
-        <div id="preview-sheet-container" class="w-full overflow-x-auto p-4 sm:p-6 checkerboard-bg rounded-xl flex items-center justify-center border border-slate-200/80 select-none">
+        <div id="preview-sheet-container" class="w-full overflow-hidden p-4 sm:p-6 checkerboard-bg rounded-xl flex items-center justify-center border border-slate-200/80 select-none min-w-0">
           <!-- The Physical Paper Sheet DOM (Box-Sizing border-box, Padding Centers Grid) -->
           <div id="paper-sheet" class="bg-white shadow-xl rounded-sm border border-slate-300 relative transition-all duration-150 ease-out" style="box-sizing: border-box;">
             <!-- Perfectly Centered CSS Grid for Cards (P0: Hard Pixel Dimensions from Scale) -->
             <div id="card-grid" class="grid">
               <!-- Rendered dynamically by renderGridPreview() -->
             </div>
+          </div>
+        </div>
+
+        <div id="mobile-card-toolbar" class="hidden lg:hidden rounded-xl border border-indigo-200 bg-indigo-50/80 p-3" aria-live="polite">
+          <div id="selected-card-label" class="mb-2 text-center text-xs font-extrabold text-indigo-900">Card 1 selected</div>
+          <div class="grid grid-cols-2 gap-2">
+            <button type="button" onclick="runSelectedCardAction('replace')" class="col-span-2 min-h-11 rounded-lg bg-white border border-indigo-200 px-2 py-2 text-xs font-bold text-indigo-800 flex items-center justify-center gap-1" data-i18n-aria-label="card_replace"><span aria-hidden="true">📷</span><span data-i18n="card_replace">Replace photo</span></button>
+            <button type="button" id="mobile-move-earlier" onclick="runSelectedCardAction('earlier')" class="min-h-11 rounded-lg bg-white border border-indigo-200 px-2 py-2 text-xs font-bold text-indigo-800 flex items-center justify-center gap-1" data-i18n-aria-label="card_move_earlier"><span aria-hidden="true">←</span><span data-i18n="card_move_earlier">Move earlier</span></button>
+            <button type="button" id="mobile-move-later" onclick="runSelectedCardAction('later')" class="min-h-11 rounded-lg bg-white border border-indigo-200 px-2 py-2 text-xs font-bold text-indigo-800 flex items-center justify-center gap-1" data-i18n-aria-label="card_move_later"><span data-i18n="card_move_later">Move later</span><span aria-hidden="true">→</span></button>
+            <button type="button" onclick="runSelectedCardAction('rotate')" class="min-h-11 rounded-lg bg-indigo-600 px-2 py-2 text-xs font-bold text-white flex items-center justify-center gap-1" data-i18n-aria-label="card_label_rotate"><span aria-hidden="true">↻</span><span data-i18n="card_label_rotate">Rotate 90°</span></button>
+            <button type="button" onclick="runSelectedCardAction('delete')" class="min-h-11 rounded-lg bg-rose-600 px-2 py-2 text-xs font-bold text-white flex items-center justify-center gap-1" data-i18n-aria-label="card_label_delete"><span aria-hidden="true">✕</span><span data-i18n="card_label_delete">Delete this card</span></button>
           </div>
         </div>
 
@@ -499,6 +654,27 @@
       </div>
 
     </div>
+
+    <section id="after-export-panel" class="hidden mt-6 rounded-2xl border border-emerald-200 bg-gradient-to-br from-emerald-50 to-white p-5 sm:p-6 shadow-sm" aria-live="polite">
+      <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+        <div class="max-w-xl">
+          <p class="text-[11px] font-extrabold uppercase tracking-wider text-emerald-700" data-i18n="after_export_title">PDF exported successfully</p>
+          <h2 class="text-base sm:text-lg font-extrabold text-slate-900 mt-1" data-i18n="after_export_desc">Print at 100% or Actual Size, then tell us whether the physical size was correct.</h2>
+          <div class="mt-3 flex flex-wrap gap-2 items-center">
+            <button type="button" onclick="scrollToPrintGuide()" class="px-3 py-2 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-extrabold" data-i18n="after_export_print">Read print settings</button>
+            <button type="button" onclick="submitPrintFeedback('yes')" class="px-3 py-2 rounded-xl bg-white border border-emerald-300 text-emerald-800 text-xs font-bold" data-i18n="feedback_yes">Size was correct</button>
+            <button type="button" onclick="submitPrintFeedback('no')" class="px-3 py-2 rounded-xl bg-white border border-rose-200 text-rose-700 text-xs font-bold" data-i18n="feedback_no">Size was wrong</button>
+          </div>
+          <p id="print-feedback-status" class="hidden mt-2 text-xs font-bold text-emerald-700" data-i18n="feedback_thanks">Thanks—this helps us improve print accuracy.</p>
+        </div>
+        <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-2 gap-2 text-xs font-bold">
+          <button type="button" onclick="openShareModal();trackGA4Event('post_export_action',{action:'share'});" class="rounded-xl border border-slate-200 bg-white px-3 py-2 hover:border-indigo-300" data-i18n="nav_share">Share</button>
+          <a href="fan-letter.html" onclick="trackGA4Event('post_export_action',{action:'fan_letter'});" class="rounded-xl border border-slate-200 bg-white px-3 py-2 hover:border-indigo-300 text-center" data-i18n="after_export_fan_letter">Try fan letters</a>
+          <button type="button" onclick="registerThemeInterest()" class="rounded-xl border border-slate-200 bg-white px-3 py-2 hover:border-rose-300" data-i18n="after_export_theme">Request theme packs</button>
+          <a href="https://ko-fi.com/stankitstudio" target="_blank" rel="noopener noreferrer" onclick="trackGA4Event('kofi_click',{placement:'post_export'});" class="rounded-xl border border-slate-200 bg-white px-3 py-2 hover:border-amber-300 text-center" data-i18n="after_export_support">Support the free tool</a>
+        </div>
+      </div>
+    </section>
 
     
   <!-- Achievement / Export Success Share Modal (Low-Friction Viral Growth) -->
@@ -567,20 +743,20 @@
           <div>
             <label class="font-bold text-slate-700 block mb-1" data-i18n="label_placeholder_theme">Aesthetic Color Theme:</label>
             <div class="grid grid-cols-4 gap-2 text-[11px] font-bold text-center">
-              <button type="button" onclick="selectPlaceholderTheme('purple')" id="theme-purple" class="p-2 rounded-xl border-2 border-indigo-600 bg-indigo-50 text-indigo-700 cursor-pointer font-bold">💜 Lavender</button>
-              <button type="button" onclick="selectPlaceholderTheme('pink')" id="theme-pink" class="p-2 rounded-xl border border-slate-200 bg-slate-50 text-slate-700 cursor-pointer font-bold">💖 Rose</button>
-              <button type="button" onclick="selectPlaceholderTheme('mint')" id="theme-mint" class="p-2 rounded-xl border border-slate-200 bg-slate-50 text-slate-700 cursor-pointer font-bold">🍀 Mint</button>
-              <button type="button" onclick="selectPlaceholderTheme('slate')" id="theme-slate" class="p-2 rounded-xl border border-slate-200 bg-slate-50 text-slate-700 cursor-pointer font-bold">🖤 Slate</button>
+              <button type="button" onclick="selectPlaceholderTheme('purple')" id="theme-purple" class="p-2 rounded-xl border-2 border-indigo-600 bg-indigo-50 text-indigo-700 cursor-pointer font-bold"><span aria-hidden="true">💜</span> <span data-i18n="theme_lavender">Lavender</span></button>
+              <button type="button" onclick="selectPlaceholderTheme('pink')" id="theme-pink" class="p-2 rounded-xl border border-slate-200 bg-slate-50 text-slate-700 cursor-pointer font-bold"><span aria-hidden="true">💖</span> <span data-i18n="theme_rose">Rose</span></button>
+              <button type="button" onclick="selectPlaceholderTheme('mint')" id="theme-mint" class="p-2 rounded-xl border border-slate-200 bg-slate-50 text-slate-700 cursor-pointer font-bold"><span aria-hidden="true">🍀</span> <span data-i18n="theme_mint">Mint</span></button>
+              <button type="button" onclick="selectPlaceholderTheme('slate')" id="theme-slate" class="p-2 rounded-xl border border-slate-200 bg-slate-50 text-slate-700 cursor-pointer font-bold"><span aria-hidden="true">🖤</span> <span data-i18n="theme_slate">Slate</span></button>
             </div>
           </div>
 
           <div>
             <label class="font-bold text-slate-700 block mb-1" data-i18n="label_placeholder_count">Number of Placeholders:</label>
             <select id="ph-count" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-              <option value="fill">Fill all remaining empty slots</option>
-              <option value="1">1 Card</option>
-              <option value="4">4 Cards</option>
-              <option value="9">9 Cards (Full Sheet)</option>
+              <option value="fill" data-i18n="placeholder_fill">Fill all remaining empty slots</option>
+              <option value="1" data-i18n="placeholder_one">1 Card</option>
+              <option value="4" data-i18n="placeholder_four">4 Cards</option>
+              <option value="9" data-i18n="placeholder_nine">9 Cards (Full Sheet)</option>
             </select>
           </div>
         </div>
@@ -598,22 +774,22 @@
       <div class="p-5 sm:p-6 text-center space-y-3">
         <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-indigo-50 text-indigo-700 text-xs font-extrabold border border-indigo-100">
           <span>✨</span>
-          <span>100% Free & Client-Side Privacy</span>
+          <span data-i18n="support_badge">Free core tool · Local image processing</span>
         </div>
-        <h4 class="text-sm font-extrabold text-slate-800 tracking-tight">
-          StanKit Studio is built with love for global fandoms
+        <h4 class="text-sm font-extrabold text-slate-800 tracking-tight" data-i18n="support_title">
+          Help us keep the print tool useful
         </h4>
-        <p class="text-xs text-slate-500 max-w-xl mx-auto leading-relaxed">
-          No mandatory subscriptions, no forced watermarks, and zero cloud photo uploads. If our tools save your crafting time, you can support future maintenance on Ko-fi.
+        <p class="text-xs text-slate-500 max-w-xl mx-auto leading-relaxed" data-i18n="support_desc">
+          Basic layout and PDF export stay free. If this saved you time, an optional Ko-fi tip helps cover maintenance.
         </p>
         <div class="pt-1 flex items-center justify-center gap-3 flex-wrap">
           <a href="https://ko-fi.com/stankitstudio" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-1.5 px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xs transition shadow-xs">
             <span>☕</span>
-            <span>Support on Ko-fi</span>
+            <span data-i18n="support_kofi">Help keep StanKit free</span>
           </a>
           <a href="contact.html" class="inline-flex items-center space-x-1.5 px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs transition">
             <span>💌</span>
-            <span>Request Idols & Feedback</span>
+            <span data-i18n="support_feedback">Send feedback</span>
           </a>
         </div>
       </div>
@@ -681,7 +857,7 @@
       </div>
 
       <!-- Section 2: Retail Photo Kiosk (4x6" 2x2 Grid) Print Guide -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs text-slate-700 leading-relaxed">
+      <div id="print-help" class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs text-slate-700 leading-relaxed">
         <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-3">
           <h3 class="font-extrabold text-slate-900 text-sm flex items-center space-x-1.5">
             <span>🛒</span>
@@ -727,7 +903,7 @@
         <a href="contact.html" class="hover:text-indigo-600 transition" data-i18n="footer_contact">Contact Us (联系我们)</a>
       </div>
       <div class="text-[11px] text-slate-400">
-        <span>© 2026 StanKit Studio. All rights reserved. 100% Client-Side Privacy Protection.</span>
+        <span data-i18n="footer_disclaimer">© 2026 StanKit Studio. Independent fan-made utility; not affiliated with artists, agencies, or platforms.</span>
       </div>
     </div>
   </footer>
@@ -746,19 +922,41 @@
     function safeGetStorage(key, defaultVal) {
       try {
         const val = localStorage.getItem(key);
-        return val !== null ? JSON.parse(val) : defaultVal;
+        if (val === null) return defaultVal;
+        try {
+          return JSON.parse(val);
+        } catch (parseError) {
+          // Compatibility with older versions that stored language as a raw string.
+          if (typeof defaultVal === 'string') return val;
+          localStorage.removeItem(key);
+          window.STANKIT_STORAGE_RECOVERED = true;
+          return defaultVal;
+        }
       } catch (e) {
         console.warn('[Storage Read Warning]', e);
+        window.STANKIT_STORAGE_UNAVAILABLE = true;
         return defaultVal;
       }
     }
 
     function safeSetStorage(key, val) {
       try {
-        localStorage.setItem(key, typeof val === 'string' ? val : JSON.stringify(val));
+        localStorage.setItem(key, JSON.stringify(val));
         return true;
       } catch (e) {
         console.warn('[Storage Write Warning]', e);
+        window.STANKIT_STORAGE_UNAVAILABLE = true;
+        return false;
+      }
+    }
+
+    function safeRemoveStorage(key) {
+      try {
+        localStorage.removeItem(key);
+        return true;
+      } catch (e) {
+        console.warn('[Storage Remove Warning]', e);
+        window.STANKIT_STORAGE_UNAVAILABLE = true;
         return false;
       }
     }
@@ -791,13 +989,16 @@
     let currentPaper = 'a4';
     let currentCutLine = true;
     let currentSafeArea = true;
-    let currentBackside = false;
     let currentFitMode = 'cover';
-    let uploadedImages = []; // Array of { src, img, id, rotation, dpi }
+    let uploadedImages = []; // Array of { src, img, id, rotation, dpi, objectUrl }
     let currentLang = 'en';
     let draggedIndex = null;
     let targetUploadSlot = null;
     let selectedPlaceholderTheme = 'purple';
+    let currentPage = 0;
+    let selectedCardIndex = null;
+    let uploadInProgress = false;
+    let exportInProgress = false;
 
     // ==========================================
     // Accurate Physical Specifications [P0 & Research-Driven Formats]
@@ -860,12 +1061,13 @@
     // ==========================================
         function getPreviewContainerWidth() {
       const previewContainer = document.getElementById('preview-sheet-container');
-      if (!previewContainer) return 460;
+      if (!previewContainer) return 420;
       const clientW = previewContainer.clientWidth;
-      if (!clientW || clientW < 200) {
-        return 460; // Safe default width before DOM layout completes
+      if (!clientW || clientW < 160) {
+        return 320; // Safe default width before DOM layout completes
       }
-      return Math.max(300, Math.min(clientW - 48, 520));
+      const previewPadding = window.innerWidth < 480 ? 20 : 48;
+      return Math.max(210, Math.min(clientW - previewPadding, 520));
     }
 
     function calculateLayout(spec, containerWidth, isPrint = false) {
@@ -889,7 +1091,7 @@
           startX, startY
         };
       } else {
-        const safeWidth = Math.max(280, containerWidth || 460);
+        const safeWidth = Math.max(210, containerWidth || 420);
         const scale = safeWidth / spec.sheetW_mm;
         const sheetH_px = Math.round(spec.sheetH_mm * scale);
         const cardW_px = Math.round(spec.cardW_mm * scale);
@@ -910,6 +1112,19 @@
           totalGridW_px, totalGridH_px, padX_px, padY_px
         };
       }
+    }
+
+    function getImageDrawSize(img, targetW, targetH, rotation = 0, fitMode = currentFitMode) {
+      const isSideways = rotation === 90 || rotation === 270;
+      const rotatedTargetW = isSideways ? targetH : targetW;
+      const rotatedTargetH = isSideways ? targetW : targetH;
+      const widthRatio = rotatedTargetW / img.width;
+      const heightRatio = rotatedTargetH / img.height;
+      const ratio = fitMode === 'contain' ? Math.min(widthRatio, heightRatio) : Math.max(widthRatio, heightRatio);
+      return {
+        width: img.width * ratio,
+        height: img.height * ratio
+      };
     }
 
     // ==========================================
@@ -1848,6 +2063,864 @@
   }
 };
 
+    const firstRoundI18n = {
+      en: {
+        hero_title_1: "Print Photocards at True Size",
+        hero_title_2: "Upload → Choose Paper → Export 300 DPI PDF",
+        hero_desc: "Arrange photos on A4, Letter or photo paper and export a print-ready PDF at physical size. No account required.",
+        label_step1: "2. Upload photos",
+        label_step2: "Paper size details",
+        label_step3: "3. Export a print-ready PDF",
+        pdf_note: "🔒 Uploaded images are processed in this browser and are not sent to StanKit servers.",
+        sec_photocard_history: "Recent Export Log",
+        empty_history: "No exports yet. This log stores settings only, not your photos.",
+        share_modal_title: "Share this free print tool",
+        share_modal_desc: "Send the tool to a friend who needs a true-size photocard layout.",
+        guide_retail_desc1: "Use the 4×6 preset for photo kiosks. Before ordering, check whether the kiosk crops, fills, or scales the file; choose Actual Size or 100% when available.",
+        trust_local: "🔒 Images processed locally",
+        trust_no_signup: "✓ No sign-up",
+        trust_true_size: "📐 True-size 300 DPI PDF",
+        flow_choose: "Choose paper",
+        flow_upload: "Upload photos",
+        flow_export: "Export PDF",
+        preset_title: "Start with the paper you can actually print",
+        preset_desc: "You can change this later without uploading your photos again.",
+        preset_a4_use: "Best for home and copy-shop printing outside North America.",
+        preset_letter_use: "Best for home and campus printers in the US and Canada.",
+        preset_4x6_use: "Best for photo kiosks; check whether the kiosk crops or scales.",
+        rights_notice: "Only upload images you have the right to use. StanKit Studio is an independent fan tool and is not affiliated with or endorsed by any artist, agency, or platform.",
+        card_count_suffix: "cards",
+        toast_upload_overflow: "Only available card slots will be filled.",
+        toast_upload_error: "Some images could not be opened. Try JPG, PNG or WebP.",
+        toast_unsupported: "That format is not supported. Please use JPG, PNG or WebP.",
+        toast_image_too_large: "That image is too large to process safely on this device.",
+        toast_need_image: "Please upload at least one image first.",
+        toast_pdf_error: "PDF rendering failed. Check your connection and try again.",
+        toast_sheet_full: "This sheet is already full.",
+        toast_share_copied: "Share text and link copied.",
+        toast_paper_capacity: "This paper holds fewer cards. Remove some photos first.",
+        confirm_clear_sheet: "Remove all photos from this sheet?",
+        confirm_clear_history: "Clear the recent export log?",
+        after_export_title: "PDF exported successfully",
+        after_export_desc: "Print at 100% or Actual Size, then tell us whether the physical size was correct.",
+        after_export_print: "Read print settings",
+        after_export_fan_letter: "Try fan letters",
+        after_export_theme: "Request theme packs",
+        after_export_support: "Support the free tool",
+        feedback_yes: "Size was correct",
+        feedback_no: "Size was wrong",
+        feedback_thanks: "Thanks—this helps us improve print accuracy.",
+        support_badge: "Free core tool · Local image processing",
+        support_title: "Help us keep the print tool useful",
+        support_desc: "Basic layout and PDF export stay free. If this saved you time, an optional Ko-fi tip helps cover maintenance.",
+        support_kofi: "Help keep StanKit free",
+        support_feedback: "Send feedback",
+        theme_lavender: "Lavender",
+        theme_rose: "Rose",
+        theme_mint: "Mint",
+        theme_slate: "Slate",
+        placeholder_fill: "Fill all remaining empty slots",
+        placeholder_one: "1 Card",
+        placeholder_four: "4 Cards",
+        placeholder_nine: "9 Cards (Full Sheet)",
+        card_move_earlier: "Move earlier",
+        card_move_later: "Move later",
+        footer_disclaimer: "© 2026 StanKit Studio. Independent fan-made utility; not affiliated with artists, agencies, or platforms."
+      },
+      zh: {
+        hero_title_1: "按真实尺寸打印小卡",
+        hero_title_2: "上传照片 → 选择纸张 → 导出 300 DPI PDF",
+        hero_desc: "把照片排到 A4、Letter 或相纸上，导出符合物理尺寸的打印 PDF，无需注册。",
+        label_step1: "2. 上传照片",
+        label_step2: "纸张尺寸详情",
+        label_step3: "3. 导出可打印 PDF",
+        pdf_note: "🔒 上传图片只在当前浏览器处理，不会发送到 StanKit 服务器。",
+        sec_photocard_history: "最近导出记录",
+        empty_history: "暂无导出记录。这里只保存设置，不保存照片。",
+        share_modal_title: "分享这个免费打印工具",
+        share_modal_desc: "把真实尺寸小卡排版工具分享给需要的追星伙伴。",
+        guide_retail_desc1: "4×6 预设适合相片店或自助打印机。下单前请确认设备是否会裁切、铺满或缩放；可选时使用“实际尺寸”或 100%。",
+        trust_local: "🔒 图片本地处理",
+        trust_no_signup: "✓ 无需注册",
+        trust_true_size: "📐 真实尺寸 300 DPI PDF",
+        flow_choose: "选择纸张",
+        flow_upload: "上传照片",
+        flow_export: "导出 PDF",
+        preset_title: "先选择你实际能打印的纸张",
+        preset_desc: "稍后仍可更换纸张，无需重新上传照片。",
+        preset_a4_use: "适合北美以外地区的家用打印机和复印店。",
+        preset_letter_use: "适合美国、加拿大的家用或校园打印机。",
+        preset_4x6_use: "适合相片店；请先确认设备是否裁切或缩放。",
+        rights_notice: "请仅上传你有权使用的图片。StanKit Studio 是独立粉丝工具，与任何艺人、经纪公司或平台均无隶属、授权或认可关系。",
+        card_count_suffix: "张",
+        toast_upload_overflow: "只会填入当前剩余卡槽。",
+        toast_upload_error: "部分图片无法打开，请尝试 JPG、PNG 或 WebP。",
+        toast_unsupported: "不支持该格式，请使用 JPG、PNG 或 WebP。",
+        toast_image_too_large: "该图片过大，当前设备无法安全处理。",
+        toast_need_image: "请先上传至少一张图片。",
+        toast_pdf_error: "PDF 生成失败，请检查网络后重试。",
+        toast_sheet_full: "当前纸张已经排满。",
+        toast_share_copied: "分享文字和链接已复制。",
+        toast_paper_capacity: "该纸张卡槽较少，请先删除部分照片。",
+        confirm_clear_sheet: "确定移除本页全部照片吗？",
+        confirm_clear_history: "确定清空最近导出记录吗？",
+        after_export_title: "PDF 已成功导出",
+        after_export_desc: "请按 100% 或“实际尺寸”打印，再告诉我们实物尺寸是否正确。",
+        after_export_print: "查看打印设置",
+        after_export_fan_letter: "试试粉丝信",
+        after_export_theme: "申请主题包",
+        after_export_support: "支持免费工具",
+        feedback_yes: "尺寸正确",
+        feedback_no: "尺寸不对",
+        feedback_thanks: "谢谢，这会帮助我们改进打印准确性。",
+        support_badge: "核心功能免费 · 图片本地处理",
+        support_title: "帮助我们继续维护打印工具",
+        support_desc: "基础排版和 PDF 导出保持免费。如果帮你节省了时间，可自愿通过 Ko-fi 支持维护。",
+        support_kofi: "支持 StanKit 免费维护",
+        support_feedback: "发送反馈",
+        theme_lavender: "薰衣草",
+        theme_rose: "玫瑰",
+        theme_mint: "薄荷",
+        theme_slate: "灰黑",
+        placeholder_fill: "填满所有剩余卡槽",
+        placeholder_one: "1 张",
+        placeholder_four: "4 张",
+        placeholder_nine: "9 张（整页）",
+        card_move_earlier: "向前移动",
+        card_move_later: "向后移动",
+        footer_disclaimer: "© 2026 StanKit Studio。独立粉丝工具，与任何艺人、经纪公司或平台均无隶属或授权关系。"
+      },
+      "zh-TW": {
+        hero_title_1: "按真實尺寸列印小卡",
+        hero_title_2: "上傳照片 → 選擇紙張 → 匯出 300 DPI PDF",
+        hero_desc: "把照片排到 A4、Letter 或相紙上，匯出符合實際尺寸的列印 PDF，無需註冊。",
+        label_step1: "2. 上傳照片",
+        label_step2: "紙張尺寸詳情",
+        label_step3: "3. 匯出可列印 PDF",
+        pdf_note: "🔒 上傳圖片只在目前瀏覽器處理，不會傳送到 StanKit 伺服器。",
+        sec_photocard_history: "最近匯出記錄",
+        empty_history: "尚無匯出記錄。這裡只儲存設定，不儲存照片。",
+        share_modal_title: "分享這個免費列印工具",
+        share_modal_desc: "把真實尺寸小卡排版工具分享給需要的追星朋友。",
+        guide_retail_desc1: "4×6 預設適合相片店或自助列印機。下單前請確認設備是否會裁切、填滿或縮放；可選時使用「實際尺寸」或 100%。",
+        trust_local: "🔒 圖片本機處理",
+        trust_no_signup: "✓ 無需註冊",
+        trust_true_size: "📐 真實尺寸 300 DPI PDF",
+        flow_choose: "選擇紙張",
+        flow_upload: "上傳照片",
+        flow_export: "匯出 PDF",
+        preset_title: "先選擇你實際能列印的紙張",
+        preset_desc: "稍後仍可更換紙張，無需重新上傳照片。",
+        preset_a4_use: "適合北美以外地區的家用印表機和影印店。",
+        preset_letter_use: "適合美國、加拿大的家用或校園印表機。",
+        preset_4x6_use: "適合相片店；請先確認設備是否裁切或縮放。",
+        rights_notice: "請只上傳你有權使用的圖片。StanKit Studio 是獨立粉絲工具，與任何藝人、經紀公司或平台均無隸屬、授權或認可關係。",
+        card_count_suffix: "張",
+        toast_upload_overflow: "只會填入目前剩餘卡槽。",
+        toast_upload_error: "部分圖片無法開啟，請嘗試 JPG、PNG 或 WebP。",
+        toast_unsupported: "不支援此格式，請使用 JPG、PNG 或 WebP。",
+        toast_image_too_large: "此圖片過大，目前裝置無法安全處理。",
+        toast_need_image: "請先上傳至少一張圖片。",
+        toast_pdf_error: "PDF 產生失敗，請檢查網路後再試。",
+        toast_sheet_full: "目前紙張已經排滿。",
+        toast_share_copied: "分享文字和連結已複製。",
+        toast_paper_capacity: "此紙張卡槽較少，請先刪除部分照片。",
+        confirm_clear_sheet: "確定移除本頁全部照片嗎？",
+        confirm_clear_history: "確定清除最近匯出記錄嗎？",
+        after_export_title: "PDF 已成功匯出",
+        after_export_desc: "請按 100% 或「實際尺寸」列印，再告訴我們實物尺寸是否正確。",
+        after_export_print: "查看列印設定",
+        after_export_fan_letter: "試試粉絲信",
+        after_export_theme: "申請主題包",
+        after_export_support: "支持免費工具",
+        feedback_yes: "尺寸正確",
+        feedback_no: "尺寸不對",
+        feedback_thanks: "謝謝，這會幫助我們改善列印準確性。",
+        support_badge: "核心功能免費 · 圖片本機處理",
+        support_title: "幫助我們繼續維護列印工具",
+        support_desc: "基礎排版和 PDF 匯出維持免費。如果替你節省時間，可自願透過 Ko-fi 支持維護。",
+        support_kofi: "支持 StanKit 免費維護",
+        support_feedback: "傳送意見",
+        theme_lavender: "薰衣草",
+        theme_rose: "玫瑰",
+        theme_mint: "薄荷",
+        theme_slate: "灰黑",
+        placeholder_fill: "填滿所有剩餘卡槽",
+        placeholder_one: "1 張",
+        placeholder_four: "4 張",
+        placeholder_nine: "9 張（整頁）",
+        card_move_earlier: "向前移動",
+        card_move_later: "向後移動",
+        footer_disclaimer: "© 2026 StanKit Studio。獨立粉絲工具，與任何藝人、經紀公司或平台均無隸屬或授權關係。"
+      },
+      ko: {
+        hero_title_1: "포토카드를 실제 크기로 인쇄하세요",
+        hero_title_2: "사진 업로드 → 용지 선택 → 300 DPI PDF 내보내기",
+        hero_desc: "A4, Letter 또는 사진 용지에 이미지를 배치하고 실제 크기의 인쇄용 PDF를 만드세요. 가입은 필요 없습니다.",
+        label_step1: "2. 사진 업로드",
+        label_step2: "용지 크기 상세",
+        label_step3: "3. 인쇄용 PDF 내보내기",
+        pdf_note: "🔒 업로드한 이미지는 이 브라우저에서만 처리되며 StanKit 서버로 전송되지 않습니다.",
+        sec_photocard_history: "최근 내보내기 기록",
+        empty_history: "아직 내보내기 기록이 없습니다. 설정만 저장되며 사진은 저장되지 않습니다.",
+        share_modal_title: "무료 인쇄 도구 공유하기",
+        share_modal_desc: "실제 크기 포토카드 배치가 필요한 친구에게 공유해 주세요.",
+        guide_retail_desc1: "4×6 프리셋은 사진 키오스크용입니다. 주문 전에 자동 자르기·채우기·크기 조정 여부를 확인하고 가능하면 실제 크기 또는 100%를 선택하세요.",
+        trust_local: "🔒 이미지 로컬 처리",
+        trust_no_signup: "✓ 가입 불필요",
+        trust_true_size: "📐 실제 크기 300 DPI PDF",
+        flow_choose: "용지 선택",
+        flow_upload: "사진 업로드",
+        flow_export: "PDF 내보내기",
+        preset_title: "실제로 인쇄할 수 있는 용지부터 선택하세요",
+        preset_desc: "사진을 다시 올리지 않고 나중에 용지를 변경할 수 있습니다.",
+        preset_a4_use: "북미 이외 지역의 가정용 프린터와 인쇄소에 적합합니다.",
+        preset_letter_use: "미국과 캐나다의 가정·학교 프린터에 적합합니다.",
+        preset_4x6_use: "사진 키오스크용이며 자동 자르기나 축소 여부를 확인하세요.",
+        rights_notice: "사용 권한이 있는 이미지만 업로드하세요. StanKit Studio는 독립 팬 도구이며 어떤 아티스트, 소속사 또는 플랫폼과도 제휴·승인 관계가 없습니다.",
+        card_count_suffix: "장",
+        toast_upload_overflow: "남은 카드 칸만 채웁니다.",
+        toast_upload_error: "일부 이미지를 열 수 없습니다. JPG, PNG 또는 WebP를 사용해 주세요.",
+        toast_unsupported: "지원하지 않는 형식입니다. JPG, PNG 또는 WebP를 사용해 주세요.",
+        toast_image_too_large: "이 기기에서 안전하게 처리하기에는 이미지가 너무 큽니다.",
+        toast_need_image: "먼저 이미지를 한 장 이상 업로드하세요.",
+        toast_pdf_error: "PDF 생성에 실패했습니다. 연결을 확인하고 다시 시도하세요.",
+        toast_sheet_full: "이 시트는 이미 가득 찼습니다.",
+        toast_share_copied: "공유 문구와 링크를 복사했습니다.",
+        toast_paper_capacity: "이 용지는 카드 칸이 더 적습니다. 사진을 일부 삭제해 주세요.",
+        confirm_clear_sheet: "이 시트의 모든 사진을 삭제할까요?",
+        confirm_clear_history: "최근 내보내기 기록을 지울까요?",
+        after_export_title: "PDF 내보내기 완료",
+        after_export_desc: "100% 또는 실제 크기로 인쇄한 뒤 실물 크기가 맞았는지 알려 주세요.",
+        after_export_print: "인쇄 설정 보기",
+        after_export_fan_letter: "팬레터 사용해 보기",
+        after_export_theme: "테마 팩 요청",
+        after_export_support: "무료 도구 후원",
+        feedback_yes: "크기가 맞아요",
+        feedback_no: "크기가 틀려요",
+        feedback_thanks: "감사합니다. 인쇄 정확도를 개선하는 데 도움이 됩니다.",
+        support_badge: "핵심 기능 무료 · 이미지 로컬 처리",
+        support_title: "인쇄 도구를 계속 관리할 수 있게 도와주세요",
+        support_desc: "기본 배치와 PDF 내보내기는 계속 무료입니다. 시간이 절약됐다면 선택적으로 Ko-fi에서 유지 관리를 후원할 수 있습니다.",
+        support_kofi: "StanKit 무료 유지 후원",
+        support_feedback: "의견 보내기",
+        theme_lavender: "라벤더",
+        theme_rose: "로즈",
+        theme_mint: "민트",
+        theme_slate: "슬레이트",
+        placeholder_fill: "남은 빈칸 모두 채우기",
+        placeholder_one: "1장",
+        placeholder_four: "4장",
+        placeholder_nine: "9장 (전체 시트)",
+        card_move_earlier: "앞으로 이동",
+        card_move_later: "뒤로 이동",
+        footer_disclaimer: "© 2026 StanKit Studio. 독립 팬 도구이며 아티스트, 소속사 또는 플랫폼과 제휴·승인 관계가 없습니다."
+      },
+      ja: {
+        hero_title_1: "トレカを実寸で印刷",
+        hero_title_2: "写真をアップロード → 用紙を選択 → 300 DPI PDF",
+        hero_desc: "A4、Letter、写真用紙に画像を配置し、実寸の印刷用PDFを書き出せます。登録は不要です。",
+        label_step1: "2. 写真をアップロード",
+        label_step2: "用紙サイズの詳細",
+        label_step3: "3. 印刷用PDFを書き出す",
+        pdf_note: "🔒 アップロード画像はこのブラウザ内だけで処理され、StanKitのサーバーには送信されません。",
+        sec_photocard_history: "最近の書き出し履歴",
+        empty_history: "書き出し履歴はまだありません。設定のみ保存され、写真は保存されません。",
+        share_modal_title: "無料の印刷ツールを共有",
+        share_modal_desc: "実寸トレカのレイアウトが必要な友達に共有できます。",
+        guide_retail_desc1: "4×6プリセットは写真キオスク向けです。注文前に自動トリミング、全面配置、拡大縮小の有無を確認し、選べる場合は実際のサイズまたは100%を使用してください。",
+        trust_local: "🔒 画像は端末内で処理",
+        trust_no_signup: "✓ 登録不要",
+        trust_true_size: "📐 実寸300 DPI PDF",
+        flow_choose: "用紙を選ぶ",
+        flow_upload: "写真を追加",
+        flow_export: "PDFを書き出す",
+        preset_title: "実際に印刷できる用紙から始めましょう",
+        preset_desc: "写真を再アップロードせず、後から用紙を変更できます。",
+        preset_a4_use: "北米以外の家庭用プリンターやコピー店におすすめです。",
+        preset_letter_use: "米国・カナダの家庭や学校のプリンター向けです。",
+        preset_4x6_use: "写真キオスク向け。自動トリミングや拡大縮小を確認してください。",
+        rights_notice: "利用権のある画像だけをアップロードしてください。StanKit Studioは独立したファン向けツールで、アーティスト、事務所、プラットフォームとは提携・公認関係にありません。",
+        card_count_suffix: "枚",
+        toast_upload_overflow: "空いているカード枠だけを埋めます。",
+        toast_upload_error: "一部の画像を開けませんでした。JPG、PNG、WebPをお試しください。",
+        toast_unsupported: "未対応形式です。JPG、PNG、WebPを使用してください。",
+        toast_image_too_large: "この端末で安全に処理するには画像が大きすぎます。",
+        toast_need_image: "先に画像を1枚以上アップロードしてください。",
+        toast_pdf_error: "PDFの作成に失敗しました。接続を確認して再試行してください。",
+        toast_sheet_full: "このシートはすでに埋まっています。",
+        toast_share_copied: "共有テキストとリンクをコピーしました。",
+        toast_paper_capacity: "この用紙は枠数が少ないため、先に写真を減らしてください。",
+        confirm_clear_sheet: "このシートからすべての写真を削除しますか？",
+        confirm_clear_history: "最近の書き出し履歴を消去しますか？",
+        after_export_title: "PDFを書き出しました",
+        after_export_desc: "100%または実際のサイズで印刷し、実物のサイズが正しかったか教えてください。",
+        after_export_print: "印刷設定を見る",
+        after_export_fan_letter: "ファンレターを試す",
+        after_export_theme: "テーマパックを希望",
+        after_export_support: "無料ツールを応援",
+        feedback_yes: "サイズは正しい",
+        feedback_no: "サイズが違う",
+        feedback_thanks: "ありがとうございます。印刷精度の改善に役立ちます。",
+        support_badge: "基本機能無料 · 画像は端末内処理",
+        support_title: "印刷ツールの維持にご協力ください",
+        support_desc: "基本レイアウトとPDF書き出しは無料のままです。時間を節約できたら、任意でKo-fiから維持費を応援できます。",
+        support_kofi: "StanKitの無料維持を応援",
+        support_feedback: "フィードバックを送る",
+        theme_lavender: "ラベンダー",
+        theme_rose: "ローズ",
+        theme_mint: "ミント",
+        theme_slate: "スレート",
+        placeholder_fill: "残りの空き枠をすべて埋める",
+        placeholder_one: "1枚",
+        placeholder_four: "4枚",
+        placeholder_nine: "9枚（1シート）",
+        card_move_earlier: "前へ移動",
+        card_move_later: "後ろへ移動",
+        footer_disclaimer: "© 2026 StanKit Studio。独立したファン向けツールで、アーティスト、事務所、プラットフォームとの提携・公認関係はありません。"
+      },
+      id: {
+        hero_title_1: "Cetak Photocard dengan Ukuran Sebenarnya",
+        hero_title_2: "Unggah → Pilih Kertas → Ekspor PDF 300 DPI",
+        hero_desc: "Susun foto di kertas A4, Letter, atau kertas foto lalu ekspor PDF siap cetak dengan ukuran fisik. Tanpa akun.",
+        label_step1: "2. Unggah foto",
+        label_step2: "Detail ukuran kertas",
+        label_step3: "3. Ekspor PDF siap cetak",
+        pdf_note: "🔒 Gambar diproses di browser ini dan tidak dikirim ke server StanKit.",
+        sec_photocard_history: "Riwayat Ekspor Terbaru",
+        empty_history: "Belum ada ekspor. Hanya pengaturan yang disimpan, bukan foto.",
+        share_modal_title: "Bagikan alat cetak gratis ini",
+        share_modal_desc: "Kirim ke teman yang membutuhkan tata letak photocard ukuran sebenarnya.",
+        guide_retail_desc1: "Preset 4×6 cocok untuk kios foto. Sebelum memesan, periksa apakah kios memotong, memenuhi, atau mengubah skala; pilih Ukuran Sebenarnya atau 100% jika tersedia.",
+        trust_local: "🔒 Gambar diproses lokal",
+        trust_no_signup: "✓ Tanpa daftar",
+        trust_true_size: "📐 PDF 300 DPI ukuran nyata",
+        flow_choose: "Pilih kertas",
+        flow_upload: "Unggah foto",
+        flow_export: "Ekspor PDF",
+        preset_title: "Mulai dari kertas yang benar-benar bisa dicetak",
+        preset_desc: "Kertas dapat diganti nanti tanpa mengunggah ulang foto.",
+        preset_a4_use: "Cocok untuk printer rumah dan toko cetak di luar Amerika Utara.",
+        preset_letter_use: "Cocok untuk printer rumah dan kampus di AS dan Kanada.",
+        preset_4x6_use: "Cocok untuk kios foto; periksa pemotongan atau perubahan skala.",
+        rights_notice: "Unggah hanya gambar yang berhak Anda gunakan. StanKit Studio adalah alat penggemar independen dan tidak berafiliasi atau didukung oleh artis, agensi, atau platform mana pun.",
+        card_count_suffix: "kartu",
+        toast_upload_overflow: "Hanya slot kartu yang tersedia yang akan diisi.",
+        toast_upload_error: "Beberapa gambar tidak dapat dibuka. Coba JPG, PNG, atau WebP.",
+        toast_unsupported: "Format tidak didukung. Gunakan JPG, PNG, atau WebP.",
+        toast_image_too_large: "Gambar terlalu besar untuk diproses dengan aman di perangkat ini.",
+        toast_need_image: "Unggah setidaknya satu gambar terlebih dahulu.",
+        toast_pdf_error: "Pembuatan PDF gagal. Periksa koneksi lalu coba lagi.",
+        toast_sheet_full: "Lembar ini sudah penuh.",
+        toast_share_copied: "Teks dan tautan berbagi telah disalin.",
+        toast_paper_capacity: "Kertas ini memuat lebih sedikit kartu. Hapus beberapa foto terlebih dahulu.",
+        confirm_clear_sheet: "Hapus semua foto dari lembar ini?",
+        confirm_clear_history: "Hapus riwayat ekspor terbaru?",
+        after_export_title: "PDF berhasil diekspor",
+        after_export_desc: "Cetak pada 100% atau Ukuran Sebenarnya, lalu beri tahu apakah ukuran fisiknya benar.",
+        after_export_print: "Lihat pengaturan cetak",
+        after_export_fan_letter: "Coba surat penggemar",
+        after_export_theme: "Minta paket tema",
+        after_export_support: "Dukung alat gratis",
+        feedback_yes: "Ukurannya benar",
+        feedback_no: "Ukurannya salah",
+        feedback_thanks: "Terima kasih—ini membantu meningkatkan akurasi cetak.",
+        support_badge: "Fitur inti gratis · Gambar diproses lokal",
+        support_title: "Bantu kami menjaga alat cetak tetap berguna",
+        support_desc: "Tata letak dasar dan ekspor PDF tetap gratis. Jika menghemat waktu Anda, tip Ko-fi opsional membantu biaya pemeliharaan.",
+        support_kofi: "Bantu StanKit tetap gratis",
+        support_feedback: "Kirim masukan",
+        theme_lavender: "Lavender",
+        theme_rose: "Mawar",
+        theme_mint: "Mint",
+        theme_slate: "Abu gelap",
+        placeholder_fill: "Isi semua slot kosong yang tersisa",
+        placeholder_one: "1 Kartu",
+        placeholder_four: "4 Kartu",
+        placeholder_nine: "9 Kartu (Satu Lembar)",
+        card_move_earlier: "Geser ke depan",
+        card_move_later: "Geser ke belakang",
+        footer_disclaimer: "© 2026 StanKit Studio. Alat penggemar independen; tidak berafiliasi dengan artis, agensi, atau platform."
+      },
+      ms: {
+        hero_title_1: "Cetak Photocard pada Saiz Sebenar",
+        hero_title_2: "Muat Naik → Pilih Kertas → Eksport PDF 300 DPI",
+        hero_desc: "Susun foto pada A4, Letter atau kertas foto dan eksport PDF sedia cetak pada saiz fizikal. Tanpa akaun.",
+        label_step1: "2. Muat naik foto",
+        label_step2: "Butiran saiz kertas",
+        label_step3: "3. Eksport PDF sedia cetak",
+        pdf_note: "🔒 Imej diproses dalam pelayar ini dan tidak dihantar ke pelayan StanKit.",
+        sec_photocard_history: "Log Eksport Terkini",
+        empty_history: "Belum ada eksport. Hanya tetapan disimpan, bukan foto.",
+        share_modal_title: "Kongsi alat cetak percuma ini",
+        share_modal_desc: "Hantar kepada rakan yang memerlukan susun atur photocard bersaiz sebenar.",
+        guide_retail_desc1: "Pratetap 4×6 sesuai untuk kiosk foto. Sebelum membuat pesanan, semak sama ada kiosk memangkas, memenuhi atau menskala fail; pilih Saiz Sebenar atau 100% jika ada.",
+        trust_local: "🔒 Imej diproses setempat",
+        trust_no_signup: "✓ Tanpa pendaftaran",
+        trust_true_size: "📐 PDF 300 DPI saiz sebenar",
+        flow_choose: "Pilih kertas",
+        flow_upload: "Muat naik foto",
+        flow_export: "Eksport PDF",
+        preset_title: "Mulakan dengan kertas yang benar-benar boleh dicetak",
+        preset_desc: "Anda boleh menukar kertas kemudian tanpa memuat naik semula foto.",
+        preset_a4_use: "Sesuai untuk pencetak rumah dan kedai cetak di luar Amerika Utara.",
+        preset_letter_use: "Sesuai untuk pencetak rumah dan kampus di AS dan Kanada.",
+        preset_4x6_use: "Sesuai untuk kiosk foto; semak pemangkasan atau penskalaan.",
+        rights_notice: "Muat naik hanya imej yang anda berhak gunakan. StanKit Studio ialah alat peminat bebas dan tidak bergabung atau disokong oleh mana-mana artis, agensi atau platform.",
+        card_count_suffix: "kad",
+        toast_upload_overflow: "Hanya slot kad yang tersedia akan diisi.",
+        toast_upload_error: "Sesetengah imej tidak dapat dibuka. Cuba JPG, PNG atau WebP.",
+        toast_unsupported: "Format tidak disokong. Gunakan JPG, PNG atau WebP.",
+        toast_image_too_large: "Imej terlalu besar untuk diproses dengan selamat pada peranti ini.",
+        toast_need_image: "Muat naik sekurang-kurangnya satu imej dahulu.",
+        toast_pdf_error: "Penjanaan PDF gagal. Semak sambungan dan cuba lagi.",
+        toast_sheet_full: "Helaian ini sudah penuh.",
+        toast_share_copied: "Teks dan pautan perkongsian telah disalin.",
+        toast_paper_capacity: "Kertas ini memuatkan lebih sedikit kad. Buang beberapa foto dahulu.",
+        confirm_clear_sheet: "Alih keluar semua foto daripada helaian ini?",
+        confirm_clear_history: "Kosongkan log eksport terkini?",
+        after_export_title: "PDF berjaya dieksport",
+        after_export_desc: "Cetak pada 100% atau Saiz Sebenar, kemudian beritahu kami sama ada saiz fizikalnya betul.",
+        after_export_print: "Lihat tetapan cetak",
+        after_export_fan_letter: "Cuba surat peminat",
+        after_export_theme: "Minta pek tema",
+        after_export_support: "Sokong alat percuma",
+        feedback_yes: "Saiz betul",
+        feedback_no: "Saiz salah",
+        feedback_thanks: "Terima kasih—ini membantu meningkatkan ketepatan cetakan.",
+        support_badge: "Fungsi teras percuma · Imej diproses setempat",
+        support_title: "Bantu kami memastikan alat cetak terus berguna",
+        support_desc: "Susun atur asas dan eksport PDF kekal percuma. Jika menjimatkan masa anda, tip Ko-fi pilihan membantu kos penyelenggaraan.",
+        support_kofi: "Bantu StanKit kekal percuma",
+        support_feedback: "Hantar maklum balas",
+        theme_lavender: "Lavender",
+        theme_rose: "Ros",
+        theme_mint: "Pudina",
+        theme_slate: "Kelabu gelap",
+        placeholder_fill: "Isi semua slot kosong yang tinggal",
+        placeholder_one: "1 Kad",
+        placeholder_four: "4 Kad",
+        placeholder_nine: "9 Kad (Satu Helaian)",
+        card_move_earlier: "Alih ke hadapan",
+        card_move_later: "Alih ke belakang",
+        footer_disclaimer: "© 2026 StanKit Studio. Alat peminat bebas; tidak bergabung dengan artis, agensi atau platform."
+      },
+      th: {
+        hero_title_1: "พิมพ์โฟโต้การ์ดตามขนาดจริง",
+        hero_title_2: "อัปโหลด → เลือกกระดาษ → ส่งออก PDF 300 DPI",
+        hero_desc: "จัดรูปบนกระดาษ A4, Letter หรือกระดาษรูป แล้วส่งออก PDF พร้อมพิมพ์ตามขนาดจริง โดยไม่ต้องสมัครสมาชิก",
+        label_step1: "2. อัปโหลดรูป",
+        label_step2: "รายละเอียดขนาดกระดาษ",
+        label_step3: "3. ส่งออก PDF พร้อมพิมพ์",
+        pdf_note: "🔒 รูปภาพประมวลผลในเบราว์เซอร์นี้และไม่ถูกส่งไปยังเซิร์ฟเวอร์ของ StanKit",
+        sec_photocard_history: "บันทึกการส่งออกล่าสุด",
+        empty_history: "ยังไม่มีการส่งออก ระบบเก็บเฉพาะการตั้งค่า ไม่เก็บรูปภาพ",
+        share_modal_title: "แชร์เครื่องมือพิมพ์ฟรี",
+        share_modal_desc: "ส่งต่อให้เพื่อนที่ต้องการจัดโฟโต้การ์ดตามขนาดจริง",
+        guide_retail_desc1: "พรีเซ็ต 4×6 เหมาะกับตู้พิมพ์รูป ก่อนสั่งพิมพ์ให้ตรวจว่าระบบครอป เติมเต็ม หรือปรับขนาดไฟล์หรือไม่ และเลือกขนาดจริงหรือ 100% หากมี",
+        trust_local: "🔒 ประมวลผลรูปในเครื่อง",
+        trust_no_signup: "✓ ไม่ต้องสมัคร",
+        trust_true_size: "📐 PDF 300 DPI ขนาดจริง",
+        flow_choose: "เลือกกระดาษ",
+        flow_upload: "อัปโหลดรูป",
+        flow_export: "ส่งออก PDF",
+        preset_title: "เริ่มจากกระดาษที่คุณพิมพ์ได้จริง",
+        preset_desc: "เปลี่ยนกระดาษภายหลังได้โดยไม่ต้องอัปโหลดรูปใหม่",
+        preset_a4_use: "เหมาะกับเครื่องพิมพ์บ้านและร้านถ่ายเอกสารนอกอเมริกาเหนือ",
+        preset_letter_use: "เหมาะกับเครื่องพิมพ์บ้านและมหาวิทยาลัยในสหรัฐฯ และแคนาดา",
+        preset_4x6_use: "เหมาะกับตู้พิมพ์รูป โปรดตรวจการครอปหรือปรับขนาด",
+        rights_notice: "อัปโหลดเฉพาะรูปที่คุณมีสิทธิ์ใช้ StanKit Studio เป็นเครื่องมือแฟนอิสระและไม่ได้มีส่วนเกี่ยวข้องหรือได้รับการรับรองจากศิลปิน ต้นสังกัด หรือแพลตฟอร์มใด",
+        card_count_suffix: "ใบ",
+        toast_upload_overflow: "จะเติมเฉพาะช่องการ์ดที่ยังว่าง",
+        toast_upload_error: "เปิดรูปบางไฟล์ไม่ได้ โปรดลอง JPG, PNG หรือ WebP",
+        toast_unsupported: "ไม่รองรับไฟล์ชนิดนี้ โปรดใช้ JPG, PNG หรือ WebP",
+        toast_image_too_large: "รูปมีขนาดใหญ่เกินกว่าจะประมวลผลอย่างปลอดภัยบนอุปกรณ์นี้",
+        toast_need_image: "โปรดอัปโหลดอย่างน้อยหนึ่งรูปก่อน",
+        toast_pdf_error: "สร้าง PDF ไม่สำเร็จ โปรดตรวจการเชื่อมต่อแล้วลองอีกครั้ง",
+        toast_sheet_full: "แผ่นนี้เต็มแล้ว",
+        toast_share_copied: "คัดลอกข้อความและลิงก์แชร์แล้ว",
+        toast_paper_capacity: "กระดาษนี้ใส่การ์ดได้น้อยกว่า โปรดลบบางรูปก่อน",
+        confirm_clear_sheet: "ลบรูปทั้งหมดออกจากแผ่นนี้หรือไม่?",
+        confirm_clear_history: "ล้างบันทึกการส่งออกล่าสุดหรือไม่?",
+        after_export_title: "ส่งออก PDF สำเร็จ",
+        after_export_desc: "พิมพ์ที่ 100% หรือขนาดจริง แล้วบอกเราว่าขนาดบนกระดาษถูกต้องหรือไม่",
+        after_export_print: "ดูการตั้งค่าพิมพ์",
+        after_export_fan_letter: "ลองเขียนแฟนเลตเตอร์",
+        after_export_theme: "ขอแพ็กธีม",
+        after_export_support: "สนับสนุนเครื่องมือฟรี",
+        feedback_yes: "ขนาดถูกต้อง",
+        feedback_no: "ขนาดไม่ถูกต้อง",
+        feedback_thanks: "ขอบคุณ ข้อมูลนี้ช่วยให้เราปรับปรุงความแม่นยำ",
+        support_badge: "ฟังก์ชันหลักฟรี · ประมวลผลรูปในเครื่อง",
+        support_title: "ช่วยให้เราดูแลเครื่องมือพิมพ์ต่อไป",
+        support_desc: "การจัดหน้าและส่งออก PDF พื้นฐานยังคงฟรี หากช่วยประหยัดเวลา คุณสามารถให้ทิปผ่าน Ko-fi เพื่อช่วยค่าดูแลได้",
+        support_kofi: "ช่วยให้ StanKit ใช้งานฟรีต่อไป",
+        support_feedback: "ส่งความคิดเห็น",
+        theme_lavender: "ลาเวนเดอร์",
+        theme_rose: "กุหลาบ",
+        theme_mint: "มินต์",
+        theme_slate: "เทาเข้ม",
+        placeholder_fill: "เติมช่องว่างที่เหลือทั้งหมด",
+        placeholder_one: "1 ใบ",
+        placeholder_four: "4 ใบ",
+        placeholder_nine: "9 ใบ (เต็มแผ่น)",
+        card_move_earlier: "เลื่อนไปก่อนหน้า",
+        card_move_later: "เลื่อนไปถัดไป",
+        footer_disclaimer: "© 2026 StanKit Studio เครื่องมือแฟนอิสระ ไม่ได้มีส่วนเกี่ยวข้องกับศิลปิน ต้นสังกัด หรือแพลตฟอร์มใด"
+      },
+      ar: {
+        hero_title_1: "اطبع بطاقات الصور بالحجم الحقيقي",
+        hero_title_2: "ارفع الصور ← اختر الورق ← صدّر PDF بدقة 300 DPI",
+        hero_desc: "رتّب الصور على ورق A4 أو Letter أو ورق الصور وصدّر ملف PDF جاهزاً للطباعة بالحجم الفعلي، بلا تسجيل.",
+        label_step1: "2. رفع الصور",
+        label_step2: "تفاصيل حجم الورق",
+        label_step3: "3. تصدير PDF جاهز للطباعة",
+        pdf_note: "🔒 تُعالج الصور داخل هذا المتصفح ولا تُرسل إلى خوادم StanKit.",
+        sec_photocard_history: "سجل التصدير الأخير",
+        empty_history: "لا توجد ملفات مصدّرة بعد. يُحفظ الإعداد فقط ولا تُحفظ الصور.",
+        share_modal_title: "شارك أداة الطباعة المجانية",
+        share_modal_desc: "أرسلها إلى صديق يحتاج إلى تخطيط بطاقات بالحجم الحقيقي.",
+        guide_retail_desc1: "إعداد 4×6 مناسب لأكشاك الصور. قبل الطلب تحقق مما إذا كان الكشك يقص الملف أو يملؤه أو يغيّر حجمه، واختر الحجم الفعلي أو 100% إن توفر.",
+        trust_local: "🔒 معالجة الصور محلياً",
+        trust_no_signup: "✓ بلا تسجيل",
+        trust_true_size: "📐 PDF بالحجم الحقيقي 300 DPI",
+        flow_choose: "اختر الورق",
+        flow_upload: "ارفع الصور",
+        flow_export: "صدّر PDF",
+        preset_title: "ابدأ بالورق الذي يمكنك طباعته فعلياً",
+        preset_desc: "يمكنك تغييره لاحقاً من دون رفع الصور مرة أخرى.",
+        preset_a4_use: "مناسب للطابعات المنزلية ومحلات الطباعة خارج أمريكا الشمالية.",
+        preset_letter_use: "مناسب للطابعات المنزلية والجامعية في الولايات المتحدة وكندا.",
+        preset_4x6_use: "مناسب لأكشاك الصور؛ تحقق من القص أو تغيير الحجم.",
+        rights_notice: "ارفع فقط الصور التي تملك حق استخدامها. StanKit Studio أداة مستقلة للمعجبين وليست تابعة أو معتمدة من أي فنان أو وكالة أو منصة.",
+        card_count_suffix: "بطاقات",
+        toast_upload_overflow: "سيتم ملء الخانات المتاحة فقط.",
+        toast_upload_error: "تعذر فتح بعض الصور. جرّب JPG أو PNG أو WebP.",
+        toast_unsupported: "هذا التنسيق غير مدعوم. استخدم JPG أو PNG أو WebP.",
+        toast_image_too_large: "الصورة كبيرة جداً لمعالجتها بأمان على هذا الجهاز.",
+        toast_need_image: "ارفع صورة واحدة على الأقل أولاً.",
+        toast_pdf_error: "فشل إنشاء PDF. تحقق من الاتصال وحاول مرة أخرى.",
+        toast_sheet_full: "هذه الورقة ممتلئة بالفعل.",
+        toast_share_copied: "تم نسخ نص المشاركة والرابط.",
+        toast_paper_capacity: "هذا الورق يتسع لبطاقات أقل. احذف بعض الصور أولاً.",
+        confirm_clear_sheet: "هل تريد إزالة جميع الصور من هذه الورقة؟",
+        confirm_clear_history: "هل تريد مسح سجل التصدير الأخير؟",
+        after_export_title: "تم تصدير PDF بنجاح",
+        after_export_desc: "اطبع بنسبة 100% أو بالحجم الفعلي، ثم أخبرنا إن كان القياس المطبوع صحيحاً.",
+        after_export_print: "عرض إعدادات الطباعة",
+        after_export_fan_letter: "جرّب رسائل المعجبين",
+        after_export_theme: "اطلب حزم الثيمات",
+        after_export_support: "ادعم الأداة المجانية",
+        feedback_yes: "الحجم صحيح",
+        feedback_no: "الحجم غير صحيح",
+        feedback_thanks: "شكراً، هذا يساعدنا على تحسين دقة الطباعة.",
+        support_badge: "الأداة الأساسية مجانية · معالجة محلية للصور",
+        support_title: "ساعدنا على إبقاء أداة الطباعة مفيدة",
+        support_desc: "يبقى التخطيط الأساسي وتصدير PDF مجانيين. إذا وفرت لك الأداة وقتاً، يمكنك دعم الصيانة اختيارياً عبر Ko-fi.",
+        support_kofi: "ساعد في إبقاء StanKit مجانياً",
+        support_feedback: "إرسال ملاحظات",
+        theme_lavender: "لافندر",
+        theme_rose: "وردي",
+        theme_mint: "نعناعي",
+        theme_slate: "رمادي داكن",
+        placeholder_fill: "ملء كل الخانات الفارغة",
+        placeholder_one: "بطاقة واحدة",
+        placeholder_four: "4 بطاقات",
+        placeholder_nine: "9 بطاقات (ورقة كاملة)",
+        card_move_earlier: "نقل إلى الأمام",
+        card_move_later: "نقل إلى الخلف",
+        footer_disclaimer: "© 2026 StanKit Studio. أداة مستقلة للمعجبين وغير تابعة لأي فنان أو وكالة أو منصة."
+      },
+      es: {
+        hero_title_1: "Imprime photocards a tamaño real",
+        hero_title_2: "Sube fotos → Elige papel → Exporta PDF a 300 DPI",
+        hero_desc: "Organiza fotos en A4, Letter o papel fotográfico y exporta un PDF listo para imprimir a tamaño físico. Sin cuenta.",
+        label_step1: "2. Subir fotos",
+        label_step2: "Detalles del tamaño de papel",
+        label_step3: "3. Exportar PDF listo para imprimir",
+        pdf_note: "🔒 Las imágenes se procesan en este navegador y no se envían a los servidores de StanKit.",
+        sec_photocard_history: "Registro de exportaciones recientes",
+        empty_history: "Aún no hay exportaciones. Solo se guardan los ajustes, no las fotos.",
+        share_modal_title: "Comparte esta herramienta gratuita",
+        share_modal_desc: "Envíala a alguien que necesite una plantilla de photocards a tamaño real.",
+        guide_retail_desc1: "El ajuste 4×6 sirve para quioscos de fotos. Antes de pedir, comprueba si recorta, rellena o cambia la escala; elige Tamaño real o 100% cuando esté disponible.",
+        trust_local: "🔒 Imágenes procesadas localmente",
+        trust_no_signup: "✓ Sin registro",
+        trust_true_size: "📐 PDF 300 DPI a tamaño real",
+        flow_choose: "Elegir papel",
+        flow_upload: "Subir fotos",
+        flow_export: "Exportar PDF",
+        preset_title: "Empieza por el papel que realmente puedes imprimir",
+        preset_desc: "Puedes cambiarlo después sin volver a subir las fotos.",
+        preset_a4_use: "Ideal para impresoras domésticas y copisterías fuera de Norteamérica.",
+        preset_letter_use: "Ideal para impresoras domésticas y universitarias de EE. UU. y Canadá.",
+        preset_4x6_use: "Ideal para quioscos de fotos; revisa el recorte o cambio de escala.",
+        rights_notice: "Sube solo imágenes que tengas derecho a usar. StanKit Studio es una herramienta independiente de fans y no está afiliada ni respaldada por artistas, agencias o plataformas.",
+        card_count_suffix: "tarjetas",
+        toast_upload_overflow: "Solo se llenarán los espacios disponibles.",
+        toast_upload_error: "No se pudieron abrir algunas imágenes. Prueba JPG, PNG o WebP.",
+        toast_unsupported: "Formato no compatible. Usa JPG, PNG o WebP.",
+        toast_image_too_large: "La imagen es demasiado grande para procesarla con seguridad en este dispositivo.",
+        toast_need_image: "Primero sube al menos una imagen.",
+        toast_pdf_error: "No se pudo crear el PDF. Comprueba la conexión e inténtalo de nuevo.",
+        toast_sheet_full: "Esta hoja ya está llena.",
+        toast_share_copied: "Texto y enlace copiados.",
+        toast_paper_capacity: "Este papel admite menos tarjetas. Elimina algunas fotos primero.",
+        confirm_clear_sheet: "¿Quitar todas las fotos de esta hoja?",
+        confirm_clear_history: "¿Borrar el registro de exportaciones recientes?",
+        after_export_title: "PDF exportado correctamente",
+        after_export_desc: "Imprime al 100% o a Tamaño real y dinos si el tamaño físico fue correcto.",
+        after_export_print: "Ver ajustes de impresión",
+        after_export_fan_letter: "Probar cartas de fans",
+        after_export_theme: "Pedir paquetes de temas",
+        after_export_support: "Apoyar la herramienta gratuita",
+        feedback_yes: "El tamaño fue correcto",
+        feedback_no: "El tamaño fue incorrecto",
+        feedback_thanks: "Gracias; esto nos ayuda a mejorar la precisión de impresión.",
+        support_badge: "Herramienta básica gratis · Procesamiento local",
+        support_title: "Ayúdanos a mantener útil la herramienta",
+        support_desc: "La maquetación básica y la exportación PDF seguirán siendo gratuitas. Si te ahorró tiempo, una propina opcional en Ko-fi ayuda al mantenimiento.",
+        support_kofi: "Ayuda a mantener StanKit gratis",
+        support_feedback: "Enviar comentarios",
+        theme_lavender: "Lavanda",
+        theme_rose: "Rosa",
+        theme_mint: "Menta",
+        theme_slate: "Gris oscuro",
+        placeholder_fill: "Llenar todos los espacios restantes",
+        placeholder_one: "1 Tarjeta",
+        placeholder_four: "4 Tarjetas",
+        placeholder_nine: "9 Tarjetas (Hoja completa)",
+        card_move_earlier: "Mover antes",
+        card_move_later: "Mover después",
+        footer_disclaimer: "© 2026 StanKit Studio. Herramienta independiente de fans; no afiliada a artistas, agencias ni plataformas."
+      }
+    };
+    Object.entries(firstRoundI18n).forEach(([lang, values]) => Object.assign(i18nData[lang], values));
+
+    const printFlowI18n = {
+      en: {
+        opt_safe_area: "Show 2mm Safe Area (Preview only)",
+        safe_area_note: "Preview guide only; it is never printed in the PDF.",
+        page_preview: "Preview pages",
+        page_label: "Page",
+        page_previous: "Previous page",
+        page_next: "Next page",
+        page_singular: "page",
+        page_plural: "pages",
+        card_selected: "selected",
+        card_replace: "Replace photo",
+        upload_processing: "Processing images",
+        toast_upload_busy: "Please wait for the current images to finish processing.",
+        toast_upload_limit: "This project has reached its image limit.",
+        toast_storage_error: "Browser storage is unavailable or full. Your photos are still local, but settings could not be saved.",
+        toast_storage_recovered: "Damaged saved settings were cleared safely.",
+        toast_history_cleared: "Recent export log cleared.",
+        toast_share_error: "Sharing failed. Please copy the page address from your browser.",
+        toast_pdf_library_error: "PDF export is unavailable because the PDF library did not load. Reload the page and try again.",
+        toast_pdf_error: "PDF export failed. Try fewer images or reload the page.",
+        tip_interactive: "Drag to reorder. On phones, tap a card for large move, rotate and delete controls."
+      },
+      zh: {
+        opt_safe_area: "显示 2mm 安全区（仅预览）",
+        safe_area_note: "此线只用于预览，不会打印到 PDF 中。",
+        page_preview: "预览分页",
+        page_label: "第",
+        page_previous: "上一页",
+        page_next: "下一页",
+        page_singular: "页",
+        page_plural: "页",
+        card_selected: "已选中",
+        card_replace: "替换照片",
+        upload_processing: "正在处理图片",
+        toast_upload_busy: "请等待当前图片处理完成。",
+        toast_upload_limit: "当前项目已达到图片数量上限。",
+        toast_storage_error: "浏览器存储不可用或已满。照片仍只在本地，但设置无法保存。",
+        toast_storage_recovered: "已安全清除损坏的旧设置。",
+        toast_history_cleared: "最近导出记录已清空。",
+        toast_share_error: "分享失败，请从浏览器地址栏复制页面链接。",
+        toast_pdf_library_error: "PDF 组件加载失败，暂时无法导出。请刷新页面后重试。",
+        toast_pdf_error: "PDF 导出失败，请减少图片数量或刷新页面后重试。",
+        tip_interactive: "拖动可排序；手机上点选小卡后，可用大按钮移动、旋转或删除。"
+      },
+      "zh-TW": {
+        opt_safe_area: "顯示 2mm 安全區（僅預覽）",
+        safe_area_note: "此線只用於預覽，不會列印到 PDF 中。",
+        page_preview: "預覽分頁",
+        page_label: "第",
+        page_previous: "上一頁",
+        page_next: "下一頁",
+        page_singular: "頁",
+        page_plural: "頁",
+        card_selected: "已選取",
+        card_replace: "更換照片",
+        upload_processing: "正在處理圖片",
+        toast_upload_busy: "請等待目前圖片處理完成。",
+        toast_upload_limit: "目前專案已達圖片數量上限。",
+        toast_storage_error: "瀏覽器儲存空間不可用或已滿。照片仍只在本機，但設定無法儲存。",
+        toast_storage_recovered: "已安全清除損壞的舊設定。",
+        toast_history_cleared: "最近匯出記錄已清除。",
+        toast_share_error: "分享失敗，請從瀏覽器網址列複製頁面連結。",
+        toast_pdf_library_error: "PDF 元件載入失敗，暫時無法匯出。請重新整理頁面後再試。",
+        toast_pdf_error: "PDF 匯出失敗，請減少圖片數量或重新整理頁面後再試。",
+        tip_interactive: "拖曳可排序；手機上點選小卡後，可用大按鈕移動、旋轉或刪除。"
+      },
+      ko: {
+        opt_safe_area: "2mm 안전 영역 표시 (미리보기 전용)",
+        safe_area_note: "미리보기용 안내선이며 PDF에는 인쇄되지 않습니다.",
+        page_preview: "페이지 미리보기",
+        page_label: "페이지",
+        page_previous: "이전 페이지",
+        page_next: "다음 페이지",
+        page_singular: "페이지",
+        page_plural: "페이지",
+        card_selected: "선택됨",
+        card_replace: "사진 교체",
+        upload_processing: "이미지 처리 중",
+        toast_upload_busy: "현재 이미지 처리가 끝날 때까지 기다려 주세요.",
+        toast_upload_limit: "이 프로젝트의 이미지 수 한도에 도달했습니다.",
+        toast_storage_error: "브라우저 저장 공간을 사용할 수 없거나 가득 찼습니다. 사진은 로컬에만 있지만 설정은 저장되지 않았습니다.",
+        toast_storage_recovered: "손상된 이전 설정을 안전하게 삭제했습니다.",
+        toast_history_cleared: "최근 내보내기 기록을 지웠습니다.",
+        toast_share_error: "공유에 실패했습니다. 브라우저 주소 표시줄에서 링크를 복사해 주세요.",
+        toast_pdf_library_error: "PDF 구성 요소를 불러오지 못해 내보낼 수 없습니다. 페이지를 새로고침해 주세요.",
+        toast_pdf_error: "PDF 내보내기에 실패했습니다. 이미지 수를 줄이거나 페이지를 새로고침해 주세요.",
+        tip_interactive: "드래그로 순서를 바꿉니다. 휴대폰에서는 카드를 탭해 큰 이동·회전·삭제 버튼을 사용하세요."
+      },
+      ja: {
+        opt_safe_area: "2mm安全エリアを表示（プレビューのみ）",
+        safe_area_note: "確認用のガイドで、PDFには印刷されません。",
+        page_preview: "ページプレビュー",
+        page_label: "ページ",
+        page_previous: "前のページ",
+        page_next: "次のページ",
+        page_singular: "ページ",
+        page_plural: "ページ",
+        card_selected: "選択中",
+        card_replace: "写真を差し替え",
+        upload_processing: "画像を処理中",
+        toast_upload_busy: "現在の画像処理が終わるまでお待ちください。",
+        toast_upload_limit: "このプロジェクトの画像数上限に達しました。",
+        toast_storage_error: "ブラウザーの保存領域が利用できないか満杯です。写真は端末内のままですが、設定を保存できませんでした。",
+        toast_storage_recovered: "破損した以前の設定を安全に消去しました。",
+        toast_history_cleared: "最近の書き出し履歴を消去しました。",
+        toast_share_error: "共有に失敗しました。ブラウザーのアドレス欄からリンクをコピーしてください。",
+        toast_pdf_library_error: "PDF機能を読み込めないため書き出せません。ページを再読み込みしてください。",
+        toast_pdf_error: "PDFの書き出しに失敗しました。画像を減らすかページを再読み込みしてください。",
+        tip_interactive: "ドラッグで並べ替え。スマホではカードをタップし、大きな移動・回転・削除ボタンを使えます。"
+      },
+      id: {
+        opt_safe_area: "Tampilkan area aman 2mm (hanya pratinjau)",
+        safe_area_note: "Garis ini hanya untuk pratinjau dan tidak dicetak ke PDF.",
+        page_preview: "Pratinjau halaman",
+        page_label: "Halaman",
+        page_previous: "Halaman sebelumnya",
+        page_next: "Halaman berikutnya",
+        page_singular: "halaman",
+        page_plural: "halaman",
+        card_selected: "dipilih",
+        card_replace: "Ganti foto",
+        upload_processing: "Memproses gambar",
+        toast_upload_busy: "Tunggu hingga gambar saat ini selesai diproses.",
+        toast_upload_limit: "Proyek ini telah mencapai batas gambar.",
+        toast_storage_error: "Penyimpanan browser tidak tersedia atau penuh. Foto tetap lokal, tetapi pengaturan tidak dapat disimpan.",
+        toast_storage_recovered: "Pengaturan lama yang rusak telah dihapus dengan aman.",
+        toast_history_cleared: "Riwayat ekspor terbaru telah dihapus.",
+        toast_share_error: "Berbagi gagal. Salin alamat halaman dari browser.",
+        toast_pdf_library_error: "Ekspor PDF tidak tersedia karena komponen PDF gagal dimuat. Muat ulang halaman.",
+        toast_pdf_error: "Ekspor PDF gagal. Kurangi gambar atau muat ulang halaman.",
+        tip_interactive: "Seret untuk mengurutkan. Di ponsel, ketuk kartu untuk tombol pindah, putar, dan hapus yang besar."
+      },
+      ms: {
+        opt_safe_area: "Tunjuk kawasan selamat 2mm (pratonton sahaja)",
+        safe_area_note: "Garis ini hanya untuk pratonton dan tidak dicetak dalam PDF.",
+        page_preview: "Pratonton halaman",
+        page_label: "Halaman",
+        page_previous: "Halaman sebelumnya",
+        page_next: "Halaman seterusnya",
+        page_singular: "halaman",
+        page_plural: "halaman",
+        card_selected: "dipilih",
+        card_replace: "Ganti foto",
+        upload_processing: "Memproses imej",
+        toast_upload_busy: "Tunggu sehingga imej semasa selesai diproses.",
+        toast_upload_limit: "Projek ini telah mencapai had imej.",
+        toast_storage_error: "Storan pelayar tidak tersedia atau penuh. Foto kekal setempat, tetapi tetapan tidak dapat disimpan.",
+        toast_storage_recovered: "Tetapan lama yang rosak telah dibersihkan dengan selamat.",
+        toast_history_cleared: "Log eksport terkini telah dikosongkan.",
+        toast_share_error: "Perkongsian gagal. Salin alamat halaman daripada pelayar.",
+        toast_pdf_library_error: "Eksport PDF tidak tersedia kerana komponen PDF gagal dimuatkan. Muat semula halaman.",
+        toast_pdf_error: "Eksport PDF gagal. Kurangkan imej atau muat semula halaman.",
+        tip_interactive: "Seret untuk menyusun. Pada telefon, ketik kad untuk butang pindah, putar dan padam yang besar."
+      },
+      th: {
+        opt_safe_area: "แสดงพื้นที่ปลอดภัย 2 มม. (เฉพาะตัวอย่าง)",
+        safe_area_note: "เส้นนี้ใช้ดูตัวอย่างเท่านั้นและจะไม่พิมพ์ลงใน PDF",
+        page_preview: "ตัวอย่างแต่ละหน้า",
+        page_label: "หน้า",
+        page_previous: "หน้าก่อน",
+        page_next: "หน้าถัดไป",
+        page_singular: "หน้า",
+        page_plural: "หน้า",
+        card_selected: "เลือกแล้ว",
+        card_replace: "เปลี่ยนรูป",
+        upload_processing: "กำลังประมวลผลรูป",
+        toast_upload_busy: "โปรดรอให้ประมวลผลรูปชุดปัจจุบันเสร็จก่อน",
+        toast_upload_limit: "โปรเจกต์นี้มีรูปถึงจำนวนสูงสุดแล้ว",
+        toast_storage_error: "พื้นที่เก็บข้อมูลของเบราว์เซอร์ใช้ไม่ได้หรือเต็ม รูปยังอยู่ในเครื่อง แต่บันทึกการตั้งค่าไม่ได้",
+        toast_storage_recovered: "ล้างการตั้งค่าเดิมที่เสียหายอย่างปลอดภัยแล้ว",
+        toast_history_cleared: "ล้างบันทึกการส่งออกล่าสุดแล้ว",
+        toast_share_error: "แชร์ไม่สำเร็จ โปรดคัดลอกที่อยู่หน้าจากแถบที่อยู่ของเบราว์เซอร์",
+        toast_pdf_library_error: "ส่งออก PDF ไม่ได้เพราะโหลดส่วนประกอบ PDF ไม่สำเร็จ โปรดรีเฟรชหน้า",
+        toast_pdf_error: "ส่งออก PDF ไม่สำเร็จ โปรดลดจำนวนรูปหรือรีเฟรชหน้า",
+        tip_interactive: "ลากเพื่อเรียงลำดับ บนโทรศัพท์ให้แตะการ์ดเพื่อใช้ปุ่มย้าย หมุน และลบขนาดใหญ่"
+      },
+      ar: {
+        opt_safe_area: "إظهار منطقة الأمان 2 مم (للمعاينة فقط)",
+        safe_area_note: "هذا الدليل للمعاينة فقط ولن يُطبع في ملف PDF.",
+        page_preview: "معاينة الصفحات",
+        page_label: "الصفحة",
+        page_previous: "الصفحة السابقة",
+        page_next: "الصفحة التالية",
+        page_singular: "صفحة",
+        page_plural: "صفحات",
+        card_selected: "محددة",
+        card_replace: "استبدال الصورة",
+        upload_processing: "جارٍ معالجة الصور",
+        toast_upload_busy: "انتظر حتى تنتهي معالجة الصور الحالية.",
+        toast_upload_limit: "وصل هذا المشروع إلى الحد الأقصى للصور.",
+        toast_storage_error: "تخزين المتصفح غير متاح أو ممتلئ. تبقى الصور محلية، لكن تعذر حفظ الإعدادات.",
+        toast_storage_recovered: "تم مسح الإعدادات القديمة التالفة بأمان.",
+        toast_history_cleared: "تم مسح سجل التصدير الأخير.",
+        toast_share_error: "فشلت المشاركة. انسخ عنوان الصفحة من شريط المتصفح.",
+        toast_pdf_library_error: "تصدير PDF غير متاح لأن مكوّن PDF لم يُحمّل. أعد تحميل الصفحة.",
+        toast_pdf_error: "فشل تصدير PDF. قلّل عدد الصور أو أعد تحميل الصفحة.",
+        tip_interactive: "اسحب لإعادة الترتيب. على الهاتف، اضغط البطاقة لاستخدام أزرار النقل والتدوير والحذف الكبيرة."
+      },
+      es: {
+        opt_safe_area: "Mostrar zona segura de 2mm (solo vista previa)",
+        safe_area_note: "Esta guía es solo de vista previa y no se imprime en el PDF.",
+        page_preview: "Vista previa de páginas",
+        page_label: "Página",
+        page_previous: "Página anterior",
+        page_next: "Página siguiente",
+        page_singular: "página",
+        page_plural: "páginas",
+        card_selected: "seleccionada",
+        card_replace: "Reemplazar foto",
+        upload_processing: "Procesando imágenes",
+        toast_upload_busy: "Espera a que terminen de procesarse las imágenes actuales.",
+        toast_upload_limit: "Este proyecto alcanzó el límite de imágenes.",
+        toast_storage_error: "El almacenamiento del navegador no está disponible o está lleno. Las fotos siguen locales, pero no se pudieron guardar los ajustes.",
+        toast_storage_recovered: "Los ajustes antiguos dañados se borraron de forma segura.",
+        toast_history_cleared: "Se borró el registro de exportaciones recientes.",
+        toast_share_error: "No se pudo compartir. Copia la dirección de la página desde el navegador.",
+        toast_pdf_library_error: "La exportación PDF no está disponible porque no se cargó el componente PDF. Recarga la página.",
+        toast_pdf_error: "No se pudo exportar el PDF. Reduce las imágenes o recarga la página.",
+        tip_interactive: "Arrastra para ordenar. En el móvil, toca una tarjeta para usar botones grandes de mover, girar y borrar."
+      }
+    };
+    Object.entries(printFlowI18n).forEach(([lang, values]) => Object.assign(i18nData[lang], values));
+
     function showToast(text, icon = '✨') {
       const box = document.getElementById('toast-box');
       const txt = document.getElementById('toast-text');
@@ -1863,10 +2936,10 @@
       }, 2200);
     }
 
-    function changeLanguage(lang) {
+    function changeLanguage(lang, source = 'user') {
       if (!i18nData[lang]) lang = 'en';
       currentLang = lang;
-      safeSetStorage('stankit_lang', lang);
+      const storageSaved = safeSetStorage('stankit_lang', lang);
       
       document.documentElement.lang = lang;
       document.documentElement.dir = (lang === 'ar' ? 'rtl' : 'ltr');
@@ -1879,6 +2952,13 @@
         const key = el.getAttribute('data-i18n');
         if (i18nData[lang] && i18nData[lang][key] !== undefined) {
           el.innerText = i18nData[lang][key];
+        }
+      });
+
+      document.querySelectorAll('[data-i18n-aria-label]').forEach(el => {
+        const key = el.getAttribute('data-i18n-aria-label');
+        if (i18nData[lang] && i18nData[lang][key] !== undefined) {
+          el.setAttribute('aria-label', i18nData[lang][key]);
         }
       });
 
@@ -1896,13 +2976,74 @@
       updateUploadCounter();
       renderGridPreview();
       renderPhotocardHistoryUI();
+      updateMobileCardToolbar();
+
+      if (!storageSaved && source !== 'init') {
+        showToast(i18nData[lang].toast_storage_error, '⚠️');
+      }
 
       trackGA4Event('change_language', { selected_language: lang });
     }
 
-    function setPaper(paper) {
+    const paperTitleKeys = {
+      'a4': 'paper_a4_title',
+      'letter': 'paper_letter_title',
+      '4x6': 'paper_4x6_title',
+      'a4-bts-tour': 'paper_tour_title',
+      'japan-l-size': 'paper_bromide_title',
+      'a4-polaroid': 'paper_polaroid_title',
+      '5x7': 'paper_5x7_title',
+      'a5': 'paper_a5_title',
+      'a4-dense': 'paper_dense_title',
+      'a3': 'paper_a3_title'
+    };
+
+    function getTotalPages(itemCount = uploadedImages.length, paper = currentPaper) {
+      const spec = paperSpecs[paper] || paperSpecs.a4;
+      return Math.max(1, Math.ceil(itemCount / spec.maxSlots));
+    }
+
+    function clampCurrentPage() {
+      currentPage = Math.max(0, Math.min(currentPage, getTotalPages() - 1));
+    }
+
+    function updatePreviewPageControls() {
+      clampCurrentPage();
+      const controls = document.getElementById('preview-page-controls');
+      const label = document.getElementById('preview-page-label');
+      const prev = document.getElementById('btn-page-prev');
+      const next = document.getElementById('btn-page-next');
+      const pageCount = getTotalPages();
+      const dict = i18nData[currentLang] || i18nData.en;
+
+      if (label) label.innerText = `${dict.page_label || 'Page'} ${currentPage + 1} / ${pageCount}`;
+      if (prev) prev.disabled = currentPage <= 0;
+      if (next) next.disabled = currentPage >= pageCount - 1;
+      if (controls) {
+        controls.classList.toggle('hidden', pageCount <= 1);
+        controls.classList.toggle('flex', pageCount > 1);
+      }
+    }
+
+    function changePreviewPage(delta) {
+      const nextPage = Math.max(0, Math.min(currentPage + delta, getTotalPages() - 1));
+      if (nextPage === currentPage) return;
+      currentPage = nextPage;
+      selectedCardIndex = null;
+      renderGridPreview();
+      updateMobileCardToolbar();
+    }
+
+    function chooseRecommendedPreset(paper) {
+      setPaper(paper, 'recommended');
+      const dropZone = document.getElementById('drop-zone');
+      if (dropZone) dropZone.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    function setPaper(paper, source = 'paper_options') {
       if (!paperSpecs[paper]) paper = 'a4';
       currentPaper = paper;
+      clampCurrentPage();
 
       const paperKeys = ['a4', 'letter', '4x6', 'a4-bts-tour', 'japan-l-size', 'a4-polaroid', '5x7', 'a5', 'a4-dense', 'a3'];
       paperKeys.forEach(pKey => {
@@ -1918,6 +3059,7 @@
       updateDimensionLabel();
       updateUploadCounter();
       renderGridPreview();
+      if (source !== 'init') trackGA4Event('preset_select', { paper, source });
     }
 
     function updateDimensionLabel() {
@@ -1925,7 +3067,7 @@
       const dimEl = document.getElementById('sheet-dim-label');
       if (!dimEl) return;
       const dict = i18nData[currentLang] || i18nData['en'];
-      const titleKey = `paper_${currentPaper.replace(/-/g, '_')}_title`;
+      const titleKey = paperTitleKeys[currentPaper];
       const title = dict[titleKey] || spec.sheetW_mm + '×' + spec.sheetH_mm + 'mm';
       dimEl.innerText = `${title.replace(/^[^\s]+\s*/, '')} (${spec.sheetW_mm}×${spec.sheetH_mm}mm) • 300 DPI`;
     }
@@ -1940,14 +3082,6 @@
       renderGridPreview();
     }
 
-    function toggleBacksideTemplate(checked) {
-      currentBackside = checked;
-      renderGridPreview();
-      if (checked) {
-        showToast('Double-Sided Print Template enabled! (背面模板已启用)', '🖨️');
-      }
-    }
-
     function setFitMode(mode) {
       currentFitMode = mode;
       renderGridPreview();
@@ -1957,88 +3091,240 @@
       const spec = paperSpecs[currentPaper] || paperSpecs['a4'];
       const counter = document.getElementById('upload-counter');
       if (counter) {
-        counter.innerText = `${uploadedImages.length}/${spec.maxSlots} cards`;
+        const dict = i18nData[currentLang] || i18nData.en;
+        const pageCount = getTotalPages();
+        const pageWord = pageCount === 1 ? (dict.page_singular || 'page') : (dict.page_plural || 'pages');
+        counter.innerText = `${uploadedImages.length} ${dict.card_count_suffix || 'cards'} • ${pageCount} ${pageWord}`;
       }
+      updatePreviewPageControls();
     }
 
-    // Precision Slot Uploading Logic
+    // Upload into the next available slot. Existing cards stay in a dense, predictable order.
     function triggerUploadForSlot(slotIdx) {
-      targetUploadSlot = slotIdx;
+      targetUploadSlot = Number.isInteger(slotIdx) ? Math.min(slotIdx, uploadedImages.length) : null;
       const fileInput = document.getElementById('file-input');
       if (fileInput) fileInput.click();
     }
 
-    // Intelligent DPI Calculation for Image
-    function calculateImageDPI(img, spec) {
+    function calculateImageDPI(img, spec, rotation = 0) {
       if (!img || !img.width || !img.height) return 300;
-      const dpiX = (img.width / spec.cardW_mm) * 25.4;
-      const dpiY = (img.height / spec.cardH_mm) * 25.4;
+      const isSideways = rotation === 90 || rotation === 270;
+      const targetWmm = isSideways ? spec.cardH_mm : spec.cardW_mm;
+      const targetHmm = isSideways ? spec.cardW_mm : spec.cardH_mm;
+      const dpiX = (img.width / targetWmm) * 25.4;
+      const dpiY = (img.height / targetHmm) * 25.4;
       return Math.round(Math.min(dpiX, dpiY));
     }
 
-    function handleFileSelect(files) {
-      if (!files || files.length === 0) return;
-      const spec = paperSpecs[currentPaper] || paperSpecs['a4'];
-      const maxSlots = spec.maxSlots;
+    const SUPPORTED_IMAGE_TYPES = new Set(['image/jpeg', 'image/png', 'image/webp']);
+    const MAX_UPLOAD_IMAGES = 24;
+    const MAX_FILE_BYTES = 30 * 1024 * 1024;
+    const MAX_SOURCE_PIXELS = 64 * 1000 * 1000;
+    const MAX_WORKING_PIXELS = 1.7 * 1000 * 1000;
+    const MAX_WORKING_EDGE = 1600;
 
-      trackGA4Event('upload_photocards', { count: files.length });
+    async function detectImageMime(file) {
+      const bytes = new Uint8Array(await file.slice(0, 16).arrayBuffer());
+      if (bytes.length >= 3 && bytes[0] === 0xff && bytes[1] === 0xd8 && bytes[2] === 0xff) {
+        return 'image/jpeg';
+      }
+      if (bytes.length >= 8 && bytes[0] === 0x89 && bytes[1] === 0x50 && bytes[2] === 0x4e && bytes[3] === 0x47 && bytes[4] === 0x0d && bytes[5] === 0x0a && bytes[6] === 0x1a && bytes[7] === 0x0a) {
+        return 'image/png';
+      }
+      if (bytes.length >= 12 && bytes[0] === 0x52 && bytes[1] === 0x49 && bytes[2] === 0x46 && bytes[3] === 0x46 && bytes[8] === 0x57 && bytes[9] === 0x45 && bytes[10] === 0x42 && bytes[11] === 0x50) {
+        return 'image/webp';
+      }
+      return '';
+    }
 
-      const fileList = Array.from(files);
-      let loadPromises = [];
-
-      fileList.forEach(file => {
-        const p = new Promise((resolve) => {
-          const reader = new FileReader();
-          reader.onload = (e) => {
-            const img = new Image();
-            img.onload = () => {
-              const dpi = calculateImageDPI(img, spec);
-              resolve({
-                src: e.target.result,
-                img: img,
-                id: 'img_' + Math.random().toString(36).substr(2, 9),
-                rotation: 0,
-                dpi: dpi
-              });
-            };
-            img.onerror = () => {
-              showToast('Failed to load an image file.', '⚠️');
-              resolve(null);
-            };
-            img.src = e.target.result;
-          };
-          reader.onerror = () => resolve(null);
-          reader.readAsDataURL(file);
-        });
-        loadPromises.push(p);
+    function loadImageFromUrl(url) {
+      return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.decoding = 'async';
+        img.onload = () => {
+          img.onload = null;
+          img.onerror = null;
+          resolve(img);
+        };
+        img.onerror = () => {
+          img.onload = null;
+          img.onerror = null;
+          reject(new Error('decode_failed'));
+        };
+        img.src = url;
       });
+    }
 
-      Promise.all(loadPromises).then(newItems => {
-        const validItems = newItems.filter(Boolean);
-        if (targetUploadSlot !== null && targetUploadSlot >= 0 && targetUploadSlot < maxSlots && validItems.length > 0) {
-          const first = validItems[0];
-          if (targetUploadSlot < uploadedImages.length) {
-            uploadedImages[targetUploadSlot] = first;
-          } else {
-            uploadedImages.push(first);
+    function releaseImageResource(item) {
+      if (!item) return;
+      if (item.objectUrl && item.src) {
+        try { URL.revokeObjectURL(item.src); } catch (e) {}
+      }
+      if (item.objectUrl && item.img) {
+        try {
+          item.img.onload = null;
+          item.img.onerror = null;
+          item.img.src = '';
+        } catch (e) {}
+      }
+      item.src = '';
+      item.img = null;
+    }
+
+    async function prepareImageFile(file, spec) {
+      if (file.size > MAX_FILE_BYTES) throw new Error('file_too_large');
+      const detectedType = await detectImageMime(file);
+      if (!SUPPORTED_IMAGE_TYPES.has(detectedType)) throw new Error('unsupported_type');
+      const sourceBlob = file.type === detectedType ? file : file.slice(0, file.size, detectedType);
+
+      let sourceUrl = URL.createObjectURL(sourceBlob);
+      let img = null;
+      try {
+        img = await loadImageFromUrl(sourceUrl);
+        const sourcePixels = img.naturalWidth * img.naturalHeight;
+        if (!sourcePixels || sourcePixels > MAX_SOURCE_PIXELS) throw new Error('image_too_large');
+
+        const scale = Math.min(
+          1,
+          MAX_WORKING_EDGE / Math.max(img.naturalWidth, img.naturalHeight),
+          Math.sqrt(MAX_WORKING_PIXELS / sourcePixels)
+        );
+
+        if (scale < 0.999) {
+          const canvas = document.createElement('canvas');
+          canvas.width = Math.max(1, Math.round(img.naturalWidth * scale));
+          canvas.height = Math.max(1, Math.round(img.naturalHeight * scale));
+          const ctx = canvas.getContext('2d', { alpha: detectedType !== 'image/jpeg' });
+          ctx.imageSmoothingEnabled = true;
+          ctx.imageSmoothingQuality = 'high';
+          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+          try {
+            const resizedBlob = await new Promise((resolve, reject) => {
+              canvas.toBlob(blob => blob ? resolve(blob) : reject(new Error('resize_failed')), detectedType, 0.96);
+            });
+            const originalImg = img;
+            URL.revokeObjectURL(sourceUrl);
+            originalImg.src = '';
+            sourceUrl = URL.createObjectURL(resizedBlob);
+            img = await loadImageFromUrl(sourceUrl);
+          } finally {
+            canvas.width = 1;
+            canvas.height = 1;
           }
-          for (let i = 1; i < validItems.length; i++) {
-            if (uploadedImages.length < maxSlots) {
-              uploadedImages.push(validItems[i]);
-            }
-          }
-        } else {
-          validItems.forEach(item => {
-            if (uploadedImages.length < maxSlots) {
-              uploadedImages.push(item);
-            }
-          });
         }
 
+        return {
+          src: sourceUrl,
+          img,
+          id: 'img_' + Math.random().toString(36).slice(2, 11),
+          rotation: 0,
+          dpi: calculateImageDPI(img, spec, 0),
+          objectUrl: true
+        };
+      } catch (error) {
+        URL.revokeObjectURL(sourceUrl);
+        if (img) {
+          try { img.src = ''; } catch (e) {}
+        }
+        throw error;
+      }
+    }
+
+    async function handleFileSelect(files) {
+      if (!files || files.length === 0) return;
+      const spec = paperSpecs[currentPaper] || paperSpecs['a4'];
+      const dict = i18nData[currentLang] || i18nData.en;
+      const fileInput = document.getElementById('file-input');
+      const dropZone = document.getElementById('drop-zone');
+      const requestedTarget = targetUploadSlot;
+      const replacingExisting = Number.isInteger(requestedTarget) && requestedTarget < uploadedImages.length;
+      const availableSlots = Math.max(0, MAX_UPLOAD_IMAGES - uploadedImages.length + (replacingExisting ? 1 : 0));
+      const selectedFiles = Array.from(files).slice(0, availableSlots);
+
+      if (uploadInProgress) {
+        showToast(dict.toast_upload_busy || 'Please wait for the current upload.', '⏳');
         targetUploadSlot = null;
+        if (fileInput) fileInput.value = '';
+        return;
+      }
+
+      trackGA4Event('upload_start', { file_count: files.length, paper: currentPaper });
+
+      if (availableSlots === 0) {
+        showToast(`${dict.toast_upload_limit || 'This project has reached its image limit.'} (${MAX_UPLOAD_IMAGES})`, '⚠️');
+        targetUploadSlot = null;
+        if (fileInput) fileInput.value = '';
+        trackGA4Event('upload_error', { reason: 'project_limit', paper: currentPaper });
+        return;
+      }
+
+      if (files.length > selectedFiles.length) {
+        showToast(`${dict.toast_upload_overflow || 'Only available slots will be filled.'} (${selectedFiles.length}/${files.length})`, '⚠️');
+        trackGA4Event('upload_error', { reason: 'slot_overflow', ignored_count: files.length - selectedFiles.length });
+      }
+
+      if (dropZone) {
+        dropZone.setAttribute('aria-busy', 'true');
+        dropZone.classList.add('opacity-60', 'pointer-events-none');
+      }
+      uploadInProgress = true;
+
+      const validItems = [];
+      const errorReasons = [];
+      let successCount = 0;
+      try {
+        for (let index = 0; index < selectedFiles.length; index++) {
+          const counter = document.getElementById('upload-counter');
+          if (counter) counter.innerText = `${dict.upload_processing || 'Processing images'} ${index + 1}/${selectedFiles.length}`;
+          try {
+            validItems.push(await prepareImageFile(selectedFiles[index], spec));
+          } catch (error) {
+            errorReasons.push(error.message || 'decode_failed');
+          }
+          await new Promise(resolve => requestAnimationFrame(resolve));
+        }
+
+        successCount = validItems.length;
+        if (validItems.length > 0) {
+          if (replacingExisting) {
+            releaseImageResource(uploadedImages[requestedTarget]);
+            uploadedImages[requestedTarget] = validItems.shift();
+          }
+          validItems.forEach(item => {
+            if (uploadedImages.length < MAX_UPLOAD_IMAGES) uploadedImages.push(item);
+            else releaseImageResource(item);
+          });
+          if (!replacingExisting || successCount > 1) {
+            currentPage = getTotalPages() - 1;
+          }
+        }
+
+        if (errorReasons.length > 0) {
+          const reason = errorReasons[0];
+          const message = reason === 'unsupported_type'
+            ? dict.toast_unsupported
+            : (reason === 'file_too_large' || reason === 'image_too_large')
+              ? dict.toast_image_too_large
+              : dict.toast_upload_error;
+          showToast(message || 'Some images could not be loaded.', '⚠️');
+          trackGA4Event('upload_error', { reason, error_count: errorReasons.length, paper: currentPaper });
+        }
+
+        if (successCount > 0) {
+          trackGA4Event('upload_complete', { success_count: successCount, paper: currentPaper });
+        }
+      } finally {
+        uploadInProgress = false;
+        targetUploadSlot = null;
+        if (fileInput) fileInput.value = '';
+        if (dropZone) {
+          dropZone.removeAttribute('aria-busy');
+          dropZone.classList.remove('opacity-60', 'pointer-events-none');
+        }
         updateUploadCounter();
         renderGridPreview();
-      });
+      }
     }
 
     function rotateCard(index, event) {
@@ -2048,8 +3334,11 @@
       }
       if (index >= 0 && index < uploadedImages.length) {
         uploadedImages[index].rotation = ((uploadedImages[index].rotation || 0) + 90) % 360;
+        selectedCardIndex = index;
         renderGridPreview();
+        updateMobileCardToolbar();
         showToast(i18nData[currentLang]?.toast_rotated || 'Card rotated 90°', '↻');
+        trackGA4Event('layout_edit', { action: 'rotate', index, rotation: uploadedImages[index].rotation });
       }
     }
 
@@ -2059,23 +3348,107 @@
         event.preventDefault();
       }
       if (index >= 0 && index < uploadedImages.length) {
-        uploadedImages.splice(index, 1);
+        const removed = uploadedImages.splice(index, 1)[0];
+        releaseImageResource(removed);
+        if (selectedCardIndex === index) selectedCardIndex = null;
+        else if (selectedCardIndex > index) selectedCardIndex--;
+        clampCurrentPage();
         updateUploadCounter();
         renderGridPreview();
+        updateMobileCardToolbar();
         showToast(i18nData[currentLang]?.toast_deleted || 'Card deleted', '🗑️');
+        trackGA4Event('layout_edit', { action: 'delete', index });
       }
     }
 
     function clearAllImages() {
+      const dict = i18nData[currentLang] || i18nData.en;
+      if (uploadedImages.length > 0 && !confirm(dict.confirm_clear_sheet || 'Remove all photos from this sheet?')) return;
+      uploadedImages.forEach(releaseImageResource);
       uploadedImages = [];
+      currentPage = 0;
+      selectedCardIndex = null;
       updateUploadCounter();
       renderGridPreview();
+      updateMobileCardToolbar();
       showToast(i18nData[currentLang]?.btn_clear_all || 'Sheet cleared', '🗑️');
+    }
+
+    function moveCard(index, delta, event) {
+      if (event) {
+        event.stopPropagation();
+        event.preventDefault();
+      }
+      const nextIndex = index + delta;
+      if (index < 0 || nextIndex < 0 || index >= uploadedImages.length || nextIndex >= uploadedImages.length) return;
+      [uploadedImages[index], uploadedImages[nextIndex]] = [uploadedImages[nextIndex], uploadedImages[index]];
+      if (selectedCardIndex === index) selectedCardIndex = nextIndex;
+      currentPage = Math.floor(nextIndex / (paperSpecs[currentPaper] || paperSpecs.a4).maxSlots);
+      renderGridPreview();
+      updateMobileCardToolbar();
+      trackGA4Event('layout_edit', { action: 'move', from: index, to: nextIndex });
+    }
+
+    function selectCard(index, event) {
+      if (event && Date.now() < suppressCardClickUntil) {
+        event.preventDefault();
+        return;
+      }
+      if (index < 0 || index >= uploadedImages.length) return;
+      selectedCardIndex = index;
+      updateMobileCardToolbar();
+    }
+
+    function updateMobileCardToolbar() {
+      const toolbar = document.getElementById('mobile-card-toolbar');
+      const label = document.getElementById('selected-card-label');
+      const earlier = document.getElementById('mobile-move-earlier');
+      const later = document.getElementById('mobile-move-later');
+      if (!toolbar) return;
+
+      const hasSelection = Number.isInteger(selectedCardIndex) && selectedCardIndex >= 0 && selectedCardIndex < uploadedImages.length;
+      toolbar.classList.toggle('hidden', !hasSelection);
+      if (!hasSelection) return;
+
+      const dict = i18nData[currentLang] || i18nData.en;
+      if (label) label.innerText = `${selectedCardIndex + 1} · ${dict.card_selected || 'selected'}`;
+      if (earlier) earlier.disabled = selectedCardIndex <= 0;
+      if (later) later.disabled = selectedCardIndex >= uploadedImages.length - 1;
+    }
+
+    function runSelectedCardAction(action) {
+      if (!Number.isInteger(selectedCardIndex)) return;
+      if (action === 'replace') triggerUploadForSlot(selectedCardIndex);
+      else if (action === 'earlier') moveCard(selectedCardIndex, -1);
+      else if (action === 'later') moveCard(selectedCardIndex, 1);
+      else if (action === 'rotate') rotateCard(selectedCardIndex);
+      else if (action === 'delete') deleteCard(selectedCardIndex);
     }
 
     // ==========================================
     // Interactive Drag to Swap / Move Logic
     // ==========================================
+    function reorderCards(fromIndex, targetIndex) {
+      if (!Number.isInteger(fromIndex) || !Number.isInteger(targetIndex) || fromIndex === targetIndex) return false;
+      if (fromIndex < 0 || fromIndex >= uploadedImages.length || targetIndex < 0) return false;
+
+      if (targetIndex < uploadedImages.length) {
+        [uploadedImages[fromIndex], uploadedImages[targetIndex]] = [uploadedImages[targetIndex], uploadedImages[fromIndex]];
+      } else {
+        const item = uploadedImages.splice(fromIndex, 1)[0];
+        uploadedImages.push(item);
+        targetIndex = uploadedImages.length - 1;
+      }
+
+      selectedCardIndex = targetIndex;
+      currentPage = Math.floor(targetIndex / (paperSpecs[currentPaper] || paperSpecs.a4).maxSlots);
+      renderGridPreview();
+      updateMobileCardToolbar();
+      showToast(i18nData[currentLang]?.toast_swapped || 'Cards reordered!', '✨');
+      trackGA4Event('layout_edit', { action: 'reorder', from: fromIndex, to: targetIndex });
+      return true;
+    }
+
     function onDragStart(e) {
       draggedIndex = parseInt(e.currentTarget.dataset.index, 10);
       e.dataTransfer.effectAllowed = 'move';
@@ -2106,62 +3479,82 @@
 
       const targetIndex = parseInt(e.currentTarget.dataset.index, 10);
       if (isNaN(draggedIndex) || isNaN(targetIndex) || draggedIndex === targetIndex) return;
-
-      const hasSource = draggedIndex < uploadedImages.length;
-      const hasTarget = targetIndex < uploadedImages.length;
-
-      if (!hasSource) return;
-
-      if (hasSource && hasTarget) {
-        const temp = uploadedImages[draggedIndex];
-        uploadedImages[draggedIndex] = uploadedImages[targetIndex];
-        uploadedImages[targetIndex] = temp;
-      } else if (hasSource && !hasTarget) {
-        const item = uploadedImages.splice(draggedIndex, 1)[0];
-        if (targetIndex >= uploadedImages.length) {
-          uploadedImages.push(item);
-        } else {
-          uploadedImages.splice(targetIndex, 0, item);
-        }
-      }
-
-      renderGridPreview();
-      showToast(i18nData[currentLang]?.toast_swapped || 'Cards swapped!', '✨');
-      trackGA4Event('reorder_cards', { from: draggedIndex, to: targetIndex });
+      reorderCards(draggedIndex, targetIndex);
     }
 
-    // Mobile Touch Event Support
+    // Mobile touch drag uses a short hold so normal vertical page scrolling stays available.
     let touchSourceIndex = null;
     let touchMoved = false;
+    let touchDragActive = false;
+    let touchHoldTimer = null;
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let touchSourceCell = null;
+    let suppressCardClickUntil = 0;
+
+    function clearTouchDragState() {
+      if (touchHoldTimer) clearTimeout(touchHoldTimer);
+      touchHoldTimer = null;
+      touchSourceIndex = null;
+      touchMoved = false;
+      touchDragActive = false;
+      if (touchSourceCell) touchSourceCell.classList.remove('touch-drag-active', 'is-dragging');
+      touchSourceCell = null;
+      document.querySelectorAll('.card-cell.is-drag-over').forEach(el => el.classList.remove('is-drag-over'));
+    }
 
     function onTouchStart(e) {
+      if (e.touches.length !== 1 || e.target.closest('button')) return;
       touchSourceIndex = parseInt(e.currentTarget.dataset.index, 10);
       touchMoved = false;
+      touchDragActive = false;
+      touchSourceCell = e.currentTarget;
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+      touchHoldTimer = setTimeout(() => {
+        if (touchSourceIndex === null || !touchSourceCell) return;
+        touchDragActive = true;
+        touchSourceCell.classList.add('touch-drag-active', 'is-dragging');
+      }, 260);
     }
 
     function onTouchMove(e) {
+      if (touchSourceIndex === null || e.touches.length !== 1) return;
+      const touch = e.touches[0];
+      const distance = Math.hypot(touch.clientX - touchStartX, touch.clientY - touchStartY);
+      if (!touchDragActive) {
+        if (distance > 10) clearTouchDragState();
+        return;
+      }
+      e.preventDefault();
       touchMoved = true;
+      document.querySelectorAll('.card-cell.is-drag-over').forEach(el => el.classList.remove('is-drag-over'));
+      const targetElement = document.elementFromPoint(touch.clientX, touch.clientY);
+      const cardCell = targetElement ? targetElement.closest('.card-cell') : null;
+      if (cardCell && cardCell !== touchSourceCell) cardCell.classList.add('is-drag-over');
     }
 
     function onTouchEnd(e) {
-      if (!touchMoved || touchSourceIndex === null) {
-        touchSourceIndex = null;
+      if (touchHoldTimer) clearTimeout(touchHoldTimer);
+      touchHoldTimer = null;
+      if (!touchDragActive || !touchMoved || touchSourceIndex === null) {
+        clearTouchDragState();
         return;
       }
+      e.preventDefault();
       const touch = e.changedTouches[0];
       const targetElement = document.elementFromPoint(touch.clientX, touch.clientY);
       const cardCell = targetElement ? targetElement.closest('.card-cell') : null;
       if (cardCell && cardCell.dataset.index !== undefined) {
         const targetIndex = parseInt(cardCell.dataset.index, 10);
-        if (touchSourceIndex !== targetIndex && touchSourceIndex < uploadedImages.length) {
-          draggedIndex = touchSourceIndex;
-          onDrop({
-            preventDefault: () => {},
-            currentTarget: cardCell
-          });
-        }
+        reorderCards(touchSourceIndex, targetIndex);
       }
-      touchSourceIndex = null;
+      suppressCardClickUntil = Date.now() + 450;
+      clearTouchDragState();
+    }
+
+    function onTouchCancel() {
+      clearTouchDragState();
     }
 
     // ==========================================
@@ -2191,10 +3584,11 @@
       cardGrid.innerHTML = '';
 
       for (let i = 0; i < spec.maxSlots; i++) {
-        const hasImage = i < uploadedImages.length;
+        const globalIndex = currentPage * spec.maxSlots + i;
+        const hasImage = globalIndex < uploadedImages.length;
         const cell = document.createElement('div');
-        cell.className = 'card-cell relative overflow-hidden flex items-center justify-center transition-all duration-150 group select-none cursor-pointer';
-        cell.dataset.index = String(i);
+        cell.className = 'card-cell relative overflow-hidden flex items-center justify-center transition-all duration-150 group select-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-500';
+        cell.dataset.index = String(globalIndex);
 
         cell.style.width = `${layout.cardW_px}px`;
         cell.style.height = `${layout.cardH_px}px`;
@@ -2203,10 +3597,11 @@
         const cutBorderClass = currentCutLine ? 'border border-dashed border-slate-300' : 'border border-slate-200/60';
 
         if (hasImage) {
-          const item = uploadedImages[i];
+          const item = uploadedImages[globalIndex];
           const rotation = item.rotation || 0;
-          const currentDPI = calculateImageDPI(item.img, spec);
+          const currentDPI = calculateImageDPI(item.img, spec, rotation);
           item.dpi = currentDPI;
+          const drawSize = getImageDrawSize(item.img, layout.cardW_px, layout.cardH_px, rotation, currentFitMode);
 
           let dpiBadgeClass = 'bg-emerald-500 text-white';
           let dpiBadgeText = `🟢 ${currentDPI} DPI`;
@@ -2220,13 +3615,36 @@
 
           cell.classList.add('bg-white');
           cell.setAttribute('draggable', 'true');
-          cell.setAttribute('title', `Card #${i + 1} (${spec.cardW_mm}×${spec.cardH_mm}mm, ${currentDPI} DPI)`);
-
-          const fitClass = currentFitMode === 'contain' ? 'object-contain bg-slate-900/5' : 'object-cover';
+          cell.setAttribute('tabindex', '0');
+          cell.setAttribute('role', 'group');
+          cell.setAttribute('aria-label', `Card ${globalIndex + 1}, ${spec.cardW_mm}×${spec.cardH_mm}mm, ${currentDPI} DPI`);
+          cell.setAttribute('title', `Card #${globalIndex + 1} (${spec.cardW_mm}×${spec.cardH_mm}mm, ${currentDPI} DPI)`);
+          cell.onclick = event => selectCard(globalIndex, event);
+          cell.onkeydown = event => {
+            if (event.key === 'Enter' || event.key === ' ') {
+              event.preventDefault();
+              selectCard(globalIndex, event);
+            } else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
+              event.preventDefault();
+              moveCard(globalIndex, -1, event);
+            } else if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
+              event.preventDefault();
+              moveCard(globalIndex, 1, event);
+            } else if (event.key.toLowerCase() === 'r') {
+              event.preventDefault();
+              rotateCard(globalIndex, event);
+            } else if (event.key.toLowerCase() === 'u') {
+              event.preventDefault();
+              triggerUploadForSlot(globalIndex);
+            } else if (event.key === 'Delete' || event.key === 'Backspace') {
+              event.preventDefault();
+              deleteCard(globalIndex, event);
+            }
+          };
 
           cell.innerHTML = `
-            <!-- Photo Image with Rotation Support [P1.4] -->
-            <img src="${item.src}" alt="Card ${i + 1}" style="transform: rotate(${rotation}deg);" class="w-full h-full ${fitClass} block pointer-events-none transition-transform duration-200" />
+            <!-- Photo uses the same center/rotation/crop math as PDF export. -->
+            <img src="${item.src}" alt="Card ${globalIndex + 1}" style="position:absolute;left:50%;top:50%;width:${drawSize.width}px;height:${drawSize.height}px;max-width:none;max-height:none;transform:translate(-50%,-50%) rotate(${rotation}deg);transform-origin:center;" class="block pointer-events-none transition-transform duration-200" />
             
             <!-- Scissor Cut Lines Overlay [P0] -->
             <div class="absolute inset-0 ${cutBorderClass} pointer-events-none z-10" style="border-radius: ${layout.cornerR_px}px;"></div>
@@ -2243,22 +3661,34 @@
               </span>
             </div>
 
+            <div class="card-mobile-actions hidden absolute top-1 right-1 z-30 items-center gap-1" aria-label="Card actions">
+              <button type="button" onclick="moveCard(${globalIndex}, -1, event)" title="${dict.card_move_earlier || 'Move earlier'}" aria-label="${dict.card_move_earlier || 'Move earlier'}" class="w-6 h-6 rounded-full bg-slate-900/80 text-white text-[10px] font-bold">←</button>
+              <button type="button" onclick="moveCard(${globalIndex}, 1, event)" title="${dict.card_move_later || 'Move later'}" aria-label="${dict.card_move_later || 'Move later'}" class="w-6 h-6 rounded-full bg-slate-900/80 text-white text-[10px] font-bold">→</button>
+              <button type="button" onclick="rotateCard(${globalIndex}, event)" title="${dict.card_label_rotate || 'Rotate 90°'}" aria-label="${dict.card_label_rotate || 'Rotate 90°'}" class="w-6 h-6 rounded-full bg-indigo-600 text-white text-[11px] font-bold">↻</button>
+              <button type="button" onclick="deleteCard(${globalIndex}, event)" title="${dict.card_label_delete || 'Delete'}" aria-label="${dict.card_label_delete || 'Delete'}" class="w-6 h-6 rounded-full bg-rose-600 text-white text-[10px] font-bold">✕</button>
+            </div>
+
             <!-- Hover Action Overlay -->
-            <div class="absolute inset-0 bg-slate-950/45 backdrop-blur-[1px] opacity-0 group-hover:opacity-100 transition-opacity duration-150 flex flex-col justify-between p-1.5 z-20" style="border-radius: ${layout.cornerR_px}px;">
+            <div class="absolute inset-0 bg-slate-950/45 backdrop-blur-[1px] opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity duration-150 flex flex-col justify-between p-1.5 z-20" style="border-radius: ${layout.cornerR_px}px;">
               <div class="flex items-center justify-between w-full">
                 <span class="bg-slate-900/90 text-white text-[9px] font-extrabold px-1.5 py-0.5 rounded shadow-xs flex items-center space-x-0.5 cursor-grab active:cursor-grabbing">
                   <span>⋮⋮</span>
-                  <span>#${i + 1}</span>
+                  <span>#${globalIndex + 1}</span>
                 </span>
                 
                 <div class="flex items-center space-x-1">
+                  <!-- Replace Image Button -->
+                  <button type="button" onclick="triggerUploadForSlot(${globalIndex}); event.stopPropagation();" title="${dict.card_replace || 'Replace photo'}" aria-label="${dict.card_replace || 'Replace photo'}" class="w-5 h-5 rounded-full bg-slate-900/90 hover:bg-slate-900 text-white flex items-center justify-center text-[9px] font-bold shadow-md transition transform hover:scale-110 active:scale-90 cursor-pointer focus:ring-2 focus:ring-white">
+                    📷
+                  </button>
+
                   <!-- Rotate 90° Button -->
-                  <button type="button" onclick="rotateCard(${i}, event)" title="${dict.card_label_rotate || 'Rotate 90°'}" class="w-5 h-5 rounded-full bg-indigo-600/90 hover:bg-indigo-600 text-white flex items-center justify-center text-[10px] font-bold shadow-md transition transform hover:scale-110 active:scale-90 cursor-pointer">
+                  <button type="button" onclick="rotateCard(${globalIndex}, event)" title="${dict.card_label_rotate || 'Rotate 90°'}" aria-label="${dict.card_label_rotate || 'Rotate 90°'}" class="w-5 h-5 rounded-full bg-indigo-600/90 hover:bg-indigo-600 text-white flex items-center justify-center text-[10px] font-bold shadow-md transition transform hover:scale-110 active:scale-90 cursor-pointer focus:ring-2 focus:ring-white">
                     ↻
                   </button>
 
                   <!-- Delete Button -->
-                  <button type="button" onclick="deleteCard(${i}, event)" title="${dict.card_label_delete || 'Delete'}" class="w-5 h-5 rounded-full bg-rose-600 hover:bg-rose-700 text-white flex items-center justify-center text-[10px] font-bold shadow-md transition transform hover:scale-110 active:scale-90 cursor-pointer">
+                  <button type="button" onclick="deleteCard(${globalIndex}, event)" title="${dict.card_label_delete || 'Delete'}" aria-label="${dict.card_label_delete || 'Delete'}" class="w-5 h-5 rounded-full bg-rose-600 hover:bg-rose-700 text-white flex items-center justify-center text-[10px] font-bold shadow-md transition transform hover:scale-110 active:scale-90 cursor-pointer focus:ring-2 focus:ring-white">
                     ✕
                   </button>
                 </div>
@@ -2287,21 +3717,29 @@
           cell.addEventListener('dragover', onDragOver);
           cell.addEventListener('dragleave', onDragLeave);
           cell.addEventListener('drop', onDrop);
-
           cell.addEventListener('touchstart', onTouchStart, { passive: true });
-          cell.addEventListener('touchmove', onTouchMove, { passive: true });
-          cell.addEventListener('touchend', onTouchEnd);
+          cell.addEventListener('touchmove', onTouchMove, { passive: false });
+          cell.addEventListener('touchend', onTouchEnd, { passive: false });
+          cell.addEventListener('touchcancel', onTouchCancel, { passive: true });
 
         } else {
           cell.classList.add('bg-slate-50/50', 'hover:bg-indigo-50/60', 'hover:border-indigo-400');
-          cell.setAttribute('title', `Card #${i + 1}`);
-          cell.onclick = () => triggerUploadForSlot(i);
+          cell.setAttribute('title', `Card #${globalIndex + 1}`);
+          cell.setAttribute('role', 'button');
+          cell.setAttribute('tabindex', '0');
+          cell.onclick = () => triggerUploadForSlot(uploadedImages.length);
+          cell.onkeydown = event => {
+            if (event.key === 'Enter' || event.key === ' ') {
+              event.preventDefault();
+              triggerUploadForSlot(uploadedImages.length);
+            }
+          };
 
           cell.innerHTML = `
             <div class="absolute inset-0 ${cutBorderClass} pointer-events-none" style="border-radius: ${layout.cornerR_px}px;"></div>
 
             <div class="text-center p-1 space-y-1 pointer-events-none z-10">
-              <span class="text-[9px] font-bold text-slate-400 group-hover:text-indigo-600 transition block">Card ${i + 1}</span>
+              <span class="text-[9px] font-bold text-slate-400 group-hover:text-indigo-600 transition block">Card ${globalIndex + 1}</span>
               <div class="w-6 h-6 rounded-full bg-white shadow-2xs border border-slate-200 group-hover:border-indigo-300 group-hover:bg-indigo-600 group-hover:text-white flex items-center justify-center text-xs font-bold text-slate-400 transition mx-auto">
                 +
               </div>
@@ -2313,13 +3751,12 @@
           cell.addEventListener('dragleave', onDragLeave);
           cell.addEventListener('drop', onDrop);
 
-          cell.addEventListener('touchstart', onTouchStart, { passive: true });
-          cell.addEventListener('touchmove', onTouchMove, { passive: true });
-          cell.addEventListener('touchend', onTouchEnd);
         }
 
         cardGrid.appendChild(cell);
       }
+      updatePreviewPageControls();
+      updateMobileCardToolbar();
     }
 
     // ==========================================
@@ -2367,21 +3804,25 @@
 
       let slotsToFill = 0;
       if (countVal === 'fill') {
-        slotsToFill = maxSlots - uploadedImages.length;
+        const usedOnLastPage = uploadedImages.length % maxSlots;
+        slotsToFill = usedOnLastPage === 0 && uploadedImages.length > 0 ? maxSlots : maxSlots - usedOnLastPage;
       } else {
         slotsToFill = parseInt(countVal, 10) || 1;
       }
+      slotsToFill = Math.min(slotsToFill, MAX_UPLOAD_IMAGES - uploadedImages.length);
 
       if (slotsToFill <= 0) {
-        showToast('Sheet is already full of cards!', '⚠️');
+        showToast((i18nData[currentLang] || i18nData.en).toast_sheet_full || 'This sheet is already full.', '⚠️');
         closePlaceholderModal();
         return;
       }
 
       const canvas = document.createElement('canvas');
-      canvas.width = 650;
-      canvas.height = 1004;
+      canvas.width = Math.round(spec.cardW_mm * (300 / 25.4));
+      canvas.height = Math.round(spec.cardH_mm * (300 / 25.4));
       const ctx = canvas.getContext('2d');
+      const w = canvas.width;
+      const h = canvas.height;
 
       let grad1 = '#f3e8ff', grad2 = '#e0e7ff', textColor = '#6b21a8', subColor = '#9333ea';
       if (selectedPlaceholderTheme === 'pink') {
@@ -2392,58 +3833,65 @@
         grad1 = '#f1f5f9'; grad2 = '#e2e8f0'; textColor = '#334155'; subColor = '#64748b';
       }
 
-      const grad = ctx.createLinearGradient(0, 0, 650, 1004);
+      const grad = ctx.createLinearGradient(0, 0, w, h);
       grad.addColorStop(0, grad1);
       grad.addColorStop(1, grad2);
       ctx.fillStyle = grad;
-      ctx.fillRect(0, 0, 650, 1004);
+      ctx.fillRect(0, 0, w, h);
 
       ctx.strokeStyle = subColor;
-      ctx.lineWidth = 4;
-      ctx.setLineDash([16, 12]);
-      ctx.strokeRect(36, 36, 650 - 72, 1004 - 72);
+      ctx.lineWidth = Math.max(3, Math.round(w * 0.006));
+      ctx.setLineDash([Math.round(w * 0.025), Math.round(w * 0.018)]);
+      const borderInset = Math.round(w * 0.055);
+      ctx.strokeRect(borderInset, borderInset, w - borderInset * 2, h - borderInset * 2);
 
       ctx.setLineDash([]);
       ctx.fillStyle = textColor;
-      ctx.font = 'bold 24px "Plus Jakarta Sans", sans-serif';
+      ctx.font = `bold ${Math.max(14, Math.round(w * 0.037))}px "Plus Jakarta Sans", sans-serif`;
       ctx.textAlign = 'center';
-      ctx.fillText('✨ STANKIT COLLECTOR SERIES ✨', 325, 120);
+      ctx.fillText('✨ STANKIT COLLECTOR SERIES ✨', w / 2, h * 0.12, w * 0.84);
 
-      ctx.font = '72px sans-serif';
-      ctx.fillText('🎴', 325, 420);
+      ctx.font = `${Math.max(42, Math.round(w * 0.11))}px sans-serif`;
+      ctx.fillText('🎴', w / 2, h * 0.42);
 
-      ctx.font = 'bold 36px "Plus Jakarta Sans", sans-serif';
+      ctx.font = `bold ${Math.max(22, Math.round(w * 0.055))}px "Plus Jakarta Sans", sans-serif`;
       ctx.fillStyle = textColor;
-      ctx.fillText(textVal, 325, 520);
+      ctx.fillText(textVal, w / 2, h * 0.52, w * 0.84);
 
-      ctx.font = '500 20px "Plus Jakarta Sans", sans-serif';
+      ctx.font = `500 ${Math.max(12, Math.round(w * 0.031))}px "Plus Jakarta Sans", sans-serif`;
       ctx.fillStyle = subColor;
-      ctx.fillText('OFFICIAL PHOTOCARD PLACEHOLDER', 325, 570);
+      ctx.fillText('FAN-MADE PHOTOCARD PLACEHOLDER', w / 2, h * 0.57, w * 0.84);
 
-      ctx.font = 'bold 18px "Plus Jakarta Sans", sans-serif';
+      ctx.font = `bold ${Math.max(11, Math.round(w * 0.028))}px "Plus Jakarta Sans", sans-serif`;
       ctx.fillStyle = subColor;
-      ctx.fillText('55 × 85 MM • ARCHIVAL GRADE', 325, 920);
+      ctx.fillText(`${spec.cardW_mm} × ${spec.cardH_mm} MM • ARCHIVAL GRADE`, w / 2, h * 0.92, w * 0.84);
 
       const placeholderDataUrl = canvas.toDataURL('image/jpeg', 0.95);
 
       const phImg = new Image();
       phImg.onload = () => {
+        let addedCount = 0;
         for (let i = 0; i < slotsToFill; i++) {
-          if (uploadedImages.length < maxSlots) {
+          if (uploadedImages.length < MAX_UPLOAD_IMAGES) {
             uploadedImages.push({
               src: placeholderDataUrl,
               img: phImg,
               id: 'ph_' + Math.random().toString(36).substr(2, 9),
               rotation: 0,
-              dpi: 300
+              dpi: 300,
+              objectUrl: false
             });
+            addedCount++;
           }
         }
+        currentPage = getTotalPages() - 1;
+        canvas.width = 1;
+        canvas.height = 1;
         updateUploadCounter();
         renderGridPreview();
         closePlaceholderModal();
         showToast(i18nData[currentLang]?.toast_placeholders_added || 'Placeholders generated!', '🎴');
-        trackGA4Event('generate_placeholders', { count: slotsToFill, theme: selectedPlaceholderTheme });
+        trackGA4Event('generate_placeholders', { count: addedCount, theme: selectedPlaceholderTheme });
       };
       phImg.src = placeholderDataUrl;
     }
@@ -2451,27 +3899,55 @@
     // ==========================================
     // Safe LocalStorage Photocard History
     // ==========================================
-    function savePhotocardProjectToHistory() {
+    function escapeHTML(value) {
+      return String(value ?? '').replace(/[&<>'"]/g, char => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'
+      })[char]);
+    }
+
+    function normalizePhotocardHistory(value) {
+      if (!Array.isArray(value)) return [];
+      return value.slice(0, 10).map((item, index) => {
+        const entry = item && typeof item === 'object' ? item : {};
+        const cardCount = Math.max(0, Math.min(MAX_UPLOAD_IMAGES, parseInt(entry.cardCount, 10) || 0));
+        return {
+          id: String(entry.id || `legacy_${index}`).slice(0, 64),
+          schemaVersion: 2,
+          paperType: String(entry.paperType || 'Legacy export').replace(/[<>]/g, '').slice(0, 64),
+          cardCount,
+          cutLine: Boolean(entry.cutLine),
+          timeStr: String(entry.timeStr || '').replace(/[<>]/g, '').slice(0, 32),
+          dateStr: String(entry.dateStr || '').replace(/[<>]/g, '').slice(0, 32)
+        };
+      });
+    }
+
+    function savePhotocardProjectToHistory(exportState = {}) {
       try {
-        if (uploadedImages.length === 0) return;
-        const history = safeGetStorage('stankit_photocard_history', []);
-        const spec = paperSpecs[currentPaper] || paperSpecs['a4'];
+        const cardCount = exportState.cardCount ?? uploadedImages.length;
+        if (cardCount === 0) return;
+        const savedHistory = safeGetStorage('stankit_photocard_history', []);
+        const history = normalizePhotocardHistory(savedHistory);
+        const paper = paperSpecs[exportState.paper] ? exportState.paper : currentPaper;
         const dict = i18nData[currentLang] || i18nData['en'];
-        const titleKey = `paper_${currentPaper.replace(/-/g, '_')}_title`;
-        const paperName = (dict[titleKey] || currentPaper.toUpperCase()).replace(/^[^\s]+\s*/, '');
+        const titleKey = paperTitleKeys[paper];
+        const paperName = (dict[titleKey] || paper.toUpperCase()).replace(/^[^\s]+\s*/, '');
 
         const entry = {
-          id: 'proj_' + Date.now(),
+          id: 'export_' + Date.now(),
+          schemaVersion: 2,
           paperType: paperName,
-          cardCount: uploadedImages.length,
-          cutLine: currentCutLine,
+          cardCount,
+          cutLine: exportState.cutLine ?? currentCutLine,
           timeStr: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
           dateStr: new Date().toLocaleDateString([], { month: 'short', day: 'numeric' })
         };
 
         history.unshift(entry);
         if (history.length > 10) history.pop();
-        safeSetStorage('stankit_photocard_history', history);
+        if (!safeSetStorage('stankit_photocard_history', history)) {
+          showToast(dict.toast_storage_error || 'Browser storage is unavailable.', '⚠️');
+        }
         renderPhotocardHistoryUI();
       } catch (err) {
         console.warn('History save error:', err);
@@ -2483,7 +3959,8 @@
       const badge = document.getElementById('photocard-history-badge');
       if (!container) return;
 
-      const history = safeGetStorage('stankit_photocard_history', []);
+      const savedHistory = safeGetStorage('stankit_photocard_history', []);
+      const history = normalizePhotocardHistory(savedHistory);
       if (badge) badge.innerText = history.length;
       const dict = i18nData[currentLang] || i18nData['en'];
 
@@ -2499,11 +3976,11 @@
         itemEl.innerHTML = `
           <div class="space-y-0.5">
             <div class="flex items-center space-x-1.5">
-              <span class="font-extrabold text-slate-800">${item.paperType}</span>
-              <span class="text-[10px] px-1.5 py-0.2 rounded bg-indigo-50 text-indigo-700 font-bold">${item.cardCount} cards</span>
+              <span class="font-extrabold text-slate-800">${escapeHTML(item.paperType)}</span>
+              <span class="text-[10px] px-1.5 py-0.2 rounded bg-indigo-50 text-indigo-700 font-bold">${item.cardCount} ${dict.card_count_suffix || 'cards'}</span>
               <span class="text-[10px] text-slate-400">${item.cutLine ? '✂️' : ''}</span>
             </div>
-            <div class="text-[10px] text-slate-400">${item.dateStr} ${item.timeStr}</div>
+            <div class="text-[10px] text-slate-400">${escapeHTML(item.dateStr)} ${escapeHTML(item.timeStr)}</div>
           </div>
           <button type="button" onclick="deletePhotocardHistoryItem(${idx})" class="text-[11px] text-slate-400 hover:text-rose-600 p-1 cursor-pointer">
             ✕
@@ -2514,18 +3991,26 @@
     }
 
     function deletePhotocardHistoryItem(index) {
-      const history = safeGetStorage('stankit_photocard_history', []);
+      const savedHistory = safeGetStorage('stankit_photocard_history', []);
+      const history = normalizePhotocardHistory(savedHistory);
+      if (index < 0 || index >= history.length) return;
       history.splice(index, 1);
-      safeSetStorage('stankit_photocard_history', history);
+      if (!safeSetStorage('stankit_photocard_history', history)) {
+        const dict = i18nData[currentLang] || i18nData.en;
+        showToast(dict.toast_storage_error || 'Browser storage is unavailable.', '⚠️');
+      }
       renderPhotocardHistoryUI();
     }
 
     function clearPhotocardHistory() {
-      if (confirm('Clear all print layout history?')) {
-        try {
-          localStorage.removeItem('stankit_photocard_history');
-        } catch (e) {}
+      const dict = i18nData[currentLang] || i18nData.en;
+      if (confirm(dict.confirm_clear_history || 'Clear the recent export log?')) {
+        if (!safeRemoveStorage('stankit_photocard_history')) {
+          showToast(dict.toast_storage_error || 'Browser storage is unavailable.', '⚠️');
+          return;
+        }
         renderPhotocardHistoryUI();
+        showToast(dict.toast_history_cleared || 'Recent export log cleared.', '🗑️');
       }
     }
 
@@ -2556,7 +4041,10 @@
           title: 'StanKit Studio | Photocard Print Grid Maker',
           text: getShareText(),
           url: 'https://stankit.vercel.app/'
-        }).catch(() => openShareModal());
+        }).catch(error => {
+          if (error && error.name === 'AbortError') return;
+          openShareModal();
+        });
       } else {
         openShareModal();
       }
@@ -2585,29 +4073,43 @@
     function shareOnX() {
       const text = encodeURIComponent(getShareText());
       const xUrl = `https://twitter.com/intent/tweet?text=${text}`;
-      window.open(xUrl, '_blank');
+      const popup = window.open(xUrl, '_blank', 'noopener,noreferrer');
+      if (!popup) {
+        const dict = i18nData[currentLang] || i18nData.en;
+        showToast(dict.toast_share_error || 'Sharing failed.', '⚠️');
+        return;
+      }
       trackGA4Event('share_click', { platform: 'twitter_x' });
       closeShareModal();
     }
 
-    function copyShareLink() {
+    async function copyShareLink() {
       const text = getShareText();
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(text).then(() => {
-          showToast('📋 Share text & link copied to clipboard!', '✨');
-          trackGA4Event('share_click', { platform: 'clipboard' });
-          closeShareModal();
-        });
-      } else {
-        const tempInput = document.createElement('textarea');
-        tempInput.value = text;
-        document.body.appendChild(tempInput);
-        tempInput.select();
-        document.execCommand('copy');
-        document.body.removeChild(tempInput);
-        showToast('📋 Share text & link copied to clipboard!', '✨');
-        trackGA4Event('share_click', { platform: 'clipboard_fallback' });
+      const dict = i18nData[currentLang] || i18nData.en;
+      let tempInput = null;
+      let platform = 'clipboard';
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          await navigator.clipboard.writeText(text);
+        } else {
+          platform = 'clipboard_fallback';
+          tempInput = document.createElement('textarea');
+          tempInput.value = text;
+          tempInput.setAttribute('readonly', '');
+          tempInput.style.position = 'fixed';
+          tempInput.style.opacity = '0';
+          document.body.appendChild(tempInput);
+          tempInput.select();
+          if (!document.execCommand('copy')) throw new Error('clipboard_copy_failed');
+        }
+        showToast((i18nData[currentLang] || i18nData.en).toast_share_copied || 'Share text and link copied.', '✨');
+        trackGA4Event('share_click', { platform });
         closeShareModal();
+      } catch (error) {
+        showToast(dict.toast_share_error || 'Sharing failed.', '⚠️');
+        trackGA4Event('share_click', { platform: 'clipboard_error' });
+      } finally {
+        if (tempInput && tempInput.parentNode) tempInput.parentNode.removeChild(tempInput);
       }
     }
 
@@ -2620,37 +4122,100 @@
         }).then(() => {
           trackGA4Event('share_click', { platform: 'web_share_api' });
           closeShareModal();
-        }).catch(() => {});
+        }).catch(error => {
+          if (error && error.name === 'AbortError') return;
+          const dict = i18nData[currentLang] || i18nData.en;
+          showToast(dict.toast_share_error || 'Sharing failed.', '⚠️');
+        });
       } else {
         copyShareLink();
       }
     }
 
-    function exportPDF() {
-      if (uploadedImages.length === 0) {
-        showToast('Please upload at least one image first!', '📷');
+    function showAfterExportPanel() {
+      const panel = document.getElementById('after-export-panel');
+      if (!panel) return;
+      panel.classList.remove('hidden');
+      panel.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    function scrollToPrintGuide() {
+      const guide = document.getElementById('print-help');
+      if (guide) guide.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      trackGA4Event('post_export_action', { action: 'print_instructions' });
+    }
+
+    function submitPrintFeedback(result) {
+      trackGA4Event('print_feedback_submit', {
+        printed: true,
+        size_correct: result === 'yes',
+        paper: currentPaper
+      });
+      if (!window.STANKIT_ANALYTICS_READY) {
+        window.location.href = `contact.html?topic=print-size&result=${encodeURIComponent(result)}&paper=${encodeURIComponent(currentPaper)}`;
         return;
       }
+      const status = document.getElementById('print-feedback-status');
+      if (status) status.classList.remove('hidden');
+    }
+
+    function registerThemeInterest() {
+      trackGA4Event('product_interest', { product_id: 'missing-photocard-theme-pack', price_test: '3.90-4.90' });
+      window.location.href = 'contact.html?topic=theme-pack';
+    }
+
+    async function exportPDF() {
+      if (uploadedImages.length === 0) {
+        const dict = i18nData[currentLang] || i18nData.en;
+        showToast(dict.toast_need_image || 'Please upload at least one image first.', '📷');
+        return;
+      }
+      if (exportInProgress) return;
 
       const btnPdf = document.getElementById('btn-export-pdf');
       const btnPdfText = document.getElementById('btn-pdf-text');
       const dict = i18nData[currentLang] || i18nData['en'];
+      const exportPaper = currentPaper;
+      const spec = paperSpecs[exportPaper] || paperSpecs.a4;
+      const exportCutLine = currentCutLine;
+      const exportFitMode = currentFitMode;
+      const exportImages = uploadedImages.map(item => ({ img: item.img, rotation: item.rotation || 0 }));
+      const pageCount = Math.ceil(exportImages.length / spec.maxSlots);
 
       if (btnPdfText) {
         btnPdfText.innerText = dict.btn_rendering_pdf || 'Rendering 300 DPI PDF...';
       }
+      exportInProgress = true;
+      if (btnPdf) {
+        btnPdf.disabled = true;
+        btnPdf.setAttribute('aria-busy', 'true');
+        btnPdf.classList.add('opacity-60', 'cursor-wait');
+      }
+      const exportStartedAt = performance.now();
+      trackGA4Event('pdf_export_start', { paper: exportPaper, card_count: exportImages.length });
 
-      setTimeout(() => {
-        try {
-          const { jsPDF } = window.jspdf;
-          const spec = paperSpecs[currentPaper] || paperSpecs['a4'];
-          const layout = calculateLayout(spec, 0, true);
+      let offCanvas = null;
+      try {
+        await new Promise(resolve => setTimeout(resolve, 0));
+        if (!window.jspdf || !window.jspdf.jsPDF) throw new Error('jspdf_unavailable');
+        const { jsPDF } = window.jspdf;
+        const layout = calculateLayout(spec, 0, true);
+        const orientation = spec.sheetW_mm > spec.sheetH_mm ? 'landscape' : 'portrait';
+        const doc = new jsPDF({
+          orientation,
+          unit: 'mm',
+          format: [spec.sheetW_mm, spec.sheetH_mm]
+        });
 
-          const offCanvas = document.createElement('canvas');
-          offCanvas.width = layout.sheetW_px;
-          offCanvas.height = layout.sheetH_px;
-          const ctx = offCanvas.getContext('2d');
+        offCanvas = document.createElement('canvas');
+        offCanvas.width = layout.sheetW_px;
+        offCanvas.height = layout.sheetH_px;
+        const ctx = offCanvas.getContext('2d', { alpha: false });
+        if (!ctx) throw new Error('canvas_unavailable');
 
+        for (let pageIndex = 0; pageIndex < pageCount; pageIndex++) {
+          ctx.setTransform(1, 0, 0, 1, 0, 0);
+          ctx.clearRect(0, 0, layout.sheetW_px, layout.sheetH_px);
           ctx.fillStyle = '#ffffff';
           ctx.fillRect(0, 0, layout.sheetW_px, layout.sheetH_px);
 
@@ -2660,10 +4225,12 @@
               const x = layout.startX + c * (layout.cardW_px + layout.gap_px);
               const y = layout.startY + r * (layout.cardH_px + layout.gap_px);
 
-              if (cardIdx < uploadedImages.length) {
-                const item = uploadedImages[cardIdx];
+              const globalIndex = pageIndex * spec.maxSlots + cardIdx;
+              if (globalIndex < exportImages.length) {
+                const item = exportImages[globalIndex];
                 const img = item.img;
                 const rotation = item.rotation || 0;
+                if (!img || !img.width || !img.height) throw new Error('image_unavailable');
 
                 ctx.save();
                 drawRoundRectPath(ctx, x, y, layout.cardW_px, layout.cardH_px, layout.cornerR_px);
@@ -2672,29 +4239,12 @@
                 ctx.translate(x + layout.cardW_px / 2, y + layout.cardH_px / 2);
                 ctx.rotate((rotation * Math.PI) / 180);
 
-                const isSideways = (rotation === 90 || rotation === 270);
-                const targetW = isSideways ? layout.cardH_px : layout.cardW_px;
-                const targetH = isSideways ? layout.cardW_px : layout.cardH_px;
-
-                if (currentFitMode === 'cover') {
-                  const hRatio = targetW / img.width;
-                  const vRatio = targetH / img.height;
-                  const ratio = Math.max(hRatio, vRatio);
-                  const drawW = img.width * ratio;
-                  const drawH = img.height * ratio;
-                  ctx.drawImage(img, -drawW / 2, -drawH / 2, drawW, drawH);
-                } else {
-                  const hRatio = targetW / img.width;
-                  const vRatio = targetH / img.height;
-                  const ratio = Math.min(hRatio, vRatio);
-                  const drawW = img.width * ratio;
-                  const drawH = img.height * ratio;
-                  ctx.drawImage(img, -drawW / 2, -drawH / 2, drawW, drawH);
-                }
+                const drawSize = getImageDrawSize(img, layout.cardW_px, layout.cardH_px, rotation, exportFitMode);
+                ctx.drawImage(img, -drawSize.width / 2, -drawSize.height / 2, drawSize.width, drawSize.height);
                 ctx.restore();
               }
 
-              if (currentCutLine) {
+              if (exportCutLine) {
                 ctx.save();
                 ctx.setLineDash([12, 12]);
                 ctx.strokeStyle = '#cbd5e1';
@@ -2708,52 +4258,79 @@
             }
           }
 
-          const doc = new jsPDF({
-            orientation: 'portrait',
-            unit: 'mm',
-            format: [spec.sheetW_mm, spec.sheetH_mm]
-          });
-
-          const imgData = offCanvas.toDataURL('image/jpeg', 0.98);
+          if (pageIndex > 0) doc.addPage([spec.sheetW_mm, spec.sheetH_mm], orientation);
+          let imgData = offCanvas.toDataURL('image/jpeg', 0.98);
+          if (!imgData || imgData === 'data:,') throw new Error('canvas_export_failed');
           const pdfW = doc.internal.pageSize.getWidth();
           const pdfH = doc.internal.pageSize.getHeight();
 
-          doc.addImage(imgData, 'JPEG', 0, 0, pdfW, pdfH, undefined, 'FAST');
-          doc.save(`StanKit_${currentPaper.toUpperCase()}_300DPI.pdf`);
-
-          savePhotocardProjectToHistory();
-          showToast(dict.toast_pdf_ready || 'PDF downloaded!', '🖨️');
-          setTimeout(() => { openShareModal(); }, 1200);
-          trackGA4Event('download_pdf', {
-            paper_type: currentPaper,
-            card_count: uploadedImages.length,
-            cut_line: currentCutLine
-          });
-        } catch (err) {
-          console.error('PDF export error:', err);
-          showToast('PDF rendering error. Please try again.', '⚠️');
-        } finally {
-          if (btnPdfText) {
-            btnPdfText.innerText = dict.btn_download_pdf || 'Download 300 DPI PDF (Print Ready)';
-          }
+          doc.addImage(imgData, 'JPEG', 0, 0, pdfW, pdfH, `stankit-page-${pageIndex}`, 'FAST');
+          imgData = null;
+          await new Promise(resolve => setTimeout(resolve, 0));
         }
-      }, 50);
+
+        doc.save(`StanKit_${exportPaper.toUpperCase()}_300DPI.pdf`);
+        savePhotocardProjectToHistory({ paper: exportPaper, cardCount: exportImages.length, cutLine: exportCutLine });
+        showToast(dict.toast_pdf_ready || 'PDF downloaded!', '🖨️');
+        showAfterExportPanel();
+        trackGA4Event('pdf_export_success', {
+          paper: exportPaper,
+          card_count: exportImages.length,
+          cut_line: exportCutLine,
+          duration_ms: Math.round(performance.now() - exportStartedAt)
+        });
+      } catch (err) {
+        console.error('PDF export error:', err);
+        const message = err && err.message === 'jspdf_unavailable'
+          ? dict.toast_pdf_library_error
+          : dict.toast_pdf_error;
+        showToast(message || 'PDF rendering failed. Please try again.', '⚠️');
+        trackGA4Event('pdf_export_error', { reason: err.message || 'unknown', paper: exportPaper });
+      } finally {
+        if (offCanvas) {
+          offCanvas.width = 1;
+          offCanvas.height = 1;
+        }
+        exportInProgress = false;
+        if (btnPdf) {
+          btnPdf.disabled = false;
+          btnPdf.removeAttribute('aria-busy');
+          btnPdf.classList.remove('opacity-60', 'cursor-wait');
+        }
+        if (btnPdfText) {
+          btnPdfText.innerText = dict.btn_download_pdf || 'Download 300 DPI PDF (Print Ready)';
+        }
+      }
     }
 
-    window.addEventListener('resize', () => {
-      renderGridPreview();
-    });
+    let resizeFrame = null;
+    function schedulePreviewRender() {
+      if (resizeFrame) cancelAnimationFrame(resizeFrame);
+      resizeFrame = requestAnimationFrame(() => {
+        resizeFrame = null;
+        renderGridPreview();
+      });
+    }
+
+    window.addEventListener('resize', schedulePreviewRender);
 
     
     // Automatically re-render on container resize
     window.addEventListener('DOMContentLoaded', () => {
       const savedLang = safeGetStorage('stankit_lang', 'en');
       if (savedLang && i18nData[savedLang]) {
-        changeLanguage(savedLang);
+        changeLanguage(savedLang, 'init');
       } else {
-        changeLanguage('en');
+        safeRemoveStorage('stankit_lang');
+        window.STANKIT_STORAGE_RECOVERED = true;
+        changeLanguage('en', 'init');
       }
-      setPaper('a4');
+      setPaper('a4', 'init');
+
+      if (window.STANKIT_STORAGE_RECOVERED) {
+        const dict = i18nData[currentLang] || i18nData.en;
+        setTimeout(() => showToast(dict.toast_storage_recovered || 'Damaged saved settings were cleared safely.', '🧹'), 50);
+      }
 
       // Use requestAnimationFrame & ResizeObserver for rock-solid layout rendering
       requestAnimationFrame(() => {
@@ -2763,30 +4340,45 @@
       const previewContainer = document.getElementById('preview-sheet-container');
       if (previewContainer && window.ResizeObserver) {
         const ro = new ResizeObserver(() => {
-          renderGridPreview();
+          schedulePreviewRender();
         });
         ro.observe(previewContainer);
       }
+
+      const dropZone = document.getElementById('drop-zone');
+      if (dropZone) {
+        dropZone.addEventListener('keydown', event => {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            triggerUploadForSlot(null);
+          }
+        });
+        ['dragenter', 'dragover'].forEach(type => dropZone.addEventListener(type, event => {
+          event.preventDefault();
+          dropZone.classList.add('border-indigo-500', 'bg-indigo-100');
+        }));
+        ['dragleave', 'drop'].forEach(type => dropZone.addEventListener(type, event => {
+          event.preventDefault();
+          dropZone.classList.remove('border-indigo-500', 'bg-indigo-100');
+        }));
+        dropZone.addEventListener('drop', event => {
+          const files = event.dataTransfer && event.dataTransfer.files;
+          if (files && files.length) handleFileSelect(files);
+        });
+      }
+
+      trackGA4Event('tool_view', { tool: 'photocard_print', language: currentLang });
     });
 
     window.addEventListener('load', () => {
       renderGridPreview();
     });
 
+    window.addEventListener('beforeunload', () => {
+      uploadedImages.forEach(releaseImageResource);
+    });
+
   </script>
 
-  <!-- Ko-fi Floating Widget Overlay -->
-  <script src="https://storage.ko-fi.com/cdn/scripts/overlay-widget.js"></script>
-  <script>
-    try {
-      kofiWidgetOverlay.draw('stankitstudio', {
-        'type': 'floating-chat',
-        'floating-chat.donatebutton.text': 'Support me',
-        'floating-chat.position': 'bottom-right',
-        'floating-chat.donatebutton.background-color': '#6366f1',
-        'floating-chat.donatebutton.text-color': '#ffffff'
-      });
-    } catch(e) {}
-  </script>
 </body>
 </html>
